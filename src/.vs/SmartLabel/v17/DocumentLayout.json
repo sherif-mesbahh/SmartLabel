@@ -1,0 +1,697 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\rep\\src\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\wwwroot\\uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_datbasephoto.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\wwwroot\\uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_datbasephoto.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\validators\\updatecategoryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\validators\\updatecategoryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\models\\updatecategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\models\\updatecategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\query\\handlers\\getcategorybyidhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\query\\handlers\\getcategorybyidhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\handlers\\deletecategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\handlers\\deletecategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\handlers\\updatecategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\handlers\\updatecategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\query\\handlers\\getallcategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\query\\handlers\\getallcategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\query\\validators\\getcategorybyidvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\query\\validators\\getcategorybyidvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\middlewares\\errorhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\middlewares\\errorhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\validators\\addcategoryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\validators\\addcategoryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\bases\\responsehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\bases\\responsehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\bases\\response.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\bases\\response.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\services\\ifileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\services\\ifileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|d:\\rep\\src\\smartlabel.infrastructure\\persistence\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|solutionrelative:smartlabel.infrastructure\\persistence\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|d:\\rep\\src\\smartlabel.infrastructure\\persistence\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|solutionrelative:smartlabel.infrastructure\\persistence\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\handlers\\addcategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\handlers\\addcategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|d:\\rep\\src\\smartlabel.domain\\repositories\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|solutionrelative:smartlabel.domain\\repositories\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\models\\addcategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\models\\addcategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\smartlabel.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\smartlabel.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\smartlabel.presentation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\smartlabel.presentation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\applicationmoduledependencies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\applicationmoduledependencies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\command\\models\\deletecategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\command\\models\\deletecategorycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|d:\\rep\\src\\smartlabel.infrastructure\\persistence\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|solutionrelative:smartlabel.infrastructure\\persistence\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|d:\\rep\\src\\smartlabel.infrastructure\\persistence\\configurations\\categoryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|solutionrelative:smartlabel.infrastructure\\persistence\\configurations\\categoryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|d:\\rep\\src\\smartlabel.domain\\smartlabel.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|solutionrelative:smartlabel.domain\\smartlabel.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\base\\appcontrollerbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\base\\appcontrollerbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|d:\\rep\\src\\smartlabel.domain\\repositories\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|solutionrelative:smartlabel.domain\\repositories\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|d:\\rep\\src\\smartlabel.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|solutionrelative:smartlabel.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\query\\models\\getcategorybyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\query\\models\\getcategorybyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\mapping\\categoryprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\mapping\\categoryprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\query\\models\\getallcategoryquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\query\\models\\getallcategoryquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\query\\results\\getallcategoryresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\query\\results\\getallcategoryresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|d:\\rep\\src\\smartlabel.application\\features\\categories\\query\\results\\getcategoryresultbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D4FFF5D-8486-4280-816F-0EA70F38B32D}|SmartLabel.Application\\SmartLabel.Application.csproj|solutionrelative:smartlabel.application\\features\\categories\\query\\results\\getcategoryresultbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|d:\\rep\\src\\smartlabel.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1855AF15-7200-4EED-A631-101D6EC2CA37}|SmartLabel.Domain\\SmartLabel.Domain.csproj|solutionrelative:smartlabel.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|d:\\rep\\src\\smartlabel.infrastructure\\infrastructuremoduledependencies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|solutionrelative:smartlabel.infrastructure\\infrastructuremoduledependencies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|d:\\rep\\src\\smartlabel.infrastructure\\smartlabel.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A8D3F0BE-06A6-4AD0-8735-91171FD51506}|SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj|solutionrelative:smartlabel.infrastructure\\smartlabel.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|d:\\rep\\src\\smartlabel.presentation\\smart label.presentation.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{A69EB101-6FB1-4032-A772-C7FBEF25D339}|SmartLabel.Presentation\\SmartLabel.Presentation.csproj|solutionrelative:smartlabel.presentation\\smart label.presentation.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetCategoryByIdHandler.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetCategoryByIdHandler.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetCategoryByIdHandler.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetCategoryByIdHandler.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetCategoryByIdHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:57:35.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdateCategoryValidator.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Validators\\UpdateCategoryValidator.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Validators\\UpdateCategoryValidator.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Validators\\UpdateCategoryValidator.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Validators\\UpdateCategoryValidator.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T18:44:28.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "SmartLabel.Presentation\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAqwCwAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T00:21:15.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UpdateCategoryCommand.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Models\\UpdateCategoryCommand.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Models\\UpdateCategoryCommand.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Models\\UpdateCategoryCommand.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Models\\UpdateCategoryCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:41:19.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FileService.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\Services\\FileService.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\Services\\FileService.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\Services\\FileService.cs",
+              "RelativeToolTip": "SmartLabel.Presentation\\Services\\FileService.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAmwBkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:45:52.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg - Bitmap [980x980, 24 bit, JPG]",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\wwwroot\\Uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg - Bitmap [980x980, 24 bit, JPG]",
+              "RelativeToolTip": "SmartLabel.Presentation\\wwwroot\\Uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg - Bitmap [980x980, 24 bit, JPG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-03-08T19:54:15.263Z",
+              "EditorCaption": " - Bitmap [980x980, 24 bit, JPG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DeleteCategoryHandler.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\DeleteCategoryHandler.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\DeleteCategoryHandler.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\DeleteCategoryHandler.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\DeleteCategoryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:22:31.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UpdateCategoryHandler.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\UpdateCategoryHandler.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\UpdateCategoryHandler.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\UpdateCategoryHandler.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\UpdateCategoryHandler.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:40:26.878Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ValidationBehavior.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Behaviors\\ValidationBehavior.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Behaviors\\ValidationBehavior.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Behaviors\\ValidationBehavior.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Behaviors\\ValidationBehavior.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T13:58:21.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ErrorHandlerMiddleware.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\Middlewares\\ErrorHandlerMiddleware.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\Middlewares\\ErrorHandlerMiddleware.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\Middlewares\\ErrorHandlerMiddleware.cs",
+              "RelativeToolTip": "SmartLabel.Presentation\\Middlewares\\ErrorHandlerMiddleware.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA0wBkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T14:24:44.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetAllCategoryHandler.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetAllCategoryHandler.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetAllCategoryHandler.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetAllCategoryHandler.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Query\\Handlers\\GetAllCategoryHandler.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:53:35.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GetCategoryByIdValidator.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Validators\\GetCategoryByIdValidator.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Query\\Validators\\GetCategoryByIdValidator.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Validators\\GetCategoryByIdValidator.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Query\\Validators\\GetCategoryByIdValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T19:44:33.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AddCategoryValidator.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Validators\\AddCategoryValidator.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Validators\\AddCategoryValidator.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Validators\\AddCategoryValidator.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Validators\\AddCategoryValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T13:38:27.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ResponseHandler.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Bases\\ResponseHandler.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Bases\\ResponseHandler.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Bases\\ResponseHandler.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Bases\\ResponseHandler.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAswEUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:08:04.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Response.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Bases\\Response.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Bases\\Response.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Bases\\Response.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Bases\\Response.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwB4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:04:08.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IFileService.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\Services\\IFileService.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\Services\\IFileService.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\Services\\IFileService.cs",
+              "RelativeToolTip": "SmartLabel.Presentation\\Services\\IFileService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T11:00:42.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "RelativeToolTip": "SmartLabel.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAswDUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T23:08:45.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Repositories\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Infrastructure\\Persistence\\Repositories\\ProductRepository.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Repositories\\ProductRepository.cs",
+              "RelativeToolTip": "SmartLabel.Infrastructure\\Persistence\\Repositories\\ProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T23:08:48.711Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AddCategoryHandler.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\AddCategoryHandler.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\AddCategoryHandler.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\AddCategoryHandler.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Handlers\\AddCategoryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:03:23.04Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ICategoryRepository.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Domain\\Repositories\\ICategoryRepository.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Domain\\Repositories\\ICategoryRepository.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Domain\\Repositories\\ICategoryRepository.cs",
+              "RelativeToolTip": "SmartLabel.Domain\\Repositories\\ICategoryRepository.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T11:30:57.598Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "SmartLabel.Application.csproj",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\SmartLabel.Application.csproj",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\SmartLabel.Application.csproj",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\SmartLabel.Application.csproj",
+              "RelativeToolTip": "SmartLabel.Application\\SmartLabel.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-06T13:03:16.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AddCategoryCommand.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Models\\AddCategoryCommand.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Models\\AddCategoryCommand.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Models\\AddCategoryCommand.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Models\\AddCategoryCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:22:36.423Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\Program.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\Program.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\Program.cs",
+              "RelativeToolTip": "SmartLabel.Presentation\\Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T23:10:46.042Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "SmartLabel.Presentation.csproj",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
+              "RelativeToolTip": "SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-05T23:11:08.156Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ApplicationModuleDependencies.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\ApplicationModuleDependencies.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\ApplicationModuleDependencies.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\ApplicationModuleDependencies.cs",
+              "RelativeToolTip": "SmartLabel.Application\\ApplicationModuleDependencies.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T10:49:40.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "DeleteCategoryCommand.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Models\\DeleteCategoryCommand.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Command\\Models\\DeleteCategoryCommand.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Command\\Models\\DeleteCategoryCommand.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Command\\Models\\DeleteCategoryCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:49:12.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Infrastructure\\Persistence\\Data\\AppDbContext.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "SmartLabel.Infrastructure\\Persistence\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T23:07:09.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "SmartLabel.Domain.csproj",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Domain\\SmartLabel.Domain.csproj",
+              "RelativeDocumentMoniker": "SmartLabel.Domain\\SmartLabel.Domain.csproj",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Domain\\SmartLabel.Domain.csproj",
+              "RelativeToolTip": "SmartLabel.Domain\\SmartLabel.Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-05T23:09:34.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "CategoryConfiguration.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Configurations\\CategoryConfiguration.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Infrastructure\\Persistence\\Configurations\\CategoryConfiguration.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Infrastructure\\Persistence\\Configurations\\CategoryConfiguration.cs",
+              "RelativeToolTip": "SmartLabel.Infrastructure\\Persistence\\Configurations\\CategoryConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T12:11:17.294Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "AppControllerBase.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\Base\\AppControllerBase.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\Base\\AppControllerBase.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\Base\\AppControllerBase.cs",
+              "RelativeToolTip": "SmartLabel.Presentation\\Base\\AppControllerBase.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T11:08:58.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "IProductRepository.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Domain\\Repositories\\IProductRepository.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Domain\\Repositories\\IProductRepository.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Domain\\Repositories\\IProductRepository.cs",
+              "RelativeToolTip": "SmartLabel.Domain\\Repositories\\IProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T12:01:03.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "CategoryProfile.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Mapping\\CategoryProfile.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Mapping\\CategoryProfile.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Mapping\\CategoryProfile.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Mapping\\CategoryProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T10:49:42.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Domain\\Entities\\Product.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Domain\\Entities\\Product.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Domain\\Entities\\Product.cs",
+              "RelativeToolTip": "SmartLabel.Domain\\Entities\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T11:19:58.309Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "GetAllCategoryQuery.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetAllCategoryQuery.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetAllCategoryQuery.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetAllCategoryQuery.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetAllCategoryQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:54:52.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "GetCategoryByIdQuery.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetCategoryByIdQuery.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetCategoryByIdQuery.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetCategoryByIdQuery.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Query\\Models\\GetCategoryByIdQuery.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA2wBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:57:49.426Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "GetAllCategoryResult.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetAllCategoryResult.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetAllCategoryResult.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetAllCategoryResult.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetAllCategoryResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T11:16:27.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "GetCategoryResultById.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetCategoryResultById.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetCategoryResultById.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetCategoryResultById.cs",
+              "RelativeToolTip": "SmartLabel.Application\\Features\\Categories\\Query\\Results\\GetCategoryResultById.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T11:02:52.939Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Domain\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Domain\\Entities\\Category.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Domain\\Entities\\Category.cs",
+              "RelativeToolTip": "SmartLabel.Domain\\Entities\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T10:42:32.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "InfrastructureModuleDependencies.cs",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Infrastructure\\InfrastructureModuleDependencies.cs",
+              "RelativeDocumentMoniker": "SmartLabel.Infrastructure\\InfrastructureModuleDependencies.cs",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Infrastructure\\InfrastructureModuleDependencies.cs",
+              "RelativeToolTip": "SmartLabel.Infrastructure\\InfrastructureModuleDependencies.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T11:03:55.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "SmartLabel.Infrastructure.csproj",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj",
+              "RelativeToolTip": "SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-05T23:07:18.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Smart Label.Presentation.http",
+              "DocumentMoniker": "D:\\rep\\src\\SmartLabel.Presentation\\Smart Label.Presentation.http",
+              "RelativeDocumentMoniker": "SmartLabel.Presentation\\Smart Label.Presentation.http",
+              "ToolTip": "D:\\rep\\src\\SmartLabel.Presentation\\Smart Label.Presentation.http",
+              "RelativeToolTip": "SmartLabel.Presentation\\Smart Label.Presentation.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-03-06T12:58:11.755Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\appsettings.Development.json
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\appsettings.json
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.staticwebassets.runtime.json
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.exe
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.deps.json
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.runtimeconfig.json
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.pdb
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\AutoMapper.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Azure.Core.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Azure.Identity.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\FluentValidation.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Humanizer.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\MediatR.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.ClientModel.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.CodeDom.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Composition.Convention.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Composition.Hosting.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Composition.Runtime.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Composition.TypedParts.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Formats.Asn1.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.IO.Pipelines.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Memory.Data.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Runtime.Caching.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Text.Json.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Application.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Domain.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Infrastructure.dll
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Application.pdb
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Infrastructure.pdb
+D:\rep\src\Smart Label.Presentation\bin\Debug\net8.0\SmartLabel.Domain.pdb
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.AssemblyReference.cache
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.GeneratedMSBuildEditorConfig.editorconfig
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfoInputs.cache
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfo.cs
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.CoreCompileInputs.cache
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cache
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.sourcelink.json
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\staticwebassets.build.json
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\staticwebassets.development.json
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.SmartLabel.Presentation.Microsoft.AspNetCore.StaticWebAssets.props
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.build.SmartLabel.Presentation.props
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SmartLabel.Presentation.props
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SmartLabel.Presentation.props
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\staticwebassets.pack.json
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\scopedcss\bundle\SmartLabel.Presentation.styles.css
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLab.902AC4BB.Up2Date
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.dll
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\refint\SmartLabel.Presentation.dll
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.pdb
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.genruntimeconfig.cache
+D:\rep\src\Smart Label.Presentation\obj\Debug\net8.0\ref\SmartLabel.Presentation.dll
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.AssemblyReference.cache
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.GeneratedMSBuildEditorConfig.editorconfig
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfoInputs.cache
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfo.cs
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.CoreCompileInputs.cache
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cache
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.sourcelink.json
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.dll
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\refint\SmartLabel.Presentation.dll
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.pdb
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\appsettings.Development.json
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\appsettings.json
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.staticwebassets.runtime.json
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.exe
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.deps.json
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.runtimeconfig.json
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.pdb
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\AutoMapper.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Azure.Core.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Azure.Identity.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\FluentValidation.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Humanizer.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.ClientModel.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.CodeDom.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Composition.Convention.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Composition.Hosting.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Composition.Runtime.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Composition.TypedParts.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Formats.Asn1.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.IO.Pipelines.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Memory.Data.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Runtime.Caching.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Text.Json.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Application.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Domain.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Infrastructure.dll
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Application.pdb
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Infrastructure.pdb
+D:\rep\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Domain.pdb
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets.build.json
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets.development.json
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.SmartLabel.Presentation.Microsoft.AspNetCore.StaticWebAssets.props
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.build.SmartLabel.Presentation.props
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SmartLabel.Presentation.props
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SmartLabel.Presentation.props
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets.pack.json
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\scopedcss\bundle\SmartLabel.Presentation.styles.css
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLab.902AC4BB.Up2Date
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.genruntimeconfig.cache
+D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\ref\SmartLabel.Presentation.dll

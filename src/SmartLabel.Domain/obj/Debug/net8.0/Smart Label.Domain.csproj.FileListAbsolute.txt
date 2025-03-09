@@ -1,0 +1,24 @@
+D:\Smart Label\Smart Label\Smart Label.Domain\bin\Debug\net8.0\Smart Label.Domain.deps.json
+D:\Smart Label\Smart Label\Smart Label.Domain\bin\Debug\net8.0\Smart Label.Domain.dll
+D:\Smart Label\Smart Label\Smart Label.Domain\bin\Debug\net8.0\Smart Label.Domain.pdb
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.AssemblyInfoInputs.cache
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.AssemblyInfo.cs
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.csproj.CoreCompileInputs.cache
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.dll
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\refint\Smart Label.Domain.dll
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.pdb
+D:\Smart Label\Smart Label\Smart Label.Domain\obj\Debug\net8.0\ref\Smart Label.Domain.dll
+D:\rep\src\Smart Label.Domain\bin\Debug\net8.0\Smart Label.Domain.deps.json
+D:\rep\src\Smart Label.Domain\bin\Debug\net8.0\Smart Label.Domain.dll
+D:\rep\src\Smart Label.Domain\bin\Debug\net8.0\Smart Label.Domain.pdb
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.AssemblyInfoInputs.cache
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.AssemblyInfo.cs
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.csproj.CoreCompileInputs.cache
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.sourcelink.json
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.dll
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\refint\Smart Label.Domain.dll
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.pdb
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\ref\Smart Label.Domain.dll
+D:\rep\src\Smart Label.Domain\obj\Debug\net8.0\Smart Label.Domain.csproj.AssemblyReference.cache

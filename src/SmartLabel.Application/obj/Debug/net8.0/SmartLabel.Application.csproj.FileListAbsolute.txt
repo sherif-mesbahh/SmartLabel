@@ -1,0 +1,32 @@
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\SmartLabel.Application.deps.json
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\SmartLabel.Application.dll
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\SmartLabel.Application.pdb
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\SmartLabel.Domain.dll
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\SmartLabel.Domain.pdb
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.csproj.AssemblyReference.cache
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.AssemblyInfoInputs.cache
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.AssemblyInfo.cs
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.csproj.CoreCompileInputs.cache
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.sourcelink.json
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLab.DA6B176F.Up2Date
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.dll
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\refint\SmartLabel.Application.dll
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\SmartLabel.Application.pdb
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\ref\SmartLabel.Application.dll
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.csproj.AssemblyReference.cache
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.AssemblyInfoInputs.cache
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.AssemblyInfo.cs
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.csproj.CoreCompileInputs.cache
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.sourcelink.json
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.dll
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\refint\SmartLabel.Application.dll
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLabel.Application.pdb
+D:\rep\src\SmartLabel.Application\bin\Debug\net8.0\SmartLabel.Application.deps.json
+D:\rep\src\SmartLabel.Application\bin\Debug\net8.0\SmartLabel.Application.dll
+D:\rep\src\SmartLabel.Application\bin\Debug\net8.0\SmartLabel.Application.pdb
+D:\rep\src\SmartLabel.Application\bin\Debug\net8.0\SmartLabel.Domain.dll
+D:\rep\src\SmartLabel.Application\bin\Debug\net8.0\SmartLabel.Domain.pdb
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\SmartLab.DA6B176F.Up2Date
+D:\rep\src\SmartLabel.Application\obj\Debug\net8.0\ref\SmartLabel.Application.dll

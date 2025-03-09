@@ -1,0 +1,31 @@
+D:\Smart Label\Smart Label\Smart Label.Application\bin\Debug\net8.0\Smart Label.Application.deps.json
+D:\Smart Label\Smart Label\Smart Label.Application\bin\Debug\net8.0\Smart Label.Application.dll
+D:\Smart Label\Smart Label\Smart Label.Application\bin\Debug\net8.0\Smart Label.Application.pdb
+D:\Smart Label\Smart Label\Smart Label.Application\bin\Debug\net8.0\Smart Label.Domain.dll
+D:\Smart Label\Smart Label\Smart Label.Application\bin\Debug\net8.0\Smart Label.Domain.pdb
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.csproj.AssemblyReference.cache
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.AssemblyInfoInputs.cache
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.AssemblyInfo.cs
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.csproj.CoreCompileInputs.cache
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart La.55B28055.Up2Date
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.dll
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\refint\Smart Label.Application.dll
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.pdb
+D:\Smart Label\Smart Label\Smart Label.Application\obj\Debug\net8.0\ref\Smart Label.Application.dll
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\Smart Label.Application.deps.json
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\Smart Label.Application.dll
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\Smart Label.Application.pdb
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\Smart Label.Domain.dll
+D:\rep\src\Smart Label.Application\bin\Debug\net8.0\Smart Label.Domain.pdb
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.csproj.AssemblyReference.cache
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.AssemblyInfoInputs.cache
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.AssemblyInfo.cs
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.csproj.CoreCompileInputs.cache
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.sourcelink.json
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart La.55B28055.Up2Date
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.dll
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\refint\Smart Label.Application.dll
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\Smart Label.Application.pdb
+D:\rep\src\Smart Label.Application\obj\Debug\net8.0\ref\Smart Label.Application.dll
