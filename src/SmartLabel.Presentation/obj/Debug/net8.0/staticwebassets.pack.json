@@ -1,75 +1,103 @@
 {
   "Files": [
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\0525539c-7f7f-43ec-bb0a-4ca5e00bf83a_ginst.jpj.png",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\0525539c-7f7f-43ec-bb0a-4ca5e00bf83a_ginst.jpj.png",
       "PackagePath": "staticwebassets\\Uploads\\0525539c-7f7f-43ec-bb0a-4ca5e00bf83a_ginst.jpj.png"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\13760808-b7d6-4e09-be9d-59624ee9b0e9_Facebook.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\09fc33d4-1517-41a2-8f0c-0d244dfce72b_eq1.png",
+      "PackagePath": "staticwebassets\\Uploads\\09fc33d4-1517-41a2-8f0c-0d244dfce72b_eq1.png"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\0eb30c27-fc83-4687-8e2f-9c40af94bf6d_eq1.png",
+      "PackagePath": "staticwebassets\\Uploads\\0eb30c27-fc83-4687-8e2f-9c40af94bf6d_eq1.png"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\13760808-b7d6-4e09-be9d-59624ee9b0e9_Facebook.jpg",
       "PackagePath": "staticwebassets\\Uploads\\13760808-b7d6-4e09-be9d-59624ee9b0e9_Facebook.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\1dea2f9b-44c8-4e24-acd2-fac838891452_Alexandria Ecpc.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\1dea2f9b-44c8-4e24-acd2-fac838891452_Alexandria Ecpc.jpg",
       "PackagePath": "staticwebassets\\Uploads\\1dea2f9b-44c8-4e24-acd2-fac838891452_Alexandria Ecpc.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\2604f848-8ec4-489a-9524-858eecd22d00_ginst.jpj.png",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\2604f848-8ec4-489a-9524-858eecd22d00_ginst.jpj.png",
       "PackagePath": "staticwebassets\\Uploads\\2604f848-8ec4-489a-9524-858eecd22d00_ginst.jpj.png"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\2efdb670-69e7-428f-a87f-76698ed793d8_FAV.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\2efdb670-69e7-428f-a87f-76698ed793d8_FAV.jpg",
       "PackagePath": "staticwebassets\\Uploads\\2efdb670-69e7-428f-a87f-76698ed793d8_FAV.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\345e7c1a-cfbc-45e5-ae29-9cea3d4f7c68_ginst.jpj.png",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\345e7c1a-cfbc-45e5-ae29-9cea3d4f7c68_ginst.jpj.png",
       "PackagePath": "staticwebassets\\Uploads\\345e7c1a-cfbc-45e5-ae29-9cea3d4f7c68_ginst.jpj.png"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\496c33c6-891b-4024-81a9-0e134278024f_vegetables.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\496c33c6-891b-4024-81a9-0e134278024f_vegetables.jpg",
       "PackagePath": "staticwebassets\\Uploads\\496c33c6-891b-4024-81a9-0e134278024f_vegetables.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\58b4ed84-beb4-4cae-b5a2-3528b68caffc_ginst.jpj.png",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\58a580ed-9739-4abe-a1cc-9539cc1a0734_eq1.png",
+      "PackagePath": "staticwebassets\\Uploads\\58a580ed-9739-4abe-a1cc-9539cc1a0734_eq1.png"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\58b4ed84-beb4-4cae-b5a2-3528b68caffc_ginst.jpj.png",
       "PackagePath": "staticwebassets\\Uploads\\58b4ed84-beb4-4cae-b5a2-3528b68caffc_ginst.jpj.png"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\7ac8c89c-a9d5-4512-a8f7-8fb5f4a48a88_Facebook.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\7ac8c89c-a9d5-4512-a8f7-8fb5f4a48a88_Facebook.jpg",
       "PackagePath": "staticwebassets\\Uploads\\7ac8c89c-a9d5-4512-a8f7-8fb5f4a48a88_Facebook.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\b96f0b9c-28d9-4c18-acce-a761c1c74ec7_ginst.jpj.png",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\a755c5f8-1294-419a-b761-ffe99008a920_milk.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\a755c5f8-1294-419a-b761-ffe99008a920_milk.jpeg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\b80962c5-309d-4f5b-8426-ad05c36be375_milk.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\b80962c5-309d-4f5b-8426-ad05c36be375_milk.jpeg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\b96f0b9c-28d9-4c18-acce-a761c1c74ec7_ginst.jpj.png",
       "PackagePath": "staticwebassets\\Uploads\\b96f0b9c-28d9-4c18-acce-a761c1c74ec7_ginst.jpj.png"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\bade9390-b304-4471-bbd4-93d6e575c231_Facebook.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\bade9390-b304-4471-bbd4-93d6e575c231_Facebook.jpg",
       "PackagePath": "staticwebassets\\Uploads\\bade9390-b304-4471-bbd4-93d6e575c231_Facebook.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\c3c84a0d-1100-46f4-9e7d-ebc79fab2c42_vegetables.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\c3c84a0d-1100-46f4-9e7d-ebc79fab2c42_vegetables.jpg",
       "PackagePath": "staticwebassets\\Uploads\\c3c84a0d-1100-46f4-9e7d-ebc79fab2c42_vegetables.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\de21f18d-879e-4a20-8c34-2fcd227b980b_milk.jpeg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\cbc9aae9-7fbc-4ca8-b373-1d831b355545_eq2.png",
+      "PackagePath": "staticwebassets\\Uploads\\cbc9aae9-7fbc-4ca8-b373-1d831b355545_eq2.png"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\d2fab61c-3a3b-45b3-b0b5-3918aea72ce6_eq2.png",
+      "PackagePath": "staticwebassets\\Uploads\\d2fab61c-3a3b-45b3-b0b5-3918aea72ce6_eq2.png"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\de21f18d-879e-4a20-8c34-2fcd227b980b_milk.jpeg",
       "PackagePath": "staticwebassets\\Uploads\\de21f18d-879e-4a20-8c34-2fcd227b980b_milk.jpeg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\e580517e-73b2-4e39-832a-b6a89c27e898_DatbasePhoto.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\e580517e-73b2-4e39-832a-b6a89c27e898_DatbasePhoto.jpg",
       "PackagePath": "staticwebassets\\Uploads\\e580517e-73b2-4e39-832a-b6a89c27e898_DatbasePhoto.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f442d99f-1caf-42d6-bb6b-372dc288787c_ginst.jpj.png",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f442d99f-1caf-42d6-bb6b-372dc288787c_ginst.jpj.png",
       "PackagePath": "staticwebassets\\Uploads\\f442d99f-1caf-42d6-bb6b-372dc288787c_ginst.jpj.png"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg",
       "PackagePath": "staticwebassets\\Uploads\\f63db19c-bd2a-471f-9c50-9c1c58c25dee_DatbasePhoto.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f86e51ea-3131-4f73-9fd4-bdebf6089ecd_Facebook.jpg",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f86e51ea-3131-4f73-9fd4-bdebf6089ecd_Facebook.jpg",
       "PackagePath": "staticwebassets\\Uploads\\f86e51ea-3131-4f73-9fd4-bdebf6089ecd_Facebook.jpg"
     },
     {
-      "Id": "D:\\rep\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\fbb5abc2-5696-43b2-99f0-5da6a2265b9e_ginst.jpj.png",
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\fbb5abc2-5696-43b2-99f0-5da6a2265b9e_ginst.jpj.png",
       "PackagePath": "staticwebassets\\Uploads\\fbb5abc2-5696-43b2-99f0-5da6a2265b9e_ginst.jpj.png"
     },
     {

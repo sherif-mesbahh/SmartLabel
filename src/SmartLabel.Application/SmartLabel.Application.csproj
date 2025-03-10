@@ -18,4 +18,11 @@
     <ProjectReference Include="..\SmartLabel.Domain\SmartLabel.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\ProductImages\Command\Validators\" />
+    <Folder Include="Features\ProductImages\Command\Results\" />
+    <Folder Include="Features\ProductImages\Query\Handlers\" />
+    <Folder Include="Features\ProductImages\Query\Models\" />
+  </ItemGroup>
+
 </Project>

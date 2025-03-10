@@ -8,7 +8,7 @@
 		public int Discount { get; set; }
 		public decimal NewPrice { get; set; }
 		public string? Description { get; set; }
-		public List<ProductImage>? Images { get; set; } = new List<ProductImage>();
+		public ICollection<ProductImage>? Images { get; set; }
 		public int CatId { get; set; }
 		public Category Category { get; set; }
 	}

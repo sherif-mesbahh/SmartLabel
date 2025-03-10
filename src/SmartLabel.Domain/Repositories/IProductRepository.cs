@@ -10,5 +10,7 @@ namespace SmartLabel.Domain.Repositories
 		Task UpdateProduct(Product product);
 		Task DeleteProduct(Product product);
 		Task<bool> IsProductExist(int id);
+		Task<bool> IsProductNameExist(string name, CancellationToken cancellationToken);
+		Task<bool> IsProductNameAndIdExist(int id, string name, CancellationToken cancellationToken);
 	}
 }

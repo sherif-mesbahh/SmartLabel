@@ -14,15 +14,13 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 
 		public async Task<Product?> GetProductById(int id)
 		{
-			return await context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+			return await context.Products.Include(x => x.Images).FirstOrDefaultAsync(x => x.Id == id);
 		}
-
 		public async Task AddProduct(Product product)
 		{
 			await context.Products.AddAsync(product);
 			await context.SaveChangesAsync();
 		}
-
 		public async Task UpdateProduct(Product product)
 		{
 			context.Products.Update(product);
@@ -38,6 +36,16 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 		public async Task<bool> IsProductExist(int id)
 		{
 			return await context.Products.AnyAsync(x => x.Id == id);
+		}
+
+		public async Task<bool> IsProductNameExist(string name, CancellationToken cancellationToken)
+		{
+			return await context.Products.AnyAsync(c => c.Name == name, cancellationToken);
+		}
+
+		public async Task<bool> IsProductNameAndIdExist(int id, string name, CancellationToken cancellationToken)
+		{
+			return await context.Products.AnyAsync(c => c.Name == name && c.Id != id, cancellationToken);
 		}
 	}
 }

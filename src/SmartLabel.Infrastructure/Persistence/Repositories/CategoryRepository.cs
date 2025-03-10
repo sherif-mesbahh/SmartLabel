@@ -14,7 +14,8 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 
 		public async Task<Category?> GetCategoryById(int id)
 		{
-			return await context.Categories.Include(x => x.Products).AsNoTracking().FirstOrDefaultAsync(x => x!.Id == id);
+			return await context.Categories.Include(x => x.Products)!
+				.ThenInclude(x => x.Images).FirstOrDefaultAsync(x => x!.Id == id);
 		}
 
 		public async Task AddCategory(Category category)

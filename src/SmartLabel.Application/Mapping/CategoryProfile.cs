@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using SmartLabel.Application.Features.Categories.Command.Models;
-using SmartLabel.Application.Features.Categories.Command.Results;
 using SmartLabel.Application.Features.Categories.Query.Results;
 using SmartLabel.Domain.Entities;
 
