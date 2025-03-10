@@ -5488,11 +5488,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\rep\\src\\SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
+      "projectUniqueName": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
       "projectName": "SmartLabel.Presentation",
-      "projectPath": "D:\\rep\\src\\SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
+      "projectPath": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\SmartLabel.Presentation.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "D:\\rep\\src\\SmartLabel.Presentation\\obj\\",
+      "outputPath": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5510,11 +5510,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\rep\\src\\SmartLabel.Application\\SmartLabel.Application.csproj": {
-              "projectPath": "D:\\rep\\src\\SmartLabel.Application\\SmartLabel.Application.csproj"
+            "D:\\SmartLabel\\src\\SmartLabel.Application\\SmartLabel.Application.csproj": {
+              "projectPath": "D:\\SmartLabel\\src\\SmartLabel.Application\\SmartLabel.Application.csproj"
             },
-            "D:\\rep\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj": {
-              "projectPath": "D:\\rep\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj"
+            "D:\\SmartLabel\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj": {
+              "projectPath": "D:\\SmartLabel\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj"
             }
           }
         }

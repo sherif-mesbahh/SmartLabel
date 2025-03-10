@@ -13,6 +13,7 @@ namespace SmartLabel.Infrastructure
 		{
 			services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
 			services.AddTransient<ICategoryRepository, CategoryRepository>();
+			services.AddTransient<IProductRepository, ProductRepository>();
 			return services;
 		}
 	}

@@ -1,6 +1,43 @@
-﻿namespace SmartLabel.Infrastructure.Persistence.Repositories
+﻿using Microsoft.EntityFrameworkCore;
+using SmartLabel.Domain.Entities;
+using SmartLabel.Domain.Repositories;
+using SmartLabel.Infrastructure.Persistence.Data;
+
+namespace SmartLabel.Infrastructure.Persistence.Repositories
 {
-	public class ProductRepository
+	public class ProductRepository(AppDbContext context) : IProductRepository
 	{
+		public async Task<IEnumerable<Product?>> GetAllProducts()
+		{
+			return await context.Products.AsNoTracking().ToListAsync();
+		}
+
+		public async Task<Product?> GetProductById(int id)
+		{
+			return await context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+		}
+
+		public async Task AddProduct(Product product)
+		{
+			await context.Products.AddAsync(product);
+			await context.SaveChangesAsync();
+		}
+
+		public async Task UpdateProduct(Product product)
+		{
+			context.Products.Update(product);
+			await context.SaveChangesAsync();
+		}
+
+		public async Task DeleteProduct(Product product)
+		{
+			context.Products.Remove(product);
+			await context.SaveChangesAsync();
+		}
+
+		public async Task<bool> IsProductExist(int id)
+		{
+			return await context.Products.AnyAsync(x => x.Id == id);
+		}
 	}
 }

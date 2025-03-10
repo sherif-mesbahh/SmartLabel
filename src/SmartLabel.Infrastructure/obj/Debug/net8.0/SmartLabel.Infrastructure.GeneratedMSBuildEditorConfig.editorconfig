@@ -16,6 +16,6 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SmartLabel.Infrastructure
-build_property.ProjectDir = D:\rep\src\SmartLabel.Infrastructure\
+build_property.ProjectDir = D:\SmartLabel\src\SmartLabel.Infrastructure\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

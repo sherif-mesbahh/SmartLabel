@@ -37,7 +37,7 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 
 		public async Task<bool> IsCategoryExist(int id)
 		{
-			return await GetCategoryById(id) is null;
+			return await context.Categories.AnyAsync(x => x.Id == id);
 		}
 
 		public async Task<bool> IsCategoryNameExist(string name, CancellationToken cancellationToken)

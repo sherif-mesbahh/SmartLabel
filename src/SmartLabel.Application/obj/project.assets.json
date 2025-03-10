@@ -580,11 +580,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\rep\\src\\SmartLabel.Application\\SmartLabel.Application.csproj",
+      "projectUniqueName": "D:\\SmartLabel\\src\\SmartLabel.Application\\SmartLabel.Application.csproj",
       "projectName": "SmartLabel.Application",
-      "projectPath": "D:\\rep\\src\\SmartLabel.Application\\SmartLabel.Application.csproj",
+      "projectPath": "D:\\SmartLabel\\src\\SmartLabel.Application\\SmartLabel.Application.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "D:\\rep\\src\\SmartLabel.Application\\obj\\",
+      "outputPath": "D:\\SmartLabel\\src\\SmartLabel.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -602,8 +602,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\rep\\src\\SmartLabel.Domain\\SmartLabel.Domain.csproj": {
-              "projectPath": "D:\\rep\\src\\SmartLabel.Domain\\SmartLabel.Domain.csproj"
+            "D:\\SmartLabel\\src\\SmartLabel.Domain\\SmartLabel.Domain.csproj": {
+              "projectPath": "D:\\SmartLabel\\src\\SmartLabel.Domain\\SmartLabel.Domain.csproj"
             }
           }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eRJ9g2DTf0U=",
+  "dgSpecHash": "q82xBL6dKVA=",
   "success": true,
-  "projectFilePath": "D:\\rep\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj",
+  "projectFilePath": "D:\\SmartLabel\\src\\SmartLabel.Infrastructure\\SmartLabel.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
