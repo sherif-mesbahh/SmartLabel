@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
-import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/products_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/custom_app_bar.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/custom_nav_bar.dart';
 
@@ -22,7 +20,8 @@ class Layout extends StatelessWidget {
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              AppCubit.get(context).screens[AppCubit.get(context).navBarCurrentIndex],
+              AppCubit.get(context)
+                  .screens[AppCubit.get(context).navBarCurrentIndex],
               CustomNavBar(),
             ],
           );

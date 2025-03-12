@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/products_widgets/custom_slider.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/products_widgets/grid_view_item.dart';

@@ -10,7 +10,15 @@ class CustomSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      options: CarouselOptions(height: screenHeight(context) * .3),
+      options: CarouselOptions(
+        height: screenHeight(context) * .3,
+        autoPlay: true,
+        enlargeCenterPage: true,
+        viewportFraction: 0.8,
+        aspectRatio: 2.0,
+        initialPage: 0,
+        enableInfiniteScroll: true,
+      ),
       items: [1, 2, 3, 4, 5].map((i) {
         return Builder(
           builder: (BuildContext context) {

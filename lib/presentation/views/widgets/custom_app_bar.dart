@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/search_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -20,6 +22,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           'assets/images/smart_label_logo.png',
         ),
       ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            pushNavigator(context, SearchPage());
+          },
+          icon: Icon(
+            Icons.search,
+            color: secondaryColor,
+            size: 30,
+          ),
+        ),
+      ],
     );
   }
 
