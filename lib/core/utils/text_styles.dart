@@ -16,15 +16,22 @@ class TextStyles {
   );
 
   static TextStyle productTitle = GoogleFonts.poppins(
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     color: darkColor,
   );
 
   static TextStyle productPrice = GoogleFonts.poppins(
-    fontSize: 18,
+    fontSize: 12,
     fontWeight: FontWeight.bold,
     color: primaryColor,
+  );
+
+  static TextStyle productOldPrice = GoogleFonts.poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: greyColor,
+    decoration: TextDecoration.lineThrough,
   );
 
   static TextStyle description = GoogleFonts.poppins(

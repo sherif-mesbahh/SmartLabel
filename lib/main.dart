@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/layout.dart';
 
 void main() {
-  runApp(const MyApp());
+  Bloc.observer = MyBlocObserver();
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+      create: (context) => AppCubit(),
+    )
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignPage(),
+      home: Layout(),
     );
   }
 }
