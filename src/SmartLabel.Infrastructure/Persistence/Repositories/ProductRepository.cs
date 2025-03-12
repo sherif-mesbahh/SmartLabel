@@ -9,12 +9,12 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 	{
 		public async Task<IEnumerable<Product?>> GetAllProducts()
 		{
-			return await context.Products.AsNoTracking().ToListAsync();
+			return await context.Products.Include(x => x.Images).AsNoTracking().ToListAsync();
 		}
 
 		public async Task<Product?> GetProductById(int id)
 		{
-			return await context.Products.Include(x => x.Images).FirstOrDefaultAsync(x => x.Id == id);
+			return await context.Products.Include(x => x.Images).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 		}
 		public async Task AddProduct(Product product)
 		{
@@ -23,8 +23,16 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 		}
 		public async Task UpdateProduct(Product product)
 		{
-			context.Products.Update(product);
-			await context.SaveChangesAsync();
+			try
+			{
+				context.Products.Update(product);
+				await context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				// Log the exception or handle it appropriately
+				Console.WriteLine($"An error occurred: {ex.Message}");
+			}
 		}
 
 		public async Task DeleteProduct(Product product)
@@ -48,4 +56,5 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 			return await context.Products.AnyAsync(c => c.Name == name && c.Id != id, cancellationToken);
 		}
 	}
+
 }

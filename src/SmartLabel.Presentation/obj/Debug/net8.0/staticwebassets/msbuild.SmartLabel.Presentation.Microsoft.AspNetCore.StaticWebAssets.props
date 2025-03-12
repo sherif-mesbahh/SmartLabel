@@ -32,22 +32,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\09fc33d4-1517-41a2-8f0c-0d244dfce72b_eq1.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\0eb30c27-fc83-4687-8e2f-9c40af94bf6d_eq1.png))">
-      <SourceType>Package</SourceType>
-      <SourceId>SmartLabel.Presentation</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/SmartLabel.Presentation</BasePath>
-      <RelativePath>Uploads/0eb30c27-fc83-4687-8e2f-9c40af94bf6d_eq1.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\0eb30c27-fc83-4687-8e2f-9c40af94bf6d_eq1.png))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\13760808-b7d6-4e09-be9d-59624ee9b0e9_Facebook.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>SmartLabel.Presentation</SourceId>
@@ -192,12 +176,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\7ac8c89c-a9d5-4512-a8f7-8fb5f4a48a88_Facebook.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\a755c5f8-1294-419a-b761-ffe99008a920_milk.jpeg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\ac566fa9-c79f-40a8-9cc6-97de2ed22379_StatusCodes.jpeg))">
       <SourceType>Package</SourceType>
       <SourceId>SmartLabel.Presentation</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/SmartLabel.Presentation</BasePath>
-      <RelativePath>Uploads/a755c5f8-1294-419a-b761-ffe99008a920_milk.jpeg</RelativePath>
+      <RelativePath>Uploads/ac566fa9-c79f-40a8-9cc6-97de2ed22379_StatusCodes.jpeg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -206,23 +190,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\a755c5f8-1294-419a-b761-ffe99008a920_milk.jpeg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\b80962c5-309d-4f5b-8426-ad05c36be375_milk.jpeg))">
-      <SourceType>Package</SourceType>
-      <SourceId>SmartLabel.Presentation</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/SmartLabel.Presentation</BasePath>
-      <RelativePath>Uploads/b80962c5-309d-4f5b-8426-ad05c36be375_milk.jpeg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\b80962c5-309d-4f5b-8426-ad05c36be375_milk.jpeg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\ac566fa9-c79f-40a8-9cc6-97de2ed22379_StatusCodes.jpeg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\b96f0b9c-28d9-4c18-acce-a761c1c74ec7_ginst.jpj.png))">
       <SourceType>Package</SourceType>
@@ -287,22 +255,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\cbc9aae9-7fbc-4ca8-b373-1d831b355545_eq2.png))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d2fab61c-3a3b-45b3-b0b5-3918aea72ce6_eq2.png))">
-      <SourceType>Package</SourceType>
-      <SourceId>SmartLabel.Presentation</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/SmartLabel.Presentation</BasePath>
-      <RelativePath>Uploads/d2fab61c-3a3b-45b3-b0b5-3918aea72ce6_eq2.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d2fab61c-3a3b-45b3-b0b5-3918aea72ce6_eq2.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\de21f18d-879e-4a20-8c34-2fcd227b980b_milk.jpeg))">
       <SourceType>Package</SourceType>

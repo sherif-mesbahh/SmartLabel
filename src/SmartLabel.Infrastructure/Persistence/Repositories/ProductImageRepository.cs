@@ -14,7 +14,7 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 
 		public async Task<ProductImage?> GetProductImageById(int id)
 		{
-			return await context.ProductImages.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+			return await context.ProductImages.FirstOrDefaultAsync(x => x.Id == id);
 		}
 
 		public async Task AddProductImage(ProductImage productImage)

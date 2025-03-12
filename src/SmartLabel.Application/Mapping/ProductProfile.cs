@@ -10,8 +10,13 @@ namespace SmartLabel.Application.Mapping
 		public ProductProfile()
 		{
 			CreateMap<AddProductCommand, Product>();
+			CreateMap<UpdateProductCommand, Product>();
+			CreateMap<Product, UpdateProductCommand>();
 			CreateMap<Product, GetProductByIdResult>();
 			CreateMap<GetProductByIdResult, Product>();
+			CreateMap<Product, GetAllProductsResult>()
+				.ForMember(dest => dest.Image,
+					opt => opt.MapFrom(src => src.Images!.FirstOrDefault()));
 		}
 	}
 }
