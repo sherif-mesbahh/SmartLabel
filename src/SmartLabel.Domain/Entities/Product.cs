@@ -11,5 +11,6 @@
 		public ICollection<ProductImage>? Images { get; set; }
 		public int CatId { get; set; }
 		public Category Category { get; set; }
+		public ICollection<BannerProduct>? BannerProducts { get; set; }
 	}
 }

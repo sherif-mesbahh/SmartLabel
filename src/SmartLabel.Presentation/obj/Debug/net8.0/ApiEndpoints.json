@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "Method": "AddBanner",
+    "RelativePath": "api/Banner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "banner",
+        "Type": "SmartLabel.Application.Features.Banners.Command.Results.AddBannerResult",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SmartLabel.Presentation.Controllers.CategoryController",
     "Method": "GetAllCategory",
     "RelativePath": "api/Category",
