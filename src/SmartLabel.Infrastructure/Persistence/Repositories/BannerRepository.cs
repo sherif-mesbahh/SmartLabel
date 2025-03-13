@@ -14,14 +14,14 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 
 		public async Task<IEnumerable<Banner?>> GetActiveBanners()
 		{
-			DateTime currentTime = DateTime.UtcNow;
-			return await context.Banners.AsNoTracking().Where(x => x.EndDate < currentTime).ToListAsync();
+			var currentTime = DateTime.UtcNow;
+			return await context.Banners.AsNoTracking().Where(x => x.StartDate <= currentTime && currentTime < x.EndDate).ToListAsync();
 		}
 
 		public async Task<Banner?> GetBannerById(int id)
 		{
 			return await context.Banners.Include(x => x.BannerProducts)!.ThenInclude(x => x.Product)
-				.ThenInclude(x => x.Images).FirstOrDefaultAsync(x => x.Id == id);
+				.ThenInclude(x => x.Images).AsSplitQuery().FirstOrDefaultAsync(x => x.Id == id);
 		}
 
 		public async Task AddBanner(Banner banner)

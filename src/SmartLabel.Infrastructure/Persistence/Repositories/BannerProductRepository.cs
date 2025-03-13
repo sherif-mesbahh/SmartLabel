@@ -12,9 +12,9 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 			return await context.BannerProducts.AsNoTracking().ToListAsync();
 		}
 
-		public async Task<BannerProduct?> GetBannerProductById(int id)
+		public async Task<BannerProduct?> GetBannerProductById(int bannerId, int productId)
 		{
-			return await context.BannerProducts.FirstOrDefaultAsync(x => x.Id == id);
+			return await context.BannerProducts.FirstOrDefaultAsync(x => x.ProductId == productId && x.BannerId == bannerId);
 		}
 
 		public async Task AddBannerProduct(BannerProduct bannerProduct)
@@ -29,15 +29,16 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 			await context.SaveChangesAsync();
 		}
 
-		public async Task DeleteBannerProduct(BannerProduct bannerProduct)
+		public async Task DeleteBannerProduct(int bannerId, int productId)
 		{
-			context.BannerProducts.Remove(bannerProduct);
+
+			context.BannerProducts.Remove(await GetBannerProductById(bannerId, productId));
 			await context.SaveChangesAsync();
 		}
 
-		public Task<bool> IsBannerProductExist(int id)
+		public Task<bool> IsBannerProductExist(int bannerId, int productId)
 		{
-			return context.BannerProducts.AnyAsync(x => x.Id == id);
+			return context.BannerProducts.AnyAsync(x => x.BannerId == bannerId && x.ProductId == productId);
 		}
 	}
 }

@@ -1,0 +1,14 @@
+﻿using SmartLabel.Application.Features.BannerProducts.Query.Models;
+
+namespace SmartLabel.Application.Features.Banners.Query.Results
+{
+	public class GetBannerByIdResult
+	{
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public string? Description { get; set; }
+		public DateTime StartDate { get; set; }
+		public DateTime EndDate { get; set; }
+		public ICollection<GetBannerProductResult> BannerProducts { get; set; }
+	}
+}

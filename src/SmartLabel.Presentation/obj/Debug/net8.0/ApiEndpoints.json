@@ -1,6 +1,16 @@
 [
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "Method": "GetAllBanners",
+    "RelativePath": "api/Banner",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
     "Method": "AddBanner",
     "RelativePath": "api/Banner",
     "HttpMethod": "POST",
@@ -9,10 +19,52 @@
     "Parameters": [
       {
         "Name": "banner",
-        "Type": "SmartLabel.Application.Features.Banners.Command.Results.AddBannerResult",
+        "Type": "SmartLabel.Application.Features.Banners.Command.Results.BannerResult",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "Method": "GetBannerById",
+    "RelativePath": "api/Banner/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "Method": "DeleteBanner",
+    "RelativePath": "api/Banner/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "Method": "GetActiveBanners",
+    "RelativePath": "api/Banner/Active",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

@@ -1,6 +1,6 @@
 ﻿namespace SmartLabel.Application.Features.Banners.Command.Results
 {
-	public class AddBannerResult
+	public class BannerResult
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }

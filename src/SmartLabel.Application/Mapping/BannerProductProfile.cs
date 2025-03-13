@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SmartLabel.Application.Features.BannerProducts.Command.Models;
+using SmartLabel.Application.Features.BannerProducts.Query.Models;
 using SmartLabel.Domain.Entities;
 
 namespace SmartLabel.Application.Mapping
@@ -9,6 +10,7 @@ namespace SmartLabel.Application.Mapping
 		public BannerProductProfile()
 		{
 			CreateMap<AddBannerProductCommand, BannerProduct>();
+			CreateMap<BannerProduct, GetBannerProductResult>();
 		}
 	}
 }

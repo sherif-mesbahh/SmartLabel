@@ -12,7 +12,7 @@ namespace SmartLabel.Application.Features.Banners.Command.Models
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
-		public AddBannerCommand(AddBannerResult banner)
+		public AddBannerCommand(BannerResult banner)
 		{
 			Id = banner.Id;
 			Title = banner.Title;
