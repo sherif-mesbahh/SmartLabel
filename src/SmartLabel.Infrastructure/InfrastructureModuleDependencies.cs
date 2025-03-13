@@ -17,6 +17,7 @@ namespace SmartLabel.Infrastructure
 			services.AddTransient<IProductImageRepository, ProductImageRepository>();
 			services.AddTransient<IBannerRepository, BannerRepository>();
 			services.AddTransient<IBannerProductRepository, BannerProductRepository>();
+			services.AddTransient<IStoredProceduresRepository, StoredProceduresRepository>();
 			return services;
 		}
 	}

@@ -27,6 +27,22 @@
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "Method": "UpdateBanner",
+    "RelativePath": "api/Banner",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "banner",
+        "Type": "SmartLabel.Application.Features.Banners.Command.Results.BannerResult",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
     "Method": "GetBannerById",
     "RelativePath": "api/Banner/{id}",
     "HttpMethod": "GET",
