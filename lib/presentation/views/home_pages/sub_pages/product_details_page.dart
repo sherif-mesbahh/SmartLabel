@@ -1,123 +1,64 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/product_details_widgets/product_details_images_indicator_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/product_details_widgets/product_details_images_page_view_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/product_details_widgets/product_details_price_row_widget.dart';
 
 class ProductDetailsPage extends StatelessWidget {
-  const ProductDetailsPage({super.key});
+  ProductDetailsPage({super.key});
+  final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Row(
+          children: [
+            Image(
+              height: 50,
+              image: AssetImage(
+                'assets/images/smart_label_logo.png',
+              ),
+            ),
+            SizedBox(width: 10),
+            Text(
+              'Smart Label',
+              style: TextStyles.appBarTitle,
+            ),
+          ],
+        ),
+      ),
+      backgroundColor: secondaryColor,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.only(top: 32.0),
+          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  height: screenHeight(context) * .3,
-                  viewportFraction: 0.8,
-                  aspectRatio: 2.0,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                ),
-                items: [1, 2, 3, 4, 5].map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: screenWidth(context),
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                            color: secondaryColor,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image(
-                            image: AssetImage(
-                              'assets/images/offer_image.jpg',
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
+              Text(
+                'Product Name',
+                style: TextStyles.headline2,
               ),
-              SizedBox(height: 16),
-              Container(
-                height: screenHeight(context) * .7,
-                width: screenWidth(context),
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32),
-                    topRight: Radius.circular(32),
-                  ),
+              ProductImagesPageView(pageController: pageController),
+              SizedBox(height: 10),
+              ProductDetailsImagesIndicator(pageController: pageController),
+              SizedBox(height: 10),
+              ProductDetailsPriceRow(),
+              SizedBox(height: 10),
+              Text(
+                'Description: ',
+                style: TextStyles.description.copyWith(
+                  fontSize: 18,
+                  color: darkColor,
+                  fontWeight: FontWeight.bold,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Product Name',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Spacer(),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.favorite_border_outlined),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Text(
-                              'Price: ',
-                              style: TextStyles.productPrice.copyWith(
-                                color: secondaryColor,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '100\$',
-                              style: TextStyles.productPrice.copyWith(
-                                color: secondaryColor,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              '100\$',
-                              style: TextStyles.productOldPrice,
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Description',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              ),
+              Text(
+                'sdfsdafasdfsdfsdfdsfsdfsdfsdfsdfdsfssdfsdfsdfdsfsdsdfsdfsdfdsfsdsdfsdfsdfdsfsdsdfsdfsdfdsfsdsdfsdfsdfdsfsdsdfsdfsdfdsfsdd',
+                style: TextStyles.description,
               ),
             ],
           ),

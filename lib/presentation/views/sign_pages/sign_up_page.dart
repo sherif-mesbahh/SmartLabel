@@ -6,7 +6,9 @@ import 'package:smart_label_software_engineering/presentation/views/widgets/logi
 import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  SignUpPage({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class SignUpPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomTextFormFieldWidget(
+                    controller: emailController,
                     labelText: 'Email',
                     hintText: 'Enter your email',
                     obscureText: false,
@@ -49,6 +52,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16.0),
                   CustomTextFormFieldWidget(
+                    controller: passwordController,
                     labelText: 'Password',
                     hintText: 'Enter your password',
                     obscureText: true,

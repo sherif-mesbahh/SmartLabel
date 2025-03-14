@@ -3,6 +3,7 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 
 class CustomTextFormFieldWidget extends StatelessWidget {
+  final TextEditingController controller;
   final String hintText;
   final String labelText;
   final bool obscureText;
@@ -17,7 +18,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
     required this.labelText,
     required this.obscureText,
     required this.suffixIconOnPressed,
-    this.validator,
+    this.validator, required this.controller,
   });
 
   @override

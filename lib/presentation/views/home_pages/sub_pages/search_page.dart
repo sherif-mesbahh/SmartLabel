@@ -5,8 +5,8 @@ import 'package:smart_label_software_engineering/presentation/views/widgets/cate
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
-
+  SearchPage({super.key});
+  final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +23,7 @@ class SearchPage extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormFieldWidget(
+              controller: searchController,
               hintText: 'Search',
               labelText: 'Search',
               obscureText: false,

@@ -6,7 +6,9 @@ import 'package:smart_label_software_engineering/presentation/views/widgets/logi
 import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class LoginPage extends StatelessWidget {
                       return null;
                     },
                     suffixIconOnPressed: () {},
+                    controller: emailController,
                   ),
                   const SizedBox(height: 16.0),
                   CustomTextFormFieldWidget(
@@ -59,6 +62,7 @@ class LoginPage extends StatelessWidget {
                       return null;
                     },
                     suffixIconOnPressed: () {},
+                    controller: passwordController,
                   ),
                   const SizedBox(height: 16.0),
                   CustomButtonWidget(

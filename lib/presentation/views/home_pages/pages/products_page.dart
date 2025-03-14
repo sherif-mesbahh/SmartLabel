@@ -20,9 +20,15 @@ class ProductsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomSlider(),
+            SizedBox(
+              height: 10,
+            ),
             Text(
               'New Products',
               style: TextStyles.headline2,
+            ),
+            SizedBox(
+              height: 10,
             ),
             GridView.builder(
               physics: NeverScrollableScrollPhysics(),
