@@ -1,19 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartLabel.Domain.Entities;
 
-namespace SmartLabel.Infrastructure.Persistence.Data
+namespace SmartLabel.Infrastructure.Persistence.Data;
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-	public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+	public DbSet<Product> Products { get; set; }
+	public DbSet<Category> Categories { get; set; }
+	public DbSet<ProductImage> ProductImages { get; set; }
+	public DbSet<BannerImage> BannerImages { get; set; }
+	public DbSet<Banner> Banners { get; set; }
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		public DbSet<Product> Products { get; set; }
-		public DbSet<Category> Categories { get; set; }
-		public DbSet<ProductImage> ProductImages { get; set; }
-		public DbSet<BannerImage> BannerImages { get; set; }
-		public DbSet<Banner> Banners { get; set; }
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			base.OnModelCreating(modelBuilder);
-			modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
-		}
+		base.OnModelCreating(modelBuilder);
+		modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 	}
 }

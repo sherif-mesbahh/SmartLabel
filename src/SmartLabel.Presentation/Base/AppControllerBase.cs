@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
 using SmartLabel.Application.Bases;
+using System.Net;
 
 namespace SmartLabel.Presentation.Base;
 
@@ -21,6 +20,8 @@ public class AppControllerBase : ControllerBase
 				return new BadRequestObjectResult(response);
 			case HttpStatusCode.NotFound:
 				return new NotFoundObjectResult(response);
+			case HttpStatusCode.InternalServerError:
+				return new ObjectResult(response) { StatusCode = (int)HttpStatusCode.InternalServerError };
 			case HttpStatusCode.Accepted:
 				return new AcceptedResult(string.Empty, response);
 			case HttpStatusCode.UnprocessableEntity:

@@ -13,7 +13,6 @@ public class AddCategoryValidator : AbstractValidator<AddCategoryCommand>
 		ApplyValidationRules();
 		AddCustomValidationRules();
 	}
-
 	private void ApplyValidationRules()
 	{
 		RuleFor(x => x.Name)
@@ -27,6 +26,5 @@ public class AddCategoryValidator : AbstractValidator<AddCategoryCommand>
 		RuleFor(x => x.Name)
 			.MustAsync(async (name, cancellationToken) => !await _repository.IsCategoryNameExist(name, cancellationToken))
 			.WithMessage("Category name already exists.");
-
 	}
 }

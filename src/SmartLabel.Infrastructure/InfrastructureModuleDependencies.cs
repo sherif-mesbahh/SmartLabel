@@ -1,24 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SmartLabel.Domain.Interfaces;
 using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
+using SmartLabel.Infrastructure.Interfaces;
 using SmartLabel.Infrastructure.Persistence.Data;
 using SmartLabel.Infrastructure.Persistence.Repositories;
 using SmartLabel.Infrastructure.Services;
 
-namespace SmartLabel.Infrastructure
+namespace SmartLabel.Infrastructure;
+public static class InfrastructureModuleDependencies
 {
-	public static class InfrastructureModuleDependencies
+	public static IServiceCollection AddInfrastructures(this IServiceCollection services, IConfiguration configuration)
 	{
-		public static IServiceCollection AddInfrastructures(this IServiceCollection services, IConfiguration configuration)
-		{
-			services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
-			services.AddTransient<ICategoryRepository, CategoryRepository>();
-			services.AddTransient<IProductRepository, ProductRepository>();
-			services.AddTransient<IBannerRepository, BannerRepository>();
-			services.AddTransient<IFileService, FileService>();
-			return services;
-		}
+		services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
+		services.AddTransient<ICategoryRepository, CategoryRepository>();
+		services.AddTransient<IProductRepository, ProductRepository>();
+		services.AddTransient<IBannerRepository, BannerRepository>();
+		services.AddTransient<IFileService, FileService>();
+		services.AddTransient<IUnitOfWork, UnitOfWork>();
+		return services;
 	}
 }

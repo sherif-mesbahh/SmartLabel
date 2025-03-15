@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace SmartLabel.Domain.Services
+namespace SmartLabel.Domain.Services;
+public interface IFileService
 {
-	public interface IFileService
-	{
-		public Task<string> BuildImageAsync(IFormFile image);
-		public Task DeleteImageAsync(string? imageUrl);
-	}
+	public Task<string> BuildImageAsync(IFormFile image);
+	public Task DeleteImageAsync(string? imageUrl);
 }

@@ -70,7 +70,15 @@ public class ResponseHandler
 			Message = message ?? "Not Found"
 		};
 	}
-
+	public Response<T> InternalServerError<T>(string? message = null)
+	{
+		return new Response<T>()
+		{
+			StatusCode = System.Net.HttpStatusCode.InternalServerError,
+			Succeeded = false,
+			Message = message ?? "An error occurred"
+		};
+	}
 	public Response<T> Created<T>(string? message = null)
 	{
 		return new Response<T>()

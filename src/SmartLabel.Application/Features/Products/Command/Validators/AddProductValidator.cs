@@ -2,36 +2,34 @@
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Domain.Repositories;
 
-namespace SmartLabel.Application.Features.Products.Command.Validators
+namespace SmartLabel.Application.Features.Products.Command.Validators;
+public class AddProductValidator : AbstractValidator<AddProductCommand>
 {
-	public class AddProductValidator : AbstractValidator<AddProductCommand>
+	private readonly IProductRepository _repository;
+
+	public AddProductValidator(IProductRepository repository)
 	{
-		private readonly IProductRepository _repository;
+		_repository = repository;
+		ApplyValidationRules();
+		AddCustomValidationRules();
+	}
+	private void ApplyValidationRules()
+	{
+		RuleFor(x => x.Name)
+			.NotEmpty().WithMessage("{PropertyName} must be not empty")
+			.NotNull().WithMessage("{PropertyName} must be not null")
+			.MaximumLength(200).WithMessage("{PropertyName} cannot exceed 200 characters.");
+		RuleFor(x => x.OldPrice)
+			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
 
-		public AddProductValidator(IProductRepository repository)
-		{
-			_repository = repository;
-			ApplyValidationRules();
-			AddCustomValidationRules();
-		}
-		private void ApplyValidationRules()
-		{
-			RuleFor(x => x.Name)
-				.NotEmpty().WithMessage("{PropertyName} must be not empty")
-				.NotNull().WithMessage("{PropertyName} must be not null")
-				.MaximumLength(200).WithMessage("{PropertyName} cannot exceed 200 characters.");
-			RuleFor(x => x.OldPrice)
-				.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
+		RuleFor(x => x.CatId)
+			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
+	}
 
-			RuleFor(x => x.CatId)
-				.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
-		}
-
-		private void AddCustomValidationRules()
-		{
-			RuleFor(x => x.Name)
-				.MustAsync(async (name, cancellationToken) => !await _repository.IsProductNameExist(name, cancellationToken))
-				.WithMessage("Product name already exists.");
-		}
+	private void AddCustomValidationRules()
+	{
+		RuleFor(x => x.Name)
+			.MustAsync(async (name, cancellationToken) => !await _repository.IsProductNameExist(name, cancellationToken))
+			.WithMessage("Product name already exists.");
 	}
 }
