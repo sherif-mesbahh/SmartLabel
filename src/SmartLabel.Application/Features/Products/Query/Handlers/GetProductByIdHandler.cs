@@ -12,7 +12,10 @@ public class GetProductByIdHandler(IMapper mapper, IProductRepository repository
 	public async Task<Response<GetProductByIdResult>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
 	{
 		var pro = await repository.GetProductById(request.Id);
-		if (pro is null) throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
+		if (pro is null)
+		{
+			throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
+		}
 		var product = mapper.Map<GetProductByIdResult>(pro);
 		return Success(product, "product is getting successfully");
 	}

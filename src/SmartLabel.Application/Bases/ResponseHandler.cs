@@ -71,11 +71,10 @@ public class ResponseHandler
 		};
 	}
 
-	public Response<T> Created<T>(T entity, string? message = null)
+	public Response<T> Created<T>(string? message = null)
 	{
 		return new Response<T>()
 		{
-			Data = entity,
 			StatusCode = System.Net.HttpStatusCode.Created,
 			Succeeded = true,
 			Message = message ?? "Created"

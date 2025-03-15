@@ -369,7 +369,6 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentati
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfoInputs.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.CoreCompileInputs.cache
-D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.sourcelink.json
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.dll
@@ -547,3 +546,4 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\scopedcss\bundle\Smar
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLab.902AC4BB.Up2Date
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.genruntimeconfig.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\ref\SmartLabel.Presentation.dll
+D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs

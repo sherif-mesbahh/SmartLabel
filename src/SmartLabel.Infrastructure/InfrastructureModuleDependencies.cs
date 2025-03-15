@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmartLabel.Domain.Repositories;
+using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Persistence.Data;
 using SmartLabel.Infrastructure.Persistence.Repositories;
+using SmartLabel.Infrastructure.Services;
 
 namespace SmartLabel.Infrastructure
 {
@@ -14,10 +16,8 @@ namespace SmartLabel.Infrastructure
 			services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
 			services.AddTransient<ICategoryRepository, CategoryRepository>();
 			services.AddTransient<IProductRepository, ProductRepository>();
-			services.AddTransient<IProductImageRepository, ProductImageRepository>();
 			services.AddTransient<IBannerRepository, BannerRepository>();
-			services.AddTransient<IBannerProductRepository, BannerProductRepository>();
-			services.AddTransient<IStoredProceduresRepository, StoredProceduresRepository>();
+			services.AddTransient<IFileService, FileService>();
 			return services;
 		}
 	}

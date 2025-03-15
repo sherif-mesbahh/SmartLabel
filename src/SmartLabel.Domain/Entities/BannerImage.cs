@@ -1,12 +1,10 @@
 ﻿namespace SmartLabel.Domain.Entities
 {
-	public class BannerProduct
+	public class BannerImage
 	{
 		public int Id { get; set; }
+		public string? ImageUrl { get; set; }
 		public int BannerId { get; set; }
 		public Banner Banner { get; set; }
-
-		public int ProductId { get; set; }
-		public Product Product { get; set; }
 	}
 }

@@ -9,19 +9,30 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 	{
 		public async Task<IEnumerable<Banner?>> GetAllBanners()
 		{
-			return await context.Banners.AsNoTracking().ToListAsync();
+			return await context.Banners
+				.AsSplitQuery()
+				.AsNoTracking()
+				.Include(x => x.Images)
+				.ToListAsync();
 		}
-
 		public async Task<IEnumerable<Banner?>> GetActiveBanners()
 		{
 			var currentTime = DateTime.UtcNow;
-			return await context.Banners.AsNoTracking().Where(x => x.StartDate <= currentTime && currentTime < x.EndDate).ToListAsync();
+			return await context.Banners
+				.AsSplitQuery()
+				.AsNoTracking()
+				.Where(x => x.StartDate <= currentTime && currentTime < x.EndDate)
+				.Include(x => x.Images)
+				.ToListAsync();
 		}
-
 		public async Task<Banner?> GetBannerById(int id)
 		{
-			return await context.Banners.Include(x => x.BannerProducts)!.ThenInclude(x => x.Product)
-				.ThenInclude(x => x.Images).AsSplitQuery().FirstOrDefaultAsync(x => x.Id == id);
+			return await context.Banners
+				.Where(x => x.Id == id)
+				.Include(x => x.Images)
+				.AsNoTracking()
+				.AsSplitQuery()
+				.FirstOrDefaultAsync();
 		}
 
 		public async Task AddBanner(Banner banner)
@@ -41,6 +52,23 @@ namespace SmartLabel.Infrastructure.Persistence.Repositories
 		{
 			context.Banners.Remove(banner);
 			await context.SaveChangesAsync();
+		}
+
+		public async Task AddBannerImage(BannerImage? bannerImage)
+		{
+			await context.BannerImages.AddAsync(bannerImage);
+			await context.SaveChangesAsync();
+		}
+
+		public async Task DeleteBannerImage(BannerImage? bannerImage)
+		{
+			context.BannerImages.Remove(bannerImage);
+			await context.SaveChangesAsync();
+		}
+
+		public async Task<BannerImage?> GetBannerImageById(int id)
+		{
+			return await context.BannerImages.FindAsync(id);
 		}
 
 		public async Task<bool> IsBannerExist(int id)

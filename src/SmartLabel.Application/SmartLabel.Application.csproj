@@ -19,14 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BannerProducts\Command\Validators\" />
-    <Folder Include="Features\BannerProducts\Query\Results\" />
     <Folder Include="Features\Banners\Command\Validators\" />
     <Folder Include="Features\Banners\Query\Validatos\" />
-    <Folder Include="Features\ProductImages\Command\Validators\" />
-    <Folder Include="Features\ProductImages\Command\Results\" />
-    <Folder Include="Features\ProductImages\Query\Handlers\" />
-    <Folder Include="Features\ProductImages\Query\Models\" />
   </ItemGroup>
 
 </Project>

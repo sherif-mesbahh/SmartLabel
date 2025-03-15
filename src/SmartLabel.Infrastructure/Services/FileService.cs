@@ -1,8 +1,12 @@
-﻿namespace SmartLabel.Presentation.Services
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using SmartLabel.Domain.Services;
+
+namespace SmartLabel.Infrastructure.Services
 {
 	public class FileService(IWebHostEnvironment host) : IFileService
 	{
-		public async Task<string> BuildImage(IFormFile? image)
+		public async Task<string> BuildImageAsync(IFormFile? image)
 		{
 			string uploadsFolder = Path.Combine(host.WebRootPath, "Uploads");
 			if (!Directory.Exists(uploadsFolder))
@@ -22,13 +26,13 @@
 			return fileUrl;
 		}
 
-		public void DeleteImage(string? imageUrl)
+		public async Task DeleteImageAsync(string? imageUrl)
 		{
 			var contentPath = host.WebRootPath;
-			var path = Path.Combine(contentPath, $"Uploads", imageUrl);
+			var path = Path.Combine(contentPath, "Uploads", imageUrl);
 			if (File.Exists(path))
 			{
-				File.Delete(path);
+				await Task.Run(() => File.Delete(path));
 			}
 		}
 	}

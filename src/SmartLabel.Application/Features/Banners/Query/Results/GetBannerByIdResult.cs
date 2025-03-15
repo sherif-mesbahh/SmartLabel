@@ -1,6 +1,4 @@
-﻿using SmartLabel.Application.Features.BannerProducts.Query.Models;
-
-namespace SmartLabel.Application.Features.Banners.Query.Results
+﻿namespace SmartLabel.Application.Features.Banners.Query.Results
 {
 	public class GetBannerByIdResult
 	{
@@ -9,6 +7,6 @@ namespace SmartLabel.Application.Features.Banners.Query.Results
 		public string? Description { get; set; }
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
-		public ICollection<GetBannerProductResult> BannerProducts { get; set; }
+		public ICollection<GetBannerImageResult>? Images { get; set; }
 	}
 }

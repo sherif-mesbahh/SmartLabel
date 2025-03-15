@@ -1,12 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Features.Categories.Command.Models;
-using SmartLabel.Application.Features.Categories.Command.Results;
 using SmartLabel.Application.Features.Categories.Query.Models;
+using SmartLabel.Domain.Services;
 using SmartLabel.Presentation.Base;
-using SmartLabel.Presentation.Services;
-
 
 namespace SmartLabel.Presentation.Controllers;
 
@@ -29,32 +26,20 @@ public class CategoryController(IMediator mediator, IFileService fileService) : 
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> AddCategory([FromForm] AddCategoryResult category)
+	public async Task<IActionResult> AddCategory([FromForm] AddCategoryCommand category)
 	{
-		var imageUrl = string.Empty;
-		if (category.Image is not null) imageUrl = await fileService.BuildImage(category.Image);
-		var categoryResult = await mediator.Send(new AddCategoryCommand(category, imageUrl));
-		return NewResult(categoryResult);
+		return NewResult(await mediator.Send(category));
 	}
 
 	[HttpPut]
-	public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryResult category)
+	public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryCommand category)
 	{
-		var cat = await mediator.Send(new GetCategoryByIdQuery(category.Id));
-		if (!cat.Data.ImageUrl.IsNullOrEmpty()) fileService.DeleteImage(cat.Data.ImageUrl);
-		var imageUrl = string.Empty;
-		if (category.Image is not null) imageUrl = await fileService.BuildImage(category.Image);
-		var categoryResult = await mediator.Send(new UpdateCategoryCommand(category, imageUrl));
-		return NewResult(categoryResult);
+		return NewResult(await mediator.Send(category));
 	}
 
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> DeleteCategory(int id)
 	{
-		var cat = await mediator.Send(new GetCategoryByIdQuery(id));
-		if (!cat.Data.ImageUrl.IsNullOrEmpty())
-			fileService.DeleteImage(cat.Data.ImageUrl);
-		var res = await mediator.Send(new DeleteCategoryCommand(id));
-		return NewResult(res);
+		return NewResult(await mediator.Send(new DeleteCategoryCommand(id)));
 	}
 }

@@ -1857,7 +1857,10 @@
         },
         "runtime": {
           "bin/placeholder/SmartLabel.Infrastructure.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },

@@ -11,8 +11,11 @@ namespace SmartLabel.Application.Mapping
 		{
 			CreateMap<AddBannerCommand, Banner>();
 			CreateMap<UpdateBannerCommand, Banner>();
-			CreateMap<Banner, GetBannerResult>();
 			CreateMap<Banner, GetBannerByIdResult>();
+			CreateMap<BannerImage, GetBannerImageResult>();
+			CreateMap<Banner, GetBannerResult>()
+				.ForMember(dest => dest.Image,
+					opt => opt.MapFrom(src => src.Images!.FirstOrDefault()));
 		}
 	}
 }

@@ -138,12 +138,6 @@
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.2",
           "System.IO.Pipelines": "9.0.2"
-        },
-        "runtime": {
-          "lib/net5.0/Microsoft.AspNetCore.Http.Features.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.1722.21507"
-          }
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/7.0.0": {

@@ -50,7 +50,7 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.ToTable("Banners");
                 });
 
-            modelBuilder.Entity("SmartLabel.Domain.Entities.BannerProduct", b =>
+            modelBuilder.Entity("SmartLabel.Domain.Entities.BannerImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,16 +61,15 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.Property<int>("BannerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BannerId");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("BannerProducts");
+                    b.ToTable("BannerImages");
                 });
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Category", b =>
@@ -155,23 +154,15 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("SmartLabel.Domain.Entities.BannerProduct", b =>
+            modelBuilder.Entity("SmartLabel.Domain.Entities.BannerImage", b =>
                 {
                     b.HasOne("SmartLabel.Domain.Entities.Banner", "Banner")
-                        .WithMany("BannerProducts")
+                        .WithMany("Images")
                         .HasForeignKey("BannerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SmartLabel.Domain.Entities.Product", "Product")
-                        .WithMany("BannerProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Banner");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Product", b =>
@@ -198,7 +189,7 @@ namespace SmartLabel.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Banner", b =>
                 {
-                    b.Navigation("BannerProducts");
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Category", b =>
@@ -208,8 +199,6 @@ namespace SmartLabel.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Product", b =>
                 {
-                    b.Navigation("BannerProducts");
-
                     b.Navigation("Images");
                 });
 #pragma warning restore 612, 618

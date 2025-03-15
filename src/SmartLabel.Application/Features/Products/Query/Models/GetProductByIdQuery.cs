@@ -4,13 +4,8 @@ using SmartLabel.Application.Features.Products.Query.Results;
 
 namespace SmartLabel.Application.Features.Products.Query.Models
 {
-	public class GetProductByIdQuery : IRequest<Response<GetProductByIdResult>>
+	public class GetProductByIdQuery(int id) : IRequest<Response<GetProductByIdResult>>
 	{
-		public int Id { get; set; }
-
-		public GetProductByIdQuery(int id)
-		{
-			Id = id;
-		}
+		public int Id = id;
 	}
 }

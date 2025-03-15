@@ -1,19 +1,13 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using SmartLabel.Application.Bases;
-using SmartLabel.Application.Features.Categories.Command.Results;
 
 namespace SmartLabel.Application.Features.Categories.Command.Models
 {
-	public class AddCategoryCommand : IRequest<Response<AddCategoryCommand>>
+	public class AddCategoryCommand : IRequest<Response<string>>
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public string? ImageUrl { get; set; }
-		public AddCategoryCommand(AddCategoryResult category, string imageUrl)
-		{
-			Id = category.Id;
-			Name = category.Name;
-			ImageUrl = imageUrl;
-		}
+		public IFormFile? Image { get; set; }
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using SmartLabel.Application.Bases;
-using SmartLabel.Application.Features.Banners.Command.Results;
 
 namespace SmartLabel.Application.Features.Banners.Command.Models
 {
@@ -11,14 +11,7 @@ namespace SmartLabel.Application.Features.Banners.Command.Models
 		public string? Description { get; set; }
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
-
-		public UpdateBannerCommand(BannerResult banner)
-		{
-			Id = banner.Id;
-			Title = banner.Title;
-			Description = banner.Description;
-			StartDate = banner.StartDate;
-			EndDate = banner.EndDate;
-		}
+		public List<IFormFile>? ImagesFiles { get; set; }
+		public List<int>? RemovedImageIds { get; set; }
 	}
 }

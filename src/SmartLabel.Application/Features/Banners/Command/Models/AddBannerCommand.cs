@@ -1,24 +1,16 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using SmartLabel.Application.Bases;
-using SmartLabel.Application.Features.Banners.Command.Results;
 
 namespace SmartLabel.Application.Features.Banners.Command.Models
 {
-	public class AddBannerCommand : IRequest<Response<AddBannerCommand>>
+	public class AddBannerCommand : IRequest<Response<string>>
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public string? Description { get; set; }
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
-
-		public AddBannerCommand(BannerResult banner)
-		{
-			Id = banner.Id;
-			Title = banner.Title;
-			Description = banner.Description;
-			StartDate = banner.StartDate;
-			EndDate = banner.EndDate;
-		}
+		public List<IFormFile>? ImagesFiles { get; set; }
 	}
 }

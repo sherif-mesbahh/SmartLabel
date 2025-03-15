@@ -11,7 +11,12 @@ namespace SmartLabel.Application.Features.Banners.Query.Handlers
 	{
 		public async Task<Response<GetBannerByIdResult>> Handle(GetBannerByIdQuery request, CancellationToken cancellationToken)
 		{
-			var banner = mapper.Map<GetBannerByIdResult>(await repository.GetBannerById(request.Id));
+			var ban = await repository.GetBannerById(request.Id);
+			if (ban is null)
+			{
+				throw new KeyNotFoundException("Banner with ID " + request.Id + " not found");
+			}
+			var banner = mapper.Map<GetBannerByIdResult>(ban);
 			return Success(banner, "Banner is getting successfully");
 		}
 	}

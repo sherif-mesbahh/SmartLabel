@@ -18,5 +18,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SmartLabel.Application\SmartLabel.Application.csproj" />
   </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
 
 </Project>
