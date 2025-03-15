@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/product_details_page.dart';
 
 class FavListViewItem extends StatelessWidget {
   const FavListViewItem({
@@ -9,66 +11,71 @@ class FavListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            alignment: Alignment.topLeft,
-            children: [
-              Container(
-                height: screenHeight(context) * .15,
-                width: screenWidth(context) * .3,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      'assets/images/fruits_image.jpg',
-                    ),
-                  ),
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              Image(
-                height: screenHeight(context) * .05,
-                width: screenWidth(context) * .09,
-                image: AssetImage(
-                  'assets/images/discount_image.png',
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return InkWell(
+      onTap: () {
+        pushNavigator(context, ProductDetailsPage());
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              alignment: Alignment.topLeft,
               children: [
-                Text(
-                  'Product Name',
-                  style: TextStyles.productTitle,
+                Container(
+                  height: screenHeight(context) * .15,
+                  width: screenWidth(context) * .3,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                        'assets/images/fruits_image.jpg',
+                      ),
+                    ),
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-                Text(
-                  '100\$',
-                  style: TextStyles.productPrice,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  '100\$',
-                  style: TextStyles.productOldPrice,
+                Image(
+                  height: screenHeight(context) * .05,
+                  width: screenWidth(context) * .09,
+                  image: AssetImage(
+                    'assets/images/discount_image.png',
+                  ),
                 ),
               ],
             ),
-          ),
-          Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.favorite_border_outlined),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Product Name',
+                    style: TextStyles.productTitle,
+                  ),
+                  Text(
+                    '100\$',
+                    style: TextStyles.productPrice,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    '100\$',
+                    style: TextStyles.productOldPrice,
+                  ),
+                ],
+              ),
+            ),
+            Spacer(),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.favorite_border_outlined),
+            ),
+          ],
+        ),
       ),
     );
   }

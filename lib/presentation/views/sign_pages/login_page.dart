@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/layout.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/categories_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
@@ -67,7 +70,9 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   CustomButtonWidget(
                     textColor: secondaryColor,
-                    onTap: () {},
+                    onTap: () {
+                      pushNavigator(context, Layout());
+                    },
                     text: 'Login',
                     color: primaryColor,
                   ),

@@ -6,6 +6,7 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.d
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_new_category_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_categories_grid_view_item_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/edit_banners_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/products_widgets/custom_slider.dart';
 
 class AdminCategoriesPage extends StatelessWidget {
@@ -36,9 +37,27 @@ class AdminCategoriesPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'All Categories',
-                    style: TextStyles.headline2,
+                  Row(
+                    children: [
+                      Text(
+                        'All Categories',
+                        style: TextStyles.headline2,
+                      ),
+                      Spacer(),
+                      TextButton(
+                        child: Text(
+                          'Edit Banners',
+                          style: TextStyles.productTitle
+                              .copyWith(color: primaryColor),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => EditBannersDialogWidget(),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 10,

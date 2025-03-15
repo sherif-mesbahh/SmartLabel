@@ -67,13 +67,15 @@ class GridViewItem extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(
-                Icons.favorite_border,
+          Positioned(
+            top: -5,
+            right: -5,
+            child: IconButton(
+              icon: Icon(
+                Icons.favorite_border_outlined,
+                color: primaryColor,
               ),
+              onPressed: () {},
             ),
           ),
         ],

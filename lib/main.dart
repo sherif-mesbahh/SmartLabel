@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/sign_pages/login_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_page.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AdminCategoriesPage(),
+      home: SignPage(),
     );
   }
 }
