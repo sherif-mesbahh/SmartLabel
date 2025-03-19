@@ -6,7 +6,6 @@ namespace SmartLabel.Application.Features.Categories.Command.Validators;
 public class UpdateCategoryValidator : AbstractValidator<UpdateCategoryCommand>
 {
 	private readonly ICategoryRepository _repository;
-
 	public UpdateCategoryValidator(ICategoryRepository repository)
 	{
 		_repository = repository;
