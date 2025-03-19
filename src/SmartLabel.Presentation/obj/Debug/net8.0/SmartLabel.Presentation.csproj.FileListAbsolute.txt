@@ -547,3 +547,9 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\refint\SmartLabel.Pre
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.pdb
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.genruntimeconfig.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\ref\SmartLabel.Presentation.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll

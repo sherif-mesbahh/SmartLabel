@@ -370,5 +370,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
+    "Method": "AddUser",
+    "RelativePath": "api/User",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "SmartLabel.Application.Features.Users.Command.Models.AddUserCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
