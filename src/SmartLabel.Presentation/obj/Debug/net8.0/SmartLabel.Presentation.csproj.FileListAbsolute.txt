@@ -530,7 +530,6 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentati
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfoInputs.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.CoreCompileInputs.cache
-D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.sourcelink.json
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets.build.json
@@ -553,3 +552,4 @@ D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs
