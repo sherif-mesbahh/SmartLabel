@@ -31,6 +31,12 @@ public class UserController(IMediator mediator) : AppControllerBase
 		return NewResult(await mediator.Send(user));
 	}
 
+	[HttpPut("ChangePassword")]
+	public async Task<IActionResult> ChangePassword(ChangePasswordCommand changes)
+	{
+		return NewResult(await mediator.Send(changes));
+	}
+
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> DeleteUser(int id)
 	{
