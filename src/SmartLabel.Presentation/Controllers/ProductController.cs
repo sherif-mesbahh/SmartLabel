@@ -1,17 +1,18 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Features.Products.Query.Models;
-using SmartLabel.Domain.Services;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
-
-[Route("api/[controller]")]
+[Authorize]
 [ApiController]
-public class ProductController(IMediator mediator, IFileService fileService) : AppControllerBase
+[Route("api/[controller]")]
+public class ProductController(IMediator mediator) : AppControllerBase
 {
 	[HttpGet]
+	[AllowAnonymous]
 	public async Task<IActionResult> GetAllProducts()
 	{
 		return NewResult(await mediator.Send(new GetAllProductsQuery()));

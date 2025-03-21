@@ -35,11 +35,10 @@ app.UseStaticFiles(new StaticFileOptions
 		Path.Combine(builder.Environment.WebRootPath, "Uploads")),
 	RequestPath = "/Uploads"
 });
-
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();

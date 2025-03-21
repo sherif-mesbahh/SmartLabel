@@ -12,10 +12,18 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SmartLabel.Domain\SmartLabel.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Authentication\Command\Results\" />
+    <Folder Include="Features\Authentication\Query\Handlers\" />
+    <Folder Include="Features\Authentication\Query\Models\" />
+    <Folder Include="Features\Authentication\Query\Results\" />
   </ItemGroup>
 
 </Project>

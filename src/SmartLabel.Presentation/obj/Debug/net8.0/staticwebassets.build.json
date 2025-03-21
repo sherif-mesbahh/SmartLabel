@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wc1bC7LDY5aU0j4CQS6dICYMYkxKOE1qOtQa+olR8KU=",
+  "Hash": "cHQqxRXNe5EDch8RZOR9OwCQ3fy6h0VSXM4QXhKp1iQ=",
   "Source": "SmartLabel.Presentation",
   "BasePath": "_content/SmartLabel.Presentation",
   "Mode": "Default",
@@ -34,25 +34,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\17afc9f6-2cf1-4314-95fb-5ef399f5f051_Banner2.jpeg"
-    },
-    {
-      "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\1cbcd22f-543b-49c7-9f20-b700abc38dfa_beef meat.webp",
-      "SourceId": "SmartLabel.Presentation",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
-      "BasePath": "_content/SmartLabel.Presentation",
-      "RelativePath": "Uploads/1cbcd22f-543b-49c7-9f20-b700abc38dfa_beef meat.webp",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\1cbcd22f-543b-49c7-9f20-b700abc38dfa_beef meat.webp"
     },
     {
       "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\23e20cc3-9924-4f29-abdd-8b33175146c6_Banner1.jpg",
@@ -110,25 +91,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\83fdba23-d5a8-4067-a009-f958bdae777a_meat.jpg"
-    },
-    {
-      "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\e826e603-4980-43ae-967c-888cfd41bc78_Electronics.jpeg",
-      "SourceId": "SmartLabel.Presentation",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
-      "BasePath": "_content/SmartLabel.Presentation",
-      "RelativePath": "Uploads/e826e603-4980-43ae-967c-888cfd41bc78_Electronics.jpeg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\e826e603-4980-43ae-967c-888cfd41bc78_Electronics.jpeg"
     }
   ]
 }

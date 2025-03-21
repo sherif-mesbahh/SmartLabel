@@ -382,6 +382,11 @@ D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Humanizer.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.Contracts.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Build.Locator.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -402,10 +407,16 @@ D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.WebEncoders.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
@@ -436,7 +447,9 @@ D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.IdentityModel.
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.IO.Pipelines.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Memory.Data.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Runtime.Caching.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Security.Permissions.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\System.Text.Json.dll
@@ -516,6 +529,7 @@ D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
@@ -530,6 +544,7 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentati
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfoInputs.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.CoreCompileInputs.cache
+D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.sourcelink.json
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets.build.json
@@ -546,10 +561,3 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\refint\SmartLabel.Pre
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.pdb
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.genruntimeconfig.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\ref\SmartLabel.Presentation.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
-D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs

@@ -8,7 +8,8 @@ public class UserProfile : Profile
 {
 	public UserProfile()
 	{
-		CreateMap<AddUserCommand, ApplicationUser>();
+		CreateMap<AddUserCommand, ApplicationUser>()
+			.ForMember(dest => dest.UserName, src => src.MapFrom(x => x.Email));
 		CreateMap<UpdateUserCommand, ApplicationUser>();
 		CreateMap<ApplicationUser, GetAllUsersResult>();
 		CreateMap<ApplicationUser, GetUserByIdResult>();
