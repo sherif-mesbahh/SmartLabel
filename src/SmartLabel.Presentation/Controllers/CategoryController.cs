@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartLabel.Application.Features.Categories.Command.Models;
 using SmartLabel.Application.Features.Categories.Query.Models;
-using SmartLabel.Domain.Services;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CategoryController(IMediator mediator, IFileService fileService) : AppControllerBase
+public class CategoryController(IMediator mediator) : AppControllerBase
 {
 	[HttpGet]
 	public async Task<IActionResult> GetAllCategory()
