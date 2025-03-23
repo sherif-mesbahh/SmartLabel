@@ -19,4 +19,9 @@ public class AuthenticationController(IMediator mediator) : AppControllerBase
 	{
 		return NewResult(await mediator.Send(command));
 	}
+	[HttpPost("Logout")]
+	public async Task<IActionResult> RefreshToken([FromBody] LogoutCommand command)
+	{
+		return NewResult(await mediator.Send(command));
+	}
 }

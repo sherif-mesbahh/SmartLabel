@@ -39,6 +39,13 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 	}
 
 
+	public async Task Logout(string refreshToken)
+	{
+		var userToken = await context.UserTokens.FirstOrDefaultAsync(x => x.RefreshToken == refreshToken);
+		if (userToken is null) throw new SecurityTokenException("Refresh token is not found");
+		await RevokeRefreshToken(userToken);
+	}
+
 	public async Task<(string, string)> RefreshToken(string accessToken, string refreshToken)
 	{
 		//validate accessToken
@@ -91,11 +98,16 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 
 		if (userToken.ExpiryDate < DateTime.UtcNow)
 		{
-			context.UserTokens.Remove(userToken);
-			await context.SaveChangesAsync();
+			await RevokeRefreshToken(userToken);
 			return false;
 		}
 		return true;
+	}
+
+	private async Task RevokeRefreshToken(UserToken userToken)
+	{
+		context.UserTokens.Remove(userToken);
+		await context.SaveChangesAsync();
 	}
 	public async Task SaveRefreshTokenAsync(int userId, string refreshToken)
 	{

@@ -38,8 +38,8 @@ public class ErrorHandlerMiddleware : IMiddleware
 					break;
 				case SecurityTokenException e:
 					responseModel.Message = e.Message;
-					responseModel.StatusCode = HttpStatusCode.BadRequest;
-					response.StatusCode = (int)HttpStatusCode.BadRequest;
+					responseModel.StatusCode = HttpStatusCode.Unauthorized;
+					response.StatusCode = (int)HttpStatusCode.Unauthorized;
 					break;
 				case { } e:
 					responseModel.Message = e.Message;
