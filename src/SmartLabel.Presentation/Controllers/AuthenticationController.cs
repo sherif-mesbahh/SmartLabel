@@ -14,4 +14,9 @@ public class AuthenticationController(IMediator mediator) : AppControllerBase
 	{
 		return NewResult(await mediator.Send(command));
 	}
+	[HttpPost("Refresh Token")]
+	public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
+	{
+		return NewResult(await mediator.Send(command));
+	}
 }

@@ -3,8 +3,9 @@ using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Authentication.Results;
 
 namespace SmartLabel.Application.Features.Authentication.Command.Models;
-public class SignInCommand : IRequest<Response<AuthResponse>>
+public class RefreshTokenCommand : IRequest<Response<AuthResponse>>
 {
-	public string Email { get; set; }
-	public string Password { get; set; }
+	public string AccessToken { get; set; }
+	public string RefreshToken { get; set; }
+
 }

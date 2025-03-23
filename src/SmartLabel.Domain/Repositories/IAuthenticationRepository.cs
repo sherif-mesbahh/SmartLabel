@@ -3,5 +3,7 @@
 namespace SmartLabel.Domain.Repositories;
 public interface IAuthenticationRepository
 {
-	Task<string> GetJwtToken(ApplicationUser user);
+	Task<(string, string)> GetJwtToken(ApplicationUser user);
+	Task SaveRefreshTokenAsync(int userId, string refreshToken);
+	Task<(string, string)> RefreshToken(string accessToken, string refreshToken);
 }

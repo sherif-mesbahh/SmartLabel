@@ -67,7 +67,7 @@ public static class InfrastructureModuleDependencies
 						ValidateAudience = jwtSettings.ValidateAudience,
 						ValidAudience = jwtSettings.Audience,
 						ValidateIssuerSigningKey = jwtSettings.ValidateSigningKey,
-						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SigningKey)),
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SigningKey))
 					};
 				}
 				);

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Bases;
 using System.Net;
 
@@ -34,6 +35,16 @@ public class ErrorHandlerMiddleware : IMiddleware
 					responseModel.Message = e.Message;
 					responseModel.StatusCode = HttpStatusCode.NotFound;
 					response.StatusCode = (int)HttpStatusCode.NotFound;
+					break;
+				case SecurityTokenException e:
+					responseModel.Message = e.Message;
+					responseModel.StatusCode = HttpStatusCode.BadRequest;
+					response.StatusCode = (int)HttpStatusCode.BadRequest;
+					break;
+				case { } e:
+					responseModel.Message = e.Message;
+					responseModel.StatusCode = HttpStatusCode.BadRequest;
+					response.StatusCode = (int)HttpStatusCode.BadRequest;
 					break;
 			}
 			await response.WriteAsJsonAsync(responseModel);
