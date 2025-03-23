@@ -10,10 +10,6 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Uploads\" />
-  </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.2">
 			<PrivateAssets>all</PrivateAssets>
@@ -23,6 +19,9 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\SmartLabel.Application\SmartLabel.Application.csproj" />
 	  <ProjectReference Include="..\SmartLabel.Infrastructure\SmartLabel.Infrastructure.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\Uploads\" />
 	</ItemGroup>
 
 </Project>

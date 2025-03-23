@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\DeployTrying</_PublishTargetUrl>
+    <History>True|2025-03-23T21:41:26.6347813Z||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="SqlConnection">
+      <Value>Server = SHERIFMESBAH\SQLEXPRESS %3b Database = Smart Label %3b Integrated Security = SSPI%3b TrustServerCertificate = True%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

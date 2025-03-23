@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\17afc9f6-2cf1-4314-95fb-5ef399f5f051_Banner2.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\17afc9f6-2cf1-4314-95fb-5ef399f5f051_Banner2.jpeg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\23e20cc3-9924-4f29-abdd-8b33175146c6_Banner1.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\23e20cc3-9924-4f29-abdd-8b33175146c6_Banner1.jpg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\7887be60-a514-474e-831d-566b4f449b5f_Banner1.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\7887be60-a514-474e-831d-566b4f449b5f_Banner1.jpg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\83fdba23-d5a8-4067-a009-f958bdae777a_meat.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\83fdba23-d5a8-4067-a009-f958bdae777a_meat.jpg"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.SmartLabel.Presentation.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.SmartLabel.Presentation.props",
+      "PackagePath": "build\\SmartLabel.Presentation.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SmartLabel.Presentation.props",
+      "PackagePath": "buildMultiTargeting\\SmartLabel.Presentation.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.SmartLabel.Presentation.props",
+      "PackagePath": "buildTransitive\\SmartLabel.Presentation.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
