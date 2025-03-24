@@ -12,7 +12,6 @@ namespace SmartLabel.Presentation.Controllers;
 public class ProductController(IMediator mediator) : AppControllerBase
 {
 	[HttpGet]
-	[AllowAnonymous]
 	public async Task<IActionResult> GetAllProducts()
 	{
 		return NewResult(await mediator.Send(new GetAllProductsQuery()));
@@ -23,6 +22,7 @@ public class ProductController(IMediator mediator) : AppControllerBase
 		return NewResult(await mediator.Send(new GetProductByIdQuery(id)));
 	}
 	[HttpPost]
+	[AllowAnonymous]
 	public async Task<IActionResult> AddProduct([FromForm] AddProductCommand product)
 	{
 		return NewResult(await mediator.Send(product));

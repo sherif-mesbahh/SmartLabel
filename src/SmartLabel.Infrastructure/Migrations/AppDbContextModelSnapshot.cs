@@ -389,6 +389,29 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.ToTable("ProductImages");
                 });
 
+            modelBuilder.Entity("SmartLabel.Domain.Entities.UserFavProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserFavProducts");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -484,6 +507,25 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("SmartLabel.Domain.Entities.UserFavProduct", b =>
+                {
+                    b.HasOne("SmartLabel.Domain.Entities.Product", "Product")
+                        .WithMany("UsserFavProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartLabel.Domain.Entities.Identity.ApplicationUser", "User")
+                        .WithMany("UsserFavProducts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SmartLabel.Domain.Entities.Banner", b =>
                 {
                     b.Navigation("Images");
@@ -497,11 +539,15 @@ namespace SmartLabel.Infrastructure.Migrations
             modelBuilder.Entity("SmartLabel.Domain.Entities.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("Tokens");
+
+                    b.Navigation("UsserFavProducts");
                 });
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Product", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("UsserFavProducts");
                 });
 #pragma warning restore 612, 618
         }

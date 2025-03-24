@@ -12,8 +12,8 @@ using SmartLabel.Infrastructure.Persistence.Data;
 namespace SmartLabel.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250323223924_AddProductionSqlConnection")]
-    partial class AddProductionSqlConnection
+    [Migration("20250324144613_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

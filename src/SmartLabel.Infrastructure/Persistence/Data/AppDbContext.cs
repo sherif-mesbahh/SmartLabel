@@ -23,6 +23,7 @@ public class AppDbContext
 	public DbSet<ProductImage> ProductImages { get; set; }
 	public DbSet<BannerImage> BannerImages { get; set; }
 	public DbSet<Banner> Banners { get; set; }
+	public DbSet<UserFavProduct> UserFavProducts { get; set; }
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		base.OnModelCreating(modelBuilder);

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6pUPJRmZIhfz6QQe43jMohalagqI2oIDyYfLgJUsLrc=",
+  "Hash": "Gt7XN6KmPUcyta5DPO8j2PcbFeuwKb6E94PC7laDpZ4=",
   "Source": "SmartLabel.Presentation",
   "BasePath": "_content/SmartLabel.Presentation",
   "Mode": "Default",
@@ -15,5 +15,63 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\0608208a-59fd-476a-abeb-ec900f1fb29e_Banner1.jpg",
+      "SourceId": "SmartLabel.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
+      "BasePath": "_content/SmartLabel.Presentation",
+      "RelativePath": "Uploads/0608208a-59fd-476a-abeb-ec900f1fb29e_Banner1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\0608208a-59fd-476a-abeb-ec900f1fb29e_Banner1.jpg"
+    },
+    {
+      "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\bac9a5ae-8f73-4926-bde0-173a61447619_meat.jpg",
+      "SourceId": "SmartLabel.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
+      "BasePath": "_content/SmartLabel.Presentation",
+      "RelativePath": "Uploads/bac9a5ae-8f73-4926-bde0-173a61447619_meat.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\bac9a5ae-8f73-4926-bde0-173a61447619_meat.jpg"
+    },
+    {
+      "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\c723e0de-d23b-442e-b78a-792614f6fa19_beef meat.webp",
+      "SourceId": "SmartLabel.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
+      "BasePath": "_content/SmartLabel.Presentation",
+      "RelativePath": "Uploads/c723e0de-d23b-442e-b78a-792614f6fa19_beef meat.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\c723e0de-d23b-442e-b78a-792614f6fa19_beef meat.webp"
+    }
+  ]
 }

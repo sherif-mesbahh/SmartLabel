@@ -27,6 +27,7 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<IFileService, FileService>();
 		services.AddTransient<IUnitOfWork, UnitOfWork>();
 		services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+		services.AddTransient<IUserFavProductRepository, UserFavProductRepository>();
 		services.AddIdentity<ApplicationUser, IdentityRole<int>>(
 				options =>
 				{

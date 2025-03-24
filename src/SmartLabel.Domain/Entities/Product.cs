@@ -10,4 +10,5 @@ public class Product
 	public ICollection<ProductImage>? Images { get; set; }
 	public int CatId { get; set; }
 	public Category Category { get; set; }
+	public ICollection<UserFavProduct> UsserFavProducts { get; set; }
 }

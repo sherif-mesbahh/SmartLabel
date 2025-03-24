@@ -9,11 +9,11 @@ public class RefreshTokenHandler(IAuthenticationRepository authRepository) : Res
 {
 	public async Task<Response<AuthResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
 	{
-		(string newAccessToken, string refreshToken) = await authRepository.RefreshToken(request.AccessToken, request.RefreshToken);
+		(string newAccessToken, string newRefreshToken) = await authRepository.RefreshToken(request.AccessToken, request.RefreshToken);
 		var authResponse = new AuthResponse()
 		{
 			AccessToken = newAccessToken,
-			RefreshToken = refreshToken
+			RefreshToken = newRefreshToken
 		};
 		return Success(authResponse);
 	}
