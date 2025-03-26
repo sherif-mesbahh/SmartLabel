@@ -12,7 +12,7 @@ public class SignInHandler(UserManager<ApplicationUser> userManager, SignInManag
 	public async Task<Response<AuthResponse>> Handle(SignInCommand request, CancellationToken cancellationToken)
 	{
 		var user = await userManager.FindByEmailAsync(request.Email);
-		if (user is null) return NotFound<AuthResponse>($"Email is incorrect");
+		if (user is null) return NotFound<AuthResponse>($"Email or Password is incorrect");
 		var result = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
 		if (!result.Succeeded) return BadRequest<AuthResponse>("Email or Password is incorrect");
 		(string accessToken, string refreshToken) = await authRepository.GetJwtToken(user);

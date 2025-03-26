@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Domain.Entities.Identity;
 using SmartLabel.Domain.Repositories;
-using SmartLabel.Infrastructure.Helpers;
+using SmartLabel.Domain.Shared.Helpers;
 using SmartLabel.Infrastructure.Persistence.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -22,11 +22,11 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 	private async Task<string> GetAccessToken(ApplicationUser user)
 	{
 		var claims = new List<Claim>()
-	{
-		new Claim(nameof(UserClaimModel.UserId), user.Id.ToString()),
-		new Claim(nameof(UserClaimModel.UserName), user.UserName),
-		new Claim(nameof(UserClaimModel.Email), user.Email)
-	};
+		{
+				new Claim(nameof(UserClaimModel.UserId), user.Id.ToString()),
+				new Claim(nameof(UserClaimModel.UserName), user.UserName),
+				new Claim(nameof(UserClaimModel.Email), user.Email)
+		};
 
 		var jwtToken = new JwtSecurityToken(
 			issuer: jwtSettings.Issuer,
@@ -40,15 +40,15 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 		return new JwtSecurityTokenHandler().WriteToken(jwtToken);
 	}
 
-	public async Task Logout(string refreshToken)
+	public async Task Logout(int userId)
 	{
-		var userToken = await context.UserTokens.FirstOrDefaultAsync(x => x.RefreshToken == refreshToken);
+		var token = await context.UserTokens.FirstOrDefaultAsync(x => x.UserId == userId);
+		var userToken = await context.UserTokens.FirstOrDefaultAsync(x => x.RefreshToken == token.RefreshToken && x.UserId == token.UserId);
 		if (userToken is null)
 			throw new SecurityTokenException("Refresh token not found");
 
 		await RevokeRefreshToken(userToken);
 	}
-
 	public async Task<(string, string)> RefreshToken(string accessToken, string refreshToken)
 	{
 		// Validate expired access token (skip lifetime check)

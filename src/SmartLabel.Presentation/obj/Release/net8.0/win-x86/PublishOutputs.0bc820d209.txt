@@ -12,8 +12,6 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\MediatR.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\MediatR.Contracts.dll
-D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\MediatR.Extensions.Microsoft.DependencyInjection.dll
-D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.AspNet.Identity.Core.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll

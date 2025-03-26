@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartLabel.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c639ec61021329fa642fa6bc6264f66f8b9dac17")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c055de359a4853c4d4722d4348fd2b3913746fb9")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartLabel.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartLabel.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

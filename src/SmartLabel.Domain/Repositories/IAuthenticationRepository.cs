@@ -5,6 +5,6 @@ public interface IAuthenticationRepository
 {
 	Task<(string, string)> GetJwtToken(ApplicationUser user);
 	Task SaveRefreshTokenAsync(int userId, string refreshToken);
-	Task Logout(string refreshToken);
+	Task Logout(int userId);
 	Task<(string, string)> RefreshToken(string accessToken, string refreshToken);
 }

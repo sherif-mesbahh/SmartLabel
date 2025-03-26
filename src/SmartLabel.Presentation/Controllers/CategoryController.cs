@@ -5,7 +5,6 @@ using SmartLabel.Application.Features.Categories.Query.Models;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
-
 [Route("api/[controller]")]
 [ApiController]
 public class CategoryController(IMediator mediator) : AppControllerBase
@@ -16,7 +15,6 @@ public class CategoryController(IMediator mediator) : AppControllerBase
 		var allCategories = await mediator.Send(new GetAllCategoryQuery());
 		return NewResult(allCategories);
 	}
-
 	[HttpGet("{id:int}")]
 	public async Task<IActionResult> GetCategoryById(int id)
 	{

@@ -1,5 +1,5 @@
 ﻿using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.SharedResults;
+using SmartLabel.Domain.Shared.Results;
 
 namespace SmartLabel.Domain.Repositories;
 public interface IUserFavProductRepository

@@ -2,8 +2,7 @@
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.UserFavProducts.Query.Models;
 using SmartLabel.Domain.Repositories;
-using SmartLabel.Domain.SharedResults;
-
+using SmartLabel.Domain.Shared.Results;
 namespace SmartLabel.Application.Features.UserFavProducts.Query.Handlers;
 public class GetFavProductsByUserHandler(IUserFavProductRepository userFavProductRepository) : ResponseHandler, IRequestHandler<GetFavProductsByUserQuery, Response<IEnumerable<UserFavProductResult>>>
 {

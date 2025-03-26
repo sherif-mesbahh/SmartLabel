@@ -8,7 +8,7 @@ using SmartLabel.Domain.Entities.Identity;
 using SmartLabel.Domain.Interfaces;
 using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
-using SmartLabel.Infrastructure.Helpers;
+using SmartLabel.Domain.Shared.Helpers;
 using SmartLabel.Infrastructure.Interfaces;
 using SmartLabel.Infrastructure.Persistence.Data;
 using SmartLabel.Infrastructure.Persistence.Repositories;

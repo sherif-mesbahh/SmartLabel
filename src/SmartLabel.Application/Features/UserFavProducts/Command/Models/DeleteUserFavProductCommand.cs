@@ -2,8 +2,7 @@
 using SmartLabel.Application.Bases;
 
 namespace SmartLabel.Application.Features.UserFavProducts.Command.Models;
-public class DeleteUserFavProductCommand : IRequest<Response<string>>
+public class DeleteUserFavProductCommand(int productId) : IRequest<Response<string>>
 {
-	public int UserId { get; set; }
-	public int ProductId { get; set; }
+	public int ProductId = productId;
 }

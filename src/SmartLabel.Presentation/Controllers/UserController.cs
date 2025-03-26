@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartLabel.Application.Features.Users.Command.Models;
 using SmartLabel.Application.Features.Users.Query.Models;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class UserController(IMediator mediator) : AppControllerBase
@@ -20,6 +22,7 @@ public class UserController(IMediator mediator) : AppControllerBase
 		return NewResult(await mediator.Send(new GetUserByIdQuery(id)));
 	}
 	[HttpPost]
+	[AllowAnonymous]
 	public async Task<IActionResult> AddUser(AddUserCommand user)
 	{
 		return NewResult(await mediator.Send(user));

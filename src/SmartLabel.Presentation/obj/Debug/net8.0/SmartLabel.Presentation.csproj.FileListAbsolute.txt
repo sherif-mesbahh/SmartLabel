@@ -381,8 +381,6 @@ D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\FluentValidation.Depe
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Humanizer.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.Contracts.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
