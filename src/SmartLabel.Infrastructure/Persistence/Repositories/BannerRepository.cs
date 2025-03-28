@@ -1,71 +1,93 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Repositories;
+using SmartLabel.Domain.Shared.Results.Banners;
 using SmartLabel.Infrastructure.Persistence.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;
 public class BannerRepository(AppDbContext context) : IBannerRepository
 {
-	public async Task<IEnumerable<Banner?>> GetAllBanners()
+	public async Task<IEnumerable<GetBannersDto?>> GetAllBannersAsync()
 	{
 		return await context.Banners
-			.AsSplitQuery()
 			.AsNoTracking()
-			.Include(x => x.Images)
-			.ToListAsync();
+			.Select(b => new GetBannersDto()
+			{
+				Title = b.Title,
+				ImageUrl = b.Images.FirstOrDefault().ImageUrl
+			}).ToListAsync();
 	}
-	public async Task<IEnumerable<Banner?>> GetActiveBanners()
+	public async Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync()
 	{
 		var currentTime = DateTime.UtcNow;
 		return await context.Banners
-			.AsSplitQuery()
 			.AsNoTracking()
 			.Where(x => x.StartDate <= currentTime && currentTime < x.EndDate)
-			.Include(x => x.Images)
-			.ToListAsync();
+			.Select(b => new GetBannersDto()
+			{
+				Title = b.Title,
+				ImageUrl = b.Images.FirstOrDefault().ImageUrl
+			}).ToListAsync();
 	}
-	public async Task<Banner?> GetBannerById(int id)
+	public async Task<GetBannerByIdDto?> GetBannerByIdAsync(int id)
 	{
 		return await context.Banners
-			.Where(x => x.Id == id)
-			.Include(x => x.Images)
 			.AsNoTracking()
-			.AsSplitQuery()
+			.Where(x => x.Id == id)
+			.Select(b => new GetBannerByIdDto()
+			{
+				Title = b.Title,
+				Description = b.Description,
+				StartDate = b.StartDate,
+				EndDate = b.EndDate,
+				Images = b.Images.Select(pi => pi.ImageUrl).ToList()
+			})
 			.FirstOrDefaultAsync();
 	}
-
-	public async Task AddBanner(Banner banner)
+	public async Task AddBannerAsync(Banner banner)
 	{
 		await context.Banners.AddAsync(banner);
 	}
 
-	public void UpdateBanner(Banner banner)
+	public async Task UpdateBannerAsync(int bannerIdBanner, Banner banner)
 	{
-		context.Banners.Update(banner);
-
+		await context.Banners
+			.ExecuteUpdateAsync(setters => setters
+				.SetProperty(x => x.Title, banner.Title)
+				.SetProperty(x => x.Description, banner.Description)
+				.SetProperty(x => x.StartDate, banner.StartDate)
+				.SetProperty(x => x.EndDate, banner.EndDate)
+			);
 	}
 
-	public void DeleteBanner(Banner banner)
+	public async Task DeleteBannerAsync(int bannerId)
 	{
-		context.Banners.Remove(banner);
+		await context.Banners
+			.Where(x => x.Id == bannerId)
+			.ExecuteDeleteAsync();
 	}
 
-	public async Task AddBannerImage(BannerImage? bannerImage)
+	public async Task AddBannerImagesAsync(List<BannerImage> bannerImages)
 	{
-		await context.BannerImages.AddAsync(bannerImage);
+		await context.BannerImages.AddRangeAsync(bannerImages);
 	}
 
-	public void DeleteBannerImage(BannerImage? bannerImage)
+	public async Task DeleteBannerImagesAsync(List<int> imageIds)
 	{
-		context.BannerImages.Remove(bannerImage);
+		await context.BannerImages
+			.Where(x => imageIds.Contains(x.Id))
+			.ExecuteDeleteAsync();
 	}
 
-	public async Task<BannerImage?> GetBannerImageById(int id)
+	public async Task<List<string?>> GetBannerImageUrlsByIdsAsync(List<int> imageIds)
 	{
-		return await context.BannerImages.FindAsync(id);
+		return await context.BannerImages
+			.Where(pi => imageIds.Contains(pi.Id))
+			.Select(x => x.ImageUrl)
+			.ToListAsync();
 	}
 
-	public async Task<bool> IsBannerExist(int id)
+	public async Task<bool> IsBannerExistAsync(int id)
 	{
 		return await context.Banners.AnyAsync(x => x.Id == id);
 	}

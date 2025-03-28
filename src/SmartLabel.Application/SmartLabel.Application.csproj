@@ -28,8 +28,4 @@
     <ProjectReference Include="..\SmartLabel.Domain\SmartLabel.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\UserFavProducts\Query\Results\" />
-  </ItemGroup>
-
 </Project>

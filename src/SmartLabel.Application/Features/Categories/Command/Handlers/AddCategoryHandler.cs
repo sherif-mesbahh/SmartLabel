@@ -8,7 +8,7 @@ using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Categories.Command.Handlers;
-public class AddCategoryHandler(IMapper mapper, ICategoryRepository repository, IFileService fileService, IUnitOfWork unitOfWork)
+public class AddCategoryHandler(IMapper mapper, ICategoryRepository categoryRepository, IFileService fileService, IUnitOfWork unitOfWork)
 	: ResponseHandler,
 	IRequestHandler<AddCategoryCommand, Response<string>>
 {
@@ -17,14 +17,15 @@ public class AddCategoryHandler(IMapper mapper, ICategoryRepository repository, 
 		try
 		{
 			var category = mapper.Map<Category>(request);
-			if (request.Image is not null) category.ImageUrl = await fileService.BuildImageAsync(request.Image);
-			await repository.AddCategory(category);
+			if (request.Image is not null)
+				category.ImageUrl = await fileService.BuildImageAsync(request.Image);
+			await categoryRepository.AddCategoryAsync(category);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
-			return Created<string>("Category is added successfully");
+			return Created<string>($"Category with id {category.Id} is added successfully");
 		}
 		catch (Exception ex)
 		{
-			return InternalServerError<string>($"An error occurred: {ex.Message}");
+			return InternalServerError<string>($"{ex.Message}");
 		}
 	}
 }

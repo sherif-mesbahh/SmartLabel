@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
-using SmartLabel.Application.Features.Products.Query.Results;
+using SmartLabel.Domain.Shared.Results.Products;
 
 namespace SmartLabel.Application.Features.Products.Query.Models;
-public class GetAllProductsQuery : IRequest<Response<IEnumerable<GetAllProductsResult>>>
+public class GetAllProductsQuery : IRequest<Response<IEnumerable<GetAllProductsDto?>>>
 {
 }

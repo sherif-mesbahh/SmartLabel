@@ -30,7 +30,7 @@ public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
 	{
 		RuleFor(x => x.Name)
 			.MustAsync(async (productRequest, name, cancellationToken)
-				=> !await _repository.IsProductNameAndIdExist(productRequest.Id, name, cancellationToken))
+				=> !await _repository.IsProductNameAndIdExistAsync(productRequest.Id, name, cancellationToken))
 			.WithMessage("{PropertyName} name already exists.");
 	}
 }

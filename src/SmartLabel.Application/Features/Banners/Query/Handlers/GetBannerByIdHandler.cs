@@ -1,21 +1,17 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Query.Models;
-using SmartLabel.Application.Features.Banners.Query.Results;
 using SmartLabel.Domain.Repositories;
+using SmartLabel.Domain.Shared.Results.Banners;
 
 namespace SmartLabel.Application.Features.Banners.Query.Handlers;
-public class GetBannerByIdHandler(IMapper mapper, IBannerRepository repository) : ResponseHandler, IRequestHandler<GetBannerByIdQuery, Response<GetBannerByIdResult>>
+public class GetBannerByIdHandler(IBannerRepository repository) : ResponseHandler, IRequestHandler<GetBannerByIdQuery, Response<GetBannerByIdDto>>
 {
-	public async Task<Response<GetBannerByIdResult>> Handle(GetBannerByIdQuery request, CancellationToken cancellationToken)
+	public async Task<Response<GetBannerByIdDto>> Handle(GetBannerByIdQuery request, CancellationToken cancellationToken)
 	{
-		var ban = await repository.GetBannerById(request.Id);
-		if (ban is null)
-		{
-			throw new KeyNotFoundException("Banner with ID " + request.Id + " not found");
-		}
-		var banner = mapper.Map<GetBannerByIdResult>(ban);
-		return Success(banner, "Banner is getting successfully");
+		var banner = await repository.GetBannerByIdAsync(request.Id);
+		if (banner is null)
+			return NotFound<GetBannerByIdDto>("Banner with id " + request.Id + " not found");
+		return Success(banner, $"Banner with id {request.Id} is getting successfully");
 	}
 }

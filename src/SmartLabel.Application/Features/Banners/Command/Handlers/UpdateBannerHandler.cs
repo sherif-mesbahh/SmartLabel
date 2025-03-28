@@ -8,34 +8,34 @@ using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
-public class UpdateBannerHandler(IMapper mapper, IBannerRepository repository, IFileService fileService, IUnitOfWork unitOfWork)
+public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IFileService fileService, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<UpdateBannerCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(UpdateBannerCommand request, CancellationToken cancellationToken)
 	{
-		if (!await repository.IsBannerExist(request.Id))
+		if (!await bannerRepository.IsBannerExistAsync(request.Id))
 		{
-			return NotFound<string>($"The Banner with id {request.Id} is not found");
+			return NotFound<string>($"Banner with id {request.Id} is not found");
 		}
+
 		using var transaction = await unitOfWork.BeginTransaction();
 		try
 		{
-			if (request.RemovedImageIds != null)
+			if (request.RemovedImageIds is not null)
 			{
-				foreach (var imageId in request.RemovedImageIds)
+				var imageUrls = await bannerRepository.GetBannerImageUrlsByIdsAsync(request.RemovedImageIds);
+				foreach (var imageUrl in imageUrls)
 				{
-					var bannerImage = await repository.GetBannerImageById(imageId);
-					if (bannerImage is null) continue;
-					await fileService.DeleteImageAsync(bannerImage.ImageUrl);
-					repository.DeleteBannerImage(bannerImage);
+					await fileService.DeleteImageAsync(imageUrl);
 				}
+				await bannerRepository.DeleteBannerImagesAsync(request.RemovedImageIds);
 			}
 
 			var banner = mapper.Map<Banner>(request);
-			repository.UpdateBanner(banner);
-			await unitOfWork.SaveChangesAsync(cancellationToken);
+			await bannerRepository.UpdateBannerAsync(banner.Id, banner);
 			if (request.ImagesFiles is not null)
 			{
+				var bannerImages = new List<BannerImage>();
 				foreach (var image in request.ImagesFiles)
 				{
 					var bannerImage = new BannerImage()
@@ -44,17 +44,18 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository repository, I
 						ImageUrl = await fileService.BuildImageAsync(image),
 						BannerId = banner.Id
 					};
-					await repository.AddBannerImage(bannerImage);
+					bannerImages.Add(bannerImage);
 				}
+				await bannerRepository.AddBannerImagesAsync(bannerImages);
 			}
-
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
-			return Updated<string>("Banner is Updated successfully");
+			return Updated<string>($"Banner with id {banner.Id} is Updated successfully");
 		}
 		catch (Exception ex)
 		{
-			return InternalServerError<string>($"An error occurred: {ex.Message}");
+			transaction.Rollback();
+			return InternalServerError<string>($"{ex.Message}");
 		}
 	}
 }

@@ -29,7 +29,7 @@ public class AddProductValidator : AbstractValidator<AddProductCommand>
 	private void AddCustomValidationRules()
 	{
 		RuleFor(x => x.Name)
-			.MustAsync(async (name, cancellationToken) => !await _repository.IsProductNameExist(name, cancellationToken))
+			.MustAsync(async (name, cancellationToken) => !await _repository.IsProductNameExistAsync(name, cancellationToken))
 			.WithMessage("Product name already exists.");
 	}
 }

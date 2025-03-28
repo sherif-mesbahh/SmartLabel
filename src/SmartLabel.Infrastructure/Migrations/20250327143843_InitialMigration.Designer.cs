@@ -12,7 +12,7 @@ using SmartLabel.Infrastructure.Persistence.Data;
 namespace SmartLabel.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250325220946_InitialMigration")]
+    [Migration("20250327143843_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

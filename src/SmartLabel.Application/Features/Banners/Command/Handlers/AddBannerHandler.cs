@@ -8,7 +8,7 @@ using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
-public class AddBannerHandler(IMapper mapper, IBannerRepository repository, IFileService fileService, IUnitOfWork unitOfWork)
+public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IFileService fileService, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<AddBannerCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(AddBannerCommand request, CancellationToken cancellationToken)
@@ -17,10 +17,11 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository repository, IFil
 		try
 		{
 			var banner = mapper.Map<Banner>(request);
-			await repository.AddBanner(banner);
+			await bannerRepository.AddBannerAsync(banner);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			if (request.ImagesFiles is not null)
 			{
+				var bannerImages = new List<BannerImage>();
 				foreach (var image in request.ImagesFiles)
 				{
 					var bannerImage = new BannerImage()
@@ -29,18 +30,18 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository repository, IFil
 						ImageUrl = await fileService.BuildImageAsync(image),
 						BannerId = banner.Id
 					};
-					await repository.AddBannerImage(bannerImage);
+					bannerImages.Add(bannerImage);
 				}
+				await bannerRepository.AddBannerImagesAsync(bannerImages);
 			}
-
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
-			return Created<string>("Banner is added successfully");
+			return Created<string>($"Banner with id {banner.Id} is added successfully");
 		}
 		catch (Exception ex)
 		{
 			transaction.Rollback();
-			return InternalServerError<string>($"An error occurred: {ex.Message}");
+			return InternalServerError<string>($"{ex.Message}");
 		}
 	}
 }

@@ -1,12 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Features.Products.Query.Models;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
-[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController(IMediator mediator) : AppControllerBase
@@ -22,7 +20,6 @@ public class ProductController(IMediator mediator) : AppControllerBase
 		return NewResult(await mediator.Send(new GetProductByIdQuery(id)));
 	}
 	[HttpPost]
-	[AllowAnonymous]
 	public async Task<IActionResult> AddProduct([FromForm] AddProductCommand product)
 	{
 		return NewResult(await mediator.Send(product));

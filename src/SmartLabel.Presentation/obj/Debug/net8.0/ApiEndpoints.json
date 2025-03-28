@@ -2,20 +2,15 @@
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.AuthenticationController",
     "Method": "SignIn",
-    "RelativePath": "api/Authentication/Login",
+    "RelativePath": "api/Authentication/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "command",
+        "Type": "SmartLabel.Application.Features.Authentication.Command.Models.SignInCommand",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -23,7 +18,7 @@
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.AuthenticationController",
     "Method": "RefreshToken",
-    "RelativePath": "api/Authentication/Logout",
+    "RelativePath": "api/Authentication/logout",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -33,7 +28,7 @@
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.AuthenticationController",
     "Method": "RefreshToken",
-    "RelativePath": "api/Authentication/Refresh Token",
+    "RelativePath": "api/Authentication/refresh-token",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -64,11 +59,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
       {
         "Name": "Title",
         "Type": "System.String",
@@ -178,7 +168,7 @@
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
     "Method": "GetActiveBanners",
-    "RelativePath": "api/Banner/Active",
+    "RelativePath": "api/Banner/active",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -187,7 +177,7 @@
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.CategoryController",
-    "Method": "GetAllCategory",
+    "Method": "GetAllCategories",
     "RelativePath": "api/Category",
     "HttpMethod": "GET",
     "IsController": true,
@@ -430,22 +420,6 @@
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
-    "Method": "AddUser",
-    "RelativePath": "api/User",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "SmartLabel.Application.Features.Users.Command.Models.AddUserCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
     "Method": "UpdateUser",
     "RelativePath": "api/User",
     "HttpMethod": "PUT",
@@ -495,7 +469,7 @@
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
     "Method": "ChangePassword",
-    "RelativePath": "api/User/ChangePassword",
+    "RelativePath": "api/User/change-password",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -509,8 +483,24 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
+    "Method": "Register",
+    "RelativePath": "api/User/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "SmartLabel.Application.Features.Users.Command.Models.AddUserCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SmartLabel.Presentation.Controllers.UserFavProductController",
-    "Method": "GetFavProductsForUser",
+    "Method": "GetFavProductsByUserId",
     "RelativePath": "api/UserFavProduct",
     "HttpMethod": "GET",
     "IsController": true,
@@ -520,7 +510,7 @@
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.UserFavProductController",
-    "Method": "AddFavoriteForProduct",
+    "Method": "AddFavForProduct",
     "RelativePath": "api/UserFavProduct/{productId}",
     "HttpMethod": "POST",
     "IsController": true,
@@ -536,7 +526,7 @@
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.UserFavProductController",
-    "Method": "DeleteFavoriteForProduct",
+    "Method": "DeleteFavForProduct",
     "RelativePath": "api/UserFavProduct/{productId}",
     "HttpMethod": "DELETE",
     "IsController": true,

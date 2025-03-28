@@ -1,19 +1,17 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Query.Models;
-using SmartLabel.Application.Features.Products.Query.Results;
 using SmartLabel.Domain.Repositories;
+using SmartLabel.Domain.Shared.Results.Products;
 
 namespace SmartLabel.Application.Features.Products.Query.Handlers;
 
-public class GetProductByIdHandler(IMapper mapper, IProductRepository repository) : ResponseHandler, IRequestHandler<GetProductByIdQuery, Response<GetProductByIdResult>>
+public class GetProductByIdHandler(IProductRepository repository) : ResponseHandler, IRequestHandler<GetProductByIdQuery, Response<GetProductByIdDto>>
 {
-	public async Task<Response<GetProductByIdResult>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+	public async Task<Response<GetProductByIdDto>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
 	{
-		var pro = await repository.GetProductById(request.Id);
-		if (pro is null) throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
-		var product = mapper.Map<GetProductByIdResult>(pro);
+		var product = await repository.GetProductByIdAsync(request.Id);
+		if (product is null) throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
 		return Success(product, "product is getting successfully");
 	}
 }

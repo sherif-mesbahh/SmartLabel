@@ -15,11 +15,10 @@ public class DeleteUserFavProductHandler(IUserFavProductRepository userFavProduc
 	{
 		var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
 		if (userId is null) throw new SecurityTokenException("You are not authenticated");
-		var userFavProduct = await userFavProductRepository.GetUserFavProduct(int.Parse(userId), request.ProductId);
+		var userFavProduct = await userFavProductRepository.GetUserFavProductAsync(int.Parse(userId), request.ProductId);
 		if (userFavProduct is null)
 			return NotFound<string>("This productId or userId is not found");
-
-		await userFavProductRepository.DeleteFavProduct(userFavProduct);
+		await userFavProductRepository.DeleteFavProductAsync(userFavProduct.Id);
 		return Deleted<string>("Like is Deleted successfully");
 	}
 }

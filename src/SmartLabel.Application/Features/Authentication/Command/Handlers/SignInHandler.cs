@@ -16,7 +16,6 @@ public class SignInHandler(UserManager<ApplicationUser> userManager, SignInManag
 		var result = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
 		if (!result.Succeeded) return BadRequest<AuthResponse>("Email or Password is incorrect");
 		(string accessToken, string refreshToken) = await authRepository.GetJwtToken(user);
-		await authRepository.SaveRefreshTokenAsync(user.Id, refreshToken);
 		var authResponse = new AuthResponse()
 		{
 			AccessToken = accessToken,

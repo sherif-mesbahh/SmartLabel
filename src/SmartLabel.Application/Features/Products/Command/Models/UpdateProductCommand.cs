@@ -6,7 +6,7 @@ namespace SmartLabel.Application.Features.Products.Command.Models;
 public class UpdateProductCommand : IRequest<Response<string>>
 {
 	public int Id { get; set; }
-	public string Name { get; set; } = null!;
+	public string Name { get; set; } = string.Empty;
 	public decimal OldPrice { get; set; }
 	public int Discount { get; set; }
 	public string? Description { get; set; }

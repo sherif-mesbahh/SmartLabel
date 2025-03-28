@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
-using SmartLabel.Application.Features.Categories.Query.Results;
+using SmartLabel.Domain.Shared.Results.Categories;
 
 namespace SmartLabel.Application.Features.Categories.Query.Models;
-public class GetAllCategoryQuery : IRequest<Response<IEnumerable<GetAllCategoryResult>>>
+public class GetAllCategoryQuery : IRequest<Response<IEnumerable<GetAllCategoriesDto?>>>
 {
 
 }

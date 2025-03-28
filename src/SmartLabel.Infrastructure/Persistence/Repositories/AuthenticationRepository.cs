@@ -16,6 +16,7 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 	{
 		var accessToken = await GetAccessToken(user);
 		var refreshToken = GenerateRefreshToken();
+		await SaveRefreshTokenAsync(user.Id, refreshToken);
 		return (accessToken, refreshToken);
 	}
 
@@ -24,30 +25,31 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 		var claims = new List<Claim>()
 		{
 				new Claim(nameof(UserClaimModel.UserId), user.Id.ToString()),
-				new Claim(nameof(UserClaimModel.UserName), user.UserName),
-				new Claim(nameof(UserClaimModel.Email), user.Email)
+				new Claim(nameof(UserClaimModel.UserName), user.UserName!),
+				new Claim(nameof(UserClaimModel.Email), user.Email!)
 		};
+		var signingCredentials = new SigningCredentials(
+			new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SigningKey)),
+			SecurityAlgorithms.HmacSha256);
 
 		var jwtToken = new JwtSecurityToken(
 			issuer: jwtSettings.Issuer,
 			audience: jwtSettings.Audience,
 			claims: claims,
-			expires: DateTime.UtcNow.AddMinutes(5),
-			signingCredentials: new SigningCredentials(
-				new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SigningKey)),
-				SecurityAlgorithms.HmacSha256));
+			expires: DateTime.UtcNow.AddDays(2),
+			signingCredentials: signingCredentials);
 
-		return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+		return await Task.FromResult(new JwtSecurityTokenHandler().WriteToken(jwtToken));
 	}
 
 	public async Task Logout(int userId)
 	{
 		var token = await context.UserTokens.FirstOrDefaultAsync(x => x.UserId == userId);
-		var userToken = await context.UserTokens.FirstOrDefaultAsync(x => x.RefreshToken == token.RefreshToken && x.UserId == token.UserId);
+		var userToken = await context.UserTokens.FirstOrDefaultAsync(x => x.RefreshToken == token!.RefreshToken && x.UserId == token.UserId);
 		if (userToken is null)
 			throw new SecurityTokenException("Refresh token not found");
 
-		await RevokeRefreshToken(userToken);
+		await RevokeRefreshToken(userToken.RefreshToken);
 	}
 	public async Task<(string, string)> RefreshToken(string accessToken, string refreshToken)
 	{
@@ -56,29 +58,25 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 		var userId = principal.FindFirst(nameof(UserClaimModel.UserId))?.Value;
 
 		if (string.IsNullOrEmpty(userId))
-			throw new SecurityTokenException("Invalid token: Missing user ID");
-
-		var user = await context.Users.FindAsync(int.Parse(userId));
-		if (user is null)
-			throw new SecurityTokenException("User not found");
+			throw new SecurityTokenException("Invalid token");
 
 		// Validate refresh token
 		if (!await IsRefreshTokenValid(userId, refreshToken))
 			throw new SecurityTokenException("Invalid refresh token");
+		// Revoke the old refresh token
+		await RevokeRefreshToken(refreshToken);
 
-		// Revoke the old refresh token and generate a new one (rotation)
-		await RevokeRefreshTokenByValue(refreshToken);
-		var newRefreshToken = GenerateRefreshToken();
-		await SaveRefreshTokenAsync(user.Id, newRefreshToken);
+		//Generate new access token and refresh token
+		var user = await context.Users.FindAsync(int.Parse(userId));
 
-		return (await GetAccessToken(user), newRefreshToken);
+		return await GetJwtToken(user!);
 	}
 
-	private ClaimsPrincipal ValidateTokenAndGetPrincipleFromExpiredToken(string token)
+	private ClaimsPrincipal ValidateTokenAndGetPrincipleFromExpiredToken(string accessToken)
 	{
 		var tokenValidationParameters = new TokenValidationParameters()
 		{
-			ValidateLifetime = false, // Allow expired tokens
+			ValidateLifetime = false,
 			ValidateIssuer = jwtSettings.ValidateIssuer,
 			ValidIssuer = jwtSettings.Issuer,
 			ValidateAudience = jwtSettings.ValidateAudience,
@@ -88,12 +86,12 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 		};
 
 		var handler = new JwtSecurityTokenHandler();
-		var principal = handler.ValidateToken(token, tokenValidationParameters, out var securityToken);
+		var principal = handler.ValidateToken(accessToken, tokenValidationParameters, out var securityToken);
 
 		if (securityToken is not JwtSecurityToken jwtSecurityToken ||
 			!jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
 		{
-			throw new SecurityTokenException("Invalid token algorithm");
+			throw new SecurityTokenException("Invalid token");
 		}
 
 		return principal;
@@ -104,23 +102,15 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 		var userToken = await context.UserTokens
 			.FirstOrDefaultAsync(x => x.UserId.ToString() == userId && x.RefreshToken == refreshToken);
 
-		return userToken != null && userToken.ExpiryDate >= DateTime.UtcNow;
+		return userToken != null && userToken.ExpiryDate > DateTime.UtcNow;
 	}
 
-	private async Task RevokeRefreshToken(UserToken userToken)
-	{
-		context.UserTokens.Remove(userToken);
-		await context.SaveChangesAsync();
-	}
 
-	private async Task RevokeRefreshTokenByValue(string refreshToken)
+	private async Task RevokeRefreshToken(string refreshToken)
 	{
 		var token = await context.UserTokens.FirstOrDefaultAsync(x => x.RefreshToken == refreshToken);
-		if (token != null)
-		{
-			context.UserTokens.Remove(token);
-			await context.SaveChangesAsync();
-		}
+		context.UserTokens.Remove(token!);
+		await context.SaveChangesAsync();
 	}
 
 	public async Task SaveRefreshTokenAsync(int userId, string refreshToken)
@@ -129,7 +119,7 @@ public class AuthenticationRepository(JwtSettings jwtSettings, AppDbContext cont
 		{
 			UserId = userId,
 			RefreshToken = refreshToken,
-			ExpiryDate = DateTime.UtcNow.AddDays(7)
+			ExpiryDate = DateTime.UtcNow.AddMonths(2)
 		};
 
 		await context.UserTokens.AddAsync(userToken);

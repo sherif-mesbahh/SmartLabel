@@ -21,6 +21,7 @@
 	  <ProjectReference Include="..\SmartLabel.Infrastructure\SmartLabel.Infrastructure.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Properties\PublishProfiles\" />
 	  <Folder Include="wwwroot\Uploads\" />
 	</ItemGroup>
 

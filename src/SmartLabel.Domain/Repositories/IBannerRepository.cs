@@ -1,16 +1,17 @@
 ﻿using SmartLabel.Domain.Entities;
+using SmartLabel.Domain.Shared.Results.Banners;
 
 namespace SmartLabel.Domain.Repositories;
 public interface IBannerRepository
 {
-	Task<IEnumerable<Banner?>> GetAllBanners();
-	Task<IEnumerable<Banner?>> GetActiveBanners();
-	Task<Banner?> GetBannerById(int id);
-	Task AddBanner(Banner banner);
-	void UpdateBanner(Banner banner);
-	void DeleteBanner(Banner banner);
-	Task AddBannerImage(BannerImage? bannerImage);
-	void DeleteBannerImage(BannerImage? bannerImage);
-	Task<BannerImage?> GetBannerImageById(int id);
-	Task<bool> IsBannerExist(int id);
+	Task<IEnumerable<GetBannersDto?>> GetAllBannersAsync();
+	Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync();
+	Task<GetBannerByIdDto?> GetBannerByIdAsync(int id);
+	Task AddBannerAsync(Banner banner);
+	Task UpdateBannerAsync(int bannerId, Banner banner);
+	Task DeleteBannerAsync(int bannerId);
+	Task AddBannerImagesAsync(List<BannerImage> bannerImages);
+	Task<List<string?>> GetBannerImageUrlsByIdsAsync(List<int> imageIds);
+	Task DeleteBannerImagesAsync(List<int> imageIds);
+	Task<bool> IsBannerExistAsync(int id);
 }

@@ -10,10 +10,9 @@ namespace SmartLabel.Presentation.Controllers;
 public class CategoryController(IMediator mediator) : AppControllerBase
 {
 	[HttpGet]
-	public async Task<IActionResult> GetAllCategory()
+	public async Task<IActionResult> GetAllCategories()
 	{
-		var allCategories = await mediator.Send(new GetAllCategoryQuery());
-		return NewResult(allCategories);
+		return NewResult(await mediator.Send(new GetAllCategoryQuery()));
 	}
 	[HttpGet("{id:int}")]
 	public async Task<IActionResult> GetCategoryById(int id)

@@ -1,11 +1,11 @@
 ﻿using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Shared.Results;
+using SmartLabel.Domain.Shared.Results.UserFavProducts;
 
 namespace SmartLabel.Domain.Repositories;
 public interface IUserFavProductRepository
 {
-	Task<IEnumerable<UserFavProductResult>> GetFavProductsByUser(int userId);
-	Task AddFavProduct(UserFavProduct userFavProduct);
-	Task<UserFavProduct?> GetUserFavProduct(int userId, int productId);
-	Task DeleteFavProduct(UserFavProduct userFavProduct);
+	Task<IEnumerable<UserFavProductDto>> GetFavProductsByUserAsync(int userId);
+	Task AddFavProductAsync(UserFavProduct userFavProduct);
+	Task<UserFavProduct?> GetUserFavProductAsync(int userId, int productId);
+	Task DeleteFavProductAsync(int id);
 }

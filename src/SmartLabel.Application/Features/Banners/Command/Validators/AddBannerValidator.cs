@@ -1,15 +1,12 @@
 ﻿using FluentValidation;
 using SmartLabel.Application.Features.Banners.Command.Models;
-using SmartLabel.Domain.Repositories;
 
 namespace SmartLabel.Application.Features.Banners.Command.Validators;
 public class AddBannerValidator : AbstractValidator<AddBannerCommand>
 {
-	private readonly IBannerRepository _repository;
 
-	public AddBannerValidator(IBannerRepository repository)
+	public AddBannerValidator()
 	{
-		_repository = repository;
 		ApplyValidationRules();
 		AddCustomValidationRules();
 	}

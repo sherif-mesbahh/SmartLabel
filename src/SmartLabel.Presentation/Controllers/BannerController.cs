@@ -16,7 +16,7 @@ public class BannerController(IMediator mediator) : AppControllerBase
 		return NewResult(await mediator.Send(new GetAllBannersQuery()));
 	}
 
-	[HttpGet("Active")]
+	[HttpGet("active")]
 	public async Task<IActionResult> GetActiveBanners()
 	{
 		return NewResult(await mediator.Send(new GetActiveBannersQuery()));

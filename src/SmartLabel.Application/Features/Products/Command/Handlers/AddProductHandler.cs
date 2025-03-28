@@ -18,10 +18,11 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 		try
 		{
 			var product = mapper.Map<Product>(request);
-			await repository.AddProduct(product);
+			await repository.AddProductAsync(product);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			if (request.ImagesFiles is not null)
 			{
+				var productImages = new List<ProductImage>();
 				foreach (var image in request.ImagesFiles)
 				{
 					var productImage = new ProductImage()
@@ -30,18 +31,18 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 						ImageUrl = await fileService.BuildImageAsync(image),
 						ProductId = product.Id
 					};
-					await repository.AddProductImage(productImage);
+					productImages.Add(productImage);
 				}
+				await repository.AddProductImagesAsync(productImages);
 			}
-
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
-			return Created<string>("Product is added successfully");
+			return Created<string>($"Product with {product.Id} is added successfully");
 		}
 		catch (Exception ex)
 		{
 			transaction.Rollback();
-			return InternalServerError<string>($"An error occurred: {ex.Message}");
+			return InternalServerError<string>($"{ex.Message}");
 		}
 	}
 }

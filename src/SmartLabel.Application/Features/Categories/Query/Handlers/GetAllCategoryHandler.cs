@@ -1,18 +1,17 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Query.Models;
-using SmartLabel.Application.Features.Categories.Query.Results;
 using SmartLabel.Domain.Repositories;
+using SmartLabel.Domain.Shared.Results.Categories;
 
 namespace SmartLabel.Application.Features.Categories.Query.Handlers;
-public class GetAllCategoryHandler(IMapper mapper, ICategoryRepository repository) : ResponseHandler
-	,IRequestHandler<GetAllCategoryQuery, Response<IEnumerable<GetAllCategoryResult>>>
+public class GetAllCategoryHandler(ICategoryRepository categoryRepository) : ResponseHandler
+	, IRequestHandler<GetAllCategoryQuery, Response<IEnumerable<GetAllCategoriesDto?>>>
 {
-	public async Task<Response<IEnumerable<GetAllCategoryResult>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
+	public async Task<Response<IEnumerable<GetAllCategoriesDto?>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
 	{
-		var categories = mapper.Map<IEnumerable<GetAllCategoryResult>>(await repository.GetAllCategory());
-		return Success(categories, "All Categories getting successfully");
+		var categories = await categoryRepository.GetAllCategoriesAsync();
+		return Success(categories, "All Categories are getting successfully");
 	}
 }
 

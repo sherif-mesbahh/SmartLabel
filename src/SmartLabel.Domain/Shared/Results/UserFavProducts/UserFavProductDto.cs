@@ -1,5 +1,5 @@
-﻿namespace SmartLabel.Domain.Shared.Results;
-public class UserFavProductResult
+﻿namespace SmartLabel.Domain.Shared.Results.UserFavProducts;
+public class UserFavProductDto
 {
 	public string? Name { get; set; }
 	public decimal? OldPrice { get; set; }

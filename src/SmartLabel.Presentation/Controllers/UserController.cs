@@ -21,9 +21,9 @@ public class UserController(IMediator mediator) : AppControllerBase
 	{
 		return NewResult(await mediator.Send(new GetUserByIdQuery(id)));
 	}
-	[HttpPost]
+	[HttpPost("register")]
 	[AllowAnonymous]
-	public async Task<IActionResult> AddUser(AddUserCommand user)
+	public async Task<IActionResult> Register(AddUserCommand user)
 	{
 		return NewResult(await mediator.Send(user));
 	}
@@ -34,7 +34,7 @@ public class UserController(IMediator mediator) : AppControllerBase
 		return NewResult(await mediator.Send(user));
 	}
 
-	[HttpPut("ChangePassword")]
+	[HttpPut("change-password")]
 	public async Task<IActionResult> ChangePassword(ChangePasswordCommand changes)
 	{
 		return NewResult(await mediator.Send(changes));

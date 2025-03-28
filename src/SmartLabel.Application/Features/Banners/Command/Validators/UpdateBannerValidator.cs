@@ -5,11 +5,11 @@ using SmartLabel.Domain.Repositories;
 namespace SmartLabel.Application.Features.Banners.Command.Validators;
 public class UpdateBannerValidator : AbstractValidator<UpdateBannerCommand>
 {
-	private readonly IBannerRepository _repository;
+	private IBannerRepository BannerRepository { get; }
 
-	public UpdateBannerValidator(IBannerRepository repository)
+	public UpdateBannerValidator(IBannerRepository bannerRepository)
 	{
-		_repository = repository;
+		BannerRepository = bannerRepository;
 		ApplyValidationRules();
 		AddCustomValidationRules();
 	}

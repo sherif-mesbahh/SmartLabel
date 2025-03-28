@@ -6,34 +6,30 @@ using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
-public class DeleteBannerHandler(IBannerRepository repository, IFileService fileService, IUnitOfWork unitOfWork)
+public class DeleteBannerHandler(IBannerRepository bannerRepository, IFileService fileService, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<DeleteBannerCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(DeleteBannerCommand request, CancellationToken cancellationToken)
 	{
-		if (!await repository.IsBannerExist(request.Id))
-		{
-			return NotFound<string>($"The Banner with id {request.Id} is not found");
-		}
+		var banner = await bannerRepository.GetBannerByIdAsync(request.Id);
+		if (banner is null)
+			return NotFound<string>($"Banner with id {request.Id} is not found");
 
 		try
 		{
-			var banner = await repository.GetBannerById(request.Id);
-			if (banner?.Images is not null)
+			if (banner.Images is not null)
 			{
 				foreach (var image in banner.Images)
-				{
-					await fileService.DeleteImageAsync(image.ImageUrl);
-				}
+					await fileService.DeleteImageAsync(image);
 			}
 
-			repository.DeleteBanner(banner);
+			await bannerRepository.DeleteBannerAsync(request.Id);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
-			return Deleted<string>("This banner is deleted Successfully");
+			return Deleted<string>($"banner with id {request.Id} is deleted Successfully");
 		}
 		catch (Exception ex)
 		{
-			return InternalServerError<string>($"An error occurred: {ex.Message}");
+			return InternalServerError<string>($"{ex.Message}");
 		}
 	}
 }

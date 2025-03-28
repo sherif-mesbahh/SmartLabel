@@ -1,16 +1,15 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Query.Models;
-using SmartLabel.Application.Features.Banners.Query.Results;
 using SmartLabel.Domain.Repositories;
+using SmartLabel.Domain.Shared.Results.Banners;
 
 namespace SmartLabel.Application.Features.Banners.Query.Handlers;
-public class GetAllBannersHandler(IMapper mapper, IBannerRepository repository) : ResponseHandler, IRequestHandler<GetAllBannersQuery, Response<IEnumerable<GetBannerResult>>>
+public class GetAllBannersHandler(IBannerRepository repository) : ResponseHandler, IRequestHandler<GetAllBannersQuery, Response<IEnumerable<GetBannersDto?>>>
 {
-	public async Task<Response<IEnumerable<GetBannerResult>>> Handle(GetAllBannersQuery request, CancellationToken cancellationToken)
+	public async Task<Response<IEnumerable<GetBannersDto?>>> Handle(GetAllBannersQuery request, CancellationToken cancellationToken)
 	{
-		var banners = mapper.Map<IEnumerable<GetBannerResult>>(await repository.GetAllBanners());
+		var banners = await repository.GetAllBannersAsync();
 		return Success(banners, "All Banners getting successfully");
 	}
 }

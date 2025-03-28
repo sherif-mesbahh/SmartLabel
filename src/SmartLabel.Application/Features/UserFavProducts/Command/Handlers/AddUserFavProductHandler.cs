@@ -15,8 +15,8 @@ public class AddUserFavProductHandler(IUserFavProductRepository userFavProductRe
 	public async Task<Response<string>> Handle(AddUserFavProductCommand request, CancellationToken cancellationToken)
 	{
 		var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-		if (userId is null) throw new SecurityTokenException("You are not authenticated");
-		if (!await productRepository.IsProductExist(request.ProductId))
+		if (userId is null) throw new SecurityTokenException("Please login first!");
+		if (!await productRepository.IsProductExistAsync(request.ProductId))
 			return NotFound<string>("This productId or userId is not found");
 		var userFavProduct = new UserFavProduct()
 		{
@@ -24,7 +24,7 @@ public class AddUserFavProductHandler(IUserFavProductRepository userFavProductRe
 			UserId = int.Parse(userId),
 			ProductId = request.ProductId
 		};
-		await userFavProductRepository.AddFavProduct(userFavProduct);
-		return Created<string>("Like is added successfully");
+		await userFavProductRepository.AddFavProductAsync(userFavProduct);
+		return Created<string>("added to your favorites");
 	}
 }

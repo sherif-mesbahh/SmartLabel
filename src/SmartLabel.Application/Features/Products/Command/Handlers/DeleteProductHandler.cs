@@ -1,39 +1,30 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
-using SmartLabel.Domain.Interfaces;
 using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
-public class DeleteProductHandler(IProductRepository repository, IFileService fileService, IUnitOfWork unitOfWork)
+public class DeleteProductHandler(IProductRepository repository, IFileService fileService)
 	: ResponseHandler, IRequestHandler<DeleteProductCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
 	{
-		if (!await repository.IsProductExist(request.Id))
-		{
-			return NotFound<string>($"The product with id {request.Id} is not found");
-		}
-
+		var product = await repository.GetProductByIdAsync(request.Id);
+		if (product is null) throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
 		try
 		{
-			var product = await repository.GetProductById(request.Id);
-			if (product?.Images is not null)
+			if (product.Images is not null)
 			{
 				foreach (var image in product.Images)
-				{
-					await fileService.DeleteImageAsync(image.ImageUrl);
-				}
+					await fileService.DeleteImageAsync(image);
 			}
-
-			repository.DeleteProduct(product);
-			await unitOfWork.SaveChangesAsync(cancellationToken);
-			return Deleted<string>("This product is deleted Successfully");
+			await repository.DeleteProductAsync(request.Id);
+			return Deleted<string>($"Product with id {request.Id} is deleted Successfully");
 		}
 		catch (Exception ex)
 		{
-			return InternalServerError<string>($"An error occurred: {ex.Message}");
+			return InternalServerError<string>($"{ex.Message}");
 		}
 	}
 }

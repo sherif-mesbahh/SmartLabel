@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\4ad1f69d-09ef-46f3-a1f3-7c19140f1448_Banner1.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\4ad1f69d-09ef-46f3-a1f3-7c19140f1448_Banner1.jpg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\8239fc7c-50bb-4eb4-bf71-3844fc42409b_milk.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\8239fc7c-50bb-4eb4-bf71-3844fc42409b_milk.jpeg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\eb172526-3176-4d6a-988a-942248d76408_Banner2.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\eb172526-3176-4d6a-988a-942248d76408_Banner2.jpeg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\f47d0519-990a-40a2-aa8d-921759a050b8_milk.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\f47d0519-990a-40a2-aa8d-921759a050b8_milk.jpeg"
+    },
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\fbe150cf-7f9f-4512-968d-f78cb349a198_meat.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\fbe150cf-7f9f-4512-968d-f78cb349a198_meat.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SmartLabel.Presentation.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SmartLabel.Presentation.props",
+      "PackagePath": "build\\SmartLabel.Presentation.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SmartLabel.Presentation.props",
+      "PackagePath": "buildMultiTargeting\\SmartLabel.Presentation.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SmartLabel.Presentation.props",
+      "PackagePath": "buildTransitive\\SmartLabel.Presentation.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

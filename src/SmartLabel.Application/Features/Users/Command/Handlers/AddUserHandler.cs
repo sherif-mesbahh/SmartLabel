@@ -14,7 +14,7 @@ public class AddUserHandler(IMapper mapper, UserManager<ApplicationUser> userMan
 		var user = mapper.Map<ApplicationUser>(request);
 		var result = await userManager.CreateAsync(user, request.Password);
 		if (!result.Succeeded)
-			return BadRequest<string>(result.Errors.FirstOrDefault().Description);
+			return BadRequest<string>(result.Errors.FirstOrDefault()?.Description);
 
 		return Created<string>("User is added successfully");
 	}
