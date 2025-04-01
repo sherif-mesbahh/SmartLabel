@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Query.Models;
-using SmartLabel.Domain.Repositories;
-using SmartLabel.Domain.Shared.Results.Banners;
+using SmartLabel.Application.Repositories;
+using GetBannerByIdDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannerByIdDto;
 
 namespace SmartLabel.Application.Features.Banners.Query.Handlers;
 public class GetBannerByIdHandler(IBannerRepository repository) : ResponseHandler, IRequestHandler<GetBannerByIdQuery, Response<GetBannerByIdDto>>
@@ -11,7 +11,7 @@ public class GetBannerByIdHandler(IBannerRepository repository) : ResponseHandle
 	{
 		var banner = await repository.GetBannerByIdAsync(request.Id);
 		if (banner is null)
-			return NotFound<GetBannerByIdDto>("Banner with id " + request.Id + " not found");
-		return Success(banner, $"Banner with id {request.Id} is getting successfully");
+			return NotFound<GetBannerByIdDto>([$"Banner ID: {request.Id} not found"], "Banner discontinued");
+		return Success(banner, $"Banner {request.Id} retrieved successfully");
 	}
 }

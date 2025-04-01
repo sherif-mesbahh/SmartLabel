@@ -4,9 +4,9 @@ namespace SmartLabel.Application.Bases;
 public class Response<T>
 {
 	public HttpStatusCode StatusCode { get; set; }
-	public bool Succeeded { get; set; }
+	public bool Success { get; set; }
 	public string? Message { get; set; }
-	public Dictionary<string, List<string>> Errors { get; set; } = new();
+	public List<string>? Errors { get; set; }
 	public T? Data { get; set; }
 }
 

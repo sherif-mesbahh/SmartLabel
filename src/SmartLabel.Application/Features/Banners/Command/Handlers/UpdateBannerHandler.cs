@@ -2,9 +2,9 @@
 using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Command.Models;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
@@ -14,10 +14,7 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 	public async Task<Response<string>> Handle(UpdateBannerCommand request, CancellationToken cancellationToken)
 	{
 		if (!await bannerRepository.IsBannerExistAsync(request.Id))
-		{
-			return NotFound<string>($"Banner with id {request.Id} is not found");
-		}
-
+			return NotFound<string>([$"Banner ID: {request.Id} not found"], "Banner discontinued");
 		using var transaction = await unitOfWork.BeginTransaction();
 		try
 		{
@@ -50,12 +47,12 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 			}
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
-			return Updated<string>($"Banner with id {banner.Id} is Updated successfully");
+			return NoContent<string>();
 		}
 		catch (Exception ex)
 		{
 			transaction.Rollback();
-			return InternalServerError<string>($"{ex.Message}");
+			return InternalServerError<string>([ex.Message], "Updating banner temporarily unavailable");
 		}
 	}
 }

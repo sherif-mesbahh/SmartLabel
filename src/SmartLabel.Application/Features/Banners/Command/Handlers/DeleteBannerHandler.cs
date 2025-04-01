@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Command.Models;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
@@ -13,8 +13,7 @@ public class DeleteBannerHandler(IBannerRepository bannerRepository, IFileServic
 	{
 		var banner = await bannerRepository.GetBannerByIdAsync(request.Id);
 		if (banner is null)
-			return NotFound<string>($"Banner with id {request.Id} is not found");
-
+			return NotFound<string>([$"Banner ID: {request.Id} not found"], "Banner discontinued");
 		try
 		{
 			if (banner.Images is not null)
@@ -25,11 +24,11 @@ public class DeleteBannerHandler(IBannerRepository bannerRepository, IFileServic
 
 			await bannerRepository.DeleteBannerAsync(request.Id);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
-			return Deleted<string>($"banner with id {request.Id} is deleted Successfully");
+			return NoContent<string>();
 		}
 		catch (Exception ex)
 		{
-			return InternalServerError<string>($"{ex.Message}");
+			return InternalServerError<string>([ex.Message], "Deleting banner temporarily unavailable");
 		}
 	}
 }

@@ -2,9 +2,9 @@
 using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
@@ -42,7 +42,7 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 		catch (Exception ex)
 		{
 			transaction.Rollback();
-			return InternalServerError<string>($"{ex.Message}");
+			return InternalServerError<string>([ex.Message], "Adding product temporarily unavailable");
 		}
 	}
 }

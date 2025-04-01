@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Repositories;
-using SmartLabel.Domain.Shared.Results.Banners;
 using SmartLabel.Infrastructure.Persistence.Data;
+using GetBannerByIdDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannerByIdDto;
+using GetBannersDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannersDto;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;
 public class BannerRepository(AppDbContext context) : IBannerRepository

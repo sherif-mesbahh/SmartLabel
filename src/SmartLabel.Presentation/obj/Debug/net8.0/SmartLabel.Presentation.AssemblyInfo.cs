@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("c0b79fcb-dea0-4da9-a393-ff0bb6da9c1b")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartLabel.Presentation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d7dc6a7859bb5aade202de55a3e4358b699f070d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bbe76a2a33140ee286df0708d88443aaa2fe860f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartLabel.Presentation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartLabel.Presentation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -2,9 +2,9 @@
 using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
@@ -15,10 +15,7 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 	{
 
 		if (!await productRepository.IsProductExistAsync(request.Id))
-		{
-			return NotFound<string>($"The product with id {request.Id} is not found");
-		}
-
+			return NotFound<string>([$"Product ID: {request.Id} not found"], "Product discontinued");
 		using var transaction = await unitOfWork.BeginTransaction();
 		try
 		{
@@ -52,12 +49,12 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
-			return Updated<string>($"Product with id {product.Id} is Updated successfully");
+			return NoContent<string>();
 		}
 		catch (Exception ex)
 		{
 			transaction.Rollback();
-			return InternalServerError<string>($"{ex.Message}");
+			return InternalServerError<string>([ex.Message], "Adding product temporarily unavailable");
 		}
 	}
 }

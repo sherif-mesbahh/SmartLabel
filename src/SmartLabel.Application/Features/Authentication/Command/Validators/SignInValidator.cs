@@ -11,8 +11,8 @@ public class SignInValidator : AbstractValidator<SignInCommand>
 	private void ApplyValidationRules()
 	{
 		RuleFor(x => x.Email)
-			.NotEmpty().WithMessage("{PropertyName} is required");
+			.NotEmpty().WithMessage("{PropertyName} must be required");
 		RuleFor(x => x.Password)
-			.NotEmpty().WithMessage("{PropertyName} is required");
+			.NotEmpty().WithMessage("{PropertyName} must be required");
 	}
 }

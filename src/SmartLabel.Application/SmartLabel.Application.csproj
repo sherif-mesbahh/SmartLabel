@@ -8,11 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Features\Authentication\Command\Results\**" />
     <Compile Remove="Features\Authentication\Query\**" />
-    <EmbeddedResource Remove="Features\Authentication\Command\Results\**" />
     <EmbeddedResource Remove="Features\Authentication\Query\**" />
-    <None Remove="Features\Authentication\Command\Results\**" />
     <None Remove="Features\Authentication\Query\**" />
   </ItemGroup>
 

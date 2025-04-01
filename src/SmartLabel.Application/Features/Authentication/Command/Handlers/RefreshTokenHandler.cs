@@ -1,20 +1,15 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Authentication.Command.Models;
-using SmartLabel.Application.Features.Authentication.Results;
-using SmartLabel.Domain.Repositories;
+using SmartLabel.Application.Features.Authentication.Command.Results;
+using SmartLabel.Application.Repositories;
 
 namespace SmartLabel.Application.Features.Authentication.Command.Handlers;
-public class RefreshTokenHandler(IAuthenticationRepository authRepository) : ResponseHandler, IRequestHandler<RefreshTokenCommand, Response<AuthResponse>>
+public class RefreshTokenHandler(IAuthenticationRepository authRepository) : ResponseHandler, IRequestHandler<RefreshTokenCommand, Response<GetTokensDto>>
 {
-	public async Task<Response<AuthResponse>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+	public async Task<Response<GetTokensDto>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
 	{
-		(string newAccessToken, string newRefreshToken) = await authRepository.RefreshToken(request.AccessToken, request.RefreshToken);
-		var authResponse = new AuthResponse()
-		{
-			AccessToken = newAccessToken,
-			RefreshToken = newRefreshToken
-		};
-		return Success(authResponse);
+		var tokens = await authRepository.RefreshTokenAsync(request.RefreshToken);
+		return Success(tokens);
 	}
 }

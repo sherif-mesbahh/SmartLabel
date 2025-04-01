@@ -11,9 +11,14 @@ public class GetUserByIdHandler(IMapper mapper, UserManager<ApplicationUser> use
 {
 	public async Task<Response<GetUserByIdResult>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
 	{
-		var userDb = await userManager.FindByIdAsync(request.Id.ToString());
-		if (userDb is null) throw new KeyNotFoundException("User with ID " + request.Id + " not found");
-		var user = mapper.Map<GetUserByIdResult>(userDb);
-		return Success(user, "User is getting successfully");
+		var existingUser = await userManager.FindByIdAsync(request.Id.ToString());
+		if (existingUser is null)
+		{
+			return NotFound<GetUserByIdResult>(
+				message: "User not found",
+				errors: [$"User with ID {request.Id} does not exist"]);
+		}
+		var user = mapper.Map<GetUserByIdResult>(existingUser);
+		return Success(user, "User retrieved successfully");
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
-using SmartLabel.Domain.Shared.Results.Categories;
+using SmartLabel.Application.Features.Categories.Query.Results;
 
 namespace SmartLabel.Application.Features.Categories.Query.Models;
 public class GetCategoryByIdQuery(int id) : IRequest<Response<GetCategoryByIdDto>>

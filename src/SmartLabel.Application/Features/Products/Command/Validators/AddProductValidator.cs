@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using SmartLabel.Application.Features.Products.Command.Models;
-using SmartLabel.Domain.Repositories;
+using SmartLabel.Application.Repositories;
 
 namespace SmartLabel.Application.Features.Products.Command.Validators;
 public class AddProductValidator : AbstractValidator<AddProductCommand>

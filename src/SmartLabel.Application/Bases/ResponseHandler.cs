@@ -1,91 +1,88 @@
-﻿namespace SmartLabel.Application.Bases;
+﻿using System.Net;
+
+namespace SmartLabel.Application.Bases;
 public class ResponseHandler
 {
 	public ResponseHandler()
 	{
 
 	}
-	public Response<T> Success<T>(T entity, string? message = null)
+	public Response<T> Success<T>(T data, string? message = null)
 	{
 		return new Response<T>()
 		{
-			Data = entity,
-			StatusCode = System.Net.HttpStatusCode.OK,
-			Succeeded = true,
-			Message = message ?? "Getting Successfully",
-		};
-	}
-	public Response<T> Updated<T>(string? message = null)
-	{
-		return new Response<T>()
-		{
-			StatusCode = System.Net.HttpStatusCode.OK,
-			Succeeded = true,
-			Message = message ?? "Updated Successfully",
-		};
-	}
-	public Response<T> Deleted<T>(string? message = null)
-	{
-		return new Response<T>()
-		{
-			StatusCode = System.Net.HttpStatusCode.OK,
-			Succeeded = true,
-			Message = message ?? "Deleted Successfully",
-		};
-	}
-	public Response<T> Unauthorized<T>()
-	{
-		return new Response<T>()
-		{
-			StatusCode = System.Net.HttpStatusCode.Unauthorized,
-			Succeeded = true,
-			Message = "UnAuthorized"
-		};
-	}
-	public Response<T> BadRequest<T>(string? message = null)
-	{
-		return new Response<T>()
-		{
-			StatusCode = System.Net.HttpStatusCode.BadRequest,
-			Succeeded = false,
-			Message = message ?? "Bad Request"
-		};
-	}
-	public Response<T> UnprocessableEntity<T>(string? message = null)
-	{
-		return new Response<T>()
-		{
-			StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
-			Succeeded = false,
-			Message = message ?? "UnprocessableEntity"
-		};
-	}
-
-	public Response<T> NotFound<T>(string? message = null)
-	{
-		return new Response<T>()
-		{
-			StatusCode = System.Net.HttpStatusCode.NotFound,
-			Succeeded = false,
-			Message = message ?? "Not Found"
-		};
-	}
-	public Response<T> InternalServerError<T>(string? message = null)
-	{
-		return new Response<T>()
-		{
-			StatusCode = System.Net.HttpStatusCode.InternalServerError,
-			Succeeded = false,
-			Message = message ?? "An error occurred"
+			Data = data,
+			StatusCode = HttpStatusCode.OK,
+			Success = true,
+			Message = message ?? "Operation completed"
 		};
 	}
 	public Response<T> Created<T>(string? message = null)
 	{
 		return new Response<T>()
 		{
-			StatusCode = System.Net.HttpStatusCode.Created,
-			Succeeded = true,
-			Message = message ?? "Created"
+			StatusCode = HttpStatusCode.Created,
+			Success = true,
+			Message = message ?? "Created successfully"
+		};
+	}
+	public Response<T> NoContent<T>(string? message = null)
+	{
+		return new Response<T>()
+		{
+			StatusCode = HttpStatusCode.OK,
+			Success = true,
+			Message = message
+		};
+	}
+	public Response<T> Unauthorized<T>(string? message = null)
+	{
+		return new Response<T>()
+		{
+			StatusCode = HttpStatusCode.Unauthorized,
+			Success = true,
+			Message = message ?? "Invalid credentials",
+		};
+	}
+	public Response<T> BadRequest<T>(List<string>? errors, string? message = null)
+	{
+		return new Response<T>()
+		{
+			StatusCode = HttpStatusCode.BadRequest,
+			Success = false,
+			Message = message,
+			Errors = errors ?? new List<string>()
+		};
+	}
+	public Response<T> UnprocessableEntity<T>(List<string>? errors, string? message = null)
+	{
+		return new Response<T>()
+		{
+			StatusCode = HttpStatusCode.UnprocessableEntity,
+			Success = false,
+			Message = message,
+			Errors = errors ?? new List<string>()
+		};
+	}
+
+	public Response<T> NotFound<T>(List<string>? errors, string? message = null)
+	{
+		return new Response<T>()
+		{
+			StatusCode = HttpStatusCode.NotFound,
+			Success = false,
+			Message = message,
+			Errors = errors ?? new List<string>()
+		};
+	}
+	public Response<T> InternalServerError<T>(List<string>? errors, string? message = null)
+	{
+		return new Response<T>()
+		{
+			StatusCode = HttpStatusCode.InternalServerError,
+			Success = false,
+			Message = message ?? "An error occurred",
+			Errors = errors ?? new List<string>()
 		};
 	}
 }

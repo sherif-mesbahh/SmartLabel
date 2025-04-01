@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartLabel.Application.Features.Products.Query.Results;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Repositories;
-using SmartLabel.Domain.Shared.Results.Products;
 using SmartLabel.Infrastructure.Persistence.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;

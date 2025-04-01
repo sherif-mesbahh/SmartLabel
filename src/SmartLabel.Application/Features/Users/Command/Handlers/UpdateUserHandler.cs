@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Users.Command.Models;
 using SmartLabel.Domain.Entities.Identity;
-using SmartLabel.Domain.Shared.Helpers;
+using SmartLabel.Domain.Helpers;
 using System.Security.Claims;
 
 namespace SmartLabel.Application.Features.Users.Command.Handlers;
@@ -15,14 +15,25 @@ public class UpdateUserHandler(IMapper mapper, UserManager<ApplicationUser> user
 	public async Task<Response<string>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
 	{
 		var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-		var userDb = await userManager.FindByIdAsync(userId!);
-		if (userDb is null)
-			return NotFound<string>($"The user is not found");
-		var user = mapper.Map(request, userDb);
+		if (userId == null)
+			return Unauthorized<string>("Please login first");
+		var existingUser = await userManager.FindByIdAsync(userId);
+		if (existingUser is null)
+		{
+			return NotFound<string>(
+				message: "User not found",
+				errors: [$"User with ID {userId} does not exist"]);
+		}
+		var user = mapper.Map(request, existingUser);
 		var result = await userManager.UpdateAsync(user);
 		if (!result.Succeeded)
-			return BadRequest<string>(result.Errors.FirstOrDefault().Description);
+		{
+			var errors = result.Errors.Select(e => e.Description).ToList();
+			return BadRequest<string>(
+				message: "User update failed",
+				errors: errors);
+		}
 
-		return Updated<string>("User is updated successfully");
+		return NoContent<string>();
 	}
 }

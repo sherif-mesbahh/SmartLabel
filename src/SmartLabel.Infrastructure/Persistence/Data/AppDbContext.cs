@@ -6,7 +6,7 @@ using SmartLabel.Domain.Entities.Identity;
 
 namespace SmartLabel.Infrastructure.Persistence.Data;
 public class AppDbContext
-	: IdentityDbContext<ApplicationUser, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+	: IdentityDbContext<ApplicationUser, Role, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
 	public AppDbContext()
 	{
@@ -24,6 +24,7 @@ public class AppDbContext
 	public DbSet<BannerImage> BannerImages { get; set; }
 	public DbSet<Banner> Banners { get; set; }
 	public DbSet<UserFavProduct> UserFavProducts { get; set; }
+	public DbSet<Role> Roles { get; set; }
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		base.OnModelCreating(modelBuilder);

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using SmartLabel.Application.Features.Banners.Command.Models;
-using SmartLabel.Domain.Repositories;
+using SmartLabel.Application.Repositories;
 
 namespace SmartLabel.Application.Features.Banners.Command.Validators;
 public class UpdateBannerValidator : AbstractValidator<UpdateBannerCommand>

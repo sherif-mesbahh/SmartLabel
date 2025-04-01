@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities.Identity;
+using SmartLabel.Domain.Helpers;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
-using SmartLabel.Domain.Shared.Helpers;
 using SmartLabel.Infrastructure.Interfaces;
 using SmartLabel.Infrastructure.Persistence.Data;
 using SmartLabel.Infrastructure.Persistence.Repositories;
@@ -27,8 +27,9 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<IFileService, FileService>();
 		services.AddTransient<IUnitOfWork, UnitOfWork>();
 		services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+		services.AddTransient<IAuthorizationRepository, AuthorizationRepository>();
 		services.AddTransient<IUserFavProductRepository, UserFavProductRepository>();
-		services.AddIdentity<ApplicationUser, IdentityRole<int>>(
+		services.AddIdentity<ApplicationUser, Role>(
 				options =>
 				{
 					options.Password.RequireDigit = true;

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Repositories;
-using SmartLabel.Domain.Shared.Results.UserFavProducts;
 using SmartLabel.Infrastructure.Persistence.Data;
+using UserFavProductDto = SmartLabel.Application.Features.UserFavProducts.Query.Results.UserFavProductDto;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;
 public class UserFavProductRepository(AppDbContext context) : IUserFavProductRepository
@@ -35,6 +35,12 @@ public class UserFavProductRepository(AppDbContext context) : IUserFavProductRep
 	{
 		return await context.UserFavProducts
 			.FirstOrDefaultAsync(x => x.UserId == userId && x.ProductId == productId);
+	}
+
+	public Task<bool> IsFavoriteExistAsync(int userId, int productId)
+	{
+		return context.UserFavProducts
+			.AnyAsync(x => x.UserId == userId && x.ProductId == productId);
 	}
 
 	public async Task DeleteFavProductAsync(int id)

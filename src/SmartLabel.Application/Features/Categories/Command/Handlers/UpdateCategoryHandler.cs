@@ -2,8 +2,8 @@
 using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Command.Models;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Categories.Command.Handlers;
@@ -15,9 +15,7 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 		CancellationToken cancellationToken)
 	{
 		if (!await categoryRepository.IsCategoryExistAsync(request.Id))
-		{
-			return NotFound<string>($"The Category with id {request.Id} is not found");
-		}
+			return NotFound<string>([$"Category ID: {request.Id} not found"], "Category discontinued");
 
 		try
 		{
@@ -26,11 +24,11 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 			if (imageUrl is not null) await fileService.DeleteImageAsync(imageUrl);
 			if (request.Image is not null) category.ImageUrl = await fileService.BuildImageAsync(request.Image);
 			await categoryRepository.UpdateCategoryAsync(category.Id, category);
-			return Updated<string>($"Category with id {category.Id} is Updated successfully");
+			return NoContent<string>();
 		}
 		catch (Exception ex)
 		{
-			return InternalServerError<string>($"{ex.Message}");
+			return InternalServerError<string>([ex.Message], "Updating category temporarily unavailable");
 		}
 	}
 }

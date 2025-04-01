@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using SmartLabel.Application.Features.Categories.Command.Models;
-using SmartLabel.Domain.Repositories;
+using SmartLabel.Application.Repositories;
 
 namespace SmartLabel.Application.Features.Categories.Command.Validators;
 public class UpdateCategoryValidator : AbstractValidator<UpdateCategoryCommand>

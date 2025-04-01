@@ -2,9 +2,9 @@
 using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Command.Models;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
@@ -36,12 +36,12 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 			}
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
-			return Created<string>($"Banner with id {banner.Id} is added successfully");
+			return Created<string>($"Banner {banner.Id} created successfully");
 		}
 		catch (Exception ex)
 		{
 			transaction.Rollback();
-			return InternalServerError<string>($"{ex.Message}");
+			return InternalServerError<string>([ex.Message], "Adding banner temporarily unavailable");
 		}
 	}
 }

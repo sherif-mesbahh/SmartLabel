@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Query.Models;
-using SmartLabel.Domain.Repositories;
-using SmartLabel.Domain.Shared.Results.Categories;
+using SmartLabel.Application.Features.Categories.Query.Results;
+using SmartLabel.Application.Repositories;
 
 namespace SmartLabel.Application.Features.Categories.Query.Handlers;
 public class GetAllCategoryHandler(ICategoryRepository categoryRepository) : ResponseHandler
@@ -11,7 +11,7 @@ public class GetAllCategoryHandler(ICategoryRepository categoryRepository) : Res
 	public async Task<Response<IEnumerable<GetAllCategoriesDto?>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
 	{
 		var categories = await categoryRepository.GetAllCategoriesAsync();
-		return Success(categories, "All Categories are getting successfully");
+		return Success(categories, "All Banners retrieved successfully");
 	}
 }
 

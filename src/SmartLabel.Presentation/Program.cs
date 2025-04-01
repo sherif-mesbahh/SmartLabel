@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using SmartLabel.Application;
+using SmartLabel.Application.Enumeration;
 using SmartLabel.Infrastructure;
 using SmartLabel.Presentation.Middlewares;
 
@@ -50,6 +51,11 @@ builder.Services.AddSwaggerGen(c =>
 		}
 	});
 });
+
+builder.Services.AddAuthorization(options =>
+	options.AddPolicy(nameof(Roles.UserOrAdmin), policy =>
+		policy.RequireRole(Roles.User.ToString(), Roles.Admin.ToString()))
+);
 
 var app = builder.Build();
 

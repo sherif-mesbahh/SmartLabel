@@ -13,6 +13,6 @@ public class GetAllUsersHandler(IMapper mapper, UserManager<ApplicationUser> use
 	public async Task<Response<IEnumerable<GetAllUsersResult>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
 	{
 		var users = mapper.Map<IEnumerable<GetAllUsersResult>>(await userManager.Users.ToListAsync(cancellationToken));
-		return Success(users, "All Users getting successfully");
+		return Success(users, "All Users retrieved successfully");
 	}
 }

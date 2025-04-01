@@ -17,7 +17,7 @@ public class FileService(IWebHostEnvironment host) : IFileService
 		var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 		await using (var fileStream = new FileStream(filePath, FileMode.Create))
 		{
-			await image.CopyToAsync(fileStream);
+			await image!.CopyToAsync(fileStream);
 		}
 		var fileUrl = uniqueFileName;
 		return fileUrl;

@@ -2,9 +2,9 @@
 using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Command.Models;
+using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Repositories;
 using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Categories.Command.Handlers;
@@ -21,11 +21,11 @@ public class AddCategoryHandler(IMapper mapper, ICategoryRepository categoryRepo
 				category.ImageUrl = await fileService.BuildImageAsync(request.Image);
 			await categoryRepository.AddCategoryAsync(category);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
-			return Created<string>($"Category with id {category.Id} is added successfully");
+			return Created<string>($"Category {category.Id} created successfully");
 		}
 		catch (Exception ex)
 		{
-			return InternalServerError<string>($"{ex.Message}");
+			return InternalServerError<string>([ex.Message], "Adding category temporarily unavailable");
 		}
 	}
 }
