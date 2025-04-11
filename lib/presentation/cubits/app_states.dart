@@ -33,3 +33,23 @@ class GetBannersErrorState extends AppStates {
 
   GetBannersErrorState(this.error);
 }
+
+class GetFavProductsLoadingState extends AppStates {}
+
+class GetFavProductsSuccessState extends AppStates {}
+
+class GetFavProductsErrorState extends AppStates {
+  String error;
+
+  GetFavProductsErrorState(this.error);
+}
+
+class GetCategoryProductsLoadingState extends AppStates {}
+
+class GetCategoryProductsSuccessState extends AppStates {}
+
+class GetCategoryProductsErrorState extends AppStates {
+  String error;
+
+  GetCategoryProductsErrorState(this.error);
+}

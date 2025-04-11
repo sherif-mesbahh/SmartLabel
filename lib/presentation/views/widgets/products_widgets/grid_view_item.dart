@@ -50,13 +50,14 @@ class GridViewItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Image(
-                    height: screenHeight(context) * .06,
-                    width: screenWidth(context) * .1,
-                    image: AssetImage(
-                      'assets/images/discount_image.png',
+                  if (model.newPrice != model.oldPrice)
+                    Image(
+                      height: screenHeight(context) * .06,
+                      width: screenWidth(context) * .1,
+                      image: AssetImage(
+                        'assets/images/discount_image.png',
+                      ),
                     ),
-                  ),
                 ],
               ),
               Text(
@@ -72,10 +73,11 @@ class GridViewItem extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    '${model.oldPrice}\$',
-                    style: TextStyles.productOldPrice,
-                  ),
+                  if (model.newPrice != model.oldPrice)
+                    Text(
+                      '${model.oldPrice}\$',
+                      style: TextStyles.productOldPrice,
+                    ),
                 ],
               ),
             ],

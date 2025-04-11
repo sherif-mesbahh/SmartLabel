@@ -32,7 +32,7 @@ class SearchPage extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (cotext, index) {
-                  return FavListViewItem();
+                  return FavListViewItem(favModel: null,);
                 },
                 itemCount: 10,
                 physics: BouncingScrollPhysics(),

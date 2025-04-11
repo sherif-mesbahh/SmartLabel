@@ -6,6 +6,8 @@ import 'package:smart_label_software_engineering/core/services/api_services/api_
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
 import 'package:smart_label_software_engineering/models/banners_model/banners_model.dart';
 import 'package:smart_label_software_engineering/models/category_model/category_model.dart';
+import 'package:smart_label_software_engineering/models/category_products_model/category_products_model.dart';
+import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/categories_page.dart';
@@ -29,6 +31,9 @@ class AppCubit extends Cubit<AppStates> {
   }) {
     navBarCurrentIndex = index;
     emit(ChangeNavBarCurrentIndexState());
+
+    if (index == 1) getCategories();
+    if (index == 2) getFav();
   }
 
   ProdcutModel? productModel;
@@ -88,6 +93,46 @@ class AppCubit extends Cubit<AppStates> {
       }
     } catch (e) {
       emit(GetBannersErrorState(e.toString()));
+    }
+  }
+
+  FavModel? favModel;
+  Future<void> getFav() async {
+    emit(GetFavProductsLoadingState());
+
+    try {
+      final response = await ApiService().get(ApiEndpoints.favProduct);
+      if (response.statusCode == 200) {
+        favModel = FavModel.fromJson(response.data);
+        emit(GetFavProductsSuccessState());
+      } else {
+        emit(GetFavProductsErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(GetFavProductsErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  CategoryProductsModel? categoryProductsModel;
+  Future<void> getCategoryProducts({required int id}) async {
+    emit(GetCategoryProductsLoadingState());
+
+    try {
+      final response = await ApiService().get(ApiEndpoints.categoryById(id));
+      if (response.statusCode == 200) {
+        categoryProductsModel = CategoryProductsModel.fromJson(response.data);
+        emit(GetCategoryProductsSuccessState());
+      } else {
+        emit(GetCategoryProductsErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(GetCategoryProductsErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
     }
   }
 }

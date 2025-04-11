@@ -11,6 +11,7 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = AppCubit.get(context);
+
     final categories = cubit.categoryModel?.data;
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
