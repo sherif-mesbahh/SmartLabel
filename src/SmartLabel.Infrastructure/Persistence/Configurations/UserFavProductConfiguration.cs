@@ -12,7 +12,7 @@ public class UserFavProductConfiguration : IEntityTypeConfiguration<UserFavProdu
 			.WithMany(x => x.UsserFavProducts)
 			.HasForeignKey(x => x.UserId);
 		builder.HasOne(x => x.Product)
-			.WithMany(x => x.UsserFavProducts)
+			.WithMany(x => x.UserFavProducts)
 			.HasForeignKey(x => x.ProductId);
 	}
 }

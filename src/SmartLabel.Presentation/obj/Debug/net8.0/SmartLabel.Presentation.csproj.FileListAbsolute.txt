@@ -366,7 +366,6 @@ D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.genr
 D:\rep\src\SmartLabel.Presentation\obj\Debug\net8.0\ref\SmartLabel.Presentation.dll
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\appsettings.Development.json
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\appsettings.json
-D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.staticwebassets.runtime.json
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.exe
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.deps.json
 D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.runtimeconfig.json
@@ -542,7 +541,6 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentati
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfoInputs.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.AssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.csproj.CoreCompileInputs.cache
-D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.sourcelink.json
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\staticwebassets.build.json
@@ -559,3 +557,5 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\refint\SmartLabel.Pre
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.pdb
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.genruntimeconfig.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\ref\SmartLabel.Presentation.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Debug\net8.0\SmartLabel.Presentation.staticwebassets.runtime.json
+D:\SmartLabel\src\SmartLabel.Presentation\obj\Debug\net8.0\SmartLabel.Presentation.MvcApplicationPartsAssemblyInfo.cs

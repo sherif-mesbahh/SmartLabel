@@ -11,7 +11,7 @@ public class GetAllCategoryHandler(ICategoryRepository categoryRepository) : Res
 	public async Task<Response<IEnumerable<GetAllCategoriesDto?>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
 	{
 		var categories = await categoryRepository.GetAllCategoriesAsync();
-		return Success(categories, "All Banners retrieved successfully");
+		return Success(categories, "All categories retrieved successfully");
 	}
 }
 

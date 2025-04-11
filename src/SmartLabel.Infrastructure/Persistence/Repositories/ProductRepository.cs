@@ -13,6 +13,7 @@ public class ProductRepository(AppDbContext context) : IProductRepository
 			.AsNoTracking()
 			.Select(p => new GetAllProductsDto()
 			{
+				Id = p.Id,
 				Name = p.Name,
 				CategoryName = p.Category.Name,
 				Discount = p.Discount,
@@ -23,6 +24,12 @@ public class ProductRepository(AppDbContext context) : IProductRepository
 			.ToListAsync();
 	}
 
+	public IQueryable<Product> GetAllProductsPaginated()
+	{
+		IQueryable<Product> products = context.Products;
+		return products;
+	}
+
 	public async Task<GetProductByIdDto> GetProductByIdAsync(int id)
 	{
 		return await context.Products
@@ -30,6 +37,7 @@ public class ProductRepository(AppDbContext context) : IProductRepository
 			.Where(x => x.Id == id)
 			.Select(p => new GetProductByIdDto()
 			{
+				Id = p.Id,
 				Name = p.Name,
 				CategoryName = p.Category.Name,
 				Discount = p.Discount,

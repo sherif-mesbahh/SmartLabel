@@ -14,16 +14,25 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
 			.AsNoTracking()
 			.Select(c => new GetAllCategoriesDto()
 			{
+				Id = c.Id,
 				Name = c.Name,
 				ImageUrl = c.ImageUrl
 			}).ToListAsync();
 	}
+
+	public IQueryable<Category> GetAllCategoriesPaginated()
+	{
+		IQueryable<Category> query = context.Categories;
+		return query;
+	}
+
 	public async Task<GetCategoryByIdDto?> GetCategoryByIdAsync(int id)
 	{
 		return await context.Categories
 			.Where(x => x.Id == id)
 			.Select(c => new GetCategoryByIdDto()
 			{
+				Id = c.Id,
 				Name = c.Name,
 				ImageUrl = c.ImageUrl,
 				Products = c.Products

@@ -10,6 +10,6 @@ public class GetAllProductsHandler(IProductRepository repository) : ResponseHand
 	public async Task<Response<IEnumerable<GetAllProductsDto?>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
 	{
 		var products = await repository.GetAllProductsAsync();
-		return Success(products, "All Products are getting successfully");
+		return Success(products, "All Products are retrieved successfully");
 	}
 }

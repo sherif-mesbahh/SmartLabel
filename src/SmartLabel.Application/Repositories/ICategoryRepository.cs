@@ -5,6 +5,7 @@ namespace SmartLabel.Application.Repositories;
 public interface ICategoryRepository
 {
 	Task<IEnumerable<GetAllCategoriesDto?>> GetAllCategoriesAsync();
+	IQueryable<Category> GetAllCategoriesPaginated();
 	Task<GetCategoryByIdDto?> GetCategoryByIdAsync(int id);
 	Task AddCategoryAsync(Category category);
 	Task UpdateCategoryAsync(int categoryId, Category category);

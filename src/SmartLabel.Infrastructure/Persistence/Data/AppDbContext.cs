@@ -16,7 +16,6 @@ public class AppDbContext
 	{
 
 	}
-	public DbSet<ApplicationUser> Users { get; set; }
 	public DbSet<UserToken> UserTokens { get; set; }
 	public DbSet<Product> Products { get; set; }
 	public DbSet<Category> Categories { get; set; }

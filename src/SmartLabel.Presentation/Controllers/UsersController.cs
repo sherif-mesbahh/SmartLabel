@@ -7,44 +7,38 @@ using SmartLabel.Application.Features.Users.Query.Models;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
-[Route("api/[controller]")]
+[Route("api")]
 [ApiController]
-public class UserController(IMediator mediator) : AppControllerBase
+public class UsersController(ISender sender) : AppControllerBase
 {
 	[Authorize(Roles = nameof(Roles.Admin))]
-	[HttpGet]
+	[HttpGet("admin")]
 	public async Task<IActionResult> GetAllUsers()
 	{
-		return NewResult(await mediator.Send(new GetAllUsersQuery()));
+		return NewResult(await sender.Send(new GetAllUsersQuery()));
 	}
 	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
-	[HttpGet("{id:int}")]
-	public async Task<IActionResult> GetUserById(int id)
+	[HttpGet("me")]
+	public async Task<IActionResult> GetUser()
 	{
-		return NewResult(await mediator.Send(new GetUserByIdQuery(id)));
-	}
-
-	[HttpPost]
-	public async Task<IActionResult> Register(AddUserCommand user)
-	{
-		return NewResult(await mediator.Send(user));
+		return NewResult(await sender.Send(new GetUserQuery()));
 	}
 	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
-	[HttpPut]
+	[HttpPut("me")]
 	public async Task<IActionResult> UpdateUser(UpdateUserCommand user)
 	{
-		return NewResult(await mediator.Send(user));
+		return NewResult(await sender.Send(user));
 	}
 	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
-	[HttpPut("change-password")]
-	public async Task<IActionResult> ChangePassword(ChangePasswordCommand changes)
+	[HttpPut("me/password")]
+	public async Task<IActionResult> ChangePassword(ChangePasswordCommand request)
 	{
-		return NewResult(await mediator.Send(changes));
+		return NewResult(await sender.Send(request));
 	}
 	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
-	[HttpDelete]
+	[HttpDelete("me")]
 	public async Task<IActionResult> DeleteUser()
 	{
-		return NewResult(await mediator.Send(new DeleteUserCommand()));
+		return NewResult(await sender.Send(new DeleteUserCommand()));
 	}
 }

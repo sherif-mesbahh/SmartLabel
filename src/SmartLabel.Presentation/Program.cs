@@ -52,10 +52,9 @@ builder.Services.AddSwaggerGen(c =>
 	});
 });
 
-builder.Services.AddAuthorization(options =>
-	options.AddPolicy(nameof(Roles.UserOrAdmin), policy =>
-		policy.RequireRole(Roles.User.ToString(), Roles.Admin.ToString()))
-);
+builder.Services.AddAuthorizationBuilder()
+	.AddPolicy(nameof(Roles.UserOrAdmin), policy =>
+		policy.RequireRole(Roles.User.ToString(), Roles.Admin.ToString()));
 
 var app = builder.Build();
 
@@ -72,6 +71,7 @@ app.UseStaticFiles(new StaticFileOptions
 		Path.Combine(builder.Environment.WebRootPath, "Uploads")),
 	RequestPath = "/Uploads"
 });
+
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();

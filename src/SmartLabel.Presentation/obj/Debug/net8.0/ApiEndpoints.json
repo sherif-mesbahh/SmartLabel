@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "SmartLabel.Presentation.Controllers.UsersController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SmartLabel.Presentation.Controllers.AuthenticationController",
     "Method": "SignIn",
     "RelativePath": "api/Authentication/login",
@@ -42,48 +52,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
-    "Method": "AddRole",
-    "RelativePath": "api/Authorization/add-role/{name}",
+    "ContainingType": "SmartLabel.Presentation.Controllers.AuthenticationController",
+    "Method": "Register",
+    "RelativePath": "api/Authentication/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
-    "Method": "AddUserToRole",
-    "RelativePath": "api/Authorization/assign-role",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "command",
-        "Type": "SmartLabel.Application.Features.Authorization.Command.Models.AddUserToRoleCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
-    "Method": "DeleteRole",
-    "RelativePath": "api/Authorization/delete-role/{name}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "name",
-        "Type": "System.String",
+        "Name": "user",
+        "Type": "SmartLabel.Application.Features.Users.Command.Models.AddUserCommand",
         "IsRequired": true
       }
     ],
@@ -101,24 +79,8 @@
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
-    "Method": "AddUserToRole",
-    "RelativePath": "api/Authorization/take-role",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "command",
-        "Type": "SmartLabel.Application.Features.Authorization.Command.Models.RemoveUserFromRoleCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
     "Method": "UpdateRole",
-    "RelativePath": "api/Authorization/update-role",
+    "RelativePath": "api/Authorization/roles",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -133,8 +95,56 @@
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
+    "Method": "AddRole",
+    "RelativePath": "api/Authorization/roles/{name}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
+    "Method": "DeleteRole",
+    "RelativePath": "api/Authorization/roles/{name}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
+    "Method": "AddUserToRole",
+    "RelativePath": "api/Authorization/user-roles",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "SmartLabel.Application.Features.Authorization.Command.Models.AddUserToRoleCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
     "Method": "UpdateUserToRole",
-    "RelativePath": "api/Authorization/update-user-role",
+    "RelativePath": "api/Authorization/user-roles",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -164,9 +174,25 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.AuthorizationController",
+    "Method": "AddUserToRole",
+    "RelativePath": "api/Authorization/user-roles/remove",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "SmartLabel.Application.Features.Authorization.Command.Models.RemoveUserFromRoleCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
     "Method": "GetAllBanners",
-    "RelativePath": "api/Banner",
+    "RelativePath": "api/Banners",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -174,9 +200,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
     "Method": "AddBanner",
-    "RelativePath": "api/Banner",
+    "RelativePath": "api/Banners",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -210,9 +236,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
     "Method": "UpdateBanner",
-    "RelativePath": "api/Banner",
+    "RelativePath": "api/Banners",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -256,9 +282,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
     "Method": "GetBannerById",
-    "RelativePath": "api/Banner/{id}",
+    "RelativePath": "api/Banners/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -272,9 +298,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
     "Method": "DeleteBanner",
-    "RelativePath": "api/Banner/{id}",
+    "RelativePath": "api/Banners/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -288,9 +314,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.BannerController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
     "Method": "GetActiveBanners",
-    "RelativePath": "api/Banner/active",
+    "RelativePath": "api/Banners/active",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -298,9 +324,101 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.CategoryController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
+    "Method": "GetActiveBannersPaginated",
+    "RelativePath": "api/Banners/active/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortColumn",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartLabel.Application.Bases.PagedList\u00601[[SmartLabel.Application.Features.Banners.Query.Results.GetBannersDto, SmartLabel.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.BannersController",
+    "Method": "GetAllBannersPaginated",
+    "RelativePath": "api/Banners/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortColumn",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartLabel.Application.Bases.PagedList\u00601[[SmartLabel.Application.Features.Banners.Query.Results.GetBannersDto, SmartLabel.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.CategoriesController",
     "Method": "GetAllCategories",
-    "RelativePath": "api/Category",
+    "RelativePath": "api/Categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -308,9 +426,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.CategoryController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.CategoriesController",
     "Method": "AddCategory",
-    "RelativePath": "api/Category",
+    "RelativePath": "api/Categories",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -329,9 +447,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.CategoryController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.CategoriesController",
     "Method": "UpdateCategory",
-    "RelativePath": "api/Category",
+    "RelativePath": "api/Categories",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -355,9 +473,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.CategoryController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.CategoriesController",
     "Method": "GetCategoryById",
-    "RelativePath": "api/Category/{id}",
+    "RelativePath": "api/Categories/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -371,9 +489,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.CategoryController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.CategoriesController",
     "Method": "DeleteCategory",
-    "RelativePath": "api/Category/{id}",
+    "RelativePath": "api/Categories/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -387,9 +505,55 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.ProductController",
-    "Method": "GetAllProducts",
-    "RelativePath": "api/Product",
+    "ContainingType": "SmartLabel.Presentation.Controllers.CategoriesController",
+    "Method": "GetAllCategoriesPaginated",
+    "RelativePath": "api/Categories/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortColumn",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartLabel.Application.Bases.PagedList\u00601[[SmartLabel.Application.Features.Categories.Query.Results.GetAllCategoriesDto, SmartLabel.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.UsersController",
+    "Method": "GetUser",
+    "RelativePath": "api/me",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -397,159 +561,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.ProductController",
-    "Method": "AddProduct",
-    "RelativePath": "api/Product",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Name",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "OldPrice",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Discount",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Description",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "CatId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "ImagesFiles",
-        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.ProductController",
-    "Method": "UpdateProduct",
-    "RelativePath": "api/Product",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Name",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "OldPrice",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Discount",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Description",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "CatId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "ImagesFiles",
-        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "RemovedImageIds",
-        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.ProductController",
-    "Method": "GetProductById",
-    "RelativePath": "api/Product/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.ProductController",
-    "Method": "DeleteProduct",
-    "RelativePath": "api/Product/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
-    "Method": "GetAllUsers",
-    "RelativePath": "api/User",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
-    "Method": "Register",
-    "RelativePath": "api/User",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "SmartLabel.Application.Features.Users.Command.Models.AddUserCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.UsersController",
     "Method": "UpdateUser",
-    "RelativePath": "api/User",
+    "RelativePath": "api/me",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -563,9 +577,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.UsersController",
     "Method": "DeleteUser",
-    "RelativePath": "api/User",
+    "RelativePath": "api/me",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -573,41 +587,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
-    "Method": "GetUserById",
-    "RelativePath": "api/User/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserController",
-    "Method": "ChangePassword",
-    "RelativePath": "api/User/change-password",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "changes",
-        "Type": "SmartLabel.Application.Features.Users.Command.Models.ChangePasswordCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserFavProductController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.FavoritesController",
     "Method": "GetFavProductsForUser",
-    "RelativePath": "api/UserFavProduct",
+    "RelativePath": "api/me/favorites",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -615,9 +597,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserFavProductController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.FavoritesController",
     "Method": "AddFavForProduct",
-    "RelativePath": "api/UserFavProduct/{productId}",
+    "RelativePath": "api/me/favorites/{productId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -631,9 +613,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SmartLabel.Presentation.Controllers.UserFavProductController",
+    "ContainingType": "SmartLabel.Presentation.Controllers.FavoritesController",
     "Method": "DeleteFavForProducts",
-    "RelativePath": "api/UserFavProduct/{productId}",
+    "RelativePath": "api/me/favorites/{productId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -645,5 +627,247 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.FavoritesController",
+    "Method": "GetFavProductsPaginatedForUser",
+    "RelativePath": "api/me/favorites/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortColumn",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartLabel.Application.Bases.PagedList\u00601[[SmartLabel.Application.Features.Products.Query.Results.GetAllProductsDto, SmartLabel.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.UsersController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/me/password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SmartLabel.Application.Features.Users.Command.Models.ChangePasswordCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.ProductsController",
+    "Method": "GetAllProducts",
+    "RelativePath": "api/Products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.ProductsController",
+    "Method": "AddProduct",
+    "RelativePath": "api/Products",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "OldPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Discount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CatId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImagesFiles",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.ProductsController",
+    "Method": "UpdateProduct",
+    "RelativePath": "api/Products",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "OldPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Discount",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CatId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImagesFiles",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "RemovedImageIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.ProductsController",
+    "Method": "GetProductById",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.ProductsController",
+    "Method": "DeleteProduct",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartLabel.Presentation.Controllers.ProductsController",
+    "Method": "GetAllProductsPaginated",
+    "RelativePath": "api/Products/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortColumn",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SmartLabel.Application.Bases.PagedList\u00601[[SmartLabel.Application.Features.Products.Query.Results.GetAllProductsDto, SmartLabel.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -5,6 +5,7 @@ namespace SmartLabel.Application.Repositories;
 public interface IProductRepository
 {
 	Task<IEnumerable<GetAllProductsDto?>> GetAllProductsAsync();
+	IQueryable<Product> GetAllProductsPaginated();
 	Task<GetProductByIdDto> GetProductByIdAsync(int id);
 	Task AddProductAsync(Product product);
 	Task UpdateProductAsync(int productId, Product product);

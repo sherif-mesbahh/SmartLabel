@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\b50e04f8-fde9-4c3d-a6b6-362523e704e9_milk.jpeg",
+      "PackagePath": "staticwebassets\\Uploads\\b50e04f8-fde9-4c3d-a6b6-362523e704e9_milk.jpeg"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.SmartLabel.Presentation.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.build.SmartLabel.Presentation.props",
+      "PackagePath": "build\\SmartLabel.Presentation.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.buildMultiTargeting.SmartLabel.Presentation.props",
+      "PackagePath": "buildMultiTargeting\\SmartLabel.Presentation.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\win-x86\\staticwebassets\\msbuild.buildTransitive.SmartLabel.Presentation.props",
+      "PackagePath": "buildTransitive\\SmartLabel.Presentation.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

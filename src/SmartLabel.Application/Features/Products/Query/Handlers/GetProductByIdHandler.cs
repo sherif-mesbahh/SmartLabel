@@ -11,7 +11,8 @@ public class GetProductByIdHandler(IProductRepository repository) : ResponseHand
 	public async Task<Response<GetProductByIdDto>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
 	{
 		var product = await repository.GetProductByIdAsync(request.Id);
-		if (product is null) throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
-		return Success(product, "product is getting successfully");
+		if (product is null)
+			throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
+		return Success(product, "product retrieved successfully");
 	}
 }

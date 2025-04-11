@@ -22,34 +22,34 @@ public class AuthorizationController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(new GetUserRolesQuery(email)));
 	}
-	[HttpPost("add-role/{name}")]
+	[HttpPost("roles/{name}")]
 	public async Task<IActionResult> AddRole(string name)
 	{
 		var command = new AddRoleCommand { Name = name };
 		return NewResult(await sender.Send(command));
 	}
-	[HttpPut("update-role")]
+	[HttpPut("roles")]
 	public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command)
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[HttpDelete("delete-role/{name}")]
+	[HttpDelete("roles/{name}")]
 	public async Task<IActionResult> DeleteRole(string name)
 	{
 		var command = new DeleteRoleCommand { Name = name };
 		return NewResult(await sender.Send(command));
 	}
-	[HttpDelete("take-role")]
+	[HttpPost("user-roles/remove")]
 	public async Task<IActionResult> AddUserToRole([FromBody] RemoveUserFromRoleCommand command)
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[HttpPost("assign-role")]
+	[HttpPost("user-roles")]
 	public async Task<IActionResult> AddUserToRole([FromBody] AddUserToRoleCommand command)
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[HttpPut("update-user-role")]
+	[HttpPut("user-roles")]
 	public async Task<IActionResult> UpdateUserToRole([FromBody] UpdateUserToRoleCommand command)
 	{
 		return NewResult(await sender.Send(command));

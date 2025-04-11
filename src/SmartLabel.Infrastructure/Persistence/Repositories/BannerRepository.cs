@@ -14,10 +14,18 @@ public class BannerRepository(AppDbContext context) : IBannerRepository
 			.AsNoTracking()
 			.Select(b => new GetBannersDto()
 			{
+				Id = b.Id,
 				Title = b.Title,
 				ImageUrl = b.Images.FirstOrDefault().ImageUrl
 			}).ToListAsync();
 	}
+
+	public IQueryable<Banner> GetAllBannersPaginated()
+	{
+		IQueryable<Banner> banners = context.Banners;
+		return banners;
+	}
+
 	public async Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync()
 	{
 		var currentTime = DateTime.UtcNow;
@@ -26,6 +34,7 @@ public class BannerRepository(AppDbContext context) : IBannerRepository
 			.Where(x => x.StartDate <= currentTime && currentTime < x.EndDate)
 			.Select(b => new GetBannersDto()
 			{
+				Id = b.Id,
 				Title = b.Title,
 				ImageUrl = b.Images.FirstOrDefault().ImageUrl
 			}).ToListAsync();
@@ -37,6 +46,7 @@ public class BannerRepository(AppDbContext context) : IBannerRepository
 			.Where(x => x.Id == id)
 			.Select(b => new GetBannerByIdDto()
 			{
+				Id = b.Id,
 				Title = b.Title,
 				Description = b.Description,
 				StartDate = b.StartDate,

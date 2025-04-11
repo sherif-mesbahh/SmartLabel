@@ -2,6 +2,7 @@
 
 public class GetProductByIdDto
 {
+	public int Id { get; set; }
 	public string Name { get; set; }
 	public decimal OldPrice { get; set; }
 	public int Discount { get; set; }

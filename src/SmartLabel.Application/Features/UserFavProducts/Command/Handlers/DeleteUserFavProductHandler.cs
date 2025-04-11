@@ -17,7 +17,7 @@ public class DeleteUserFavProductHandler(IUserFavProductRepository userFavProduc
 			return Unauthorized<string>("Please login first");
 		if (!await productRepository.IsProductExistAsync(request.ProductId))
 			return NotFound<string>([$"Product ID: {request.ProductId} not found"], "Product discontinued");
-		var userFavProduct = await userFavProductRepository.GetUserFavProductAsync(int.Parse(userId), request.ProductId);
+		var userFavProduct = await userFavProductRepository.GetUserFavProductsAsync(int.Parse(userId), request.ProductId);
 		if (userFavProduct is null)
 			return NotFound<string>([$"Product {request.ProductId} not found for user {userId}"], "Product not found in favorites");
 		try

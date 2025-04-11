@@ -1,12 +1,13 @@
-﻿using SmartLabel.Domain.Entities;
-using UserFavProductDto = SmartLabel.Application.Features.UserFavProducts.Query.Results.UserFavProductDto;
+﻿using SmartLabel.Application.Features.Products.Query.Results;
+using SmartLabel.Domain.Entities;
 
 namespace SmartLabel.Application.Repositories;
 public interface IUserFavProductRepository
 {
-	Task<IEnumerable<UserFavProductDto>> GetFavProductsByUserAsync(int userId);
+	Task<IEnumerable<GetAllProductsDto>> GetFavProductsByUserAsync(int userId);
+	IQueryable<GetAllProductsDto> GetFavProductsByUserQueryable(int userId);
 	Task AddFavProductAsync(UserFavProduct userFavProduct);
-	Task<UserFavProduct?> GetUserFavProductAsync(int userId, int productId);
+	Task<UserFavProduct?> GetUserFavProductsAsync(int userId, int productId);
 	Task<bool> IsFavoriteExistAsync(int userId, int productId);
 	Task DeleteFavProductAsync(int id);
 }
