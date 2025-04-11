@@ -17,11 +17,12 @@ class Layout extends StatelessWidget {
       body: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Stack(
-            alignment: Alignment.bottomCenter,
+          return Column(
             children: [
-              AppCubit.get(context)
-                  .screens[AppCubit.get(context).navBarCurrentIndex],
+              Expanded(
+                child: AppCubit.get(context)
+                    .screens[AppCubit.get(context).navBarCurrentIndex],
+              ),
               CustomNavBar(),
             ],
           );

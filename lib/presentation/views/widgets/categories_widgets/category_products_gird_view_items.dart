@@ -5,10 +5,10 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/product_details_page.dart';
 
-class GridViewItem extends StatelessWidget {
+class CategoryProductsGridViewItem extends StatelessWidget {
   final dynamic model;
 
-  const GridViewItem({
+  const CategoryProductsGridViewItem({
     super.key,
     required this.model,
   });
@@ -30,7 +30,6 @@ class GridViewItem extends StatelessWidget {
                 children: [
                   Container(
                     height: screenHeight(context) * .2,
-                    width: screenWidth(context) * .5,
                     decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(10),
@@ -38,21 +37,19 @@ class GridViewItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            'http://smartlabel1.runasp.net/Uploads/${model.imageUrl}',
+                        imageUrl: 'Uploads/${model.imageUrl}',
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(
-                            color: primaryColor,
-                          ),
-                        ),
+                            child: CircularProgressIndicator(
+                          color: primaryColor,
+                        )),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
                   ),
                   Image(
-                    height: screenHeight(context) * .06,
-                    width: screenWidth(context) * .1,
+                    height: screenHeight(context) * .05,
+                    width: screenWidth(context) * .09,
                     image: AssetImage(
                       'assets/images/discount_image.png',
                     ),
@@ -86,7 +83,7 @@ class GridViewItem extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 Icons.favorite_border_outlined,
-                color: Colors.black,
+                color: primaryColor,
               ),
               onPressed: () {},
             ),

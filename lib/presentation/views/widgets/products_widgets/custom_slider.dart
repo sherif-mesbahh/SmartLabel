@@ -1,10 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/models/banners_model/banners_datum.dart';
+import 'package:smart_label_software_engineering/models/category_model/category_datum.dart';
 
 class CustomSlider extends StatelessWidget {
+  final List<BannersDatum> banners;
+
   const CustomSlider({
     super.key,
+    required this.banners,
   });
 
   @override
@@ -19,22 +25,28 @@ class CustomSlider extends StatelessWidget {
         initialPage: 0,
         enableInfiniteScroll: true,
       ),
-      items: [1, 2, 3, 4, 5].map((i) {
+      items: banners.map((banner) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
               width: screenWidth(context),
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
-                  color: secondaryColor,
-                  borderRadius: BorderRadius.circular(10)),
+                color: secondaryColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image(
-                  image: AssetImage(
-                    'assets/images/offer_image.jpg',
-                  ),
+                child: CachedNetworkImage(
+                  imageUrl:
+                      "http://smartlabel1.runasp.net/Uploads/${banner.imageUrl}",
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                    color: primaryColor,
+                  )),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.broken_image),
                 ),
               ),
             );

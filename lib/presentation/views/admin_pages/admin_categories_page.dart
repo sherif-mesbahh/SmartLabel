@@ -33,7 +33,7 @@ class AdminCategoriesPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomSlider(),
+                  CustomSlider(banners: [],),
                   SizedBox(
                     height: 10,
                   ),
