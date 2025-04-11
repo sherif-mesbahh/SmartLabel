@@ -49,7 +49,7 @@ function FoodPage() {
                 <img
                   src={`http://smartlabel1.runasp.net/Uploads/${img}`}
                   alt={`Thumbnail ${index}`}
-                  className="cursor-pointer rounded-lg h-32  "
+                  className="cursor-pointer rounded-lg h-31  "
                   onClick={() => setMainImage(img)}
                 />
               </SwiperSlide>
