@@ -53,3 +53,43 @@ class GetCategoryProductsErrorState extends AppStates {
 
   GetCategoryProductsErrorState(this.error);
 }
+
+class GetProductDetailsLoadingState extends AppStates {}
+
+class GetProductDetailsSuccessState extends AppStates {}
+
+class GetProductDetailsErrorState extends AppStates {
+  String error;
+
+  GetProductDetailsErrorState(this.error);
+}
+
+class GetProductSearchLoadingState extends AppStates {}
+
+class GetProductSearchSuccessState extends AppStates {}
+
+class GetProductSearchErrorState extends AppStates {
+  String error;
+
+  GetProductSearchErrorState(this.error);
+}
+
+class GetCategorySearchLoadingState extends AppStates {}
+
+class GetCategorySearchSuccessState extends AppStates {}
+
+class GetCategorySearchErrorState extends AppStates {
+  String error;
+
+  GetCategorySearchErrorState(this.error);
+}
+
+class GetFavSearchLoadingState extends AppStates {}
+
+class GetFavSearchSuccessState extends AppStates {}
+
+class GetFavSearchErrorState extends AppStates {
+  String error;
+
+  GetFavSearchErrorState(this.error);
+}

@@ -10,6 +10,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   final IconData suffixIcon;
   final VoidCallback suffixIconOnPressed;
   final String? Function(String?)? validator;
+  final ValueChanged<String>? onFieldSubmitted;
 
   const CustomTextFormFieldWidget({
     super.key,
@@ -18,13 +19,16 @@ class CustomTextFormFieldWidget extends StatelessWidget {
     required this.labelText,
     required this.obscureText,
     required this.suffixIconOnPressed,
-    this.validator, required this.controller,
+    this.validator,
+    required this.controller,
+    this.onFieldSubmitted,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         suffixIcon: obscureText
             ? IconButton(

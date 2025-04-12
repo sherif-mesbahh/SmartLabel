@@ -5,7 +5,6 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/custom_app_bar.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/products_widgets/grid_view_item.dart';
 
 class CategoriesProductsPage extends StatelessWidget {
@@ -15,28 +14,33 @@ class CategoriesProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Smart Label',
-          style: TextStyles.appBarTitle,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image(
+              height: 50,
+              width: 50,
+              image: AssetImage(
+                'assets/images/smart_label_logo.png',
+              ),
+            ),
+            Text(
+              'Smart Label',
+              style: TextStyles.appBarTitle,
+            ),
+          ],
         ),
         backgroundColor: primaryColor,
-        leading: Image(
-          image: AssetImage(
-            'assets/images/smart_label_logo.png',
+        leading: IconButton(
+          onPressed: () {
+            popNavigator(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_outlined,
+            color: secondaryColor,
+            size: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              popNavigator(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_outlined,
-              color: secondaryColor,
-              size: 30,
-            ),
-          ),
-        ],
       ),
       body: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},

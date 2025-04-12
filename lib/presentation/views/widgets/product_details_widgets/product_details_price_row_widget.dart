@@ -3,8 +3,12 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 
 class ProductDetailsPriceRow extends StatelessWidget {
+  final String newPrice;
+  final String oldPrice;
   const ProductDetailsPriceRow({
     super.key,
+    required this.newPrice,
+    required this.oldPrice,
   });
 
   @override
@@ -19,16 +23,17 @@ class ProductDetailsPriceRow extends StatelessWidget {
           ),
         ),
         Text(
-          '\$10.99',
+          '\$ $newPrice',
           style: TextStyles.productPrice.copyWith(fontSize: 18),
         ),
         SizedBox(
           width: 10,
         ),
-        Text(
-          '\$11.00',
-          style: TextStyles.productOldPrice.copyWith(fontSize: 18),
-        ),
+        if (newPrice != oldPrice)
+          Text(
+            '\$ $oldPrice',
+            style: TextStyles.productOldPrice.copyWith(fontSize: 18),
+          ),
         Spacer(),
         IconButton(
           onPressed: () {},
@@ -38,4 +43,3 @@ class ProductDetailsPriceRow extends StatelessWidget {
     );
   }
 }
-
