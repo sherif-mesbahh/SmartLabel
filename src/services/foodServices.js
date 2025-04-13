@@ -8,7 +8,9 @@ export const getAll = async () => {
 };
 
 export const search = async (searchTerm) => {
-  const { data } = await axios.get(`/api/foods/search/` + searchTerm);
+  const { data } = await axios.get(
+    `http://smartlabel1.runasp.net/api/Products/paginated?Search=${searchTerm}`
+  );
   return data;
 };
 export const getAllTags = async () => {

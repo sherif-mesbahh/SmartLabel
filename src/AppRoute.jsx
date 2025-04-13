@@ -17,12 +17,13 @@ import CategoriesAdminPage from "./pages/CategoriesAdmin/CategoriesAdminPage";
 import CategoryEditPage from "./pages/CategoriesEdit/CategoryEditPage";
 import Tags from "./pages/tags/tags";
 import BannerPage from "./pages/Banner/BannerPage";
+import AllProductPage from "./pages/allProduct/AllProductPage";
 
 function AppRoute() {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/search/:searchTerm" element={<Homepage />} />
+      <Route path="/Search/:searchTerm" element={<Homepage />} />
 
       <Route path="/tags/:Tag?" element={<Tags />} />
       <Route path="/food/:id" element={<FoodPage />} />
@@ -30,6 +31,7 @@ function AppRoute() {
       <Route path="/login" element={<Loginpage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/banner/:id" element={<BannerPage />} />
+      <Route path="/allproduct" element={<AllProductPage />} />
 
       <Route
         path="/profile"

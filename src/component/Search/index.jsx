@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 Search.defaultProps = {
-  SearchRoute: "/search/",
-  defaultRoute: "/",
-  placeholder: " Search Food Mine ",
+  defaultRoute: "/allproduct/",
+  placeholder: " Search Food ",
 };
-function Search({ SearchRoute, defaultRoute, placeholder }) {
+function Search({ defaultRoute, placeholder }) {
   const [term, setTerm] = useState("");
   const navigate = useNavigate();
   const { searchTerm } = useParams();
   const search = () => {
-    term ? navigate(SearchRoute + term) : navigate(defaultRoute);
+    term
+      ? navigate(`${defaultRoute}?Search=${encodeURIComponent(term)}`)
+      : navigate(defaultRoute);
   };
 
   useEffect(() => {

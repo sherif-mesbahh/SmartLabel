@@ -66,6 +66,14 @@ const NewProducts = ({ food }) => {
           ))}
         </Swiper>
       </div>
+      <div className=" text-center pt-3">
+        <Link
+          to="/allproduct"
+          className="bg-blue-600 text-white text-3xl font-bold uppercase px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+        >
+          All Product
+        </Link>
+      </div>
     </div>
   );
 };
