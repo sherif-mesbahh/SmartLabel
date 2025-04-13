@@ -4,7 +4,8 @@ class FavDatum {
   int? oldPrice;
   int? discount;
   int? newPrice;
-  String? categoryName;
+  int? categroyId;
+  bool? favorite;
   String? imageUrl;
 
   FavDatum({
@@ -13,8 +14,9 @@ class FavDatum {
     this.oldPrice,
     this.discount,
     this.newPrice,
-    this.categoryName,
+    this.categroyId,
     this.imageUrl,
+    this.favorite,
   });
 
   factory FavDatum.fromJson(Map<String, dynamic> json) => FavDatum(
@@ -29,7 +31,8 @@ class FavDatum {
         newPrice: (json['newPrice'] is int)
             ? json['newPrice'] as int
             : (json['newPrice'] as num?)?.toInt(),
-        categoryName: json['categoryName'] as String?,
+        categroyId: json['categoryId'] as int?,
+        favorite: json['favorite'],
         imageUrl: json['imageUrl'] as String?,
       );
 
@@ -39,7 +42,8 @@ class FavDatum {
         'oldPrice': oldPrice,
         'discount': discount,
         'newPrice': newPrice,
-        'categoryName': categoryName,
+        'categoryId': categroyId,
+        'favorite': favorite,
         'imageUrl': imageUrl,
       };
 }

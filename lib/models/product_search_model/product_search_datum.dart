@@ -4,8 +4,9 @@ class ProductSearchDatum {
   int? oldPrice;
   int? discount;
   int? newPrice;
-  String? categoryName;
+  int? categoryId;
   String? imageUrl;
+  bool? favorite;
 
   ProductSearchDatum({
     this.id,
@@ -13,8 +14,9 @@ class ProductSearchDatum {
     this.oldPrice,
     this.discount,
     this.newPrice,
-    this.categoryName,
+    this.categoryId,
     this.imageUrl,
+    this.favorite,
   });
 
   factory ProductSearchDatum.fromJson(Map<String, dynamic> json) {
@@ -24,8 +26,9 @@ class ProductSearchDatum {
       oldPrice: (json['oldPrice'] as num?)?.toInt(),
       discount: (json['discount'] as num?)?.toInt(),
       newPrice: (json['newPrice'] as num?)?.toInt(),
-      categoryName: json['categoryName'] as String?,
+      categoryId: json['categoryId'] as int?,
       imageUrl: json['imageUrl'] as String?,
+      favorite: json['favorite'],
     );
   }
 
@@ -35,7 +38,8 @@ class ProductSearchDatum {
         'oldPrice': oldPrice,
         'discount': discount,
         'newPrice': newPrice,
-        'categoryName': categoryName,
+        'categoryId': categoryId,
         'imageUrl': imageUrl,
+        'favorite': favorite,
       };
 }

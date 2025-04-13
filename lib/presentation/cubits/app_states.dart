@@ -84,12 +84,21 @@ class GetCategorySearchErrorState extends AppStates {
   GetCategorySearchErrorState(this.error);
 }
 
-class GetFavSearchLoadingState extends AppStates {}
+class GetActiveBannersLoadingState extends AppStates {}
 
-class GetFavSearchSuccessState extends AppStates {}
+class GetActiveBannersSuccessState extends AppStates {}
 
-class GetFavSearchErrorState extends AppStates {
+class GetActiveBannersErrorState extends AppStates {
   String error;
 
-  GetFavSearchErrorState(this.error);
+  GetActiveBannersErrorState(this.error);
+}
+class GetActiveBannerDetailsLoadingState extends AppStates {}
+
+class GetActiveBannerDetailsSuccessState extends AppStates {}
+
+class GetActiveBannerDetailsErrorState extends AppStates {
+  String error;
+
+  GetActiveBannerDetailsErrorState(this.error);
 }

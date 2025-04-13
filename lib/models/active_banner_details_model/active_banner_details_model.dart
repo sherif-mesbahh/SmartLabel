@@ -1,13 +1,13 @@
-import 'data.dart';
+import 'active_banner_details_data.dart';
 
-class CategoryProductsModel {
+class ActiveBannerDetailsModel {
   int? statusCode;
   bool? success;
   String? message;
   dynamic errors;
-  Data? data;
+  ActiveBannerDetailsData? data;
 
-  CategoryProductsModel({
+  ActiveBannerDetailsModel({
     this.statusCode,
     this.success,
     this.message,
@@ -15,15 +15,16 @@ class CategoryProductsModel {
     this.data,
   });
 
-  factory CategoryProductsModel.fromJson(Map<String, dynamic> json) {
-    return CategoryProductsModel(
+  factory ActiveBannerDetailsModel.fromJson(Map<String, dynamic> json) {
+    return ActiveBannerDetailsModel(
       statusCode: json['statusCode'] as int?,
       success: json['success'] as bool?,
       message: json['message'] as String?,
       errors: json['errors'] as dynamic,
       data: json['data'] == null
           ? null
-          : Data.fromJson(json['data'] as Map<String, dynamic>),
+          : ActiveBannerDetailsData.fromJson(
+              json['data'] as Map<String, dynamic>),
     );
   }
 

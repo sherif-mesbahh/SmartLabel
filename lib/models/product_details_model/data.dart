@@ -5,7 +5,9 @@ class Data {
   int? discount;
   int? newPrice;
   String? description;
-  dynamic categoryName;
+  String? mainImage;
+  int? categoryId;
+  bool? favorite;
   List<String>? images;
 
   Data({
@@ -15,8 +17,10 @@ class Data {
     this.discount,
     this.newPrice,
     this.description,
-    this.categoryName,
+    this.categoryId,
     this.images,
+    this.mainImage,
+    this.favorite,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -26,7 +30,9 @@ class Data {
         discount: (json['discount'] as num?)?.toInt(),
         newPrice: (json['newPrice'] as num?)?.toInt(),
         description: json['description'] as String?,
-        categoryName: json['categoryName'],
+        categoryId: json['categoryId'] as int?,
+        favorite: json['favorite'],
+        mainImage: json['mainImage'] as String?,
         images: (json['images'] as List?)?.map((e) => e.toString()).toList(),
       );
 
@@ -37,7 +43,9 @@ class Data {
         'discount': discount,
         'newPrice': newPrice,
         'description': description,
-        'categoryName': categoryName,
+        'categoryId': categoryId,
+        'favorite': favorite,
+        'mainImage': mainImage,
         'images': images,
       };
 }

@@ -11,7 +11,7 @@ void main() {
       create: (context) => AppCubit()
         ..getProducts()
         ..getCategories()
-        ..getBanners(),
+        ..getActiveBanners(),
     )
   ], child: const MyApp()));
 }

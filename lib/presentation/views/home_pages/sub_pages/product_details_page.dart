@@ -107,6 +107,7 @@ class ProductDetailsPage extends StatelessWidget {
                   ProductDetailsPriceRow(
                     newPrice: product.newPrice?.toString() ?? '0',
                     oldPrice: product.oldPrice?.toString() ?? '',
+                    favorite: product.favorite ?? false,
                   ),
 
                   const SizedBox(height: 10),

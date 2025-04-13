@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
+import 'package:smart_label_software_engineering/models/acitve_banners_model/acitve_banners_model.dart';
+import 'package:smart_label_software_engineering/models/active_banner_details_model/active_banner_details_model.dart';
 import 'package:smart_label_software_engineering/models/banners_model/banners_model.dart';
 import 'package:smart_label_software_engineering/models/category_model/category_model.dart';
 import 'package:smart_label_software_engineering/models/category_products_model/category_products_model.dart';
 import 'package:smart_label_software_engineering/models/category_search_model/category_search_model.dart';
 import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart';
-import 'package:smart_label_software_engineering/models/fav_search_model/fav_search_model.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
 import 'package:smart_label_software_engineering/models/product_search_model/product_search_model.dart';
@@ -97,6 +98,45 @@ class AppCubit extends Cubit<AppStates> {
       }
     } catch (e) {
       emit(GetBannersErrorState(e.toString()));
+    }
+  }
+
+  AcitveBannersModel? activeBannersModel;
+  Future<void> getActiveBanners() async {
+    emit(GetActiveBannersLoadingState());
+
+    try {
+      final response = await ApiService().get(ApiEndpoints.activeBanners);
+      if (response.statusCode == 200) {
+        activeBannersModel = AcitveBannersModel.fromJson(response.data);
+        emit(GetActiveBannersSuccessState());
+      } else {
+        emit(GetActiveBannersErrorState(
+            'Failed with status: ${response.statusCode}'));
+      }
+    } catch (e) {
+      emit(GetActiveBannersErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  ActiveBannerDetailsModel? activeBannerDetailsModel;
+  Future<void> getActiveBannerDetails({required int id}) async {
+    emit(GetActiveBannerDetailsLoadingState());
+
+    try {
+      final response = await ApiService().get(ApiEndpoints.bannerById(id));
+      if (response.statusCode == 200) {
+        activeBannerDetailsModel =
+            ActiveBannerDetailsModel.fromJson(response.data);
+        emit(GetActiveBannerDetailsSuccessState());
+      } else {
+        emit(GetActiveBannerDetailsErrorState(
+            'Failed with status: ${response.statusCode}'));
+      }
+    } catch (e) {
+      emit(GetActiveBannerDetailsErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
     }
   }
 
@@ -198,27 +238,6 @@ class AppCubit extends Cubit<AppStates> {
       }
     } catch (e) {
       emit(GetCategorySearchErrorState(e.toString()));
-      log('Failed with status: ${e.toString()}');
-    }
-  }
-
-  FavSearchModel? favSearchModel;
-  Future<void> getFavSearch({required String name}) async {
-    emit(GetFavSearchLoadingState());
-
-    try {
-      final response = await ApiService()
-          .get(ApiEndpoints.favSearch, queryParams: {'Search': name});
-      if (response.statusCode == 200) {
-        favSearchModel = FavSearchModel.fromJson(response.data);
-        emit(GetFavSearchSuccessState());
-      } else {
-        emit(GetFavSearchErrorState(
-            'Failed with status: ${response.statusCode}'));
-        log('Failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      emit(GetFavSearchErrorState(e.toString()));
       log('Failed with status: ${e.toString()}');
     }
   }

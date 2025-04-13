@@ -4,8 +4,9 @@ class ProductDatum {
   num? oldPrice;
   num? discount;
   num? newPrice;
-  String? categoryName;
+  int? categoryId;
   dynamic imageUrl;
+  bool? favorite;
 
   ProductDatum({
     this.id,
@@ -13,8 +14,9 @@ class ProductDatum {
     this.oldPrice,
     this.discount,
     this.newPrice,
-    this.categoryName,
+    this.categoryId,
     this.imageUrl,
+    this.favorite,
   });
 
   factory ProductDatum.fromJson(Map<String, dynamic> json) => ProductDatum(
@@ -23,8 +25,9 @@ class ProductDatum {
         oldPrice: json['oldPrice'] as num?,
         discount: json['discount'] as num?,
         newPrice: json['newPrice'] as num?,
-        categoryName: json['categoryName'] as String?,
+        categoryId: json['categoryId'] as int?,
         imageUrl: json['imageUrl'],
+        favorite: json['favorite'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,7 +36,8 @@ class ProductDatum {
         'oldPrice': oldPrice,
         'discount': discount,
         'newPrice': newPrice,
-        'categoryName': categoryName,
+        'categoryId': categoryId,
         'imageUrl': imageUrl,
+        'favorite': favorite,
       };
 }

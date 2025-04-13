@@ -7,7 +7,8 @@ class ApiService {
     receiveTimeout: const Duration(seconds: 10),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxMiIsIlVzZXJOYW1lIjoiYW1pcmtoYWlyeTkwM0BnbWFpbC5jb20iLCJFbWFpbCI6ImFtaXJraGFpcnk5MDNAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbIlVzZXIiLCJBZG1pbiJdLCJhdWQiOiJXZWJzaXRlQW5kTW9iaWxlQXBwIiwiaXNzIjoiU21hcnRMYWJlbFByb2plY3QiLCJleHAiOjE3NDQzOTgzOTgsImlhdCI6MTc0NDM5NzQ5OCwibmJmIjoxNzQ0Mzk3NDk4fQ.fh3PayXcMv1q_ZM1kdl4LyRR9R3p_yO0HC5-hNo7HAU',
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxMiIsIlVzZXJOYW1lIjoiYW1pcmtoYWlyeTkwM0BnbWFpbC5jb20iLCJFbWFpbCI6ImFtaXJraGFpcnk5MDNAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbIlVzZXIiLCJBZG1pbiJdLCJhdWQiOiJXZWJzaXRlQW5kTW9iaWxlQXBwIiwiaXNzIjoiU21hcnRMYWJlbFByb2plY3QiLCJleHAiOjE3NDQ1NTg0MTksImlhdCI6MTc0NDU1NzUxOSwibmJmIjoxNzQ0NTU3NTE5fQ.KQpJy0Mzrw1mMSDcA4c9tJfOB-xn9xcFemMzngmUFIA',
     },
   ));
 

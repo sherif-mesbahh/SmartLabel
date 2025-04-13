@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
-import 'package:smart_label_software_engineering/models/banners_model/banners_datum.dart';
-import 'package:smart_label_software_engineering/models/category_model/category_datum.dart';
+import 'package:smart_label_software_engineering/models/acitve_banners_model/active_banners_datum.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/banner_details_page.dart';
 
 class CustomSlider extends StatelessWidget {
-  final List<BannersDatum> banners;
+  final List<ActiveBannersDatum> banners;
 
   const CustomSlider({
     super.key,
@@ -28,25 +30,39 @@ class CustomSlider extends StatelessWidget {
       items: banners.map((banner) {
         return Builder(
           builder: (BuildContext context) {
-            return Container(
-              width: screenWidth(context),
-              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              decoration: BoxDecoration(
-                color: secondaryColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl:
-                      "http://smartlabel1.runasp.net/Uploads/${banner.imageUrl}",
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(
-                    color: primaryColor,
-                  )),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.broken_image),
+            return InkWell(
+              onTap: () {
+                AppCubit.get(context)
+                    .getActiveBannerDetails(id: banner.id ?? 1)
+                    .then((onValue) {
+                  pushNavigator(
+                    context,
+                    BannerDetailsPage(
+                      id: banner.id ?? 1,
+                    ),
+                  );
+                });
+              },
+              child: Container(
+                width: screenWidth(context),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                  color: secondaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "http://smartlabel1.runasp.net/Uploads/${banner.imageUrl}",
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                      color: primaryColor,
+                    )),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.broken_image),
+                  ),
                 ),
               ),
             );

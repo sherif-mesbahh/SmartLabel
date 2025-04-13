@@ -86,13 +86,21 @@ class FavListViewItem extends StatelessWidget {
               ),
             ),
             Spacer(),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.favorite_border_outlined,
-                color: Colors.black,
-              ),
-            ),
+            favModel.favorite
+                ? IconButton(
+                    icon: Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {},
+                  )
+                : IconButton(
+                    icon: Icon(
+                      Icons.favorite_border_outlined,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {},
+                  ),
           ],
         ),
       ),

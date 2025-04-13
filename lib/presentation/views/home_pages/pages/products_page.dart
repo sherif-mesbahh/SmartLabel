@@ -25,7 +25,10 @@ class ProductsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomSlider(banners: cubit.bannersModel?.data ?? []),
+                if (cubit.activeBannersModel != null &&
+                    cubit.activeBannersModel!.data != null &&
+                    cubit.activeBannersModel!.data!.isNotEmpty)
+                  CustomSlider(banners: cubit.activeBannersModel?.data ?? []),
                 const SizedBox(height: 10),
                 if (state is GetProductsLoadingState)
                   const Center(child: CircularProgressIndicator())

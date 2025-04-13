@@ -26,7 +26,7 @@ class ProductSearchModel {
       pageSize: json['pageSize'] as int?,
       totalCount: json['totalCount'] as int?,
       hasPreviousPage: json['hasPreviousPage'] as bool?,
-      hasNextPage: json['hasNextPage'] as bool?,
+      hasNextPage: json['hasNextPage'],
     );
   }
 

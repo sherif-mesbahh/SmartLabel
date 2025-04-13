@@ -93,13 +93,21 @@ class ListViewSearchProductWidget extends StatelessWidget {
               ),
             ),
             Spacer(),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.favorite_border_outlined,
-                color: Colors.black,
-              ),
-            ),
+            cubit.productSearchModel?.data![index].favorite ?? false
+                ? IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.favorite_border_outlined,
+                      color: Colors.red,
+                    ),
+                  ),
           ],
         ),
       ),

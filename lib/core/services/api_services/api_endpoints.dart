@@ -5,7 +5,7 @@ class ApiEndpoints {
   static const String favProduct = 'me/favorites';
   static const String category = 'Categories';
   static const String banner = 'Banners';
-  static const String activeBanner = 'Banners/active';
+  static const String activeBanners = 'Banners/active';
   static const String productSearch = 'Products/paginated/';
   static const String categorySearch = 'Categories/paginated/';
   static const String favSearch = 'favorites/paginated/';

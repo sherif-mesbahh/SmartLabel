@@ -1,11 +1,12 @@
-class BannersDatum {
+class ActiveBannersDatum {
   int? id;
   String? title;
   String? imageUrl;
 
-  BannersDatum({this.id, this.title, this.imageUrl});
+  ActiveBannersDatum({this.id, this.title, this.imageUrl});
 
-  factory BannersDatum.fromJson(Map<String, dynamic> json) => BannersDatum(
+  factory ActiveBannersDatum.fromJson(Map<String, dynamic> json) =>
+      ActiveBannersDatum(
         id: json['id'] as int?,
         title: json['title'] as String?,
         imageUrl: json['imageUrl'] as String?,

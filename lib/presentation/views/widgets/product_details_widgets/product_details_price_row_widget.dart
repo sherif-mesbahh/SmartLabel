@@ -5,10 +5,12 @@ import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 class ProductDetailsPriceRow extends StatelessWidget {
   final String newPrice;
   final String oldPrice;
+  final bool favorite;
   const ProductDetailsPriceRow({
     super.key,
     required this.newPrice,
     required this.oldPrice,
+    required this.favorite,
   });
 
   @override
@@ -35,10 +37,21 @@ class ProductDetailsPriceRow extends StatelessWidget {
             style: TextStyles.productOldPrice.copyWith(fontSize: 18),
           ),
         Spacer(),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.favorite_border_outlined),
-        ),
+        favorite
+            ? IconButton(
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+                onPressed: () {},
+              )
+            : IconButton(
+                icon: Icon(
+                  Icons.favorite_border_outlined,
+                  color: Colors.red,
+                ),
+                onPressed: () {},
+              ),
       ],
     );
   }

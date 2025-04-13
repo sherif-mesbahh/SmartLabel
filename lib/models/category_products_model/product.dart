@@ -4,7 +4,8 @@ class Product {
   int? oldPrice;
   int? discount;
   int? newPrice;
-  String? categoryName;
+  int? categoryId;
+  bool? favorite;
   String? imageUrl;
 
   Product({
@@ -13,7 +14,8 @@ class Product {
     this.oldPrice,
     this.discount,
     this.newPrice,
-    this.categoryName,
+    this.categoryId,
+    this.favorite,
     this.imageUrl,
   });
 
@@ -23,7 +25,8 @@ class Product {
         oldPrice: _convertToInt(json['oldPrice']),
         discount: _convertToInt(json['discount']),
         newPrice: _convertToInt(json['newPrice']),
-        categoryName: json['categoryName'] as String?,
+        categoryId: json['categoryId'] as int?,
+        favorite: json['favorite'] as bool?,
         imageUrl: json['imageUrl'] as String?,
       );
 
@@ -33,7 +36,8 @@ class Product {
         'oldPrice': oldPrice,
         'discount': discount,
         'newPrice': newPrice,
-        'categoryName': categoryName,
+        'categoryId': categoryId,
+        'favorite': favorite,
         'imageUrl': imageUrl,
       };
 

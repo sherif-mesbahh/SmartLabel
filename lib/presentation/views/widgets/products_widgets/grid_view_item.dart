@@ -96,13 +96,21 @@ class GridViewItem extends StatelessWidget {
               Positioned(
                 top: -5,
                 right: -5,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.favorite_border_outlined,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {},
-                ),
+                child: model.favorite
+                    ? IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {},
+                      )
+                    : IconButton(
+                        icon: Icon(
+                          Icons.favorite_border_outlined,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {},
+                      ),
               ),
             ],
           ),
