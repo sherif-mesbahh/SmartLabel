@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
@@ -24,7 +25,7 @@ class ListViewSearchProductWidget extends StatelessWidget {
             .getProductDetails(
                 id: cubit.productSearchModel!.data![index].id ?? 0)
             .then((onValue) {
-          pushNavigator(context, ProductDetailsPage());
+          pushNavigator(context, ProductDetailsPage(),slideRightToLeft);
         });
       },
       child: Padding(
@@ -94,18 +95,31 @@ class ListViewSearchProductWidget extends StatelessWidget {
             ),
             Spacer(),
             cubit.productSearchModel?.data![index].favorite ?? false
-                ? IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite,
-                      color: Colors.red,
+                ? InkWell(
+                    onTap: () {},
+                    child: Lottie.asset(
+                      'assets/lottie/inFavAnimation.json',
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                      repeat: false,
+                      reverse: false,
+                      animate: true,
                     ),
                   )
-                : IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite_border_outlined,
-                      color: Colors.red,
+                : InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 5),
+                      child: Lottie.asset(
+                        'assets/lottie/notFavAnimation.json',
+                        width: 40,
+                        height: 40,
+                        repeat: false,
+                        reverse: false,
+                        animate: true,
+                      ),
                     ),
                   ),
           ],

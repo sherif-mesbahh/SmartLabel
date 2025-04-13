@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 
@@ -38,19 +39,32 @@ class ProductDetailsPriceRow extends StatelessWidget {
           ),
         Spacer(),
         favorite
-            ? IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: Colors.red,
+            ? InkWell(
+                onTap: () {},
+                child: Lottie.asset(
+                  'assets/lottie/inFavAnimation.json',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                  repeat: false,
+                  reverse: false,
+                  animate: true,
                 ),
-                onPressed: () {},
               )
-            : IconButton(
-                icon: Icon(
-                  Icons.favorite_border_outlined,
-                  color: Colors.red,
+            : InkWell(
+                onTap: () {},
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  child: Lottie.asset(
+                    'assets/lottie/notFavAnimation.json',
+                    width: 40,
+                    height: 40,
+                    repeat: false,
+                    reverse: false,
+                    animate: true,
+                  ),
                 ),
-                onPressed: () {},
               ),
       ],
     );

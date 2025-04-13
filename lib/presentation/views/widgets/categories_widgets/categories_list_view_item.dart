@@ -45,7 +45,7 @@ class CategoriesListViewItem extends StatelessWidget {
               AppCubit.get(context)
                   .getCategoryProducts(id: model.id)
                   .then((onValue) {
-                pushNavigator(context, CategoriesProductsPage());
+                pushNavigator(context, CategoriesProductsPage(),slideRightToLeft);
               });
             },
             icon: Icon(

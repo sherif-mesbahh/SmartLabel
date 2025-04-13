@@ -36,11 +36,11 @@ class CustomSlider extends StatelessWidget {
                     .getActiveBannerDetails(id: banner.id ?? 1)
                     .then((onValue) {
                   pushNavigator(
-                    context,
-                    BannerDetailsPage(
-                      id: banner.id ?? 1,
-                    ),
-                  );
+                      context,
+                      BannerDetailsPage(
+                        id: banner.id ?? 1,
+                      ),
+                      slideRightToLeft);
                 });
               },
               child: Container(

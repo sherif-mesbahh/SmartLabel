@@ -17,7 +17,7 @@ class CategoryProductsGridViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        pushNavigator(context, ProductDetailsPage());
+        pushNavigator(context, ProductDetailsPage(), slideRightToLeft);
       },
       child: Stack(
         alignment: Alignment.topRight,

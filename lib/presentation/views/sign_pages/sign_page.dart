@@ -25,7 +25,7 @@ class SignPage extends StatelessWidget {
             CustomButtonWidget(
               textColor: primaryColor,
               onTap: () {
-                pushNavigator(context, LoginPage());
+                pushNavigator(context, LoginPage(), slideRightToLeft);
               },
               text: 'Sign in',
               color: secondaryColor,
@@ -34,7 +34,7 @@ class SignPage extends StatelessWidget {
             CustomButtonWidget(
               color: primaryColor,
               onTap: () {
-                pushNavigator(context, SignUpPage());
+                pushNavigator(context, SignUpPage(), slideLeftToRigth);
               },
               text: 'Sign up',
               textColor: secondaryColor,

@@ -69,7 +69,8 @@ class SignUpPage extends StatelessWidget {
                   CustomButtonWidget(
                     textColor: secondaryColor,
                     onTap: () {
-                      pushNavigator(context, AdminCategoriesPage());
+                      pushNavigator(
+                          context, AdminCategoriesPage(), slideLeftToRigth);
                     },
                     text: 'Sign up',
                     color: primaryColor,
