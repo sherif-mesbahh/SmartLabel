@@ -15,7 +15,6 @@ const NewProducts = ({ food }) => {
   const isFavorite = (item) => {
     return favorites.items.some((favItem) => favItem.food.id === item.id);
   };
-  console.log(food);
 
   return (
     <div className="mb-12">

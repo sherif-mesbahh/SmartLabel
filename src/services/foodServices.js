@@ -130,3 +130,14 @@ export const updateFood = async (
   );
   return data;
 };
+export const getBanners = async () => {
+  const data = await axios.get("http://smartlabel1.runasp.net/api/Banners");
+  return data;
+};
+
+export const getBannerById = async (id) => {
+  const data = await axios.get(
+    `http://smartlabel1.runasp.net/api/Banners/${id}`
+  );
+  return data;
+};

@@ -16,6 +16,7 @@ import FoodEditPage from "./pages/FoodEdit/FoodEditPage";
 import CategoriesAdminPage from "./pages/CategoriesAdmin/CategoriesAdminPage";
 import CategoryEditPage from "./pages/CategoriesEdit/CategoryEditPage";
 import Tags from "./pages/tags/tags";
+import BannerPage from "./pages/Banner/BannerPage";
 
 function AppRoute() {
   return (
@@ -28,6 +29,7 @@ function AppRoute() {
       <Route path="/fav" element={<CartPage />} />
       <Route path="/login" element={<Loginpage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/banner/:id" element={<BannerPage />} />
 
       <Route
         path="/profile"

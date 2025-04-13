@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Section1({ tags }) {
-  console.log(tags);
   return (
     <div className="my-12">
       <div className="max-w-7xl mx-auto px-4 ">

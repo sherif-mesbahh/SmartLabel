@@ -22,7 +22,7 @@ function FoodPage() {
   }, [id]);
   console.log(food);
 
-  const images = [food.images];
+  const images = food.images;
 
   const AddItemHandle = () => {
     toggleFavorite(food);
@@ -44,16 +44,17 @@ function FoodPage() {
             modules={[Navigation]}
             className="w-32 h-[400px]"
           >
-            {images.map((img, index) => (
-              <SwiperSlide key={index}>
-                <img
-                  src={`http://smartlabel1.runasp.net/Uploads/${img}`}
-                  alt={`Thumbnail ${index}`}
-                  className="cursor-pointer rounded-lg h-31  "
-                  onClick={() => setMainImage(img)}
-                />
-              </SwiperSlide>
-            ))}
+            {images &&
+              images.map((img, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={`http://smartlabel1.runasp.net/Uploads/${img}`}
+                    alt={`Thumbnail ${index}`}
+                    className="cursor-pointer rounded-lg h-31  "
+                    onClick={() => setMainImage(img)}
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
 

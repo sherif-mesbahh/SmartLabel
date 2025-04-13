@@ -5,6 +5,9 @@ import Loading from "./component/Loading";
 import SetLoadingInterceptors from "./interceptors/Loadinginterceptors";
 import { useLoading } from "./hooks/useLoading";
 import Footer from "./component/Footer";
+import "swiper/css";
+import "swiper/css/pagination";
+
 // import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const { hideLoading, showLoading } = useLoading();
