@@ -14,23 +14,18 @@ function FoodPage() {
   const { id } = useParams();
   const { toggleFavorite, favorites } = useFavorites();
 
+  const isFavorite = (item) => {
+    return favorites.items.some((favItem) => favItem.id === item.id);
+  };
+
   useEffect(() => {
     getById(id).then((data) => {
       setFood(data.data);
       setMainImage(data.data.images[0]);
     });
   }, [id]);
-  console.log(food);
 
   const images = food.images;
-
-  const AddItemHandle = () => {
-    toggleFavorite(food);
-  };
-
-  const isFavorite = (item) => {
-    return favorites.items.some((favItem) => favItem.food.id === item.id);
-  };
 
   return (
     <div className="container mx-auto py-10">
@@ -75,7 +70,7 @@ function FoodPage() {
             <del className="text-red-500">{food.oldPrice}$</del>
           </h3>
           <button
-            onClick={AddItemHandle}
+            onClick={() => toggleFavorite(food)}
             className="px-4 py-2 bg-teal-400 text-white rounded-lg hover:bg-teal-500 transition"
           >
             <i className="fa fa-heart"></i>{" "}

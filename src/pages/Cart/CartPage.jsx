@@ -5,7 +5,7 @@ import { useFavorites } from "../../hooks/useCart";
 
 function FavoritesPage() {
   const { favorites, clearFavorites, DeleteFavorite } = useFavorites();
-
+  console.log(favorites.items);
   return (
     <div className="flex justify-center p-6">
       {favorites.items.length === 0 ? (
@@ -18,25 +18,25 @@ function FavoritesPage() {
           <ul className="divide-y divide-gray-300">
             {favorites.items.map((item) => (
               <li
-                key={item.food.id}
+                key={item.id}
                 className="flex justify-between items-center py-4 px-2 hover:bg-gray-100 rounded-lg transition duration-200"
               >
                 <div className="flex items-center gap-4">
                   <img
-                    src={`${item.food.imagePath}`}
-                    alt={item.food.name}
+                    src={`http://smartlabel1.runasp.net/Uploads/${item.imageUrl}`}
+                    alt={item.name}
                     className="w-24 h-32 object-cover rounded-md shadow-md"
                   />
                   <Link
-                    to={`/food/${item.food.id}`}
+                    to={`/food/${item.id}`}
                     className="text-lg font-semibold text-blue-600 hover:underline"
                   >
-                    {item.food.name}
+                    {item.name}
                   </Link>
                 </div>
                 <button
                   className="text-red-500 text-2xl hover:scale-110 transition-transform"
-                  onClick={() => DeleteFavorite(item.food)}
+                  onClick={() => DeleteFavorite(item)}
                 >
                   ❤️
                 </button>

@@ -6,19 +6,25 @@ export const getUser = () => {
     : null;
 };
 
-export const Login = async (Username, password) => {
+export const Login = async (email, password) => {
   const { data } = await axios.post(
-    "http://newsmartlabel.runasp.net/api/account/login",
-    { Username, password }
+    "http://smartlabel1.runasp.net/api/Authentication/login",
+    { email, password }
   );
   localStorage.setItem("user", JSON.stringify(data));
   return data;
 };
 
-export const register = async (Username, Password, Email, PhoneNumber) => {
+export const register = async (
+  firstName,
+  lastName,
+  email,
+  password,
+  confirmPassword
+) => {
   const { data } = await axios.post(
-    "http://newsmartlabel.runasp.net/api/account/register?isAdmin=true",
-    { Username, Password, Email, PhoneNumber }
+    "http://smartlabel1.runasp.net/api/Authentication/register",
+    { firstName, lastName, email, password, confirmPassword }
   );
   localStorage.setItem("user", JSON.stringify(data));
   return data;

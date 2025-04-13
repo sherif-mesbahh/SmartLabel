@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams, Link } from "react-router-dom";
 
 function Loginpage() {
   const { user, login } = useAuth();
-  const [Username, setUsername] = useState("");
+  const [email, setEmai] = useState("");
   const [password, setPassword] = useState("");
   const [usernameerror, setUserNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -30,7 +30,7 @@ function Loginpage() {
     if (!valid) return;
 
     try {
-      await login(Username, password);
+      await login(email, password);
     } catch (err) {
       // Handle login failure (e.g., incorrect credentials)
       setUserNameError("Incorrect Username or password");
@@ -55,8 +55,8 @@ function Loginpage() {
             <input
               type="text"
               placeholder="Email"
-              value={Username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmai(e.target.value)}
               className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 user ? "border-red-500" : "border-gray-300"
               }`}

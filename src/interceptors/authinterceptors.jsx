@@ -6,7 +6,7 @@ axios.interceptors.request.use(
   (req) => {
     // Get the user object from localStorage
     const user = localStorage.getItem("user");
-    const token = user && JSON.parse(user).token;
+    const token = user && JSON.parse(user).data.accessToken;
 
     // If the token exists, set it in the Authorization header
     if (token) {

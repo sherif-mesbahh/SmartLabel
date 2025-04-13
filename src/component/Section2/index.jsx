@@ -8,12 +8,8 @@ import { Pagination, Autoplay } from "swiper/modules";
 const NewProducts = ({ food }) => {
   const { toggleFavorite, favorites } = useFavorites();
 
-  const AddItemHandle = (item) => {
-    toggleFavorite(item);
-  };
-
   const isFavorite = (item) => {
-    return favorites.items.some((favItem) => favItem.food.id === item.id);
+    return favorites.items.some((favItem) => favItem.id === item.id);
   };
 
   return (
@@ -54,7 +50,7 @@ const NewProducts = ({ food }) => {
                     <del className="text-gray-400 text-sm">{item.oldPrice}</del>
                   </h4>
                 </div>
-                <button onClick={() => AddItemHandle(item)}>
+                <button onClick={() => toggleFavorite(item)}>
                   <i
                     className={`fa fa-heart mr-1 ${
                       isFavorite(item) ? "text-red-600" : "text-slate-500"

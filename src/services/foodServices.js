@@ -143,3 +143,21 @@ export const getBannerById = async (id) => {
   );
   return data;
 };
+export const getFav = async () => {
+  const data = await axios.get(
+    "http://smartlabel1.runasp.net/api/me/favorites"
+  );
+  return data;
+};
+export const addFav = async (id) => {
+  const data = await axios.post(
+    "http://smartlabel1.runasp.net/api/me/favorites/" + id
+  );
+  return data;
+};
+export const deleteFav = async (id) => {
+  const data = await axios.delete(
+    "http://smartlabel1.runasp.net/api/me/favorites/" + id
+  );
+  return data;
+};

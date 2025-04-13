@@ -6,28 +6,34 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(userService.getUser());
-  const login = async (Username, Password) => {
+  const login = async (email, Password) => {
     try {
-      const user = await userService.Login(Username, Password);
+      const user = await userService.Login(email, Password);
       setUser(user);
       toast.success("Login Successful");
     } catch (error) {
-      toast.error(error.response.data);
+      toast.error(error.response?.data?.errors?.[0] || "login failed");
     }
   };
-  const register = async (Username, Password, Email, PhoneNumber) => {
+  const register = async (
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword
+  ) => {
     try {
       const user = await userService.register(
-        Username,
-        Password,
-        Email,
-        PhoneNumber
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword
       );
       setUser(user);
       toast.success("Registration Successful");
     } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.response.data);
+      toast.error(error.response?.data?.errors?.[0] || "Registration failed");
     }
   };
   const updateProfile = async (data) => {

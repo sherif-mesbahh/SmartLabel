@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 
 function ProductGrid({ food }) {
   const { toggleFavorite, favorites } = useFavorites();
+
+  const isFavorite = (item) => {
+    return favorites.items.some((favItem) => favItem.id === item.id);
+  };
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
   console.log(food);
-  const isFavorite = (item) =>
-    favorites.items.some((fav) => fav.food.id === item.id);
 
   return (
     <div className="mb-12">

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
+
 function RegisterPage() {
   const { register, user } = useAuth();
 
-  const [Username, setUsername] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState();
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -25,34 +28,42 @@ function RegisterPage() {
     e.preventDefault();
 
     // Reset errors
+    setError("");
     setEmailError("");
     setPasswordError("");
+    setConfirmPasswordError("");
 
-    // Input validation
     let valid = true;
+
     if (!validateEmail(Email)) {
       setEmailError("Invalid email format");
       valid = false;
     }
+
     if (Password.length < 6) {
       setPasswordError("Password must be at least 6 characters long");
+      valid = false;
+    }
+
+    if (Password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match");
       valid = false;
     }
 
     if (!valid) return;
 
     try {
-      await register(Username, Password, Email, PhoneNumber);
+      await register(firstName, lastName, Email, Password, confirmPassword);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Registration failed");
     }
   };
+
   useEffect(() => {
-    if (!user) return;
     if (user) {
       navigate(redirectTo);
     }
-  }, [user]);
+  }, [user, navigate, redirectTo]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -62,9 +73,18 @@ function RegisterPage() {
           <div>
             <input
               type="text"
-              placeholder="Name"
-              value={Username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setfirstName(e.target.value)}
+              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setlastName(e.target.value)}
               className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
@@ -96,15 +116,21 @@ function RegisterPage() {
               <p className="text-red-500 text-sm mt-1">{passwordError}</p>
             )}
           </div>
-
           <div>
             <input
-              type="text"
-              placeholder="Phone Number"
-              value={PhoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                confirmPasswordError && "border-red-500"
+              }`}
             />
+            {confirmPasswordError && (
+              <p className="text-red-500 text-sm mt-1">
+                {confirmPasswordError}
+              </p>
+            )}
           </div>
           <button
             type="submit"

@@ -1,53 +1,59 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { addFav, deleteFav, getFav } from "../services/foodServices";
 
 const favoriteContext = createContext(null);
-const FAVORITE_KEY = "favorites";
-const EMPTY_FAVORITES = {
-  items: [],
-  totalCount: 0,
-};
 
 function FavoriteProvider({ children }) {
-  const getItemsFromLocalStorage = () => {
-    const storedFavorites = localStorage.getItem(FAVORITE_KEY);
-    return storedFavorites ? JSON.parse(storedFavorites) : EMPTY_FAVORITES;
-  };
-
-  const initFavorites = getItemsFromLocalStorage();
-  const [favoriteItems, setFavoriteItems] = useState(initFavorites.items);
-  const [totalCount, setTotalCount] = useState(initFavorites.totalCount);
-
-  const toggleFavorite = (food) => {
-    const existingItem = favoriteItems.find((item) => item.food.id === food.id);
-
-    if (existingItem) {
-      DeleteFavorite(food);
-    } else {
-      setFavoriteItems([...favoriteItems, { food, isFavorite: true }]);
-    }
-  };
-  const DeleteFavorite = (food) => {
-    const updatedFavorites = favoriteItems.filter(
-      (item) => item.food.id !== food.id
-    );
-    setFavoriteItems(updatedFavorites);
-  };
+  const [favoriteItems, setFavoriteItems] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    setTotalCount(favoriteItems.length);
-    localStorage.setItem(
-      FAVORITE_KEY,
-      JSON.stringify({
-        items: favoriteItems,
-        totalCount: favoriteItems.length,
-      })
-    );
-  }, [favoriteItems]);
+    // Fetch initial favorites from API on mount
+    getFav().then((response) => {
+      const items = response.data.data || [];
+
+      setFavoriteItems(items);
+      setTotalCount(items.length);
+    });
+  }, []);
+
+  const toggleFavorite = async (food) => {
+    const existingItem = favoriteItems.find((item) => item.id === food.id);
+
+    if (existingItem) {
+      await DeleteFavorite(food);
+    } else {
+      await addFavorite(food);
+    }
+  };
+  const addFavorite = async (food) => {
+    try {
+      await addFav(food.id);
+      const response = await getFav();
+      const items = response.data.data || [];
+
+      setFavoriteItems(items);
+      setTotalCount(items.length);
+    } catch (error) {
+      console.error("Failed to add favorite:", error);
+    }
+  };
+
+  const DeleteFavorite = async (food) => {
+    try {
+      await deleteFav(food.id);
+      const updated = favoriteItems.filter((item) => item.id !== food.id);
+      setFavoriteItems(updated);
+      setTotalCount(updated.length);
+    } catch (error) {
+      console.error("Failed to delete favorite:", error);
+    }
+  };
 
   const clearFavorites = () => {
-    localStorage.removeItem(FAVORITE_KEY);
     setFavoriteItems([]);
     setTotalCount(0);
+    // Optional: implement a clear API call if needed
   };
 
   return (
