@@ -14,16 +14,16 @@ class Layout extends StatelessWidget {
     return Scaffold(
       backgroundColor: secondaryColor,
       appBar: CustomAppBar(),
-      body: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
+      body: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
+          final cubit = AppCubit.get(context); // Access cubit
+
           return Column(
             children: [
               Expanded(
-                child: AppCubit.get(context)
-                    .screens[AppCubit.get(context).navBarCurrentIndex],
+                child: cubit.screens[cubit.navBarCurrentIndex],
               ),
-              CustomNavBar(),
+              CustomNavBar(), // Move CustomNavBar inside BlocBuilder
             ],
           );
         },

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/models/category_model/category_datum.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/categories_products_page.dart';
 
 class CategoriesListViewItem extends StatelessWidget {
-  final dynamic model;
+  final CategoryDatum model;
   const CategoriesListViewItem({
     super.key,
     required this.model,
@@ -43,7 +44,7 @@ class CategoriesListViewItem extends StatelessWidget {
           IconButton(
             onPressed: () {
               AppCubit.get(context)
-                  .getCategoryProducts(id: model.id)
+                  .getCategoryProducts(id: model.id!)
                   .then((onValue) {
                 pushNavigator(context, CategoriesProductsPage(),slideRightToLeft);
               });

@@ -1,19 +1,19 @@
-import 'product.dart';
+import 'category_products_data_product_model.dart';
 
-class Data {
+class CategoryProductsDataModel {
   int? id;
   String? name;
   String? imageUrl;
-  List<Product>? products;
+  List<CategoryProductsDataProductModel>? products;
 
-  Data({this.id, this.name, this.imageUrl, this.products});
+  CategoryProductsDataModel({this.id, this.name, this.imageUrl, this.products});
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory CategoryProductsDataModel.fromJson(Map<String, dynamic> json) => CategoryProductsDataModel(
         id: json['id'] as int?,
         name: json['name'] as String?,
         imageUrl: json['imageUrl'] as String?,
         products: (json['products'] as List<dynamic>?)
-            ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
+            ?.map((e) => CategoryProductsDataProductModel.fromJson(e as Map<String, dynamic>))
             .toList(),
       );
 

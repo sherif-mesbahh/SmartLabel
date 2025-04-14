@@ -1,4 +1,4 @@
-class Product {
+class CategoryProductsDataProductModel {
   int? id;
   String? name;
   int? oldPrice;
@@ -8,7 +8,7 @@ class Product {
   bool? favorite;
   String? imageUrl;
 
-  Product({
+  CategoryProductsDataProductModel({
     this.id,
     this.name,
     this.oldPrice,
@@ -19,7 +19,7 @@ class Product {
     this.imageUrl,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory CategoryProductsDataProductModel.fromJson(Map<String, dynamic> json) => CategoryProductsDataProductModel(
         id: json['id'] as int?,
         name: json['name'] as String?,
         oldPrice: _convertToInt(json['oldPrice']),

@@ -15,6 +15,8 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = AppCubit.get(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
@@ -40,98 +42,99 @@ class ProductDetailsPage extends StatelessWidget {
         ),
       ),
       backgroundColor: secondaryColor,
-      body: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          final cubit = AppCubit.get(context);
-          final product = cubit.productDetailsModel?.data;
-
+      body: BlocListener<AppCubit, AppStates>(
+        listener: (context, state) {
           if (state is GetProductDetailsLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(color: primaryColor),
-            );
-          }
-
-          if (product == null) {
-            return const Center(
-              child: Text(
-                'Failed to load product details.',
-                style: TextStyle(color: Colors.red),
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) => const Center(
+                child: CircularProgressIndicator(color: primaryColor),
               ),
             );
+          } else {
+            Navigator.of(context, rootNavigator: true).pop();
           }
-
-          return SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.name ?? 'No Name',
-                    style: TextStyles.headline2,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // Handle null or empty images safely
-                  if (product.images != null && product.images!.isNotEmpty)
-                    ProductImagesPageView(
-                      pageController: pageController,
-                      images: product.images!,
-                    )
-                  else
-                    Container(
-                      height: screenHeight(context) * .3,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Icon(Icons.image_not_supported, size: 40),
-                      ),
-                    ),
-
-                  const SizedBox(height: 10),
-
-                  if (product.images != null && product.images!.isNotEmpty)
-                    ProductDetailsImagesIndicator(
-                      pageController: pageController,
-                      images: product.images!,
-                    ),
-
-                  const SizedBox(height: 10),
-
-                  ProductDetailsPriceRow(
-                    newPrice: product.newPrice?.toString() ?? '0',
-                    oldPrice: product.oldPrice?.toString() ?? '',
-                    favorite: product.favorite ?? false,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  Text(
-                    'Description:',
-                    style: TextStyles.description.copyWith(
-                      fontSize: 18,
-                      color: darkColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    product.description?.trim().isNotEmpty == true
-                        ? product.description!
-                        : 'No description available.',
-                    style: TextStyles.description,
-                  ),
-                ],
-              ),
-            ),
-          );
         },
+        child: BlocBuilder<AppCubit, AppStates>(
+          buildWhen: (previous, current) =>
+              current is GetProductDetailsSuccessState ||
+              current is GetProductDetailsErrorState,
+          builder: (context, state) {
+            final product = cubit.productDetailsModel?.data;
+
+            if (product == null) {
+              return const Center(
+                child: Text(
+                  'Failed to load product details.',
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
+            }
+
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.name ?? 'No Name',
+                      style: TextStyles.headline2,
+                    ),
+                    const SizedBox(height: 10),
+                    if (product.images != null && product.images!.isNotEmpty)
+                      ProductImagesPageView(
+                        pageController: pageController,
+                        images: product.images!,
+                      )
+                    else
+                      Container(
+                        height: screenHeight(context) * .3,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.image_not_supported, size: 40),
+                        ),
+                      ),
+                    const SizedBox(height: 10),
+                    if (product.images != null && product.images!.isNotEmpty)
+                      ProductDetailsImagesIndicator(
+                        pageController: pageController,
+                        images: product.images!,
+                      ),
+                    const SizedBox(height: 10),
+                    ProductDetailsPriceRow(
+                      newPrice: product.newPrice?.toString() ?? '0',
+                      oldPrice: product.oldPrice?.toString() ?? '',
+                      favorite: product.favorite ?? false,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Description:',
+                      style: TextStyles.description.copyWith(
+                        fontSize: 18,
+                        color: darkColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      product.description?.trim().isNotEmpty == true
+                          ? product.description!
+                          : 'No description available.',
+                      style: TextStyles.description,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

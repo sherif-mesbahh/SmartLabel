@@ -17,6 +17,7 @@ class ProductImagesPageView extends StatelessWidget {
     return SizedBox(
       height: screenHeight(context) * .3,
       child: PageView.builder(
+        physics: const BouncingScrollPhysics(),
         controller: pageController,
         itemCount: images.length,
         itemBuilder: (context, index) {

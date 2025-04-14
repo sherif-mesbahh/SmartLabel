@@ -16,37 +16,38 @@ class SearchItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Builder(builder: (context) {
-        final isProduct = selectedType == 'Products';
-        final hasResults = isProduct
-            ? (cubit.productSearchModel?.data?.isNotEmpty ?? false)
-            : (cubit.categorySearchModel?.data?.isNotEmpty ?? false);
-        if (!hasResults) {
-          return SearchCustomTextWidget(
-            text: 'No ${selectedType.toLowerCase()} found with that name.',
-          );
-        }
-        return ListView.builder(
-          itemCount: selectedType == 'Products'
-              ? cubit.productSearchModel?.data?.length ?? 0
-              : cubit.categorySearchModel?.data?.length ?? 0,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            if (selectedType == 'Products') {
-              return ListViewSearchProductWidget(cubit: cubit, index: index);
-            }
+    // Directly use the selectedType and cubit to simplify and avoid unnecessary widget rebuilding
+    final isProduct = selectedType == 'Products';
+    final hasResults = isProduct
+        ? (cubit.productSearchModel?.data?.isNotEmpty ?? false)
+        : (cubit.categorySearchModel?.data?.isNotEmpty ?? false);
 
-            if (selectedType == 'Categories') {
-              return ListViewSearchCategoriesWidget(cubit: cubit, index: index);
-            } else {
-              return SearchCustomTextWidget(
-                text: 'Search for $selectedType',
-              );
-            }
-          },
-        );
-      }),
+    if (!hasResults) {
+      return SearchCustomTextWidget(
+        text: 'No ${selectedType.toLowerCase()} found with that name.',
+      );
+    }
+
+    // Use ListView.builder for performance when the list is potentially long
+    return Expanded(
+      child: ListView.builder(
+        itemCount: selectedType == 'Products'
+            ? cubit.productSearchModel?.data?.length ?? 0
+            : cubit.categorySearchModel?.data?.length ?? 0,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+          // Directly return the appropriate widget based on selectedType
+          if (selectedType == 'Products') {
+            return ListViewSearchProductWidget(cubit: cubit, index: index);
+          } else if (selectedType == 'Categories') {
+            return ListViewSearchCategoriesWidget(cubit: cubit, index: index);
+          } else {
+            return SearchCustomTextWidget(
+              text: 'Search for $selectedType',
+            );
+          }
+        },
+      ),
     );
   }
 }

@@ -18,75 +18,60 @@ class BannerDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        final cubit = AppCubit.get(context);
-        final banner = cubit.activeBannerDetailsModel?.data;
+    final cubit = AppCubit.get(context);
 
-        final List<String> bannerImages = banner?.images ?? [];
+    return Scaffold(
+      appBar: ActiveBannerDetailsAppBar(),
+      body: BlocBuilder<AppCubit, AppStates>(
+        buildWhen: (previous, current) =>
+            current is GetActiveBannerDetailsSuccessState,
+        builder: (context, state) {
+          final banner = cubit.activeBannerDetailsModel?.data;
+          final List<String> bannerImages = banner?.images ?? [];
 
-        return Scaffold(
-          appBar: ActiveBannerDetailsAppBar(),
-          body: banner == null
-              ? const Center(
-                  child: Text(
-                    "No banner details available.",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                )
-              : SingleChildScrollView(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (bannerImages.isNotEmpty)
-                        ActiveBannerDetailsImageSlider(bannerImages: bannerImages),
-                      const SizedBox(height: 16.0),
-                      Text(
-                        "Title:",
-                        style: TextStyles.productTitle,
-                      ),
-                      Text(
-                        banner.title ?? "No title provided",
-                        style: TextStyles.description,
-                      ),
-                      SizedBox(height: 12.0),
-                      Text(
-                        "Start Date:",
-                        style: TextStyles.productTitle,
-                      ),
-                      Text(
-                        _formatDate(banner.startDate),
-                        style: TextStyles.description,
-                      ),
-                      const SizedBox(height: 12.0),
-                      Text(
-                        "End Date:",
-                        style: TextStyles.productTitle,
-                      ),
-                      Text(
-                        _formatDate(banner.endDate),
-                        style: TextStyles.description,
-                      ),
-                      const SizedBox(height: 12.0),
-                      Text(
-                        "Description:",
-                        style: TextStyles.productTitle,
-                      ),
-                      Text(
-                        banner.description?.toString().trim().isEmpty == true
-                            ? "No description provided"
-                            : banner.description.toString(),
-                        style: TextStyles.description,
-                      ),
-                      const SizedBox(height: 20.0),
-                    ],
-                  ),
+          if (banner == null) {
+            return const Center(
+              child: Text(
+                "No banner details available.",
+                style: TextStyle(color: Colors.grey),
+              ),
+            );
+          }
+
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(8.0),
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (bannerImages.isNotEmpty)
+                  ActiveBannerDetailsImageSlider(bannerImages: bannerImages),
+                const SizedBox(height: 16.0),
+                Text("Title:", style: TextStyles.productTitle),
+                Text(banner.title ?? "No title provided",
+                    style: TextStyles.description),
+                const SizedBox(height: 12.0),
+                Text("Start Date:", style: TextStyles.productTitle),
+                Text(_formatDate(banner.startDate),
+                    style: TextStyles.description),
+                const SizedBox(height: 12.0),
+                Text("End Date:", style: TextStyles.productTitle),
+                Text(_formatDate(banner.endDate),
+                    style: TextStyles.description),
+                const SizedBox(height: 12.0),
+                Text("Description:", style: TextStyles.productTitle),
+                Text(
+                  banner.description?.toString().trim().isEmpty == true
+                      ? "No description provided"
+                      : banner.description.toString(),
+                  style: TextStyles.description,
                 ),
-        );
-      },
+                const SizedBox(height: 20.0),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
-

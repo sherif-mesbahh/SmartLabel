@@ -1,11 +1,11 @@
-import 'data.dart';
+import 'category_products_data_model.dart';
 
 class CategoryProductsModel {
   int? statusCode;
   bool? success;
   String? message;
   dynamic errors;
-  Data? data;
+  CategoryProductsDataModel? data;
 
   CategoryProductsModel({
     this.statusCode,
@@ -23,7 +23,7 @@ class CategoryProductsModel {
       errors: json['errors'] as dynamic,
       data: json['data'] == null
           ? null
-          : Data.fromJson(json['data'] as Map<String, dynamic>),
+          : CategoryProductsDataModel.fromJson(json['data'] as Map<String, dynamic>),
     );
   }
 

@@ -31,17 +31,29 @@ class CustomSlider extends StatelessWidget {
         return Builder(
           builder: (BuildContext context) {
             return InkWell(
-              onTap: () {
-                AppCubit.get(context)
-                    .getActiveBannerDetails(id: banner.id ?? 1)
-                    .then((onValue) {
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => const Center(
+                    child: CircularProgressIndicator(color: primaryColor),
+                  ),
+                );
+
+                await AppCubit.get(context)
+                    .getActiveBannerDetails(id: banner.id ?? 1);
+
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+
+                if (context.mounted) {
                   pushNavigator(
-                      context,
-                      BannerDetailsPage(
-                        id: banner.id ?? 1,
-                      ),
-                      slideRightToLeft);
-                });
+                    context,
+                    BannerDetailsPage(id: banner.id ?? 1),
+                    slideRightToLeft,
+                  );
+                }
               },
               child: Container(
                 width: screenWidth(context),

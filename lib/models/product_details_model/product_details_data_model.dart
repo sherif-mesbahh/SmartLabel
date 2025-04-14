@@ -1,4 +1,4 @@
-class Data {
+class ProductDetailsDataModel {
   int? id;
   String? name;
   int? oldPrice;
@@ -10,7 +10,7 @@ class Data {
   bool? favorite;
   List<String>? images;
 
-  Data({
+  ProductDetailsDataModel({
     this.id,
     this.name,
     this.oldPrice,
@@ -23,7 +23,7 @@ class Data {
     this.favorite,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory ProductDetailsDataModel.fromJson(Map<String, dynamic> json) => ProductDetailsDataModel(
         id: (json['id'] as num?)?.toInt(),
         name: json['name'] as String?,
         oldPrice: (json['oldPrice'] as num?)?.toInt(),

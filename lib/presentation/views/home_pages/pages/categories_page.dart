@@ -10,45 +10,44 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = AppCubit.get(context);
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
+        child: BlocBuilder<AppCubit, AppStates>(
+          buildWhen: (previous, current) =>
+              current is GetCategoriesLoadingState ||
+              current is GetCategoriesSuccessState ||
+              current is GetCategoriesErrorState,
+          builder: (context, state) {
+            final cubit = AppCubit.get(context);
+            final categories = cubit.categoryModel?.data;
 
-    final categories = cubit.categoryModel?.data;
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        if (state is GetCategoriesLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(color: primaryColor),
-          );
-        }
+            if (state is GetCategoriesLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(color: primaryColor),
+              );
+            }
 
-        if (categories == null) {
-          return const Center(child: Text('Loading...'));
-        }
+            if (categories == null) {
+              return const Center(child: Text('Loading...'));
+            }
 
-        if (categories.isEmpty) {
-          return const Center(child: Text('No Categories Found'));
-        }
+            if (categories.isEmpty) {
+              return const Center(child: Text('No Categories Found'));
+            }
 
-        return SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 8.0,
-              right: 8.0,
-              left: 8.0,
-            ),
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(), // Disable inside scroll
-              shrinkWrap: true, // Prevent infinite height
+            return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               itemCount: categories.length,
               itemBuilder: (context, index) => CategoriesListViewItem(
                 model: categories[index],
               ),
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }

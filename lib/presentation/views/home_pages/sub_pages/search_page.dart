@@ -20,78 +20,104 @@ class _SearchPageState extends State<SearchPage> {
   final formKey = GlobalKey<FormState>();
 
   String selectedType = 'Products';
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SearchAppBar(),
-      body: BlocConsumer<AppCubit, AppStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            final cubit = AppCubit.get(context);
+      body: BlocBuilder<AppCubit, AppStates>(
+        builder: (context, state) {
+          final cubit = AppCubit.get(context);
 
-            return Form(
-              key: formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ChoiceChip(
-                          label: Text('Products'),
-                          selected: selectedType == 'Products',
-                          selectedColor: primaryColor,
-                          onSelected: (_) {
+          return Form(
+            key: formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  // Use Row for ChoiceChips only when needed
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ChoiceChip(
+                        label: Text('Products'),
+                        selected: selectedType == 'Products',
+                        selectedColor: primaryColor,
+                        onSelected: (selected) {
+                          if (selected) {
                             setState(() => selectedType = 'Products');
-                          },
-                        ),
-                        const SizedBox(width: 10),
-                        ChoiceChip(
-                          label: Text('Categories'),
-                          selected: selectedType == 'Categories',
-                          selectedColor: primaryColor,
-                          onSelected: (_) {
+                          }
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      ChoiceChip(
+                        label: Text('Categories'),
+                        selected: selectedType == 'Categories',
+                        selectedColor: primaryColor,
+                        onSelected: (selected) {
+                          if (selected) {
                             setState(() => selectedType = 'Categories');
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    CustomTextFormFieldWidget(
-                      controller: searchController,
-                      hintText: 'Search $selectedType',
-                      labelText: 'Search',
-                      obscureText: false,
-                      suffixIconOnPressed: () {},
-                      validator: (p0) {
-                        if (p0!.isEmpty) {
-                          return 'Please enter $selectedType name';
-                        }
-                        return null;
-                      },
-                      onFieldSubmitted: (value) {
-                        if (formKey.currentState!.validate()) {
-                          if (selectedType == 'Products') {
-                            cubit.getProductSearch(name: value.toString());
-                            setState(() {});
                           }
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
 
-                          if (selectedType == 'Categories') {
-                            cubit.getCategorySearch(name: value);
-                            setState(() {});
+                  // Wrap the search field in a const to prevent unnecessary rebuilds
+                  CustomTextFormFieldWidget(
+                    controller: searchController,
+                    hintText: 'Search $selectedType',
+                    labelText: 'Search',
+                    obscureText: false,
+                    suffixIconOnPressed: () {},
+                    validator: (p0) {
+                      if (p0!.isEmpty) {
+                        return 'Please enter $selectedType name';
+                      }
+                      return null;
+                    },
+                    onFieldSubmitted: (value) async {
+                      if (formKey.currentState!.validate()) {
+                        // Show loading dialog
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) => const Center(
+                            child:
+                                CircularProgressIndicator(color: primaryColor),
+                          ),
+                        );
+
+                        try {
+                          // Await the search operation
+                          if (selectedType == 'Products') {
+                            await cubit.getProductSearch(name: value);
+                          } else if (selectedType == 'Categories') {
+                            await cubit.getCategorySearch(name: value);
                           }
+                        } finally {
+                          // Always close the dialog
+                          if (context.mounted) Navigator.of(context).pop();
                         }
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    SearchItemsList(selectedType: selectedType, cubit: cubit),
-                  ],
-                ),
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 10),
+
+                  // Using BlocBuilder for SearchItemsList widget
+                  SearchItemsList(selectedType: selectedType, cubit: cubit),
+                ],
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 }

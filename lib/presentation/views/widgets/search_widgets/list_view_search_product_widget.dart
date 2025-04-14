@@ -19,13 +19,15 @@ class ListViewSearchProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = cubit.productSearchModel?.data?[index];
+    final hasDiscount = product?.newPrice != product?.oldPrice;
+
     return InkWell(
       onTap: () {
         AppCubit.get(context)
-            .getProductDetails(
-                id: cubit.productSearchModel!.data![index].id ?? 0)
+            .getProductDetails(id: product?.id ?? 0)
             .then((onValue) {
-          pushNavigator(context, ProductDetailsPage(),slideRightToLeft);
+          pushNavigator(context, ProductDetailsPage(), slideRightToLeft);
         });
       },
       child: Padding(
@@ -47,7 +49,7 @@ class ListViewSearchProductWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
                       imageUrl:
-                          'http://smartlabel1.runasp.net/Uploads/${cubit.productSearchModel?.data?[index].imageUrl}',
+                          'http://smartlabel1.runasp.net/Uploads/${product?.imageUrl}',
                       fit: BoxFit.cover,
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(
@@ -57,14 +59,11 @@ class ListViewSearchProductWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (cubit.productSearchModel?.data?[index].newPrice !=
-                    cubit.productSearchModel?.data?[index].oldPrice)
+                if (hasDiscount)
                   Image(
                     height: screenHeight(context) * .05,
                     width: screenWidth(context) * .09,
-                    image: AssetImage(
-                      'assets/images/discount_image.png',
-                    ),
+                    image: AssetImage('assets/images/discount_image.png'),
                   ),
               ],
             ),
@@ -74,52 +73,44 @@ class ListViewSearchProductWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${cubit.productSearchModel?.data?[index].name}',
+                    product?.name ?? '',
                     style: TextStyles.productTitle,
                   ),
                   Text(
-                    '${cubit.productSearchModel?.data?[index].newPrice}\$',
+                    '${product?.newPrice}\$',
                     style: TextStyles.productPrice,
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  if (cubit.productSearchModel?.data?[index].newPrice !=
-                      cubit.productSearchModel?.data?[index].oldPrice)
+                  if (hasDiscount) ...[
+                    const SizedBox(width: 10),
                     Text(
-                      '${cubit.productSearchModel?.data?[index].oldPrice}\$',
+                      '${product?.oldPrice}\$',
                       style: TextStyles.productOldPrice,
                     ),
+                  ],
                 ],
               ),
             ),
             Spacer(),
-            cubit.productSearchModel?.data![index].favorite ?? false
-                ? InkWell(
-                    onTap: () {},
+            product?.favorite ?? false
+                ? Lottie.asset(
+                    'assets/lottie/inFavAnimation.json',
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                    repeat: false,
+                    reverse: false,
+                    animate: true,
+                  )
+                : Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     child: Lottie.asset(
-                      'assets/lottie/inFavAnimation.json',
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
+                      'assets/lottie/notFavAnimation.json',
+                      width: 40,
+                      height: 40,
                       repeat: false,
                       reverse: false,
                       animate: true,
-                    ),
-                  )
-                : InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 5),
-                      child: Lottie.asset(
-                        'assets/lottie/notFavAnimation.json',
-                        width: 40,
-                        height: 40,
-                        repeat: false,
-                        reverse: false,
-                        animate: true,
-                      ),
                     ),
                   ),
           ],
