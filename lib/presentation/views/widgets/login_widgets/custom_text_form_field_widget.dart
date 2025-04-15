@@ -11,17 +11,19 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   final VoidCallback suffixIconOnPressed;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onFieldSubmitted;
+  final bool showSuffixIcon; // ✅ new
 
   const CustomTextFormFieldWidget({
     super.key,
-    this.suffixIcon = Icons.visibility,
+    required this.controller,
     required this.hintText,
     required this.labelText,
     required this.obscureText,
     required this.suffixIconOnPressed,
     this.validator,
-    required this.controller,
     this.onFieldSubmitted,
+    this.suffixIcon = Icons.visibility,
+    this.showSuffixIcon = false, // ✅ default is false
   });
 
   @override
@@ -30,8 +32,9 @@ class CustomTextFormFieldWidget extends StatelessWidget {
       obscureText: obscureText,
       controller: controller,
       onFieldSubmitted: onFieldSubmitted,
+      validator: validator,
       decoration: InputDecoration(
-        suffixIcon: obscureText
+        suffixIcon: showSuffixIcon
             ? IconButton(
                 onPressed: suffixIconOnPressed,
                 icon: Icon(suffixIcon),
@@ -55,7 +58,6 @@ class CustomTextFormFieldWidget extends StatelessWidget {
           borderSide: BorderSide(color: greyColor),
         ),
       ),
-      validator: validator,
     );
   }
 }

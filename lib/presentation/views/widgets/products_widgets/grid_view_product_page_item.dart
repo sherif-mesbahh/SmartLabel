@@ -81,6 +81,8 @@ class GridViewProductPageItem extends StatelessWidget {
               ),
               Text(
                 '${model.name}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyles.productTitle,
               ),
               Row(

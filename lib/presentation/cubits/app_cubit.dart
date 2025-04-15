@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
+import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
 import 'package:smart_label_software_engineering/models/acitve_banners_model/acitve_banners_model.dart';
 import 'package:smart_label_software_engineering/models/active_banner_details_model/active_banner_details_model.dart';
 import 'package:smart_label_software_engineering/models/banners_model/banners_model.dart';
@@ -12,6 +13,7 @@ import 'package:smart_label_software_engineering/models/category_model/category_
 import 'package:smart_label_software_engineering/models/category_products_model/category_products_model.dart';
 import 'package:smart_label_software_engineering/models/category_search_model/category_search_model.dart';
 import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart';
+import 'package:smart_label_software_engineering/models/login_model/login_model.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
 import 'package:smart_label_software_engineering/models/product_search_model/product_search_model.dart';
@@ -43,9 +45,39 @@ class AppCubit extends Cubit<AppStates> {
       getProducts();
       getActiveBanners();
     }
-    ;
+
     if (index == 1) getCategories();
     if (index == 2) getFav();
+  }
+
+  IconData signUpPasswordSuffix = Icons.visibility;
+  bool signUpIsPasswordObscured = true;
+
+  void changeSignUpPasswordVisibility() {
+    signUpIsPasswordObscured = !signUpIsPasswordObscured;
+    signUpPasswordSuffix =
+        signUpIsPasswordObscured ? Icons.visibility : Icons.visibility_off;
+    emit(ChangeSuffixEyeState());
+  }
+
+  IconData signUpConfirmPasswordSuffix = Icons.visibility;
+  bool signUpIsConfirmPasswordObscured = true;
+  void changeSignUpConfirmPasswordVisibility() {
+    signUpIsConfirmPasswordObscured = !signUpIsConfirmPasswordObscured;
+    signUpConfirmPasswordSuffix = signUpIsConfirmPasswordObscured
+        ? Icons.visibility
+        : Icons.visibility_off;
+    emit(ChangeSuffixEyeState());
+  }
+
+  IconData loginPasswordSuffix = Icons.visibility;
+  bool loginIsPasswordObscured = true;
+
+  void changeLoginPasswordVisibility() {
+    loginIsPasswordObscured = !loginIsPasswordObscured;
+    loginPasswordSuffix =
+        loginIsPasswordObscured ? Icons.visibility : Icons.visibility_off;
+    emit(ChangeSuffixEyeState());
   }
 
   ProdcutModel? productModel;
@@ -279,4 +311,58 @@ class AppCubit extends Cubit<AppStates> {
       log('Register unexpected error: $e');
     }
   }
+
+  LoginModel? loginModel;
+
+  bool isLoggedIn = false;
+  Future<void> login({required Map<String, String> data}) async {
+    emit(LoginLoadingState());
+
+    try {
+      final response = await ApiService().post(ApiEndpoints.login, data);
+      loginModel = LoginModel.fromJson(response.data);
+
+      final accessToken = response.data['data']['accessToken'];
+      final refreshToken = response.data['data']['refreshToken'];
+
+      await SecureTokenStorage.saveTokens(accessToken, refreshToken);
+      isLoggedIn = true;
+      emit(LoginSuccessState());
+    } on DioException catch (dioError) {
+      String errorMessage = 'Login failed';
+
+      if (dioError.response != null) {
+        final responseData = dioError.response?.data;
+        final message = responseData['message'];
+        final errors = responseData['errors'];
+
+        errorMessage = errors != null && errors is List && errors.isNotEmpty
+            ? errors.join(', ')
+            : (message ?? 'Login failed');
+      }
+
+      emit(LoginErrorState(errorMessage));
+      log('Login DioException: $errorMessage');
+    } catch (e) {
+      emit(LoginErrorState(e.toString()));
+      log('Login unexpected error: $e');
+    }
+  }
+
+  Future<void> checkLoginStatus() async {
+    final accessToken = await SecureTokenStorage.getAccessToken();
+    if (accessToken != null) {
+      isLoggedIn = true;
+    } else {
+      isLoggedIn = false;
+    }
+    emit(CheckLoginStatusState());
+  }
+
+//  logout
+//  loding indicator in login an signup
+//  the categories and items overflow in products page and categories prodcucts and
+//  favvorite products and products details and search products and banners deatails
+//  more tests on login and the tokens
+//  favorite heart
 }

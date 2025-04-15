@@ -4,6 +4,8 @@ class AppInitialState extends AppStates {}
 
 class ChangeNavBarCurrentIndexState extends AppStates {}
 
+class ChangeSuffixEyeState extends AppStates {}
+
 class GetProductsLoadingState extends AppStates {}
 
 class GetProductsSuccessState extends AppStates {}
@@ -113,3 +115,25 @@ class RegisterErrorState extends AppStates {
 
   RegisterErrorState(this.error);
 }
+
+class LoginLoadingState extends AppStates {}
+
+class LoginSuccessState extends AppStates {}
+
+class LoginErrorState extends AppStates {
+  String error;
+
+  LoginErrorState(this.error);
+}
+
+class RefreshTokenLoadingState extends AppStates {}
+
+class RefreshTokenSuccessState extends AppStates {}
+
+class RefreshTokenErrorState extends AppStates {
+  String error;
+
+  RefreshTokenErrorState(this.error);
+}
+
+class CheckLoginStatusState extends AppStates {}

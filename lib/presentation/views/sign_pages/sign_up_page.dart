@@ -80,106 +80,110 @@ class _SignUpPageState extends State<SignUpPage> {
                   builder: (context, state) {
                     return Form(
                       key: formKey,
-                      child: BlocBuilder<AppCubit, AppStates>(
-                        buildWhen: (previous, current) {
-                          return current is RegisterLoadingState ||
-                              current is RegisterSuccessState ||
-                              current is RegisterErrorState;
-                        },
-                        builder: (context, state) {
-                          return Column(
-                            children: [
-                              CustomTextFormFieldWidget(
-                                controller: firstNameController,
-                                labelText: 'First Name',
-                                hintText: 'Enter your first name',
-                                obscureText: false,
-                                validator: (value) =>
-                                    value == null || value.isEmpty
-                                        ? 'Please enter your first name'
-                                        : null,
-                                suffixIconOnPressed: () {},
-                              ),
-                              const SizedBox(height: 16.0),
-                              CustomTextFormFieldWidget(
-                                controller: lastNameController,
-                                labelText: 'Last Name',
-                                hintText: 'Enter your last name',
-                                obscureText: false,
-                                validator: (value) =>
-                                    value == null || value.isEmpty
-                                        ? 'Please enter your last name'
-                                        : null,
-                                suffixIconOnPressed: () {},
-                              ),
-                              const SizedBox(height: 16.0),
-                              CustomTextFormFieldWidget(
-                                controller: emailController,
-                                labelText: 'Email',
-                                hintText: 'Enter your email',
-                                obscureText: false,
-                                validator: (value) =>
-                                    value == null || value.isEmpty
-                                        ? 'Please enter your email'
-                                        : null,
-                                suffixIconOnPressed: () {},
-                              ),
-                              const SizedBox(height: 16.0),
-                              CustomTextFormFieldWidget(
-                                controller: passwordController,
-                                labelText: 'Password',
-                                hintText: 'Enter your password',
-                                obscureText: true,
-                                validator: (value) =>
-                                    value == null || value.isEmpty
-                                        ? 'Please enter your password'
-                                        : null,
-                                suffixIconOnPressed: () {},
-                              ),
-                              const SizedBox(height: 16.0),
-                              CustomTextFormFieldWidget(
-                                controller: confirmPasswordController,
-                                labelText: 'Confirm Password',
-                                hintText: 'Enter your confirm password',
-                                obscureText: true,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your confirm password';
-                                  }
-                                  return null;
-                                },
-                                suffixIconOnPressed: () {},
-                              ),
-                              const SizedBox(height: 24.0),
-                              CustomButtonWidget(
-                                onTap: () {
-                                  if (formKey.currentState!.validate()) {
-                                    AppCubit.get(context).register(data: {
-                                      "firstName": firstNameController.text,
-                                      "lastName": lastNameController.text,
-                                      "email": emailController.text,
-                                      "password": passwordController.text,
-                                      "confirmPassword":
-                                          confirmPasswordController.text,
-                                    });
-                                  }
-                                },
-                                color: primaryColor,
-                                child: Text(
-                                  'Sign up',
-                                  style: TextStyles.buttonText
-                                      .copyWith(color: secondaryColor),
-                                ),
-                              ),
-                              const SizedBox(height: 8.0),
-                              TextButton(
-                                onPressed: () => popNavigator(context),
-                                child: Text('go back',
-                                    style: TextStyles.smallText),
-                              ),
-                            ],
-                          );
-                        },
+                      child: Column(
+                        children: [
+                          CustomTextFormFieldWidget(
+                            controller: firstNameController,
+                            labelText: 'First Name',
+                            hintText: 'Enter your first name',
+                            obscureText: false,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Please enter your first name'
+                                : null,
+                            suffixIconOnPressed: () {},
+                          ),
+                          const SizedBox(height: 16.0),
+                          CustomTextFormFieldWidget(
+                            controller: lastNameController,
+                            labelText: 'Last Name',
+                            hintText: 'Enter your last name',
+                            obscureText: false,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Please enter your last name'
+                                : null,
+                            suffixIconOnPressed: () {},
+                          ),
+                          const SizedBox(height: 16.0),
+                          CustomTextFormFieldWidget(
+                            controller: emailController,
+                            labelText: 'Email',
+                            hintText: 'Enter your email',
+                            obscureText: false,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Please enter your email'
+                                : null,
+                            suffixIconOnPressed: () {},
+                          ),
+                          const SizedBox(height: 16.0),
+                          CustomTextFormFieldWidget(
+                            controller: passwordController,
+                            labelText: 'Password',
+                            hintText: 'Enter your password',
+                            obscureText:
+                                AppCubit.get(context).signUpIsPasswordObscured,
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Please enter your password'
+                                : null,
+                            suffixIconOnPressed: () {
+                              AppCubit.get(context)
+                                  .changeSignUpPasswordVisibility();
+                            },
+                            suffixIcon:
+                                AppCubit.get(context).signUpPasswordSuffix,
+                            showSuffixIcon: true,
+                          ),
+                          const SizedBox(height: 16.0),
+                          CustomTextFormFieldWidget(
+                            controller: confirmPasswordController,
+                            labelText: 'Confirm Password',
+                            hintText: 'Enter your Confirm Password',
+                            obscureText: AppCubit.get(context)
+                                .signUpIsConfirmPasswordObscured,
+                            showSuffixIcon: true,
+                            suffixIcon: AppCubit.get(context)
+                                .signUpConfirmPasswordSuffix,
+                            suffixIconOnPressed: () {
+                              AppCubit.get(context)
+                                  .changeSignUpConfirmPasswordVisibility();
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your Confirm Password';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 24.0),
+                          CustomButtonWidget(
+                            onTap: () {
+                              if (formKey.currentState!.validate()) {
+                                AppCubit.get(context).register(data: {
+                                  "firstName": firstNameController.text,
+                                  "lastName": lastNameController.text,
+                                  "email": emailController.text,
+                                  "password": passwordController.text,
+                                  "confirmPassword":
+                                      confirmPasswordController.text,
+                                });
+                              }
+                            },
+                            color: primaryColor,
+                            child: state is RegisterLoadingState
+                                ? const CircularProgressIndicator(
+                                    color: secondaryColor,
+                                  )
+                                : Text(
+                                    'Sign up',
+                                    style: TextStyles.buttonText
+                                        .copyWith(color: secondaryColor),
+                                  ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          TextButton(
+                            onPressed: () => popNavigator(context),
+                            child: Text('go back', style: TextStyles.smallText),
+                          ),
+                        ],
                       ),
                     );
                   },

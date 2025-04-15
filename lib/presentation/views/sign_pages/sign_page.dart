@@ -15,42 +15,39 @@ class SignPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: BlocProvider(
-        create: (context) => AppCubit(),
-        child: Center(
-          child: Column(
-            children: [
-              Spacer(),
-              Image.asset(
-                'assets/images/smart_label_logo.png',
-                height: screenHeight(context) * .25,
+      body: Center(
+        child: Column(
+          children: [
+            Spacer(),
+            Image.asset(
+              'assets/images/smart_label_logo.png',
+              height: screenHeight(context) * .25,
+            ),
+            Spacer(),
+            // Sign in Button
+            CustomButtonWidget(
+              onTap: () {
+                pushNavigator(context, LoginPage(), slideRightToLeft);
+              },
+              color: secondaryColor,
+              child: Text(
+                'Sign in',
+                style: TextStyles.buttonText.copyWith(color: primaryColor),
               ),
-              Spacer(),
-              // Sign in Button
-              CustomButtonWidget(
-                onTap: () {
-                  pushNavigator(context, LoginPage(), slideRightToLeft);
-                },
-                color: secondaryColor,
-                child: Text(
-                  'Sign in',
-                  style: TextStyles.buttonText.copyWith(color: primaryColor),
-                ),
+            ),
+            // Sign up Button
+            CustomButtonWidget(
+              color: primaryColor,
+              onTap: () {
+                pushNavigator(context, SignUpPage(), slideLeftToRigth);
+              },
+              child: Text(
+                'Sign up',
+                style: TextStyles.buttonText.copyWith(color: secondaryColor),
               ),
-              // Sign up Button
-              CustomButtonWidget(
-                color: primaryColor,
-                onTap: () {
-                  pushNavigator(context, SignUpPage(), slideLeftToRigth);
-                },
-                child: Text(
-                  'Sign up',
-                  style: TextStyles.buttonText.copyWith(color: secondaryColor),
-                ),
-              ),
-              Spacer(),
-            ],
-          ),
+            ),
+            Spacer(),
+          ],
         ),
       ),
     );

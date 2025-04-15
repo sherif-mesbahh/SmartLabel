@@ -22,10 +22,6 @@ class ProductsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BlocBuilder<AppCubit, AppStates>(
-              buildWhen: (previous, current) =>
-                  current is GetActiveBannersLoadingState ||
-                  current is GetActiveBannersSuccessState ||
-                  current is GetActiveBannersErrorState,
               builder: (context, state) {
                 final cubit = AppCubit.get(context);
                 final banners = cubit.activeBannersModel?.data;

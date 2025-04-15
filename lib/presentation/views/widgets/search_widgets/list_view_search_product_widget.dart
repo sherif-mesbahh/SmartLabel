@@ -48,14 +48,17 @@ class ListViewSearchProductWidget extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
-                      imageUrl:
-                          'http://smartlabel1.runasp.net/Uploads/${product?.imageUrl}',
+                      imageUrl: product?.imageUrl != null
+                          ? 'http://smartlabel1.runasp.net/Uploads/${product!.imageUrl}'
+                          : 'https://via.placeholder.com/150',
                       fit: BoxFit.cover,
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(
                           color: primaryColor,
                         ),
                       ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                 ),
@@ -74,7 +77,9 @@ class ListViewSearchProductWidget extends StatelessWidget {
                 children: [
                   Text(
                     product?.name ?? '',
-                    style: TextStyles.productTitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.productTitle.copyWith(fontSize: 12),
                   ),
                   Text(
                     '${product?.newPrice}\$',
