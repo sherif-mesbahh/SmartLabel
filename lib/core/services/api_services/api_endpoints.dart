@@ -17,6 +17,8 @@ class ApiEndpoints {
   static String bannerById(int id) => 'Banners/$id';
 
   // Auth
+  static const String register = 'Authentication/register';
   static const String login = 'Authentication/login';
+  static const String refreshToken = 'Authentication/refresh-token';
   static const String logout = 'Authentication/logout';
 }

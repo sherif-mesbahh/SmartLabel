@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
@@ -14,6 +15,7 @@ import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
 import 'package:smart_label_software_engineering/models/product_search_model/product_search_model.dart';
+import 'package:smart_label_software_engineering/models/register_model/register_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/categories_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/fav_page.dart';
@@ -37,6 +39,11 @@ class AppCubit extends Cubit<AppStates> {
     navBarCurrentIndex = index;
     emit(ChangeNavBarCurrentIndexState());
 
+    if (index == 0) {
+      getProducts();
+      getActiveBanners();
+    }
+    ;
     if (index == 1) getCategories();
     if (index == 2) getFav();
   }
@@ -239,6 +246,37 @@ class AppCubit extends Cubit<AppStates> {
     } catch (e) {
       emit(GetCategorySearchErrorState(e.toString()));
       log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  RegisterModel? registerModel;
+  Future<void> register({required Map<String, String> data}) async {
+    emit(RegisterLoadingState());
+
+    try {
+      final response = await ApiService().post(ApiEndpoints.register, data);
+
+      registerModel = RegisterModel.fromJson(response.data);
+      emit(RegisterSuccessState());
+    } on DioException catch (dioError) {
+      String errorMessage = 'Registration failed';
+
+      if (dioError.response != null) {
+        final responseData = dioError.response?.data;
+
+        final message = responseData['message'];
+        final errors = responseData['errors'];
+
+        errorMessage = errors != null && errors is List && errors.isNotEmpty
+            ? errors.join(', ')
+            : (message ?? 'Registration failed');
+      }
+
+      emit(RegisterErrorState(errorMessage));
+      log('Register DioException: $errorMessage');
+    } catch (e) {
+      emit(RegisterErrorState(e.toString()));
+      log('Register unexpected error: $e');
     }
   }
 }

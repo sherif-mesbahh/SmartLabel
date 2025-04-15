@@ -10,7 +10,6 @@ void main() {
     BlocProvider(
       create: (context) => AppCubit()
         ..getProducts()
-        ..getCategories()
         ..getActiveBanners(),
     )
   ], child: const MyApp()));

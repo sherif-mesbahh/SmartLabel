@@ -23,7 +23,8 @@ class ProductDetailsDataModel {
     this.favorite,
   });
 
-  factory ProductDetailsDataModel.fromJson(Map<String, dynamic> json) => ProductDetailsDataModel(
+  factory ProductDetailsDataModel.fromJson(Map<String, dynamic> json) =>
+      ProductDetailsDataModel(
         id: (json['id'] as num?)?.toInt(),
         name: json['name'] as String?,
         oldPrice: (json['oldPrice'] as num?)?.toInt(),

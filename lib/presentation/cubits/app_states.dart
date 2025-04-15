@@ -93,6 +93,7 @@ class GetActiveBannersErrorState extends AppStates {
 
   GetActiveBannersErrorState(this.error);
 }
+
 class GetActiveBannerDetailsLoadingState extends AppStates {}
 
 class GetActiveBannerDetailsSuccessState extends AppStates {}
@@ -101,4 +102,14 @@ class GetActiveBannerDetailsErrorState extends AppStates {
   String error;
 
   GetActiveBannerDetailsErrorState(this.error);
+}
+
+class RegisterLoadingState extends AppStates {}
+
+class RegisterSuccessState extends AppStates {}
+
+class RegisterErrorState extends AppStates {
+  String error;
+
+  RegisterErrorState(this.error);
 }

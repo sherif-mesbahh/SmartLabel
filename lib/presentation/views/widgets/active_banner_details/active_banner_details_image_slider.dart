@@ -28,8 +28,7 @@ class ActiveBannerDetailsImageSlider extends StatelessWidget {
           builder: (BuildContext context) {
             return Container(
               width: screenWidth(context),
-              margin: const EdgeInsets.symmetric(
-                  horizontal: 5.0),
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
                 color: secondaryColor,
                 borderRadius: BorderRadius.circular(10),
@@ -37,11 +36,9 @@ class ActiveBannerDetailsImageSlider extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                  imageUrl: "http://smartlabel1.runasp.net/Uploads/$imageUrl",
                   fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(
                       color: primaryColor,
                     ),

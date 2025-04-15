@@ -49,7 +49,8 @@ class ListViewSearchCategoriesWidget extends StatelessWidget {
                   .getCategoryProducts(
                       id: cubit.categorySearchModel?.data?[index].id ?? 0)
                   .then((onValue) {
-                pushNavigator(context, CategoriesProductsPage(),slideRightToLeft);
+                pushNavigator(
+                    context, CategoriesProductsPage(), slideRightToLeft);
               });
             },
             icon: Icon(

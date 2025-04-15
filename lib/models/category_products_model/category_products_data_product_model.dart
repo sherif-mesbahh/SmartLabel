@@ -19,7 +19,9 @@ class CategoryProductsDataProductModel {
     this.imageUrl,
   });
 
-  factory CategoryProductsDataProductModel.fromJson(Map<String, dynamic> json) => CategoryProductsDataProductModel(
+  factory CategoryProductsDataProductModel.fromJson(
+          Map<String, dynamic> json) =>
+      CategoryProductsDataProductModel(
         id: json['id'] as int?,
         name: json['name'] as String?,
         oldPrice: _convertToInt(json['oldPrice']),

@@ -16,14 +16,14 @@ class Layout extends StatelessWidget {
       appBar: CustomAppBar(),
       body: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
-          final cubit = AppCubit.get(context); // Access cubit
+          final cubit = AppCubit.get(context);
 
           return Column(
             children: [
               Expanded(
                 child: cubit.screens[cubit.navBarCurrentIndex],
               ),
-              CustomNavBar(), // Move CustomNavBar inside BlocBuilder
+              CustomNavBar(),
             ],
           );
         },

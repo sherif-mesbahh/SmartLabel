@@ -3,7 +3,8 @@ import 'package:smart_label_software_engineering/core/components/components.dart
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 
-class ActiveBannerDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
+class ActiveBannerDetailsAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const ActiveBannerDetailsAppBar({super.key});
 
   @override

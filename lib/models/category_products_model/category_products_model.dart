@@ -23,7 +23,8 @@ class CategoryProductsModel {
       errors: json['errors'] as dynamic,
       data: json['data'] == null
           ? null
-          : CategoryProductsDataModel.fromJson(json['data'] as Map<String, dynamic>),
+          : CategoryProductsDataModel.fromJson(
+              json['data'] as Map<String, dynamic>),
     );
   }
 

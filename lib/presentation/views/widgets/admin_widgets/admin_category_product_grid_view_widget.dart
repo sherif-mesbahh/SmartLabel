@@ -13,7 +13,7 @@ class AdminCategoryProductsGridViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        pushNavigator(context, AdminEditProductPage(),slideRightToLeft);
+        pushNavigator(context, AdminEditProductPage(), slideRightToLeft);
       },
       child: Stack(
         alignment: Alignment.topRight,

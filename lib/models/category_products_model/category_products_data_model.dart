@@ -8,12 +8,14 @@ class CategoryProductsDataModel {
 
   CategoryProductsDataModel({this.id, this.name, this.imageUrl, this.products});
 
-  factory CategoryProductsDataModel.fromJson(Map<String, dynamic> json) => CategoryProductsDataModel(
+  factory CategoryProductsDataModel.fromJson(Map<String, dynamic> json) =>
+      CategoryProductsDataModel(
         id: json['id'] as int?,
         name: json['name'] as String?,
         imageUrl: json['imageUrl'] as String?,
         products: (json['products'] as List<dynamic>?)
-            ?.map((e) => CategoryProductsDataProductModel.fromJson(e as Map<String, dynamic>))
+            ?.map((e) => CategoryProductsDataProductModel.fromJson(
+                e as Map<String, dynamic>))
             .toList(),
       );
 

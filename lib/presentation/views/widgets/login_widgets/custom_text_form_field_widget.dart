@@ -28,6 +28,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
+      controller: controller,
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         suffixIcon: obscureText

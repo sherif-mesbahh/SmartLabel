@@ -67,12 +67,15 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16.0),
                   CustomButtonWidget(
-                    textColor: secondaryColor,
                     onTap: () {
                       navigatorAndRemove(context, Layout(), fadeTransition);
                     },
-                    text: 'Login',
                     color: primaryColor,
+                    child: Text(
+                      'Sign in',
+                      style:
+                          TextStyles.buttonText.copyWith(color: secondaryColor),
+                    ),
                   ),
                   const SizedBox(height: 8.0),
                   TextButton(
