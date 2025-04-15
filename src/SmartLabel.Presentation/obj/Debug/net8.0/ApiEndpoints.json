@@ -652,7 +652,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Page",
+        "Name": "PageNumber",
         "Type": "System.Int32",
         "IsRequired": false
       },

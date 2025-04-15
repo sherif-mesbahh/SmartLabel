@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fKaDbcJRqbDhadmgG9WtlGDKIAcjm8BuB+Vq/GNGAHI=",
+  "Hash": "pYc8lQYtoZ0uoSXO+G+68taj6kFHlBE9ZT8X1tmuL/0=",
   "Source": "SmartLabel.Presentation",
   "BasePath": "_content/SmartLabel.Presentation",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\456fd6d0-f884-497d-ad3a-43714cc0cac3_Jwt Token.png"
+    },
+    {
+      "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\513e84bf-cf35-499b-962c-2d9d9c920145_Banner1.jpg",
+      "SourceId": "SmartLabel.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
+      "BasePath": "_content/SmartLabel.Presentation",
+      "RelativePath": "Uploads/513e84bf-cf35-499b-962c-2d9d9c920145_Banner1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\513e84bf-cf35-499b-962c-2d9d9c920145_Banner1.jpg"
     },
     {
       "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\57dbb746-40a5-47fb-8af4-02cdd2086587_Screenshot 2024-12-25 221001.png",
@@ -243,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\8594e7d6-f769-4063-a3d8-6b7c83cd505d_ginst.jpj.png"
+    },
+    {
+      "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\8b53caf8-79af-4cc4-a929-462473200591_milk.jpeg",
+      "SourceId": "SmartLabel.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
+      "BasePath": "_content/SmartLabel.Presentation",
+      "RelativePath": "Uploads/8b53caf8-79af-4cc4-a929-462473200591_milk.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\8b53caf8-79af-4cc4-a929-462473200591_milk.jpeg"
     },
     {
       "Identity": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\Uploads\\8d7cfe78-36cb-480b-b830-aa2f11abf538_Electronics.jpeg",

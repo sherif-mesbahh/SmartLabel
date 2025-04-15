@@ -99,7 +99,7 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 		               WHERE p.Id = @productId
 		               """;
 		Dictionary<int, GetProductByIdDto> productDictionary = new();
-		var products = await connection.QueryAsync<GetProductByIdDto, string, GetProductByIdDto>
+		var products = await connection.QueryAsync<GetProductByIdDto, GetProductImageDto, GetProductByIdDto>
 		(
 			sqlQuery,
 			(product, productImage) =>
@@ -112,7 +112,7 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 
 				if (productImage != null)
 				{
-					existingProduct.Images ??= new List<string>();
+					existingProduct.Images ??= new List<GetProductImageDto>();
 					existingProduct.Images?.Add(productImage);
 				}
 
@@ -153,13 +153,14 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 		                   p.Description AS Description,
 		                   p.CatId AS CategoryId,
 		                   p.Favorite AS Favorite,
+		                   pi.Id AS ImageId,
 		                   pi.ImageUrl AS ImageUrl
 		               FROM Products p 
 		               LEFT JOIN ProductImages pi ON p.Id = pi.ProductId
 		               WHERE p.Id = @productId
 		               """;
 		Dictionary<int, GetProductByIdDto> productDictionary = new();
-		var products = await connection.QueryAsync<GetProductByIdDto, string, GetProductByIdDto>
+		var products = await connection.QueryAsync<GetProductByIdDto, GetProductImageDto, GetProductByIdDto>
 		(
 			sqlQuery,
 			(product, productImage) =>
@@ -172,14 +173,14 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 
 				if (productImage != null)
 				{
-					existingProduct.Images ??= new List<string>();
+					existingProduct.Images ??= new List<GetProductImageDto>();
 					existingProduct.Images?.Add(productImage);
 				}
 
 				return existingProduct;
 			},
 			new { productId = id },
-			splitOn: "ImageUrl"
+			splitOn: "ImageId"
 		);
 		var productResponse = productDictionary.Values.FirstOrDefault();
 		if (string.IsNullOrEmpty(userId)) return productResponse;

@@ -21,7 +21,7 @@ public class DeleteBannerHandler(IBannerRepository bannerRepository, IFileServic
 			if (banner.Images is not null)
 			{
 				foreach (var image in banner.Images)
-					await fileService.DeleteImageAsync(image);
+					await fileService.DeleteImageAsync(image.ImageUrl);
 			}
 
 			await bannerRepository.DeleteBannerAsync(request.Id);

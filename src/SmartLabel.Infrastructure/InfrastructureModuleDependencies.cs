@@ -29,6 +29,7 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<ICategoryProcRepository, CategoryProcRepository>();
 		services.AddTransient<IProductProcRepository, ProductProcRepository>();
 		services.AddTransient<IBannerProcRepository, BannerProcRepository>();
+		services.AddTransient<IUserProductsProcRepository, UserProductsProcRepository>();
 		services.AddTransient<IFileService, FileService>();
 		services.AddTransient<IUnitOfWork, UnitOfWork>();
 		services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();

@@ -11,5 +11,5 @@ public class GetProductByIdDto
 	public string? MainImage { get; set; }
 	public int CategoryId { get; set; }
 	public bool Favorite { get; set; }
-	public List<string>? Images { get; set; } = new List<string>();
+	public List<GetProductImageDto>? Images { get; set; } = new List<GetProductImageDto>();
 }

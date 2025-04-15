@@ -8,5 +8,5 @@ public class GetBannerByIdDto
 	public DateTime StartDate { get; set; }
 	public DateTime EndDate { get; set; }
 	public string? MainImage { get; set; }
-	public List<string>? Images { get; set; }
+	public List<GetBannerImageDto>? Images { get; set; }
 }

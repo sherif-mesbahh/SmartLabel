@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
+using SmartLabel.Application.Features.Banners.Query.Results;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Services;
@@ -12,14 +13,6 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 {
 	public async Task<IEnumerable<GetBannersDto?>> GetAllBannersAsync()
 	{
-		//return await context.Banners
-		//	.AsNoTracking()
-		//	.Select(b => new GetBannersDto()
-		//	{
-		//		Id = b.Id,
-		//		Title = b.Title,
-		//		ImageUrl = b.Images.FirstOrDefault().ImageUrl
-		//	}).ToListAsync();
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -32,24 +25,9 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		return banners.ToList();
 	}
 
-	public IQueryable<Banner> GetAllBannersPaginated()
-	{
-		IQueryable<Banner> banners = context.Banners;
-		return banners;
-	}
-
 	public async Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync()
 	{
 		var currentTime = DateTime.UtcNow;
-		//return await context.Banners
-		//	.AsNoTracking()
-		//	.Where(x => x.StartDate <= currentTime && currentTime < x.EndDate)
-		//	.Select(b => new GetBannersDto()
-		//	{
-		//		Id = b.Id,
-		//		Title = b.Title,
-		//		ImageUrl = b.Images.FirstOrDefault().ImageUrl
-		//	}).ToListAsync();
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -64,20 +42,6 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 	}
 	public async Task<GetBannerByIdDto?> GetBannerByIdAsync(int id)
 	{
-		//return await context.Banners
-		//	.AsNoTracking()
-		//	.Where(x => x.Id == id)
-		//	.Select(b => new GetBannerByIdDto()
-		//	{
-		//		Id = b.Id,
-		//		Title = b.Title,
-		//		Description = b.Description,
-		//		StartDate = b.StartDate,
-		//		EndDate = b.EndDate,
-		//		Images = b.Images.Select(pi => pi.ImageUrl).ToList()
-		//	})
-		//	.FirstOrDefaultAsync();
-
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -87,13 +51,14 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		                   b.EndDate AS EndDate,
 		                   b.MainImage AS MainImage,
 		                   b.Description AS Description,
-		                   bi.ImageUrl AS x
+		                   bi.Id AS ImageId,
+		                   bi.ImageUrl AS ImageUrl
 		               FROM Banners b 
 		               LEFT JOIN BannerImages bi ON b.Id = bi.BannerId
 		               WHERE b.Id = @bannerId
 		               """;
 		Dictionary<int, GetBannerByIdDto> bannerDictionary = new();
-		var banners = await connection.QueryAsync<GetBannerByIdDto, string, GetBannerByIdDto>
+		var banners = await connection.QueryAsync<GetBannerByIdDto, GetBannerImageDto, GetBannerByIdDto>
 		(
 			sqlQuery,
 			(banner, bannerImage) =>
@@ -106,14 +71,14 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 
 				if (bannerImage != null)
 				{
-					existingProduct.Images ??= new List<string>();
+					existingProduct.Images ??= new List<GetBannerImageDto>();
 					existingProduct.Images?.Add(bannerImage);
 				}
 
 				return existingProduct;
 			},
 			new { bannerId = id },
-			splitOn: "x"
+			splitOn: "ImageId"
 		);
 		var bannerResponse = bannerDictionary.Values.FirstOrDefault();
 		return bannerResponse;
