@@ -228,6 +228,11 @@
         "IsRequired": false
       },
       {
+        "Name": "MainImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
         "Name": "ImagesFiles",
         "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
@@ -266,6 +271,11 @@
       {
         "Name": "EndDate",
         "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "MainImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       },
       {
@@ -347,7 +357,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Page",
+        "Name": "PageNumber",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -393,7 +403,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Page",
+        "Name": "PageNumber",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -528,7 +538,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Page",
+        "Name": "PageNumber",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -538,17 +548,7 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "SmartLabel.Application.Bases.PagedList\u00601[[SmartLabel.Application.Features.Categories.Query.Results.GetAllCategoriesDto, SmartLabel.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "SmartLabel.Presentation.Controllers.UsersController",
@@ -734,6 +734,11 @@
         "IsRequired": false
       },
       {
+        "Name": "MainImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
         "Name": "ImagesFiles",
         "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
@@ -777,6 +782,11 @@
       {
         "Name": "CatId",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "MainImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       },
       {
@@ -848,7 +858,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Page",
+        "Name": "PageNumber",
         "Type": "System.Int32",
         "IsRequired": false
       },

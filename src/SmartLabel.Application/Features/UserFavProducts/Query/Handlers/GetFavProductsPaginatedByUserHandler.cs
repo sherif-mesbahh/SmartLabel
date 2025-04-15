@@ -35,7 +35,7 @@ internal sealed class GetFavProductsPaginatedByUserHandler(IUserFavProductReposi
 		var productResponseQuery = productsQuery;
 		var pageSize = (request.PageSize == 0 ? 10 : request.PageSize);
 		var page = (request.Page == 0 ? 1 : request.Page);
-		var products = PagedList<GetAllProductsDto>.CreateAsync(productResponseQuery, page, pageSize);
+		var products = PagedList<GetAllProductsDto>.CreateAsync(productResponseQuery, 0, page, pageSize);
 		return await products;
 	}
 	private static Expression<Func<GetAllProductsDto, object>> GetSortProperty(string? sortColumn) =>
@@ -44,7 +44,6 @@ internal sealed class GetFavProductsPaginatedByUserHandler(IUserFavProductReposi
 			"name" => product => product.Name!,
 			"old-price" => product => product.OldPrice,
 			"new-price" => product => product.NewPrice,
-			"category-name" => product => product.CategoryName,
 			"discount" => product => product.Discount,
 			_ => product => product.Id
 		};

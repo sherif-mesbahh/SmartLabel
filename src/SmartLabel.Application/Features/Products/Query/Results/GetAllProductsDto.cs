@@ -7,6 +7,7 @@ public class GetAllProductsDto
 	public decimal OldPrice { get; set; }
 	public int Discount { get; set; }
 	public decimal NewPrice { get; set; }
-	public required string CategoryName { get; set; }
-	public string? ImageUrl { get; set; }
+	public int CategoryId { get; set; }
+	public bool Favorite { get; set; }
+	public string? MainImage { get; set; }
 }

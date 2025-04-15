@@ -18,6 +18,7 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 		try
 		{
 			var product = mapper.Map<Product>(request);
+			if (request.MainImage != null) product.MainImage = await fileService.BuildImageAsync(request.MainImage);
 			await repository.AddProductAsync(product);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			if (request.ImagesFiles is not null)
@@ -35,6 +36,7 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 				}
 				await repository.AddProductImagesAsync(productImages);
 			}
+
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
 			return Created<string>($"Product with {product.Id} is added successfully");

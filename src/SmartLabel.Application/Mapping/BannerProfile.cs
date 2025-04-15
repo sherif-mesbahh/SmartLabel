@@ -9,6 +9,5 @@ public class BannerProfile : Profile
 	{
 		CreateMap<AddBannerCommand, Banner>();
 		CreateMap<UpdateBannerCommand, Banner>();
-
 	}
 }

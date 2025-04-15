@@ -14,6 +14,7 @@ public interface IBannerRepository
 	Task DeleteBannerAsync(int bannerId);
 	Task AddBannerImagesAsync(List<BannerImage> bannerImages);
 	Task<List<string?>> GetBannerImageUrlsByIdsAsync(List<int> imageIds);
+	Task<string?> GetBannerImage(int id);
 	Task DeleteBannerImagesAsync(List<int> imageIds);
 	Task<bool> IsBannerExistAsync(int id);
 }

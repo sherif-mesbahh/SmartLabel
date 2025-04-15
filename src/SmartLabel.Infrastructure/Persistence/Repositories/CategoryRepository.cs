@@ -1,23 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
 using SmartLabel.Application.Features.Categories.Query.Results;
 using SmartLabel.Application.Features.Products.Query.Results;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Domain.Entities;
+using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Persistence.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;
-public class CategoryRepository(AppDbContext context) : ICategoryRepository
+public class CategoryRepository(AppDbContext context, IUserFavProductRepository userFavProduct,
+	ISqlConnectionFactory sqlConnectionFactory)
+	: ICategoryRepository
 {
 	public async Task<IEnumerable<GetAllCategoriesDto?>> GetAllCategoriesAsync()
 	{
-		return await context.Categories
-			.AsNoTracking()
-			.Select(c => new GetAllCategoriesDto()
-			{
-				Id = c.Id,
-				Name = c.Name,
-				ImageUrl = c.ImageUrl
-			}).ToListAsync();
+		//return await context.Categories
+		//	.AsNoTracking()
+		//	.Select(c => new GetAllCategoriesDto()
+		//	{
+		//		Id = c.Id,
+		//		Name = c.Name,
+		//		ImageUrl = c.ImageUrl
+		//	}).ToListAsync();
+
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = "SELECT Id, Name, ImageUrl FROM Categories";
+		var categoryResponse = await connection
+			.QueryAsync<GetAllCategoriesDto>(sqlQuery);
+		return categoryResponse.ToList();
 	}
 
 	public IQueryable<Category> GetAllCategoriesPaginated()
@@ -26,28 +36,90 @@ public class CategoryRepository(AppDbContext context) : ICategoryRepository
 		return query;
 	}
 
-	public async Task<GetCategoryByIdDto?> GetCategoryByIdAsync(int id)
+	public async Task<GetCategoryByIdDto?> GetCategoryByIdAsync(int id, string? userId)
 	{
-		return await context.Categories
-			.Where(x => x.Id == id)
-			.Select(c => new GetCategoryByIdDto()
+		//return await context.Categories
+		//	.Where(x => x.Id == id)
+		//	.Select(c => new GetCategoryByIdDto()
+		//	{
+		//		Id = c.Id,
+		//		Name = c.Name,
+		//		ImageUrl = c.ImageUrl,
+		//		Products = c.Products
+		//			.Select(p => new GetAllProductsDto()
+		//			{
+		//				Name = p.Name,
+		//				CategoryName = p.Category.Name,
+		//				Discount = p.Discount,
+		//				OldPrice = p.OldPrice,
+		//				NewPrice = p.NewPrice,
+		//				ImageUrl = p.MainImage
+		//			}).ToList()
+		//	}).FirstOrDefaultAsync();
+		using var connection = sqlConnectionFactory.Create();
+		Dictionary<int, GetCategoryByIdDto> categoryDictionary = new();
+
+		var sqlQuery = """
+		               SELECT 
+		                   c.Id AS Id, 
+		                   c.Name AS Name, 
+		                   c.ImageUrl AS ImageUrl,
+		                   p.Id AS Id, 
+		                   p.Name AS Name, 
+		                   p.Discount AS Discount,
+		                   p.OldPrice AS OldPrice, 
+		                   p.NewPrice AS NewPrice, 
+		                   p.MainImage AS ImageUrl,
+		                   p.CatId AS CategoryName,
+		                   p.Favorite AS Favorite
+		               FROM Categories c 
+		               LEFT JOIN Products p ON c.Id = p.CatId 
+		               WHERE c.Id = @categoryId
+		               """;
+
+		var categories = await connection.QueryAsync<GetCategoryByIdDto, GetAllProductsDto, GetCategoryByIdDto>(
+			sqlQuery,
+			(category, product) =>
 			{
-				Id = c.Id,
-				Name = c.Name,
-				ImageUrl = c.ImageUrl,
-				Products = c.Products
-					.Select(p => new GetAllProductsDto()
-					{
-						Name = p.Name,
-						CategoryName = p.Category.Name,
-						Discount = p.Discount,
-						OldPrice = p.OldPrice,
-						NewPrice = p.NewPrice,
-						ImageUrl = p.Images!
-							.Select(pi => pi.ImageUrl)
-							.FirstOrDefault()
-					}).ToList()
-			}).FirstOrDefaultAsync();
+				if (!categoryDictionary.TryGetValue(category.Id, out var existingCategory))
+				{
+					categoryDictionary.Add(category.Id, category);
+					existingCategory = category;
+				}
+
+				if (product != null)
+				{
+					existingCategory.Products ??= new List<GetAllProductsDto>();
+					existingCategory.Products.Add(product);
+				}
+
+				return existingCategory;
+			},
+			new { categoryId = id },
+			splitOn: nameof(GetAllProductsDto.Id)
+		);
+
+		var categoryResponse = categoryDictionary.Values.FirstOrDefault();
+		if (string.IsNullOrEmpty(userId))
+			return categoryResponse;
+		var favoriteProducts = await userFavProduct.GetFavProductsByUserAsync(int.Parse(userId));
+		var favoriteProductsList = favoriteProducts.ToList();
+		var favorites = new Dictionary<int, bool>();
+		foreach (var product in favoriteProductsList)
+		{
+			favorites.Add(product.Id, true);
+		}
+
+		if (categoryResponse?.Products != null)
+		{
+			foreach (var product in categoryResponse.Products)
+			{
+				if (favorites.ContainsKey(product.Id))
+					product.Favorite = true;
+			}
+		}
+
+		return categoryResponse;
 	}
 
 	public async Task AddCategoryAsync(Category category)

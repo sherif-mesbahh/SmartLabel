@@ -8,6 +8,7 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\Azure.Core.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\Azure.Identity.dll
+D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\Dapper.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\FluentValidation.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\PubTmp\Out\MediatR.dll

@@ -11,6 +11,8 @@ public class UpdateProductCommand : IRequest<Response<string>>
 	public int Discount { get; set; }
 	public string? Description { get; set; }
 	public int CatId { get; set; }
+	public IFormFile? MainImage { get; set; }
+
 	public List<IFormFile>? ImagesFiles { get; set; }
 	public List<int>? RemovedImageIds { get; set; }
 }

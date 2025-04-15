@@ -8,5 +8,5 @@ public record GetActiveBannersPaginatedQuery
 	string? Search,
 	string? SortColumn,
 	string? SortOrder,
-	int Page,
+	int PageNumber,
 	int PageSize) : IRequest<PagedList<GetBannersDto>>;

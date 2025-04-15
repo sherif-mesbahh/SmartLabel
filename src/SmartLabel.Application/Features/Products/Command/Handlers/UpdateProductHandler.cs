@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Repositories;
@@ -19,7 +20,9 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 		using var transaction = await unitOfWork.BeginTransaction();
 		try
 		{
-			if (request.RemovedImageIds is not null)
+			var mainImage = await productRepository.GetProductImage(request.Id);
+			await fileService.DeleteImageAsync(mainImage);
+			if (!request.RemovedImageIds.IsNullOrEmpty())
 			{
 				var imageUrls = await productRepository.GetProductImageUrlsByIdsAsync(request.RemovedImageIds);
 				foreach (var imageUrl in imageUrls)
@@ -28,9 +31,9 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 				}
 				await productRepository.DeleteProductImagesAsync(request.RemovedImageIds);
 			}
-
 			var product = mapper.Map<Product>(request);
-			await productRepository.UpdateProductAsync(product.Id, product);
+			if (request.MainImage != null) product.MainImage = await fileService.BuildImageAsync(request.MainImage);
+
 			if (request.ImagesFiles is not null)
 			{
 				var productImages = new List<ProductImage>();
@@ -46,15 +49,15 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 				}
 				await productRepository.AddProductImagesAsync(productImages);
 			}
-
 			await unitOfWork.SaveChangesAsync(cancellationToken);
+			await productRepository.UpdateProductAsync(product.Id, product);
 			transaction.Commit();
 			return NoContent<string>();
 		}
 		catch (Exception ex)
 		{
 			transaction.Rollback();
-			return InternalServerError<string>([ex.Message], "Adding product temporarily unavailable");
+			return InternalServerError<string>([ex.Message], "Updating product temporarily unavailable");
 		}
 	}
 }

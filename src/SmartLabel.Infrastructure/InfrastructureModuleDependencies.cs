@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Repositories.StoredProceduresRepositories;
 using SmartLabel.Domain.Entities.Identity;
 using SmartLabel.Domain.Helpers;
 using SmartLabel.Domain.Interfaces;
@@ -12,6 +13,7 @@ using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Interfaces;
 using SmartLabel.Infrastructure.Persistence.Data;
 using SmartLabel.Infrastructure.Persistence.Repositories;
+using SmartLabel.Infrastructure.Persistence.Repositories.StoredProceduresRepositories;
 using SmartLabel.Infrastructure.Services;
 using System.Text;
 
@@ -24,11 +26,15 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<ICategoryRepository, CategoryRepository>();
 		services.AddTransient<IProductRepository, ProductRepository>();
 		services.AddTransient<IBannerRepository, BannerRepository>();
+		services.AddTransient<ICategoryProcRepository, CategoryProcRepository>();
+		services.AddTransient<IProductProcRepository, ProductProcRepository>();
+		services.AddTransient<IBannerProcRepository, BannerProcRepository>();
 		services.AddTransient<IFileService, FileService>();
 		services.AddTransient<IUnitOfWork, UnitOfWork>();
 		services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
 		services.AddTransient<IAuthorizationRepository, AuthorizationRepository>();
 		services.AddTransient<IUserFavProductRepository, UserFavProductRepository>();
+		services.AddTransient<ISqlConnectionFactory, SqlConnectionFactory>();
 		services.AddIdentity<ApplicationUser, Role>(
 				options =>
 				{

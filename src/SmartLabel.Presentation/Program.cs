@@ -52,14 +52,17 @@ builder.Services.AddSwaggerGen(c =>
 	});
 });
 
+
 builder.Services.AddAuthorizationBuilder()
 	.AddPolicy(nameof(Roles.UserOrAdmin), policy =>
 		policy.RequireRole(Roles.User.ToString(), Roles.Admin.ToString()));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
+app.UseCors(x => x
+	.WithOrigins("http://localhost:5173", "http://localhost:5174")
+	.AllowAnyMethod()
+	.AllowAnyHeader());
 
 app.UseSwagger();
 app.UseSwaggerUI();

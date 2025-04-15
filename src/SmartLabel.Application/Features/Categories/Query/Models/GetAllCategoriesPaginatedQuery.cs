@@ -8,5 +8,5 @@ public record GetAllCategoriesPaginatedQuery
 	string? Search,
 	string? SortColumn,
 	string? SortOrder,
-	int Page,
+	int PageNumber,
 	int PageSize) : IRequest<PagedList<GetAllCategoriesDto>>;

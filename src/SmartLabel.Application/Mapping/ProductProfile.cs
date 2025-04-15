@@ -10,8 +10,10 @@ public class ProductProfile : Profile
 		CreateMap<AddProductCommand, Product>()
 			.ForMember(dest => dest.NewPrice,
 				opt => opt.MapFrom(src => src.OldPrice - (((decimal)src.Discount / 100) * src.OldPrice)));
+
 		CreateMap<UpdateProductCommand, Product>()
 			.ForMember(dest => dest.NewPrice,
 				opt => opt.MapFrom(src => src.OldPrice - (((decimal)src.Discount / 100) * src.OldPrice)));
+
 	}
 }

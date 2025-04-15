@@ -180,3 +180,4 @@ D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\refint\Smar
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\SmartLabel.Presentation.pdb
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\SmartLabel.Presentation.genruntimeconfig.cache
 D:\SmartLabel\src\SmartLabel.Presentation\obj\Release\net8.0\win-x86\ref\SmartLabel.Presentation.dll
+D:\SmartLabel\src\SmartLabel.Presentation\bin\Release\net8.0\win-x86\Dapper.dll

@@ -1,50 +1,18 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Query.Models;
 using SmartLabel.Application.Features.Banners.Query.Results;
-using SmartLabel.Application.Repositories;
-using SmartLabel.Domain.Entities;
-using System.Linq.Expressions;
+using SmartLabel.Application.Repositories.StoredProceduresRepositories;
 
 namespace SmartLabel.Application.Features.Banners.Query.Handlers;
-internal sealed class GetActiveBannersPaginatedHandler(IBannerRepository bannerRepository) : IRequestHandler<GetActiveBannersPaginatedQuery, PagedList<GetBannersDto>>
+internal sealed class GetActiveBannersPaginatedHandler(IBannerProcRepository bannerRepository) : IRequestHandler<GetActiveBannersPaginatedQuery, PagedList<GetBannersDto>>
 {
 	public async Task<PagedList<GetBannersDto>> Handle(GetActiveBannersPaginatedQuery request, CancellationToken cancellationToken)
 	{
-		var bannersQuery = bannerRepository.GetAllBannersPaginated();
-		if (!string.IsNullOrEmpty(request.Search))
-		{
-			bannersQuery = bannersQuery
-				.Where(x => x.Title.ToLower().Contains(request.Search.ToLower()));
-
-		}
-
-		var keySelector = GetSortProperty(request.SortColumn);
-		if (!string.IsNullOrEmpty(request.SortOrder))
-			bannersQuery = request.SortOrder?.ToLower() == "desc" ? bannersQuery.OrderByDescending(keySelector) : bannersQuery.OrderBy(keySelector);
-
-		var currentTime = DateTime.UtcNow;
-		var bannerResponseQuery = bannersQuery
-			.AsNoTracking()
-			.Where(x => x.StartDate <= currentTime && currentTime < x.EndDate)
-
-			.Select(b => new GetBannersDto()
-			{
-				Id = b.Id,
-				Title = b.Title,
-				ImageUrl = b.Images.FirstOrDefault().ImageUrl
-			});
+		(int totalCount, var activeBan) = await bannerRepository.GetActiveBannersPaged(request);
 		var pageSize = (request.PageSize == 0 ? 10 : request.PageSize);
-		var page = (request.Page == 0 ? 1 : request.Page);
-		var banners = PagedList<GetBannersDto>.CreateAsync(bannerResponseQuery, page, pageSize);
+		var page = (request.PageNumber == 0 ? 1 : request.PageNumber);
+		var banners = PagedList<GetBannersDto>.CreateAsync(activeBan, totalCount, page, pageSize);
 		return await banners;
 	}
-
-	private static Expression<Func<Banner, object>> GetSortProperty(string? sortColumn) =>
-		sortColumn?.ToLower() switch
-		{
-			"title" => banner => banner.Title,
-			_ => banner => banner.Id
-		};
 }

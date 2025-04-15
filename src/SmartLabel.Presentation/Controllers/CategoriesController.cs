@@ -1,11 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SmartLabel.Application.Bases;
 using SmartLabel.Application.Enumeration;
 using SmartLabel.Application.Features.Categories.Command.Models;
 using SmartLabel.Application.Features.Categories.Query.Models;
-using SmartLabel.Application.Features.Categories.Query.Results;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
@@ -20,9 +18,9 @@ public class CategoriesController(ISender sender) : AppControllerBase
 	}
 
 	[HttpGet("paginated")]
-	public async Task<PagedList<GetAllCategoriesDto>> GetAllCategoriesPaginated([FromQuery] GetAllCategoriesPaginatedQuery query)
+	public async Task<IActionResult> GetAllCategoriesPaginated([FromQuery] GetAllCategoriesPaginatedQuery query)
 	{
-		return await sender.Send(query);
+		return Ok(await sender.Send(query));
 	}
 
 	[HttpGet("{id:int}")]

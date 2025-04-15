@@ -17,6 +17,7 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 		try
 		{
 			var banner = mapper.Map<Banner>(request);
+			if (request.MainImage is not null) banner.MainImage = await fileService.BuildImageAsync(request.MainImage);
 			await bannerRepository.AddBannerAsync(banner);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			if (request.ImagesFiles is not null)
@@ -24,6 +25,7 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 				var bannerImages = new List<BannerImage>();
 				foreach (var image in request.ImagesFiles)
 				{
+
 					var bannerImage = new BannerImage()
 					{
 						Id = 0,
