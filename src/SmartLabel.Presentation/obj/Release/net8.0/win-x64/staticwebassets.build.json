@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "6pUPJRmZIhfz6QQe43jMohalagqI2oIDyYfLgJUsLrc=",
+  "Source": "SmartLabel.Presentation",
+  "BasePath": "_content/SmartLabel.Presentation",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SmartLabel.Presentation\\wwwroot",
+      "Source": "SmartLabel.Presentation",
+      "ContentRoot": "D:\\SmartLabel\\src\\SmartLabel.Presentation\\wwwroot\\",
+      "BasePath": "_content/SmartLabel.Presentation",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
