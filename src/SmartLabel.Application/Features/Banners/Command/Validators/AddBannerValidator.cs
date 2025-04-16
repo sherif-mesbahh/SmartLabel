@@ -14,10 +14,11 @@ public class AddBannerValidator : AbstractValidator<AddBannerCommand>
 	{
 		RuleFor(x => x.Title)
 			.NotEmpty().WithMessage("{PropertyName} must be not empty")
-			.NotNull().WithMessage("{PropertyName} must be not null")
-			.MaximumLength(200).WithMessage("{PropertyName} cannot exceed 200 characters.");
-		RuleFor(x => x.ImagesFiles)
-			.NotNull().WithMessage("You must put at least a image");
+			.MaximumLength(1000).WithMessage("{PropertyName} cannot exceed 1000 characters.");
+		RuleFor(x => x.Description)
+			.MaximumLength(20000).WithMessage("{PropertyName} cannot exceed 20000 characters.");
+		RuleFor(x => x.MainImage)
+			.NotEmpty().WithMessage("You should upload at least one Image");
 	}
 	private void AddCustomValidationRules()
 	{

@@ -17,13 +17,16 @@ public class AddProductValidator : AbstractValidator<AddProductCommand>
 	{
 		RuleFor(x => x.Name)
 			.NotEmpty().WithMessage("{PropertyName} must be not empty")
-			.NotNull().WithMessage("{PropertyName} must be not null")
 			.MaximumLength(200).WithMessage("{PropertyName} cannot exceed 200 characters.");
+		RuleFor(x => x.Description)
+			.MaximumLength(20000).WithMessage("{PropertyName} cannot exceed 20000 characters.");
 		RuleFor(x => x.OldPrice)
 			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
 
 		RuleFor(x => x.CatId)
 			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
+		RuleFor(x => x.MainImage)
+			.NotEmpty().WithMessage("You should upload at least one Image");
 	}
 
 	private void AddCustomValidationRules()
