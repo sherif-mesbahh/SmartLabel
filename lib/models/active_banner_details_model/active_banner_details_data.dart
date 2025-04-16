@@ -1,3 +1,5 @@
+import 'package:smart_label_software_engineering/models/active_banner_details_model/active_banners_details_data_images_model.dart';
+
 class ActiveBannerDetailsData {
   int? id;
   String? title;
@@ -5,7 +7,7 @@ class ActiveBannerDetailsData {
   DateTime? startDate;
   DateTime? endDate;
   String? mainImage;
-  List<String>? images;
+  List<ActiveBannersDetailsDataImages>? images;
 
   ActiveBannerDetailsData({
     this.id,
@@ -30,7 +32,7 @@ class ActiveBannerDetailsData {
             : DateTime.parse(json['endDate'] as String),
         mainImage: json['mainImage'] as String?,
         images: (json['images'] as List<dynamic>?)
-            ?.map((e) => e.toString())
+            ?.map((e) => ActiveBannersDetailsDataImages.fromJson(e))
             .toList(),
       );
 
@@ -41,6 +43,6 @@ class ActiveBannerDetailsData {
         'startDate': startDate?.toIso8601String(),
         'endDate': endDate?.toIso8601String(),
         'mainImage': mainImage,
-        'images': images,
+        'images': images?.map((e) => e.toJson()).toList(),
       };
 }

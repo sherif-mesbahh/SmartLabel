@@ -31,7 +31,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             elevation: 0,
             currentIndex: AppCubit.get(context).navBarCurrentIndex,
             onTap: (value) {
-              AppCubit.get(context).changeNavBarCurrentIndex(index: value);
+              AppCubit.get(context).changeNavBarCurrentIndex(index: value,);
             },
             type: BottomNavigationBarType.fixed,
             selectedItemColor: secondaryColor,

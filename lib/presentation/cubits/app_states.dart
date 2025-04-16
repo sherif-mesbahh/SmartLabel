@@ -137,3 +137,23 @@ class RefreshTokenErrorState extends AppStates {
 }
 
 class CheckLoginStatusState extends AppStates {}
+
+class AddToFavLoadingState extends AppStates {}
+
+class AddToFavSuccessState extends AppStates {}
+
+class AddToFavErrorState extends AppStates {
+  String error;
+
+  AddToFavErrorState(this.error);
+}
+
+class GetUserInfoLoadingState extends AppStates {}
+
+class GetUserInfoSuccessState extends AppStates {}
+
+class GetUserInfoErrorState extends AppStates {
+  String error;
+
+  GetUserInfoErrorState(this.error);
+}

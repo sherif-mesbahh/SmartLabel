@@ -48,8 +48,8 @@ class ListViewSearchProductWidget extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
-                      imageUrl: product?.imageUrl != null
-                          ? 'http://smartlabel1.runasp.net/Uploads/${product!.imageUrl}'
+                      imageUrl: product?.mainImage != null
+                          ? 'http://smartlabel1.runasp.net/Uploads/${product!.mainImage}'
                           : 'https://via.placeholder.com/150',
                       fit: BoxFit.cover,
                       placeholder: (context, url) => const Center(

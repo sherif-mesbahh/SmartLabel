@@ -23,7 +23,7 @@ class FavListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = cubit.favModel?.data?[index];
-    final String imageUrl = favModel.imageUrl ?? '';
+    final String imageUrl = favModel.mainImage ?? '';
     final bool hasDiscount =
         favModel.oldPrice != null && favModel.oldPrice! > favModel.newPrice!;
 

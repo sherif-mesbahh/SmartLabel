@@ -27,8 +27,11 @@ class BannerDetailsPage extends StatelessWidget {
             current is GetActiveBannerDetailsSuccessState,
         builder: (context, state) {
           final banner = cubit.activeBannerDetailsModel?.data;
-          final List<String> bannerImages = banner?.images ?? [];
-
+          final List<String> bannerImages = banner?.images
+                  ?.map((img) => img.imageUrl ?? '')
+                  .where((url) => url.isNotEmpty)
+                  .toList() ??
+              [];
           if (banner == null) {
             return const Center(
               child: Text(

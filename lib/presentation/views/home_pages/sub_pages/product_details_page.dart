@@ -87,7 +87,10 @@ class ProductDetailsPage extends StatelessWidget {
                     if (product.images != null && product.images!.isNotEmpty)
                       ProductImagesPageView(
                         pageController: pageController,
-                        images: product.images!,
+                        images: product.images!
+                            .map((img) => img.imageUrl ?? '')
+                            .where((url) => url.isNotEmpty)
+                            .toList(),
                       )
                     else
                       Container(
@@ -105,7 +108,10 @@ class ProductDetailsPage extends StatelessWidget {
                     if (product.images != null && product.images!.isNotEmpty)
                       ProductDetailsImagesIndicator(
                         pageController: pageController,
-                        images: product.images!,
+                        images: product.images!
+                            .map((img) => img.imageUrl ?? '')
+                            .where((url) => url.isNotEmpty)
+                            .toList(),
                       ),
                     const SizedBox(height: 10),
                     ProductDetailsPriceRow(

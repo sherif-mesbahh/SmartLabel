@@ -9,12 +9,14 @@ class ApiEndpoints {
   static const String productSearch = 'Products/paginated/';
   static const String categorySearch = 'Categories/paginated/';
   static const String favSearch = 'favorites/paginated/';
+  static const String userInfo = 'me';
 
   // Specific endpoints
   static String userById(int id) => 'User/$id';
   static String productById(int id) => 'Products/$id';
   static String categoryById(int id) => 'Categories/$id';
   static String bannerById(int id) => 'Banners/$id';
+  static String addtoFavById(int id) => 'favorites/$id';
 
   // Auth
   static const String register = 'Authentication/register';

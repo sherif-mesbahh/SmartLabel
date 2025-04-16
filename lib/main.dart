@@ -9,16 +9,14 @@ import 'package:smart_label_software_engineering/presentation/views/sign_pages/s
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+
   final appCubit = AppCubit();
-  await appCubit.checkLoginStatus();
-  await appCubit.checkLoginStatus();
+  await appCubit
+      .checkLoginStatus(); // Ensure login status is checked before app starts
 
   runApp(MultiBlocProvider(
     providers: [
-      BlocProvider(
-          create: (context) => appCubit
-            ..getProducts()
-            ..getActiveBanners()),
+      BlocProvider(create: (context) => appCubit),
     ],
     child: const MyApp(),
   ));
@@ -35,7 +33,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           final appCubit = AppCubit.get(context);
 
-          if (appCubit.isLoggedIn) {
+          if (appCubit.isLogin) {
             return Layout();
           } else {
             return SignPage();

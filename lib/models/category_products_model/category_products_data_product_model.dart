@@ -6,7 +6,7 @@ class CategoryProductsDataProductModel {
   int? newPrice;
   int? categoryId;
   bool? favorite;
-  String? imageUrl;
+  String? mainImage;
 
   CategoryProductsDataProductModel({
     this.id,
@@ -16,7 +16,7 @@ class CategoryProductsDataProductModel {
     this.newPrice,
     this.categoryId,
     this.favorite,
-    this.imageUrl,
+    this.mainImage,
   });
 
   factory CategoryProductsDataProductModel.fromJson(
@@ -29,7 +29,7 @@ class CategoryProductsDataProductModel {
         newPrice: _convertToInt(json['newPrice']),
         categoryId: json['categoryId'] as int?,
         favorite: json['favorite'] as bool?,
-        imageUrl: json['imageUrl'] as String?,
+        mainImage: json['mainImage'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -40,7 +40,7 @@ class CategoryProductsDataProductModel {
         'newPrice': newPrice,
         'categoryId': categoryId,
         'favorite': favorite,
-        'imageUrl': imageUrl,
+        'mainImage': mainImage,
       };
 
   // Helper function to handle the conversion

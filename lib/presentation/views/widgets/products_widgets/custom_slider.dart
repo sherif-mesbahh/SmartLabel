@@ -66,7 +66,7 @@ class CustomSlider extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
                     imageUrl:
-                        "http://smartlabel1.runasp.net/Uploads/${banner.imageUrl}",
+                        "http://smartlabel1.runasp.net/Uploads/${banner.mainImage}",
                     fit: BoxFit.cover,
                     placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(

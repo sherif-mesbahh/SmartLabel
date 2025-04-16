@@ -60,6 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: BlocConsumer<AppCubit, AppStates>(
                   listener: (context, state) {
                     if (state is RegisterSuccessState) {
+                      Navigator.of(context, rootNavigator: true).pop();
                       navigatorAndRemove(context, SignPage(), slideRightToLeft);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -69,10 +70,20 @@ class _SignUpPageState extends State<SignUpPage> {
                       );
                     }
                     if (state is RegisterErrorState) {
+                      Navigator.of(context, rootNavigator: true).pop();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(state.error),
                           backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                    if (state is RegisterLoadingState) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => const Center(
+                          child: CircularProgressIndicator(color: primaryColor),
                         ),
                       );
                     }
@@ -168,15 +179,11 @@ class _SignUpPageState extends State<SignUpPage> {
                               }
                             },
                             color: primaryColor,
-                            child: state is RegisterLoadingState
-                                ? const CircularProgressIndicator(
-                                    color: secondaryColor,
-                                  )
-                                : Text(
-                                    'Sign up',
-                                    style: TextStyles.buttonText
-                                        .copyWith(color: secondaryColor),
-                                  ),
+                            child: Text(
+                              'Sign up',
+                              style: TextStyles.buttonText
+                                  .copyWith(color: secondaryColor),
+                            ),
                           ),
                           const SizedBox(height: 8.0),
                           TextButton(

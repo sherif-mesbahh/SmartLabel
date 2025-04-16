@@ -5,7 +5,7 @@ class ProductDatum {
   num? discount;
   num? newPrice;
   int? categoryId;
-  dynamic imageUrl;
+  String? mainImage;
   bool? favorite;
 
   ProductDatum({
@@ -15,7 +15,7 @@ class ProductDatum {
     this.discount,
     this.newPrice,
     this.categoryId,
-    this.imageUrl,
+    this.mainImage,
     this.favorite,
   });
 
@@ -26,7 +26,7 @@ class ProductDatum {
         discount: json['discount'] as num?,
         newPrice: json['newPrice'] as num?,
         categoryId: json['categoryId'] as int?,
-        imageUrl: json['imageUrl'],
+        mainImage: json['mainImage'],
         favorite: json['favorite'],
       );
 
@@ -37,7 +37,7 @@ class ProductDatum {
         'discount': discount,
         'newPrice': newPrice,
         'categoryId': categoryId,
-        'imageUrl': imageUrl,
+        'mainImage': mainImage,
         'favorite': favorite,
       };
 }

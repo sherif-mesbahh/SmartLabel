@@ -5,7 +5,7 @@ class ProductSearchDatum {
   int? discount;
   int? newPrice;
   int? categoryId;
-  String? imageUrl;
+  String? mainImage;
   bool? favorite;
 
   ProductSearchDatum({
@@ -15,7 +15,7 @@ class ProductSearchDatum {
     this.discount,
     this.newPrice,
     this.categoryId,
-    this.imageUrl,
+    this.mainImage,
     this.favorite,
   });
 
@@ -27,7 +27,7 @@ class ProductSearchDatum {
       discount: (json['discount'] as num?)?.toInt(),
       newPrice: (json['newPrice'] as num?)?.toInt(),
       categoryId: json['categoryId'] as int?,
-      imageUrl: json['imageUrl'] as String?,
+      mainImage: json['mainImage'] as String?,
       favorite: json['favorite'],
     );
   }
@@ -39,7 +39,7 @@ class ProductSearchDatum {
         'discount': discount,
         'newPrice': newPrice,
         'categoryId': categoryId,
-        'imageUrl': imageUrl,
+        'mainImage': mainImage,
         'favorite': favorite,
       };
 }

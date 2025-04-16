@@ -46,7 +46,7 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
                         imageUrl:
-                            'http://smartlabel1.runasp.net/Uploads/${model.imageUrl}',
+                            'http://smartlabel1.runasp.net/Uploads/${model.mainImage}',
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(

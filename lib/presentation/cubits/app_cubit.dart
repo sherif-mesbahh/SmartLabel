@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
@@ -184,7 +185,9 @@ class AppCubit extends Cubit<AppStates> {
     emit(GetFavProductsLoadingState());
 
     try {
-      final response = await ApiService().get(ApiEndpoints.favProduct);
+      final response = await ApiService().get(
+        ApiEndpoints.favProduct,
+      );
       if (response.statusCode == 200) {
         favModel = FavModel.fromJson(response.data);
         emit(GetFavProductsSuccessState());
@@ -313,8 +316,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   LoginModel? loginModel;
-
-  bool isLoggedIn = false;
   Future<void> login({required Map<String, String> data}) async {
     emit(LoginLoadingState());
 
@@ -322,21 +323,30 @@ class AppCubit extends Cubit<AppStates> {
       final response = await ApiService().post(ApiEndpoints.login, data);
       loginModel = LoginModel.fromJson(response.data);
 
-      final accessToken = response.data['data']['accessToken'];
-      final refreshToken = response.data['data']['refreshToken'];
+      final accessToken = loginModel?.data?.accessToken;
+      final refreshToken = loginModel?.data?.refreshToken;
 
-      await SecureTokenStorage.saveTokens(accessToken, refreshToken);
-      isLoggedIn = true;
-      emit(LoginSuccessState());
+      if (accessToken != null && refreshToken != null) {
+        await SecureTokenStorage.saveTokens(accessToken, refreshToken);
+        isLogin = true;
+
+        // Call initial data fetch
+        getProducts();
+        getActiveBanners();
+
+        emit(LoginSuccessState());
+      } else {
+        emit(LoginErrorState('Invalid login response data.'));
+      }
     } on DioException catch (dioError) {
       String errorMessage = 'Login failed';
 
       if (dioError.response != null) {
         final responseData = dioError.response?.data;
-        final message = responseData['message'];
-        final errors = responseData['errors'];
+        final message = responseData?['message'];
+        final errors = responseData?['errors'];
 
-        errorMessage = errors != null && errors is List && errors.isNotEmpty
+        errorMessage = (errors is List && errors.isNotEmpty)
             ? errors.join(', ')
             : (message ?? 'Login failed');
       }
@@ -344,25 +354,62 @@ class AppCubit extends Cubit<AppStates> {
       emit(LoginErrorState(errorMessage));
       log('Login DioException: $errorMessage');
     } catch (e) {
-      emit(LoginErrorState(e.toString()));
+      emit(LoginErrorState('Unexpected error: $e'));
       log('Login unexpected error: $e');
     }
   }
 
+  bool isLogin = false;
+
   Future<void> checkLoginStatus() async {
     final accessToken = await SecureTokenStorage.getAccessToken();
-    if (accessToken != null) {
-      isLoggedIn = true;
+    final refreshToken = await SecureTokenStorage.getRefreshToken();
+
+    isLogin = accessToken != null && refreshToken != null;
+
+    if (isLogin) {
+      getUserInfo();
+      emit(LoginSuccessState());
     } else {
-      isLoggedIn = false;
+      getUserInfo();
+      emit(LoginErrorState('Not logged in'));
     }
+  }
+
+  Future<void> getUserInfo() async {
+    emit(GetUserInfoLoadingState());
+    log('[UserInfo] Started loading...');
+
+    try {
+      final response = await ApiService().get(ApiEndpoints.userInfo);
+      log('[UserInfo] Response received with status: ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        emit(GetUserInfoSuccessState());
+      } else {
+        emit(GetUserInfoErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('[UserInfo] Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(GetUserInfoErrorState(e.toString()));
+      log('[UserInfo] Caught exception: ${e.toString()}');
+    }
+  }
+
+  Future<void> logout() async {
+    await SecureTokenStorage.clearTokens();
+    isLogin = false;
+    navBarCurrentIndex = 0;
+
     emit(CheckLoginStatusState());
   }
 
-//  logout
-//  loding indicator in login an signup
-//  the categories and items overflow in products page and categories prodcucts and
+  //  the categories and items overflow in products page and categories prodcucts and
 //  favvorite products and products details and search products and banners deatails
 //  more tests on login and the tokens
-//  favorite heart
+//  favorite heart tab
+
+
+// the app find the 401 error only if hot restart
 }

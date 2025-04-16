@@ -1,3 +1,5 @@
+import 'package:smart_label_software_engineering/models/product_details_model/product_details_data_images_model.dart';
+
 class ProductDetailsDataModel {
   int? id;
   String? name;
@@ -8,7 +10,7 @@ class ProductDetailsDataModel {
   String? mainImage;
   int? categoryId;
   bool? favorite;
-  List<String>? images;
+  List<ProductDetailsDataImagesModel>? images;
 
   ProductDetailsDataModel({
     this.id,
@@ -34,7 +36,9 @@ class ProductDetailsDataModel {
         categoryId: json['categoryId'] as int?,
         favorite: json['favorite'],
         mainImage: json['mainImage'] as String?,
-        images: (json['images'] as List?)?.map((e) => e.toString()).toList(),
+        images: (json['images'] as List<dynamic>?)
+            ?.map((e) => ProductDetailsDataImagesModel.fromJson(e))
+            .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +51,6 @@ class ProductDetailsDataModel {
         'categoryId': categoryId,
         'favorite': favorite,
         'mainImage': mainImage,
-        'images': images,
+        'images': images?.map((e) => e.toJson()).toList(),
       };
 }

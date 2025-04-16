@@ -35,17 +35,18 @@ class ActiveBannerDetailsImageSlider extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl: "http://smartlabel1.runasp.net/Uploads/$imageUrl",
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(
-                      color: primaryColor,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.broken_image),
-                ),
+                child: imageUrl.isNotEmpty
+                    ? CachedNetworkImage(
+                        imageUrl:
+                            "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(color: primaryColor),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.broken_image),
+                      )
+                    : const Icon(Icons.image_not_supported, size: 60),
               ),
             );
           },

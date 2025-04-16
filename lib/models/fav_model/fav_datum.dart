@@ -6,7 +6,7 @@ class FavDatum {
   int? newPrice;
   int? categroyId;
   bool? favorite;
-  String? imageUrl;
+  String? mainImage;
 
   FavDatum({
     this.id,
@@ -15,7 +15,7 @@ class FavDatum {
     this.discount,
     this.newPrice,
     this.categroyId,
-    this.imageUrl,
+    this.mainImage,
     this.favorite,
   });
 
@@ -33,7 +33,7 @@ class FavDatum {
             : (json['newPrice'] as num?)?.toInt(),
         categroyId: json['categoryId'] as int?,
         favorite: json['favorite'],
-        imageUrl: json['imageUrl'] as String?,
+        mainImage: json['mainImage'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +44,6 @@ class FavDatum {
         'newPrice': newPrice,
         'categoryId': categroyId,
         'favorite': favorite,
-        'imageUrl': imageUrl,
+        'mainImage': mainImage,
       };
 }
