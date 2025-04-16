@@ -18,7 +18,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		               SELECT 
 		                   b.Id AS Id, 
 		                   b.Title AS Title, 
-		                   b.MainImage AS ImageUrl
+		                   b.MainImage AS MainImage
 		               FROM Banners b 
 		               """;
 		var banners = await connection.QueryAsync<GetBannersDto>(sqlQuery);
@@ -33,7 +33,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		               SELECT 
 		                   b.Id AS Id, 
 		                   b.Title AS Title, 
-		                   b.MainImage AS ImageUrl
+		                   b.MainImage AS MainImage
 		               FROM Banners b 
 		               WHERE GETUTCDATE() BETWEEN b.StartDate AND b.EndDate
 		               """;

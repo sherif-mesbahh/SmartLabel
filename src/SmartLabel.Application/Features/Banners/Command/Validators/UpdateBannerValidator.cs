@@ -20,7 +20,7 @@ public class UpdateBannerValidator : AbstractValidator<UpdateBannerCommand>
 			.NotNull().WithMessage("{PropertyName} must be not null")
 			.MaximumLength(1000).WithMessage("{PropertyName} cannot exceed 1000 characters.");
 		RuleFor(x => x.Description)
-			.MaximumLength(20000).WithMessage("{PropertyName} cannot exceed 20000 characters.");
+			.MaximumLength(2000).WithMessage("{PropertyName} cannot exceed 2000 characters.");
 
 		RuleFor(x => x.MainImage)
 			.NotEmpty().WithMessage("You should upload at least one Image");

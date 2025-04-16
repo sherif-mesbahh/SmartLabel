@@ -69,7 +69,7 @@ public class CategoryRepository(AppDbContext context, IUserFavProductRepository 
 		                   p.Discount AS Discount,
 		                   p.OldPrice AS OldPrice, 
 		                   p.NewPrice AS NewPrice, 
-		                   p.MainImage AS ImageUrl,
+		                   p.MainImage AS MainImage,
 		                   p.CatId AS CategoryName,
 		                   p.Favorite AS Favorite
 		               FROM Categories c 

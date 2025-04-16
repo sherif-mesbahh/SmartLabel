@@ -24,3 +24,16 @@ D:\rep\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.dll
 D:\rep\src\SmartLabel.Domain\obj\Debug\net8.0\refint\SmartLabel.Domain.dll
 D:\rep\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.pdb
 D:\rep\src\SmartLabel.Domain\obj\Debug\net8.0\ref\SmartLabel.Domain.dll
+D:\SmartLabel\src\SmartLabel.Domain\bin\Debug\net8.0\SmartLabel.Domain.deps.json
+D:\SmartLabel\src\SmartLabel.Domain\bin\Debug\net8.0\SmartLabel.Domain.dll
+D:\SmartLabel\src\SmartLabel.Domain\bin\Debug\net8.0\SmartLabel.Domain.pdb
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.csproj.AssemblyReference.cache
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.AssemblyInfoInputs.cache
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.AssemblyInfo.cs
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.csproj.CoreCompileInputs.cache
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.sourcelink.json
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.dll
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\refint\SmartLabel.Domain.dll
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\SmartLabel.Domain.pdb
+D:\SmartLabel\src\SmartLabel.Domain\obj\Debug\net8.0\ref\SmartLabel.Domain.dll
