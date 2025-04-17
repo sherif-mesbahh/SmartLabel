@@ -12,10 +12,11 @@ import 'package:smart_label_software_engineering/presentation/views/home_pages/s
 
 class GridViewCategoryProductsPageItem extends StatelessWidget {
   final CategoryProductsDataProductModel model;
-
+  final int categoryId;
   const GridViewCategoryProductsPageItem({
     super.key,
     required this.model,
+    this.categoryId = 1,
   });
 
   @override
@@ -23,7 +24,7 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         AppCubit.get(context).getProductDetails(id: model.id!).then((onValue) {
-          pushNavigator(context, ProductDetailsPage(), slideRightToLeft);
+          pushNavigator(context, ProductDetailsPage(categoryId: categoryId,), slideRightToLeft);
         });
       },
       child: Stack(

@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/product_details_page.dart';
 
 class ListViewSearchProductWidget extends StatelessWidget {
@@ -96,28 +98,43 @@ class ListViewSearchProductWidget extends StatelessWidget {
               ),
             ),
             Spacer(),
-            product?.favorite ?? false
-                ? Lottie.asset(
-                    'assets/lottie/inFavAnimation.json',
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
-                    repeat: false,
-                    reverse: false,
-                    animate: true,
-                  )
-                : Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                    child: Lottie.asset(
-                      'assets/lottie/notFavAnimation.json',
-                      width: 40,
-                      height: 40,
-                      repeat: false,
-                      reverse: false,
-                      animate: true,
-                    ),
-                  ),
+            BlocBuilder<AppCubit, AppStates>(
+              builder: (context, state) {
+                final bool favorite = product?.favorite ?? false;
+                return favorite
+                    ? InkWell(
+                        onTap: () {
+                          cubit.removeFromFav(model: product!);
+                        },
+                        child: Lottie.asset(
+                          'assets/lottie/inFavAnimation.json',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                          repeat: false,
+                          reverse: false,
+                          animate: true,
+                        ),
+                      )
+                    : InkWell(
+                        onTap: () {
+                          cubit.addToFav(model: product!);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          child: Lottie.asset(
+                            'assets/lottie/notFavAnimation.json',
+                            width: 40,
+                            height: 40,
+                            repeat: false,
+                            reverse: false,
+                            animate: true,
+                          ),
+                        ),
+                      );
+              },
+            ),
           ],
         ),
       ),

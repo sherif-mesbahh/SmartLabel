@@ -111,7 +111,10 @@ class _SearchPageState extends State<SearchPage> {
                   const SizedBox(height: 10),
 
                   // Using BlocBuilder for SearchItemsList widget
-                  SearchItemsList(selectedType: selectedType, cubit: cubit),
+                  SearchItemsList(
+                    selectedType: selectedType,
+                    cubit: cubit,
+                  ),
                 ],
               ),
             ),

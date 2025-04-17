@@ -8,7 +8,11 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_states.
 import 'package:smart_label_software_engineering/presentation/views/widgets/categories_widgets/grid_view_category_products_page_item.dart';
 
 class CategoriesProductsPage extends StatelessWidget {
-  const CategoriesProductsPage({super.key});
+  final int categoryId;
+  const CategoriesProductsPage({
+    super.key,
+    this.categoryId = 1,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +43,9 @@ class CategoriesProductsPage extends StatelessWidget {
       ),
       body: BlocBuilder<AppCubit, AppStates>(
         buildWhen: (prev, curr) =>
-            curr is GetProductsLoadingState ||
-            curr is GetProductsSuccessState ||
-            curr is GetProductsErrorState,
+            curr is GetCategoryProductsLoadingState ||
+            curr is GetCategoryProductsErrorState ||
+            curr is GetCategoryProductsSuccessState,
         builder: (context, state) {
           final products = cubit.categoryProductsModel?.data?.products;
 
@@ -78,7 +82,9 @@ class CategoriesProductsPage extends StatelessWidget {
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       return GridViewCategoryProductsPageItem(
-                          model: products[index]);
+                        model: products[index],
+                        categoryId: categoryId,
+                      );
                     },
                   ),
                 ],

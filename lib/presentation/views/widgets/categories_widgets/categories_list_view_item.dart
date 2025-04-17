@@ -47,7 +47,11 @@ class CategoriesListViewItem extends StatelessWidget {
                   .getCategoryProducts(id: model.id!)
                   .then((onValue) {
                 pushNavigator(
-                    context, CategoriesProductsPage(), slideRightToLeft);
+                    context,
+                    CategoriesProductsPage(
+                      categoryId: model.id!,
+                    ),
+                    slideRightToLeft);
               });
             },
             icon: Icon(

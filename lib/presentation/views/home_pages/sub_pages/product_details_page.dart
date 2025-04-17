@@ -10,8 +10,10 @@ import 'package:smart_label_software_engineering/presentation/views/widgets/prod
 import 'package:smart_label_software_engineering/presentation/views/widgets/product_details_widgets/product_details_price_row_widget.dart';
 
 class ProductDetailsPage extends StatelessWidget {
+  final int categoryId;
   ProductDetailsPage({
     super.key,
+    this.categoryId = 1,
   });
   final PageController pageController = PageController();
 
@@ -33,7 +35,7 @@ class ProductDetailsPage extends StatelessWidget {
                 }
                 if (AppCubit.get(context).navBarCurrentIndex == 1) {
                   AppCubit.get(context).getCategoryProducts(
-                    id: AppCubit.get(context).categoryModel!.data![0].id!,
+                    id: categoryId,
                   );
                   popNavigator(context);
                 }

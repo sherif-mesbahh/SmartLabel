@@ -16,7 +16,6 @@ import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart
 import 'package:smart_label_software_engineering/models/login_model/login_model.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
-import 'package:smart_label_software_engineering/models/product_model/product_datum.dart';
 import 'package:smart_label_software_engineering/models/product_search_model/product_search_model.dart';
 import 'package:smart_label_software_engineering/models/register_model/register_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -453,9 +452,5 @@ class AppCubit extends Cubit<AppStates> {
       log('[RemoveFromFav] Caught exception: ${e.toString()}');
     }
   }
-  //  the categories and items overflow in products page and categories prodcucts and
-//  favvorite products and products details and search products and banners deatails
-//  more tests on login and the tokens
-
-//  favorite heart tab in search and handle after go to categories product details and tap the heart button and go back it doesn't change in the category products list
+  //  the categories and items overflow in products page and categories prodcucts andfavvorite products and products details and search products and banners deatails
 }

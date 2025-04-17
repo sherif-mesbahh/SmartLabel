@@ -5,10 +5,12 @@ import 'package:smart_label_software_engineering/presentation/views/widgets/sear
 import 'package:smart_label_software_engineering/presentation/views/widgets/search_widgets/search_custom_text_widget.dart';
 
 class SearchItemsList extends StatelessWidget {
+  
   const SearchItemsList({
     super.key,
     required this.selectedType,
     required this.cubit,
+    
   });
 
   final String selectedType;
@@ -38,7 +40,11 @@ class SearchItemsList extends StatelessWidget {
         itemBuilder: (context, index) {
           // Directly return the appropriate widget based on selectedType
           if (selectedType == 'Products') {
-            return ListViewSearchProductWidget(cubit: cubit, index: index);
+            return ListViewSearchProductWidget(
+              cubit: cubit,
+              index: index,
+              
+            );
           } else if (selectedType == 'Categories') {
             return ListViewSearchCategoriesWidget(cubit: cubit, index: index);
           } else {
