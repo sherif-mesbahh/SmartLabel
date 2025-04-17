@@ -22,7 +22,6 @@ public class AuthenticationController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
 	[HttpPost("refresh-token")]
 	public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
 	{

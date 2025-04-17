@@ -11,23 +11,6 @@ public class UserFavProductRepository(AppDbContext context, ISqlConnectionFactor
 {
 	public async Task<IEnumerable<GetAllProductsDto>> GetFavProductsByUserAsync(int userId)
 	{
-		//return await context.UserFavProducts
-		//	.AsNoTracking()
-		//	.Where(x => x.UserId == userId)
-		//	.Select(ufp => new GetAllProductsDto()
-		//	{
-		//		Id = ufp.Product.Id,
-		//		Name = ufp.Product.Name,
-		//		OldPrice = ufp.Product.OldPrice,
-		//		Discount = ufp.Product.Discount,
-		//		NewPrice = ufp.Product.NewPrice,
-		//		CategoryId = ufp.Product.CatId,
-		//		ImageUrl = ufp.Product.Images!
-		//			.OrderBy(pi => pi.Id)
-		//			.Select(pi => pi.ImageUrl)
-		//			.FirstOrDefault()
-		//	})
-		//	.ToListAsync();
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -37,7 +20,7 @@ public class UserFavProductRepository(AppDbContext context, ISqlConnectionFactor
 		                   p.OldPrice AS OldPrice, 
 		                   p.NewPrice AS NewPrice,
 		                   P.CatId As CategoryId,
-		                   p.MainImage AS ImageUrl,
+		                   p.MainImage AS MainImage,
 		                   p.Favorite As Favorite
 		               FROM UserFavProducts ufp 
 		               LEFT JOIN Products p
@@ -51,27 +34,6 @@ public class UserFavProductRepository(AppDbContext context, ISqlConnectionFactor
 			product.Favorite = true;
 		}
 		return productsList;
-	}
-
-	public IQueryable<GetAllProductsDto> GetFavProductsByUserQueryable(int userId)
-	{
-		var query = context.UserFavProducts
-			.AsNoTracking()
-			.Where(x => x.UserId == userId)
-			.Select(ufp => new GetAllProductsDto()
-			{
-				Id = ufp.Product.Id,
-				Name = ufp.Product.Name,
-				OldPrice = ufp.Product.OldPrice,
-				Discount = ufp.Product.Discount,
-				NewPrice = ufp.Product.NewPrice,
-				CategoryId = ufp.Product.CatId,
-				MainImage = ufp.Product.Images!
-					.OrderBy(pi => pi.Id)
-					.Select(pi => pi.ImageUrl)
-					.FirstOrDefault()
-			});
-		return query;
 	}
 
 	public async Task AddFavProductAsync(UserFavProduct userFavProduct)
