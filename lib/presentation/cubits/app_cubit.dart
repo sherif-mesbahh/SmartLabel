@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
@@ -17,6 +16,7 @@ import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart
 import 'package:smart_label_software_engineering/models/login_model/login_model.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
+import 'package:smart_label_software_engineering/models/product_model/product_datum.dart';
 import 'package:smart_label_software_engineering/models/product_search_model/product_search_model.dart';
 import 'package:smart_label_software_engineering/models/register_model/register_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -40,6 +40,8 @@ class AppCubit extends Cubit<AppStates> {
     required int index,
   }) {
     navBarCurrentIndex = index;
+    getUserInfo();
+
     emit(ChangeNavBarCurrentIndexState());
 
     if (index == 0) {
@@ -405,11 +407,55 @@ class AppCubit extends Cubit<AppStates> {
     emit(CheckLoginStatusState());
   }
 
+  Future<void> addToFav({
+    required dynamic model,
+  }) async {
+    emit(AddToFavLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().post(
+          ApiEndpoints.addtoFavById(model.id!), {},
+          headers: {'Authorization': 'Bearer $accessToken'});
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        model.favorite = !(model.favorite ?? false);
+        emit(AddToFavSuccessState());
+      } else {
+        emit(AddToFavErrorState('Failed with status: ${response.statusCode}'));
+        log('[AddToFav] Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(AddToFavErrorState(e.toString()));
+      log('[AddToFav] Caught exception: ${e.toString()}');
+    }
+  }
+
+  Future<void> removeFromFav({
+    required dynamic model,
+  }) async {
+    emit(RemoveFromFavLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().delete(
+          ApiEndpoints.addtoFavById(model.id!),
+          headers: {'Authorization': 'Bearer $accessToken'});
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        model.favorite = !(model.favorite ?? false);
+        emit(RemoveFromFavSuccessState());
+      } else {
+        emit(RemoveFromFavErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('[RemoveFromFav] Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(RemoveFromFavErrorState(e.toString()));
+      log('[RemoveFromFav] Caught exception: ${e.toString()}');
+    }
+  }
   //  the categories and items overflow in products page and categories prodcucts and
 //  favvorite products and products details and search products and banners deatails
 //  more tests on login and the tokens
-//  favorite heart tab
 
-
-// the app find the 401 error only if hot restart
+//  favorite heart tab in search and handle after go to categories product details and tap the heart button and go back it doesn't change in the category products list
 }

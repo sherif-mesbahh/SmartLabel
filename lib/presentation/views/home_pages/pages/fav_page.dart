@@ -29,6 +29,10 @@ class FavPage extends StatelessWidget {
         if (favData.isEmpty) {
           return const Center(child: Text('No favorites found'));
         }
+        if (state is AddToFavSuccessState ||
+            state is RemoveFromFavSuccessState) {
+          cubit.getFav();
+        }
 
         return ListView.builder(
           itemBuilder: (context, index) {

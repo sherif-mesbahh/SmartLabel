@@ -16,7 +16,8 @@ class ApiEndpoints {
   static String productById(int id) => 'Products/$id';
   static String categoryById(int id) => 'Categories/$id';
   static String bannerById(int id) => 'Banners/$id';
-  static String addtoFavById(int id) => 'favorites/$id';
+  static String addtoFavById(int id) => 'me/favorites/$id';
+  static String deleteFromFavById(int id) => 'me/favorites/$id';
 
   // Auth
   static const String register = 'Authentication/register';

@@ -10,7 +10,9 @@ import 'package:smart_label_software_engineering/presentation/views/widgets/prod
 import 'package:smart_label_software_engineering/presentation/views/widgets/product_details_widgets/product_details_price_row_widget.dart';
 
 class ProductDetailsPage extends StatelessWidget {
-  ProductDetailsPage({super.key});
+  ProductDetailsPage({
+    super.key,
+  });
   final PageController pageController = PageController();
 
   @override
@@ -20,15 +22,33 @@ class ProductDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        leading: IconButton(
-          onPressed: () {
-            popNavigator(context);
+        leading: BlocBuilder<AppCubit, AppStates>(
+          builder: (context, state) {
+            return IconButton(
+              onPressed: () {
+                if (AppCubit.get(context).navBarCurrentIndex == 0) {
+                  AppCubit.get(context).getProducts();
+                  AppCubit.get(context).getBanners();
+                  popNavigator(context);
+                }
+                if (AppCubit.get(context).navBarCurrentIndex == 1) {
+                  AppCubit.get(context).getCategoryProducts(
+                    id: AppCubit.get(context).categoryModel!.data![0].id!,
+                  );
+                  popNavigator(context);
+                }
+                if (AppCubit.get(context).navBarCurrentIndex == 2) {
+                  AppCubit.get(context).getFav();
+                  popNavigator(context);
+                }
+              },
+              icon: Icon(
+                Icons.arrow_back_outlined,
+                color: secondaryColor,
+                size: 30,
+              ),
+            );
           },
-          icon: Icon(
-            Icons.arrow_back_outlined,
-            color: secondaryColor,
-            size: 30,
-          ),
         ),
         title: Row(
           children: [
@@ -44,17 +64,7 @@ class ProductDetailsPage extends StatelessWidget {
       backgroundColor: secondaryColor,
       body: BlocListener<AppCubit, AppStates>(
         listener: (context, state) {
-          if (state is GetProductDetailsLoadingState) {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (_) => const Center(
-                child: CircularProgressIndicator(color: primaryColor),
-              ),
-            );
-          } else {
-            Navigator.of(context, rootNavigator: true).pop();
-          }
+          if (state is GetProductDetailsLoadingState) {}
         },
         child: BlocBuilder<AppCubit, AppStates>(
           buildWhen: (previous, current) =>
@@ -117,7 +127,7 @@ class ProductDetailsPage extends StatelessWidget {
                     ProductDetailsPriceRow(
                       newPrice: product.newPrice?.toString() ?? '0',
                       oldPrice: product.oldPrice?.toString() ?? '',
-                      favorite: product.favorite ?? false,
+                      model: product,
                     ),
                     const SizedBox(height: 10),
                     Text(

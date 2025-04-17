@@ -11,8 +11,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
 
   final appCubit = AppCubit();
-  await appCubit
-      .checkLoginStatus(); // Ensure login status is checked before app starts
+  await appCubit.checkLoginStatus();
 
   runApp(MultiBlocProvider(
     providers: [

@@ -14,6 +14,15 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = AppCubit.get(context);
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (cubit.productModel == null) {
+        cubit.getProducts(); 
+      }
+      if (cubit.activeBannersModel == null) {
+        cubit.getActiveBanners();
+      }
+    });
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(

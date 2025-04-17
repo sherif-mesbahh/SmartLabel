@@ -90,14 +90,15 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
             ],
           ),
           BlocBuilder<AppCubit, AppStates>(
-            //buildWhen: (previous, current) => current is changeFavSuccessState,
             builder: (context, state) {
               return Positioned(
                 top: -5,
                 right: -5,
                 child: model.favorite!
                     ? InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          AppCubit.get(context).removeFromFav(model: model);
+                        },
                         child: Lottie.asset(
                           'assets/lottie/inFavAnimation.json',
                           width: 50,
@@ -109,7 +110,9 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                         ),
                       )
                     : InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          AppCubit.get(context).addToFav(model: model);
+                        },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 5, vertical: 5),

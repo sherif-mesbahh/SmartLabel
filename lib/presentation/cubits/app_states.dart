@@ -148,6 +148,16 @@ class AddToFavErrorState extends AppStates {
   AddToFavErrorState(this.error);
 }
 
+class RemoveFromFavLoadingState extends AppStates {}
+
+class RemoveFromFavSuccessState extends AppStates {}
+
+class RemoveFromFavErrorState extends AppStates {
+  String error;
+
+  RemoveFromFavErrorState(this.error);
+}
+
 class GetUserInfoLoadingState extends AppStates {}
 
 class GetUserInfoSuccessState extends AppStates {}
