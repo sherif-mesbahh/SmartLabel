@@ -36,7 +36,9 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_secure_storage: ^9.2.4
+  fluttertoast: ^8.2.12
   google_fonts: ^6.2.1
+  image_picker: ^1.1.2
   intl: ^0.20.2
   lottie: ^3.3.1
   smooth_page_indicator: ^1.2.1

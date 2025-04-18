@@ -6,8 +6,8 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.d
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_new_category_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_categories_grid_view_item_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_custom_slider_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/edit_banners_dialog_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/products_widgets/custom_slider.dart';
 
 class AdminCategoriesPage extends StatelessWidget {
   AdminCategoriesPage({super.key});
@@ -33,9 +33,31 @@ class AdminCategoriesPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomSlider(
-                    banners: [],
-                  ),
+                  AppCubit.get(context).bannersModel?.data?.isEmpty ?? false
+                      ? SizedBox()
+                      : BlocBuilder<AppCubit, AppStates>(
+                          buildWhen: (previous, current) =>
+                              current is DeleteBannerLoadingState ||
+                              current is DeleteBannerSuccessState ||
+                              current is DeleteBannerErrorState,
+                          builder: (context, state) {
+                            if (state is GetBannersLoadingState) {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                    color: primaryColor),
+                              );
+                            }
+                            if (state is GetBannersErrorState) {
+                              return Center(
+                                child: Text(state.error,
+                                    style: TextStyles.headline1),
+                              );
+                            }
+                            return AdminCustomSliderWidget(
+                              cubit: AppCubit.get(context),
+                            );
+                          },
+                        ),
                   SizedBox(
                     height: 10,
                   ),
@@ -48,14 +70,14 @@ class AdminCategoriesPage extends StatelessWidget {
                       Spacer(),
                       TextButton(
                         child: Text(
-                          'Edit Banners',
+                          'Add Banners',
                           style: TextStyles.productTitle
                               .copyWith(color: primaryColor),
                         ),
                         onPressed: () {
                           showDialog(
                             context: context,
-                            builder: (context) => EditBannersDialogWidget(),
+                            builder: (context) => AddBannersDialogWidget(),
                           );
                         },
                       ),

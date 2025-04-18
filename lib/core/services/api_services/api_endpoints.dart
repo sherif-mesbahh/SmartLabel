@@ -10,6 +10,7 @@ class ApiEndpoints {
   static const String categorySearch = 'Categories/paginated/';
   static const String favSearch = 'favorites/paginated/';
   static const String userInfo = 'me';
+  static const String addBanner = 'Banners';
 
   // Specific endpoints
   static String userById(int id) => 'User/$id';
@@ -18,6 +19,7 @@ class ApiEndpoints {
   static String bannerById(int id) => 'Banners/$id';
   static String addtoFavById(int id) => 'me/favorites/$id';
   static String deleteFromFavById(int id) => 'me/favorites/$id';
+  static String deleteBannerById(int id) => 'Banners/$id';
 
   // Auth
   static const String register = 'Authentication/register';

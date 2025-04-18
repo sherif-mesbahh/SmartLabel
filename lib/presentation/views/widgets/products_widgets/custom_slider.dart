@@ -3,12 +3,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
-import 'package:smart_label_software_engineering/models/acitve_banners_model/active_banners_datum.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/banner_details_page.dart';
 
 class CustomSlider extends StatelessWidget {
-  final List<ActiveBannersDatum> banners;
+  final List<dynamic> banners;
 
   const CustomSlider({
     super.key,
@@ -41,7 +40,7 @@ class CustomSlider extends StatelessWidget {
                 );
 
                 await AppCubit.get(context)
-                    .getActiveBannerDetails(id: banner.id ?? 1);
+                    .getBannerDetails(id: banner.id ?? 1);
 
                 if (context.mounted) {
                   Navigator.of(context).pop();

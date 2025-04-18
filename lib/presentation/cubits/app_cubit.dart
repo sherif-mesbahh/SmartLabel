@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
@@ -18,6 +20,7 @@ import 'package:smart_label_software_engineering/models/product_details_model/pr
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
 import 'package:smart_label_software_engineering/models/product_search_model/product_search_model.dart';
 import 'package:smart_label_software_engineering/models/register_model/register_model.dart';
+import 'package:smart_label_software_engineering/models/user_info_model/user_info_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/categories_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/fav_page.dart';
@@ -124,24 +127,6 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  BannersModel? bannersModel;
-  Future<void> getBanners() async {
-    emit(GetBannersLoadingState());
-
-    try {
-      final response = await ApiService().get(ApiEndpoints.banner);
-      if (response.statusCode == 200) {
-        bannersModel = BannersModel.fromJson(response.data);
-        emit(GetBannersSuccessState());
-      } else {
-        emit(
-            GetBannersErrorState('Failed with status: ${response.statusCode}'));
-      }
-    } catch (e) {
-      emit(GetBannersErrorState(e.toString()));
-    }
-  }
-
   AcitveBannersModel? activeBannersModel;
   Future<void> getActiveBanners() async {
     emit(GetActiveBannersLoadingState());
@@ -162,7 +147,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   ActiveBannerDetailsModel? activeBannerDetailsModel;
-  Future<void> getActiveBannerDetails({required int id}) async {
+  Future<void> getBannerDetails({required int id}) async {
     emit(GetActiveBannerDetailsLoadingState());
 
     try {
@@ -377,6 +362,7 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
+  UserInfoModel? userInfoModel;
   Future<void> getUserInfo() async {
     emit(GetUserInfoLoadingState());
     log('[UserInfo] Started loading...');
@@ -385,6 +371,7 @@ class AppCubit extends Cubit<AppStates> {
       final response = await ApiService().get(ApiEndpoints.userInfo);
       log('[UserInfo] Response received with status: ${response.statusCode}');
 
+      userInfoModel = UserInfoModel.fromJson(response.data);
       if (response.statusCode == 200) {
         emit(GetUserInfoSuccessState());
       } else {
@@ -399,11 +386,17 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<void> logout() async {
-    await SecureTokenStorage.clearTokens();
-    isLogin = false;
-    navBarCurrentIndex = 0;
+    try {
+      final response = await ApiService().post(ApiEndpoints.logout, {});
+      log('Logout response with status: ${response.statusCode}');
+      await SecureTokenStorage.clearTokens();
+      isLogin = false;
+      navBarCurrentIndex = 0;
 
-    emit(CheckLoginStatusState());
+      emit(CheckLoginStatusState());
+    } catch (e) {
+      log('Logout caught exception: ${e.toString()}');
+    }
   }
 
   Future<void> addToFav({
@@ -452,5 +445,95 @@ class AppCubit extends Cubit<AppStates> {
       log('[RemoveFromFav] Caught exception: ${e.toString()}');
     }
   }
+
   //  the categories and items overflow in products page and categories prodcucts andfavvorite products and products details and search products and banners deatails
+
+  // Admin
+
+  BannersModel? bannersModel;
+  Future<void> getBanners() async {
+    emit(GetBannersLoadingState());
+
+    try {
+      final response = await ApiService().get(ApiEndpoints.banner);
+      if (response.statusCode == 200) {
+        bannersModel = BannersModel.fromJson(response.data);
+        emit(GetBannersSuccessState());
+      } else {
+        emit(
+            GetBannersErrorState('Failed with status: ${response.statusCode}'));
+      }
+    } catch (e) {
+      emit(GetBannersErrorState(e.toString()));
+    }
+  }
+
+  Future<void> deleteBanner({required int id}) async {
+    emit(DeleteBannerLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().delete(
+          ApiEndpoints.deleteBannerById(id),
+          headers: {'Authorization': 'Bearer $accessToken'});
+      if (response.statusCode == 200) {
+        getBanners();
+        emit(DeleteBannerSuccessState());
+      } else {
+        emit(DeleteBannerErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(DeleteBannerErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  Future<void> addBanner({
+    required String title,
+    required String description,
+    required String startDate,
+    required String endDate,
+    required File mainImage,
+    required List<XFile> imageFiles,
+  }) async {
+    emit(AddBannerLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+
+      final formData = FormData.fromMap({
+        'Title': title,
+        'Description': description,
+        'StartDate': startDate,
+        'EndDate': endDate,
+        'MainImage': await MultipartFile.fromFile(mainImage.path),
+        'ImagesFiles': [
+          for (var image in imageFiles)
+            await MultipartFile.fromFile(image.path),
+        ],
+      });
+
+      final response = await ApiService().post(
+        ApiEndpoints.addBanner,
+        formData, // <-- send as FormData
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'multipart/form-data', // Important!
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        getBanners();
+        emit(AddBannerSuccessState());
+      } else {
+        emit(AddBannerErrorState('Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(AddBannerErrorState(e.toString()));
+      log('Failed with error: ${e.toString()}');
+    }
+  }
 }

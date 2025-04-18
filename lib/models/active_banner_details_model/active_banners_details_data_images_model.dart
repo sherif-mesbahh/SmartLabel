@@ -4,7 +4,8 @@ class ActiveBannersDetailsDataImages {
 
   ActiveBannersDetailsDataImages({this.imageId, this.imageUrl});
 
-  factory ActiveBannersDetailsDataImages.fromJson(Map<String, dynamic> json) => ActiveBannersDetailsDataImages(
+  factory ActiveBannersDetailsDataImages.fromJson(Map<String, dynamic> json) =>
+      ActiveBannersDetailsDataImages(
         imageId: json['imageId'] as int?,
         imageUrl: json['imageUrl'] as String?,
       );

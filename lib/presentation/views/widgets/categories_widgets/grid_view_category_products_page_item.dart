@@ -24,7 +24,12 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         AppCubit.get(context).getProductDetails(id: model.id!).then((onValue) {
-          pushNavigator(context, ProductDetailsPage(categoryId: categoryId,), slideRightToLeft);
+          pushNavigator(
+              context,
+              ProductDetailsPage(
+                categoryId: categoryId,
+              ),
+              slideRightToLeft);
         });
       },
       child: Stack(

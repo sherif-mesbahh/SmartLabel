@@ -27,6 +27,13 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    AppCubit.get(context).getProductSearch(name: searchController.text);
+    AppCubit.get(context).getCategorySearch(name: searchController.text);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SearchAppBar(),

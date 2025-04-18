@@ -167,3 +167,23 @@ class GetUserInfoErrorState extends AppStates {
 
   GetUserInfoErrorState(this.error);
 }
+
+class DeleteBannerLoadingState extends AppStates {}
+
+class DeleteBannerSuccessState extends AppStates {}
+
+class DeleteBannerErrorState extends AppStates {
+  String error;
+
+  DeleteBannerErrorState(this.error);
+}
+
+class AddBannerLoadingState extends AppStates {}
+
+class AddBannerSuccessState extends AppStates {}
+
+class AddBannerErrorState extends AppStates {
+  String error;
+
+  AddBannerErrorState(this.error);
+}

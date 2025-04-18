@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
           final appCubit = AppCubit.get(context);
 
           if (appCubit.isLogin) {
-           
             return Layout();
           } else {
             return SignPage();

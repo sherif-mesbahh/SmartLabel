@@ -16,7 +16,7 @@ class ProductsPage extends StatelessWidget {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (cubit.productModel == null) {
-        cubit.getProducts(); 
+        cubit.getProducts();
       }
       if (cubit.activeBannersModel == null) {
         cubit.getActiveBanners();
