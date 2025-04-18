@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
 
 class ApiService {
@@ -11,7 +12,7 @@ class ApiService {
 
   ApiService._internal() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'http://smartlabel1.runasp.net/api/',
+      baseUrl: ApiEndpoints.baseUrl,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {'Content-Type': 'application/json'},
@@ -37,7 +38,7 @@ class ApiService {
               // Use a clean Dio instance to refresh the token
               final tokenDio = Dio();
               final newTokenResponse = await tokenDio.post(
-                'http://smartlabel1.runasp.net/api/Authentication/refresh-token',
+                ApiEndpoints.refreshToken,
                 data: {'refreshToken': refreshToken},
                 options: Options(headers: {'Content-Type': 'application/json'}),
               );
