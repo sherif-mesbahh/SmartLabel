@@ -283,8 +283,6 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
   }
 }
 
-
-
 // SizedBox(
 //               height: screenHeight(context) * .2,
 //               child: ListView.separated(

@@ -119,7 +119,7 @@ class ApiService {
   }
 
   // PUT request
-  Future<Response> put(String endpoint, Map<String, dynamic> data,
+  Future<Response> put(String endpoint, dynamic data,
       {Map<String, dynamic>? headers}) async {
     try {
       final response = await _dio.put(

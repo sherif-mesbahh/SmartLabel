@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
-import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/banner_details_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_banner_details_page.dart';
 
 class AdminCustomSliderWidget extends StatelessWidget {
   final AppCubit cubit;
@@ -50,7 +50,7 @@ class AdminCustomSliderWidget extends StatelessWidget {
                 if (context.mounted) {
                   pushNavigator(
                     context,
-                    BannerDetailsPage(id: banner.id ?? 1),
+                    AdminBannerDetailsPage(id: banner.id ?? 1),
                     slideRightToLeft,
                   );
                 }

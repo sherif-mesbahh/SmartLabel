@@ -187,3 +187,23 @@ class AddBannerErrorState extends AppStates {
 
   AddBannerErrorState(this.error);
 }
+
+class GetBannerDetailsLoadingState extends AppStates {}
+
+class GetBannerDetailsSuccessState extends AppStates {}
+
+class GetBannerDetailsErrorState extends AppStates {
+  String error;
+
+  GetBannerDetailsErrorState(this.error);
+}
+
+class DeleteBannerDetailsImageLoadingState extends AppStates {}
+
+class DeleteBannerDetailsImageSuccessState extends AppStates {}
+
+class DeleteBannerDetailsImageErrorState extends AppStates {
+  String error;
+
+  DeleteBannerDetailsImageErrorState(this.error);
+}

@@ -40,7 +40,7 @@ class CustomSlider extends StatelessWidget {
                 );
 
                 await AppCubit.get(context)
-                    .getBannerDetails(id: banner.id ?? 1);
+                    .getActiveBannerDetails(id: banner.id ?? 1);
 
                 if (context.mounted) {
                   Navigator.of(context).pop();

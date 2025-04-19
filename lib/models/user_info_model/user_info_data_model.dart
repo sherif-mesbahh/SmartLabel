@@ -4,9 +4,11 @@ class UserInfoDataModel {
   String? email;
   String? passwordHash;
 
-  UserInfoDataModel({this.firstName, this.lastName, this.email, this.passwordHash});
+  UserInfoDataModel(
+      {this.firstName, this.lastName, this.email, this.passwordHash});
 
-  factory UserInfoDataModel.fromJson(Map<String, dynamic> json) => UserInfoDataModel(
+  factory UserInfoDataModel.fromJson(Map<String, dynamic> json) =>
+      UserInfoDataModel(
         firstName: json['firstName'] as String?,
         lastName: json['lastName'] as String?,
         email: json['email'] as String?,

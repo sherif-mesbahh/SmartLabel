@@ -5,11 +5,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
 import 'package:smart_label_software_engineering/models/acitve_banners_model/acitve_banners_model.dart';
 import 'package:smart_label_software_engineering/models/active_banner_details_model/active_banner_details_model.dart';
+import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_model.dart';
 import 'package:smart_label_software_engineering/models/banners_model/banners_model.dart';
 import 'package:smart_label_software_engineering/models/category_model/category_model.dart';
 import 'package:smart_label_software_engineering/models/category_products_model/category_products_model.dart';
@@ -53,6 +55,7 @@ class AppCubit extends Cubit<AppStates> {
 
     if (index == 1) getCategories();
     if (index == 2) getFav();
+    if (index == 3) getActiveBanners();
   }
 
   IconData signUpPasswordSuffix = Icons.visibility;
@@ -147,11 +150,12 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   ActiveBannerDetailsModel? activeBannerDetailsModel;
-  Future<void> getBannerDetails({required int id}) async {
+  Future<void> getActiveBannerDetails({required int id}) async {
     emit(GetActiveBannerDetailsLoadingState());
 
     try {
-      final response = await ApiService().get(ApiEndpoints.bannerById(id));
+      final response =
+          await ApiService().get(ApiEndpoints.activeBannerById(id));
       if (response.statusCode == 200) {
         activeBannerDetailsModel =
             ActiveBannerDetailsModel.fromJson(response.data);
@@ -534,6 +538,83 @@ class AppCubit extends Cubit<AppStates> {
     } catch (e) {
       emit(AddBannerErrorState(e.toString()));
       log('Failed with error: ${e.toString()}');
+    }
+  }
+
+  BannerDetailsModel? bannerDetailsModel;
+  Future<void> getBannerDetails({required int id}) async {
+    emit(GetBannerDetailsLoadingState());
+
+    try {
+      final response = await ApiService().get(ApiEndpoints.bannerById(id));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        bannerDetailsModel = BannerDetailsModel.fromJson(response.data);
+        emit(GetBannerDetailsSuccessState());
+      } else {
+        emit(GetBannerDetailsErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(GetBannerDetailsErrorState(e.toString()));
+      log('Failed with error: ${e.toString()}');
+    }
+  }
+
+  Future<File> getFileFromServer(String fileName) async {
+    final dir = await getTemporaryDirectory();
+    final filePath = '${dir.path}/$fileName';
+    final file = File(filePath);
+
+    final imageUrl = 'http://smartlabel1.runasp.net/Uploads/$fileName';
+    await Dio().download(imageUrl, file.path);
+    return file;
+  }
+
+  Future<void> deleteBannerDetailsImage({
+    required int bannerId,
+    required String title,
+    required String description,
+    required String startDate,
+    required String endDate,
+    required String mainImage,
+    required int imageId,
+  }) async {
+    emit(DeleteBannerDetailsImageLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final DateTime parsedStartDate = DateTime.parse(startDate);
+      final DateTime parsedEndDate = DateTime.parse(endDate);
+
+      final String formattedStartDate =
+          parsedStartDate.toUtc().toIso8601String();
+      final String formattedEndDate = parsedEndDate.toUtc().toIso8601String();
+
+      final File mainImageFile = await getFileFromServer(mainImage);
+      final formData = FormData.fromMap({
+        'Id': bannerId,
+        'Title': title,
+        'Description': description,
+        'StartDate': formattedStartDate,
+        'EndDate': formattedEndDate,
+        'MainImage': await MultipartFile.fromFile(mainImageFile.path),
+        'RemovedImageIds': [imageId],
+      });
+      final response = await ApiService().put(ApiEndpoints.editBanner, formData,
+          headers: {'Authorization': 'Bearer $accessToken'});
+      if (response.statusCode == 200) {
+        getBanners();
+        emit(DeleteBannerDetailsImageSuccessState());
+      } else {
+        emit(DeleteBannerDetailsImageErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+        log('Failed with status: ${response.statusMessage}');
+      }
+    } catch (e) {
+      emit(DeleteBannerDetailsImageErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
     }
   }
 }
