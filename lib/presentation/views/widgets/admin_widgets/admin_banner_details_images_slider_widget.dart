@@ -73,7 +73,7 @@ class AdminBannerDetailsImagesSliderWidget extends StatelessWidget {
                           icon: const Icon(Icons.delete,
                               color: Colors.white, size: 20),
                           onPressed: () {
-                            AppCubit.get(context).deleteBannerDetailsImage(
+                            AppCubit.get(context).deleteBannerDetailsImages(
                               bannerId: banner.id!,
                               title: banner.title!,
                               description: banner.description!,

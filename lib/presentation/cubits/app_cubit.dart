@@ -521,10 +521,10 @@ class AppCubit extends Cubit<AppStates> {
 
       final response = await ApiService().post(
         ApiEndpoints.addBanner,
-        formData, // <-- send as FormData
+        formData,
         headers: {
           'Authorization': 'Bearer $accessToken',
-          'Content-Type': 'multipart/form-data', // Important!
+          'Content-Type': 'multipart/form-data',
         },
       );
 
@@ -571,7 +571,7 @@ class AppCubit extends Cubit<AppStates> {
     return file;
   }
 
-  Future<void> deleteBannerDetailsImage({
+  Future<void> deleteBannerDetailsImages({
     required int bannerId,
     required String title,
     required String description,
@@ -614,6 +614,50 @@ class AppCubit extends Cubit<AppStates> {
       }
     } catch (e) {
       emit(DeleteBannerDetailsImageErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  Future<void> addBannerDetailsImages({
+    required int bannerId,
+    required String title,
+    required String description,
+    required DateTime startDate,
+    required DateTime endDate,
+    required String mainImage,
+    required List<XFile> imageFiles,
+  }) async {
+    emit(AddBannerDetailsImagesLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+
+      final File mainImageFile = await getFileFromServer(mainImage);
+      final formData = FormData.fromMap({
+        'Id': bannerId,
+        'Title': title,
+        'Description': description,
+        'StartDate': "$startDate",
+        'EndDate': "$endDate",
+        'MainImage': await MultipartFile.fromFile(mainImageFile.path),
+        'ImagesFiles': [
+          for (var image in imageFiles)
+            await MultipartFile.fromFile(image.path),
+        ],
+      });
+      final response = await ApiService().put(ApiEndpoints.editBanner, formData,
+          headers: {'Authorization': 'Bearer $accessToken'});
+      if (response.statusCode == 200) {
+        getBanners();
+        emit(AddBannerDetailsImagesSuccessState());
+      } else {
+        emit(AddBannerDetailsImagesErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+        log('Failed with status: ${response.statusMessage}');
+      }
+    } catch (e) {
+      emit(AddBannerDetailsImagesErrorState(e.toString()));
       log('Failed with status: ${e.toString()}');
     }
   }

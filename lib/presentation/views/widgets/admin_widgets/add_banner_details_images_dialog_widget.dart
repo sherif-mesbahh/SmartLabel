@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_model.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
+
+class AddBannerDetailsImagesDialogWidget extends StatefulWidget {
+  final int bannerId;
+  final BannerDetailsDataModel bannerDetailsDataModel;
+  const AddBannerDetailsImagesDialogWidget({
+    super.key,
+    required this.bannerId,
+    required this.bannerDetailsDataModel,
+  });
+
+  @override
+  State<AddBannerDetailsImagesDialogWidget> createState() =>
+      _AddBannersDialogWidgetState();
+}
+
+class _AddBannersDialogWidgetState
+    extends State<AddBannerDetailsImagesDialogWidget> {
+  List<XFile> bannerDetailsImages = [];
+
+  final picker = ImagePicker();
+
+  Future<void> pickBannerDetailsImages() async {
+    final pickedList = await picker.pickMultiImage();
+    if (pickedList.isNotEmpty) {
+      setState(() => bannerDetailsImages = pickedList);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.white,
+      title: Text('Add Banner', style: TextStyles.headline2),
+      content: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ElevatedButton(
+              onPressed: pickBannerDetailsImages,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+              ),
+              child: Text(
+                "Pick Banner Images",
+                style: TextStyles.buttonText.copyWith(
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            if (bannerDetailsImages.isNotEmpty)
+              Wrap(
+                spacing: 8,
+                children: bannerDetailsImages
+                    .map((img) => Image.file(File(img.path), height: 50))
+                    .toList(),
+              ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          child: Text('Cancel', style: TextStyles.productTitle),
+          onPressed: () {
+            AppCubit.get(context).getBannerDetails(
+              id: widget.bannerId,
+            );
+            Navigator.of(context).pop();
+          },
+        ),
+        BlocBuilder<AppCubit, AppStates>(
+          builder: (context, state) {
+            return TextButton(
+              child: Text('Apply', style: TextStyles.productTitle),
+              onPressed: () {
+                if (bannerDetailsImages.isEmpty) {
+                  Fluttertoast.showToast(
+                    msg: "Please choose at least one image or cancel.",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
+                  return;
+                }
+
+                AppCubit.get(context)
+                    .addBannerDetailsImages(
+                  bannerId: widget.bannerId,
+                  title: widget.bannerDetailsDataModel.title!,
+                  description: widget.bannerDetailsDataModel.description!,
+                  startDate: widget.bannerDetailsDataModel.startDate!,
+                  endDate: widget.bannerDetailsDataModel.endDate!,
+                  mainImage: widget.bannerDetailsDataModel.mainImage!,
+                  imageFiles: bannerDetailsImages,
+                )
+                    .then((onValue) {
+                  AppCubit.get(context).getBannerDetails(id: widget.bannerId);
+                  Navigator.of(context).pop();
+                });
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
+}

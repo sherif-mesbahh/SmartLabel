@@ -8,6 +8,7 @@ import 'package:smart_label_software_engineering/models/banner_details_model/ban
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/active_banner_details/active_banner_details_app_bar.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_banner_details_images_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_banner_details_images_slider_widget.dart';
 
 class AdminBannerDetailsPage extends StatelessWidget {
@@ -42,6 +43,28 @@ class AdminBannerDetailsPage extends StatelessWidget {
           if (state is DeleteBannerDetailsImageErrorState) {
             Fluttertoast.showToast(
               msg: 'Error deleting image.',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          }
+          if (state is AddBannerDetailsImagesSuccessState) {
+            Fluttertoast.showToast(
+              msg: 'Images added successfully.',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          }
+          if (state is AddBannerDetailsImagesErrorState) {
+            Fluttertoast.showToast(
+              msg: 'Error adding images.',
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -89,11 +112,21 @@ class AdminBannerDetailsPage extends StatelessWidget {
                   children: [
                     TextButton(
                       child: Text(
-                        'Add Image',
+                        'Add Images',
                         style: TextStyles.productTitle
                             .copyWith(color: primaryColor),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AddBannerDetailsImagesDialogWidget(
+                            bannerId: id,
+                            bannerDetailsDataModel:
+                                cubit.bannerDetailsModel!.data!,
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

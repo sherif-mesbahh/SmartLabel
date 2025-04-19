@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -7,7 +8,7 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_states.
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_new_category_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_categories_grid_view_item_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_custom_slider_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/edit_banners_dialog_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_banners_dialog_widget.dart';
 
 class AdminCategoriesPage extends StatelessWidget {
   AdminCategoriesPage({super.key});
@@ -15,7 +16,48 @@ class AdminCategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AddBannerSuccessState) {
+          Fluttertoast.showToast(
+              msg: 'Banner added successfully.',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        if (state is AddBannerErrorState) {
+          Fluttertoast.showToast(
+              msg: 'Error adding banner.',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        if (state is DeleteBannerSuccessState) {
+          Fluttertoast.showToast(
+              msg: 'Banner deleted successfully.',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        if (state is DeleteBannerErrorState) {
+          Fluttertoast.showToast(
+              msg: 'Error deleting banner.',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
