@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -79,40 +81,22 @@ class _AddBannersDialogWidgetState
             Navigator.of(context).pop();
           },
         ),
-        BlocBuilder<AppCubit, AppStates>(
-          builder: (context, state) {
-            return TextButton(
-              child: Text('Apply', style: TextStyles.productTitle),
-              onPressed: () {
-                if (bannerDetailsImages.isEmpty) {
-                  Fluttertoast.showToast(
-                    msg: "Please choose at least one image or cancel.",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0,
-                  );
-                  return;
-                }
+        BlocListener<AppCubit, AppStates>(
+          listener: (context, state) {},
+          child: TextButton(
+            child: Text('Apply', style: TextStyles.productTitle),
+            onPressed: () {
+              AppCubit.get(context)
+                  .bannerDetailsImagesToUpload
+                  .addAll(bannerDetailsImages);
 
-                AppCubit.get(context)
-                    .addBannerDetailsImages(
-                  bannerId: widget.bannerId,
-                  title: widget.bannerDetailsDataModel.title!,
-                  description: widget.bannerDetailsDataModel.description!,
-                  startDate: widget.bannerDetailsDataModel.startDate!,
-                  endDate: widget.bannerDetailsDataModel.endDate!,
-                  mainImage: widget.bannerDetailsDataModel.mainImage!,
-                  imageFiles: bannerDetailsImages,
-                )
-                    .then((onValue) {
-                  AppCubit.get(context).getBannerDetails(id: widget.bannerId);
-                  Navigator.of(context).pop();
-                });
-              },
-            );
-          },
+              bannerDetailsImages.clear();
+
+              AppCubit.get(context).emit(AppUpdateState());
+
+              Navigator.of(context).pop();
+            },
+          ),
         ),
       ],
     );

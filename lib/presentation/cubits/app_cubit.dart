@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
@@ -571,94 +572,65 @@ class AppCubit extends Cubit<AppStates> {
     return file;
   }
 
-  Future<void> deleteBannerDetailsImages({
-    required int bannerId,
+  List<XFile> bannerDetailsImagesToUpload = [];
+  List<int> bannerDetailsImagesToDelete = [];
+  XFile? mainBannerImageToUpload;
+
+  Future<void> updateBanner({
+    required int id,
     required String title,
     required String description,
     required String startDate,
     required String endDate,
-    required String mainImage,
-    required int imageId,
+    List<XFile>? imageFiles,
+    List<int>? imagesToDelete,
+    XFile? mainImage,
   }) async {
-    emit(DeleteBannerDetailsImageLoadingState());
+    emit(UpdateBannerLoadingState());
 
     try {
       final accessToken = await SecureTokenStorage.getAccessToken();
-      final DateTime parsedStartDate = DateTime.parse(startDate);
-      final DateTime parsedEndDate = DateTime.parse(endDate);
-
-      final String formattedStartDate =
-          parsedStartDate.toUtc().toIso8601String();
-      final String formattedEndDate = parsedEndDate.toUtc().toIso8601String();
-
-      final File mainImageFile = await getFileFromServer(mainImage);
+      final inputFormat = DateFormat('dd MMM yyyy');
       final formData = FormData.fromMap({
-        'Id': bannerId,
+        'Id': id,
         'Title': title,
         'Description': description,
-        'StartDate': formattedStartDate,
-        'EndDate': formattedEndDate,
-        'MainImage': await MultipartFile.fromFile(mainImageFile.path),
-        'RemovedImageIds': [imageId],
+        'StartDate': inputFormat.parse(startDate).toIso8601String(),
+        'EndDate': inputFormat.parse(endDate).toIso8601String(),
+        'MainImage': mainImage != null
+            ? await MultipartFile.fromFile(mainImage.path)
+            : await MultipartFile.fromFile((await getFileFromServer(
+                    bannerDetailsModel?.data!.mainImage ?? ""))
+                .path),
+        'ImagesFiles': imageFiles != []
+            ? [
+                for (var image in imageFiles!)
+                  await MultipartFile.fromFile(image.path),
+              ]
+            : [],
+        'RemovedImageIds': imagesToDelete != [] ? imagesToDelete : [],
       });
-      final response = await ApiService().put(ApiEndpoints.editBanner, formData,
-          headers: {'Authorization': 'Bearer $accessToken'});
-      if (response.statusCode == 200) {
-        getBanners();
-        emit(DeleteBannerDetailsImageSuccessState());
+      print(formData.fields);
+      log("${formData.fields}");
+      final response = await ApiService().put(
+        ApiEndpoints.updateBanner,
+        formData,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'multipart/form-data',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(UpdateBannerSuccessState());
       } else {
-        emit(DeleteBannerDetailsImageErrorState(
+        emit(UpdateBannerErrorState(
             'Failed with status: ${response.statusCode}'));
         log('Failed with status: ${response.statusCode}');
-        log('Failed with status: ${response.statusMessage}');
       }
     } catch (e) {
-      emit(DeleteBannerDetailsImageErrorState(e.toString()));
-      log('Failed with status: ${e.toString()}');
-    }
-  }
-
-  Future<void> addBannerDetailsImages({
-    required int bannerId,
-    required String title,
-    required String description,
-    required DateTime startDate,
-    required DateTime endDate,
-    required String mainImage,
-    required List<XFile> imageFiles,
-  }) async {
-    emit(AddBannerDetailsImagesLoadingState());
-
-    try {
-      final accessToken = await SecureTokenStorage.getAccessToken();
-
-      final File mainImageFile = await getFileFromServer(mainImage);
-      final formData = FormData.fromMap({
-        'Id': bannerId,
-        'Title': title,
-        'Description': description,
-        'StartDate': "$startDate",
-        'EndDate': "$endDate",
-        'MainImage': await MultipartFile.fromFile(mainImageFile.path),
-        'ImagesFiles': [
-          for (var image in imageFiles)
-            await MultipartFile.fromFile(image.path),
-        ],
-      });
-      final response = await ApiService().put(ApiEndpoints.editBanner, formData,
-          headers: {'Authorization': 'Bearer $accessToken'});
-      if (response.statusCode == 200) {
-        getBanners();
-        emit(AddBannerDetailsImagesSuccessState());
-      } else {
-        emit(AddBannerDetailsImagesErrorState(
-            'Failed with status: ${response.statusCode}'));
-        log('Failed with status: ${response.statusCode}');
-        log('Failed with status: ${response.statusMessage}');
-      }
-    } catch (e) {
-      emit(AddBannerDetailsImagesErrorState(e.toString()));
-      log('Failed with status: ${e.toString()}');
+      emit(UpdateBannerErrorState(e.toString()));
+      log('Failed with error: ${e.toString()}');
     }
   }
 }

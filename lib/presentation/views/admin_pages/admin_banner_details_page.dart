@@ -2,75 +2,110 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
-import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_image_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/active_banner_details/active_banner_details_app_bar.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_banner_details_images_dialog_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_banner_details_images_slider_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_description_text_field.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_save_and_discard_buttons_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_start_date_text_field.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_title_text_field.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_add_images_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_appBar_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_banner_images_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_end_date_text_field.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_main_image_row_widget.dart';
 
-class AdminBannerDetailsPage extends StatelessWidget {
-  const AdminBannerDetailsPage({super.key, required this.id});
-  final int id;
+class AdminBannerDetailsPage extends StatefulWidget {
+  const AdminBannerDetailsPage(
+      {super.key, required this.cubit, required this.bannerId});
+  final AppCubit cubit;
+  final int bannerId;
 
-  String _formatDate(DateTime? date) {
-    if (date == null) return "N/A";
-    return DateFormat('dd MMM yyyy').format(date);
+  @override
+  State<AdminBannerDetailsPage> createState() => _AdminBannerDetailsPageState();
+}
+
+class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
+  final TextEditingController startDateController = TextEditingController();
+  final TextEditingController endDateController = TextEditingController();
+  bool hasTextFieldChanged = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final banner = widget.cubit.bannerDetailsModel?.data;
+
+    if (banner != null) {
+      titleController.text = banner.title ?? "";
+      descController.text = banner.description ?? "";
+      startDateController.text = banner.startDate != null
+          ? DateFormat('dd MMM yyyy').format(banner.startDate!)
+          : "";
+      endDateController.text = banner.endDate != null
+          ? DateFormat('dd MMM yyyy').format(banner.endDate!)
+          : "";
+    }
+    titleController.addListener(_onTextChanged);
+    startDateController.addListener(_onTextChanged);
+    endDateController.addListener(_onTextChanged);
+    descController.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    setState(() {
+      hasTextFieldChanged = true;
+    });
+  }
+
+  @override
+  void dispose() {
+    titleController.removeListener(_onTextChanged);
+    startDateController.removeListener(_onTextChanged);
+    endDateController.removeListener(_onTextChanged);
+    descController.removeListener(_onTextChanged);
+    titleController.dispose();
+    descController.dispose();
+    startDateController.dispose();
+    endDateController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = AppCubit.get(context);
+    final cubit = widget.cubit;
 
     return Scaffold(
-      appBar: ActiveBannerDetailsAppBar(),
+      appBar: AdminBannerDetailsAppBarWidget(cubit: cubit),
       body: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          if (state is DeleteBannerDetailsImageSuccessState) {
+          if (state is UpdateBannerSuccessState) {
             Fluttertoast.showToast(
-              msg: 'Image deleted successfully.',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
+              msg: 'Banner Updated Successfully',
               backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-            cubit.getBannerDetails(id: id);
-          }
-          if (state is DeleteBannerDetailsImageErrorState) {
-            Fluttertoast.showToast(
-              msg: 'Error deleting image.',
-              toastLength: Toast.LENGTH_SHORT,
+              textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,
+              toastLength: Toast.LENGTH_LONG,
               timeInSecForIosWeb: 1,
+              fontSize: 16,
+            );
+            cubit.getBanners().then((onValue) {
+              pushNavigator(context, AdminCategoriesPage(), slideLeftToRigth);
+            });
+          }
+          if (state is UpdateBannerErrorState) {
+            Fluttertoast.showToast(
+              msg: 'Error while Updating Banner, try again',
               backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-          }
-          if (state is AddBannerDetailsImagesSuccessState) {
-            Fluttertoast.showToast(
-              msg: 'Images added successfully.',
-              toastLength: Toast.LENGTH_SHORT,
+              textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,
+              toastLength: Toast.LENGTH_LONG,
               timeInSecForIosWeb: 1,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-          }
-          if (state is AddBannerDetailsImagesErrorState) {
-            Fluttertoast.showToast(
-              msg: 'Error adding images.',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0,
+              fontSize: 16,
             );
           }
         },
@@ -97,99 +132,43 @@ class AdminBannerDetailsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Main image
+                BannerDetailsMainImageRowWidget(cubit: cubit, banner: banner),
+                const SizedBox(height: 12),
+                // Banner images
                 if (bannerImages.isNotEmpty)
-                  Column(
-                    children: [
-                      AdminBannerDetailsImagesSliderWidget(
-                        banner: banner,
-                        bannerImages: bannerImages,
-                      ),
-                      const SizedBox(height: 8.0),
-                    ],
+                  BannerDetailsBannerImaegsWidget(
+                      banner: banner, bannerImages: bannerImages),
+                // Add images
+                BannerDetailsAddImagesWidget(cubit: cubit, banner: banner),
+
+                const SizedBox(height: 12.0),
+                // Title
+                BannerDetailsTitleTextField(titleController: titleController),
+                const SizedBox(height: 12.0),
+                // Start Date
+                BannerDetailsStartDateTextField(
+                    startDateController: startDateController),
+                const SizedBox(height: 12.0),
+                // End Date
+                BannerDetailsEndDateTextField(
+                    endDateController: endDateController),
+                const SizedBox(height: 12.0),
+                // Description
+                BannerDetailsDescriptionTextField(
+                    descController: descController),
+                if (hasTextFieldChanged ||
+                    cubit.bannerDetailsImagesToUpload.isNotEmpty ||
+                    cubit.bannerDetailsImagesToDelete.isNotEmpty ||
+                    cubit.mainBannerImageToUpload != null)
+                  BannerDetailsSaveAndDiscardButtonsWidget(
+                    cubit: cubit,
+                    widget: widget,
+                    titleController: titleController,
+                    descController: descController,
+                    startDateController: startDateController,
+                    endDateController: endDateController,
                   ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      child: Text(
-                        'Add Images',
-                        style: TextStyles.productTitle
-                            .copyWith(color: primaryColor),
-                      ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              AddBannerDetailsImagesDialogWidget(
-                            bannerId: id,
-                            bannerDetailsDataModel:
-                                cubit.bannerDetailsModel!.data!,
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Title:", style: TextStyles.productTitle),
-                    IconButton(
-                      icon:
-                          const Icon(Icons.edit, size: 20, color: primaryColor),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                Text(banner.title ?? "No title provided",
-                    style: TextStyles.description),
-                const SizedBox(height: 12.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Start Date:", style: TextStyles.productTitle),
-                    IconButton(
-                      icon:
-                          const Icon(Icons.edit, size: 20, color: primaryColor),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                Text(_formatDate(banner.startDate),
-                    style: TextStyles.description),
-                const SizedBox(height: 12.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("End Date:", style: TextStyles.productTitle),
-                    IconButton(
-                      icon:
-                          const Icon(Icons.edit, size: 20, color: primaryColor),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                Text(_formatDate(banner.endDate),
-                    style: TextStyles.description),
-                const SizedBox(height: 12.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Description:", style: TextStyles.productTitle),
-                    IconButton(
-                      icon:
-                          const Icon(Icons.edit, size: 20, color: primaryColor),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                Text(
-                  banner.description?.toString().trim().isEmpty == true
-                      ? "No description provided"
-                      : banner.description.toString(),
-                  style: TextStyles.description,
-                ),
-                const SizedBox(height: 20.0),
               ],
             ),
           );

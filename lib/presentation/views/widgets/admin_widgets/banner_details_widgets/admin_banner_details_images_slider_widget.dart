@@ -8,7 +8,7 @@ import 'package:smart_label_software_engineering/models/banner_details_model/ban
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
-class AdminBannerDetailsImagesSliderWidget extends StatelessWidget {
+class AdminBannerDetailsImagesSliderWidget extends StatefulWidget {
   const AdminBannerDetailsImagesSliderWidget({
     super.key,
     required this.bannerImages,
@@ -19,10 +19,23 @@ class AdminBannerDetailsImagesSliderWidget extends StatelessWidget {
   final BannerDetailsDataModel banner;
 
   @override
+  State<AdminBannerDetailsImagesSliderWidget> createState() =>
+      _AdminBannerDetailsImagesSliderWidgetState();
+}
+
+class _AdminBannerDetailsImagesSliderWidgetState
+    extends State<AdminBannerDetailsImagesSliderWidget> {
+  final Set<int> deletedImageIds = {};
+
+  @override
   Widget build(BuildContext context) {
+    final filteredImages = widget.bannerImages
+        .where((img) => !deletedImageIds.contains(img.imageId))
+        .toList();
+
     return CarouselSlider(
       options: CarouselOptions(
-        height: screenHeight(context) * .3,
+        height: screenHeight(context) * .25,
         autoPlay: false,
         enlargeCenterPage: true,
         viewportFraction: 0.8,
@@ -30,7 +43,7 @@ class AdminBannerDetailsImagesSliderWidget extends StatelessWidget {
         initialPage: 0,
         enableInfiniteScroll: false,
       ),
-      items: bannerImages.map((image) {
+      items: filteredImages.map((image) {
         return Builder(
           builder: (BuildContext context) {
             return BlocBuilder<AppCubit, AppStates>(
@@ -65,24 +78,33 @@ class AdminBannerDetailsImagesSliderWidget extends StatelessWidget {
                       top: 8,
                       right: 8,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.red,
                           shape: BoxShape.circle,
                         ),
-                        child: IconButton(
-                          icon: const Icon(Icons.delete,
-                              color: Colors.white, size: 20),
-                          onPressed: () {
-                            AppCubit.get(context).deleteBannerDetailsImages(
-                              bannerId: banner.id!,
-                              title: banner.title!,
-                              description: banner.description!,
-                              startDate: "${banner.startDate}",
-                              endDate: "${banner.endDate}",
-                              mainImage: banner.mainImage!,
-                              imageId: image.imageId!,
-                            );
-                          },
+                        child: BlocListener<AppCubit, AppStates>(
+                          listener: (context, state) {},
+                          child: IconButton(
+                            icon: const Icon(Icons.delete,
+                                color: Colors.white, size: 20),
+                            onPressed: () {
+                              if (image.imageId != null) {
+                                setState(() {
+                                  deletedImageIds.add(image.imageId!);
+                                });
+
+                                final cubit = AppCubit.get(context);
+                                if (!cubit.bannerDetailsImagesToDelete
+                                    .contains(image.imageId)) {
+                                  cubit.bannerDetailsImagesToDelete
+                                      .add(image.imageId!);
+                                }
+                                AppCubit.get(context).emit(AppUpdateState());
+                                debugPrint(
+                                    "Deleted image ID: ${image.imageId} — Total deleted: $deletedImageIds");
+                              }
+                            },
+                          ),
                         ),
                       ),
                     ),

@@ -15,7 +15,7 @@ void main() async {
 
   runApp(MultiBlocProvider(
     providers: [
-      BlocProvider(create: (context) => appCubit),
+      BlocProvider(create: (context) => appCubit..getProducts()),
     ],
     child: const MyApp(),
   ));

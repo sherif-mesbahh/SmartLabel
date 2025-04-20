@@ -198,22 +198,14 @@ class GetBannerDetailsErrorState extends AppStates {
   GetBannerDetailsErrorState(this.error);
 }
 
-class DeleteBannerDetailsImageLoadingState extends AppStates {}
+class AppUpdateState extends AppStates {}
 
-class DeleteBannerDetailsImageSuccessState extends AppStates {}
+class UpdateBannerLoadingState extends AppStates {}
 
-class DeleteBannerDetailsImageErrorState extends AppStates {
+class UpdateBannerSuccessState extends AppStates {}
+
+class UpdateBannerErrorState extends AppStates {
   String error;
 
-  DeleteBannerDetailsImageErrorState(this.error);
-}
-
-class AddBannerDetailsImagesLoadingState extends AppStates {}
-
-class AddBannerDetailsImagesSuccessState extends AppStates {}
-
-class AddBannerDetailsImagesErrorState extends AppStates {
-  String error;
-
-  AddBannerDetailsImagesErrorState(this.error);
+  UpdateBannerErrorState(this.error);
 }

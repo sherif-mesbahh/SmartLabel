@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_new_category_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_categories_grid_view_item_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_custom_slider_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_banners_dialog_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/admin_banners_custom_slider_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/add_banners_dialog_widget.dart';
 
 class AdminCategoriesPage extends StatelessWidget {
   AdminCategoriesPage({super.key});
@@ -17,51 +18,41 @@ class AdminCategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
-        if (state is AddBannerSuccessState) {
-          Fluttertoast.showToast(
-              msg: 'Banner added successfully.',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
-        if (state is AddBannerErrorState) {
-          Fluttertoast.showToast(
-              msg: 'Error adding banner.',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
         if (state is DeleteBannerSuccessState) {
           Fluttertoast.showToast(
-              msg: 'Banner deleted successfully.',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0);
+            msg: 'Banner Deleted Successfully',
+            backgroundColor: Colors.green,
+            textColor: secondaryColor,
+            gravity: ToastGravity.BOTTOM,
+            toastLength: Toast.LENGTH_LONG,
+            timeInSecForIosWeb: 1,
+            fontSize: 16,
+          );
         }
         if (state is DeleteBannerErrorState) {
           Fluttertoast.showToast(
-              msg: 'Error deleting banner.',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
+            msg: 'Error while Deleting Banner, try again',
+            backgroundColor: Colors.red,
+            textColor: secondaryColor,
+            gravity: ToastGravity.BOTTOM,
+            toastLength: Toast.LENGTH_LONG,
+            timeInSecForIosWeb: 1,
+            fontSize: 16,
+          );
         }
       },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: primaryColor,
+            leading: IconButton(
+              onPressed: () => popNavigator(context),
+              icon: const Icon(
+                Icons.arrow_back_outlined,
+                color: secondaryColor,
+                size: 30,
+              ),
+            ),
             centerTitle: true,
             title: Text(
               'Admin Panel',
@@ -77,28 +68,16 @@ class AdminCategoriesPage extends StatelessWidget {
                 children: [
                   AppCubit.get(context).bannersModel?.data?.isEmpty ?? false
                       ? SizedBox()
-                      : BlocBuilder<AppCubit, AppStates>(
-                          buildWhen: (previous, current) =>
-                              current is DeleteBannerLoadingState ||
-                              current is DeleteBannerSuccessState ||
-                              current is DeleteBannerErrorState,
-                          builder: (context, state) {
-                            if (state is GetBannersLoadingState) {
-                              return const Center(
-                                child: CircularProgressIndicator(
-                                    color: primaryColor),
-                              );
-                            }
-                            if (state is GetBannersErrorState) {
-                              return Center(
-                                child: Text(state.error,
-                                    style: TextStyles.headline1),
-                              );
-                            }
-                            return AdminCustomSliderWidget(
-                              cubit: AppCubit.get(context),
-                            );
-                          },
+                      : BlocListener<AppCubit, AppStates>(
+                          listener: (context, state) {},
+                          child: state is DeleteBannerLoadingState
+                              ? Center(
+                                  child: CircularProgressIndicator(
+                                      color: primaryColor),
+                                )
+                              : AdminBannersCustomSliderWidget(
+                                  cubit: AppCubit.get(context),
+                                ),
                         ),
                   SizedBox(
                     height: 10,
@@ -110,6 +89,7 @@ class AdminCategoriesPage extends StatelessWidget {
                         style: TextStyles.headline2,
                       ),
                       Spacer(),
+                      //Add Banner Button
                       TextButton(
                         child: Text(
                           'Add Banners',
@@ -128,6 +108,7 @@ class AdminCategoriesPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
+                  // All Categories
                   GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -147,6 +128,7 @@ class AdminCategoriesPage extends StatelessWidget {
               ),
             ),
           ),
+          // Add Category
           floatingActionButton: FloatingActionButton(
             backgroundColor: primaryColor,
             child: Icon(

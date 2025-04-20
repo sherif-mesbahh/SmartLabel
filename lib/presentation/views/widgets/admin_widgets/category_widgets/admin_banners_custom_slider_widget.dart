@@ -6,10 +6,10 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_banner_details_page.dart';
 
-class AdminCustomSliderWidget extends StatelessWidget {
+class AdminBannersCustomSliderWidget extends StatelessWidget {
   final AppCubit cubit;
 
-  const AdminCustomSliderWidget({
+  const AdminBannersCustomSliderWidget({
     super.key,
     required this.cubit,
   });
@@ -50,7 +50,10 @@ class AdminCustomSliderWidget extends StatelessWidget {
                 if (context.mounted) {
                   pushNavigator(
                     context,
-                    AdminBannerDetailsPage(id: banner.id ?? 1),
+                    AdminBannerDetailsPage(
+                      cubit: cubit,
+                      bannerId: banner.id!,
+                    ),
                     slideRightToLeft,
                   );
                 }
