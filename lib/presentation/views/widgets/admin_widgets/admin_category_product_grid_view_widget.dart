@@ -1,19 +1,23 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
-import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_edit_product_page.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 
-class AdminCategoryProductsGridViewItem extends StatelessWidget {
-  const AdminCategoryProductsGridViewItem({
+class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
+  const AdminCategoryDetailsProductsGridViewItem({
     super.key,
+    required this.index,
+    required this.cubit,
   });
+  final int index;
+  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        pushNavigator(context, AdminEditProductPage(), slideRightToLeft);
+        // pushNavigator(context, AdminEditProductPage(), slideRightToLeft);
       },
       child: Stack(
         alignment: Alignment.topRight,
@@ -22,22 +26,25 @@ class AdminCategoryProductsGridViewItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: screenHeight(context) * .2,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      'assets/images/fruits_image.jpg',
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CachedNetworkImage(
+                  imageUrl:
+                      'http://smartlabel1.runasp.net/Uploads/${cubit.categoryProductsModel?.data!.products?[index].mainImage}',
+                  height: screenHeight(context) * .2,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,
                     ),
                   ),
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(10),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
               SizedBox(height: 10),
               Text(
-                'Product Name',
+                cubit.categoryProductsModel?.data!.products?[index].name ?? '',
                 style: TextStyles.productTitle,
               ),
             ],

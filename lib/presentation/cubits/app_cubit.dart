@@ -530,7 +530,6 @@ class AppCubit extends Cubit<AppStates> {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        getBanners();
         emit(AddBannerSuccessState());
       } else {
         emit(AddBannerErrorState('Failed with status: ${response.statusCode}'));
@@ -630,6 +629,107 @@ class AppCubit extends Cubit<AppStates> {
       }
     } catch (e) {
       emit(UpdateBannerErrorState(e.toString()));
+      log('Failed with error: ${e.toString()}');
+    }
+  }
+
+  Future<void> deleteCategory({required int id}) async {
+    emit(DeleteCategoryLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().delete(
+          ApiEndpoints.deleteCategoryById(id),
+          headers: {'Authorization': 'Bearer $accessToken'});
+      if (response.statusCode == 200) {
+        getCategories();
+        emit(DeleteCategorySuccessState());
+      } else {
+        emit(DeleteCategoryErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(DeleteCategoryErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  Future<void> addCategory({
+    required String name,
+    required File image,
+  }) async {
+    emit(AddCategoryLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+
+      final formData = FormData.fromMap({
+        'Name': name,
+        'Image': await MultipartFile.fromFile(image.path),
+      });
+
+      final response = await ApiService().post(
+        ApiEndpoints.addCategory,
+        formData,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'multipart/form-data',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(AddCategorySuccessState());
+      } else {
+        emit(AddCategoryErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(AddCategoryErrorState(e.toString()));
+      log('Failed with error: ${e.toString()}');
+    }
+  }
+
+  XFile? mainCategoryImageToUpload;
+  Future<void> updateCategory({
+    required int id,
+    required String name,
+    XFile? categoryImage,
+  }) async {
+    emit(UpdateCategoryLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final formData = FormData.fromMap({
+        'Id': id,
+        'Name': name,
+        'Image': categoryImage != null
+            ? await MultipartFile.fromFile(categoryImage.path)
+            : await MultipartFile.fromFile((await getFileFromServer(
+                    categoryProductsModel?.data!.imageUrl ?? ""))
+                .path),
+      });
+      print(formData.fields);
+      log("${formData.fields}");
+      final response = await ApiService().put(
+        ApiEndpoints.updateCategory,
+        formData,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'multipart/form-data',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(UpdateCategorySuccessState());
+      } else {
+        emit(UpdateCategoryErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(UpdateCategoryErrorState(e.toString()));
       log('Failed with error: ${e.toString()}');
     }
   }

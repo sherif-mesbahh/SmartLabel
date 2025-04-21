@@ -209,3 +209,33 @@ class UpdateBannerErrorState extends AppStates {
 
   UpdateBannerErrorState(this.error);
 }
+
+class DeleteCategoryLoadingState extends AppStates {}
+
+class DeleteCategorySuccessState extends AppStates {}
+
+class DeleteCategoryErrorState extends AppStates {
+  String error;
+
+  DeleteCategoryErrorState(this.error);
+}
+
+class AddCategoryLoadingState extends AppStates {}
+
+class AddCategorySuccessState extends AppStates {}
+
+class AddCategoryErrorState extends AppStates {
+  String error;
+
+  AddCategoryErrorState(this.error);
+}
+
+class UpdateCategoryLoadingState extends AppStates {}
+
+class UpdateCategorySuccessState extends AppStates {}
+
+class UpdateCategoryErrorState extends AppStates {
+  String error;
+
+  UpdateCategoryErrorState(this.error);
+}

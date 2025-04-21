@@ -86,8 +86,10 @@ class ProfilePage extends StatelessWidget {
                       iconSize: 30,
                       onPressed: () {
                         AppCubit.get(context).getBanners().then((onValue) {
-                          pushNavigator(
-                              context, AdminCategoriesPage(), fadeTransition);
+                          AppCubit.get(context).getCategories().then((onValue) {
+                            pushNavigator(
+                                context, AdminCategoriesPage(), fadeTransition);
+                          });
                         });
                       },
                       icon: Icon(
