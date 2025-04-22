@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_category_details_page.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_category_product_grid_view_widget.dart';
 
 class AdminCategoryDetailsProductsGridViewWidget extends StatelessWidget {
   const AdminCategoryDetailsProductsGridViewWidget({
     super.key,
-    required this.widget,
+    required this.cubit,
+    required this.categoryId,
   });
 
-  final AdminCategoryDetailsPage widget;
+  final AppCubit cubit;
+  final int categoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +23,13 @@ class AdminCategoryDetailsProductsGridViewWidget extends StatelessWidget {
         mainAxisSpacing: 10,
         childAspectRatio: 1,
       ),
-      itemCount: widget
-          .cubit.categoryProductsModel!.data?.products!.length,
+      itemCount: cubit.categoryProductsModel!.data?.products!.length,
       itemBuilder: (context, index) {
         return AdminCategoryDetailsProductsGridViewItem(
           index: index,
-          cubit: widget.cubit,
+          cubit: cubit,
         );
       },
     );
   }
 }
-

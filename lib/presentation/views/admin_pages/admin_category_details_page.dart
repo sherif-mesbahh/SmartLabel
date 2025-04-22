@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -112,7 +111,9 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                     nameController: nameController),
                 // Category Image
                 AdminCategoryDetailsEditImageWidget(
-                    cubit: cubit, widget: widget, category: category),
+                  cubit: cubit,
+                  category: category,
+                ),
                 // Save and Discard
                 SizedBox(height: 10),
                 if (hasTextFieldChanged ||
@@ -130,7 +131,10 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                   style: TextStyles.headline2,
                 ),
                 SizedBox(height: 10),
-                AdminCategoryDetailsProductsGridViewWidget(widget: widget),
+                AdminCategoryDetailsProductsGridViewWidget(
+                  cubit: cubit,
+                  categoryId: category.id!,
+                ),
               ],
             ),
           );
@@ -146,8 +150,8 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => AddNewProductDialog(
-              categoryId: 1,
+            builder: (context) => AddProductDialogWidget(
+              categoryId: widget.categoryId,
             ),
           );
         },
@@ -155,4 +159,3 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
     );
   }
 }
-

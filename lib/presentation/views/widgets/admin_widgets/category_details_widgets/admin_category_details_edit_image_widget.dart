@@ -13,12 +13,10 @@ class AdminCategoryDetailsEditImageWidget extends StatelessWidget {
   const AdminCategoryDetailsEditImageWidget({
     super.key,
     required this.cubit,
-    required this.widget,
     required this.category,
   });
 
   final AppCubit cubit;
-  final AdminCategoryDetailsPage widget;
   final CategoryProductsDataModel? category;
 
   @override
@@ -35,7 +33,7 @@ class AdminCategoryDetailsEditImageWidget extends StatelessWidget {
             : cubit.categoryProductsModel!.data?.imageUrl != null
                 ? CachedNetworkImage(
                     imageUrl:
-                        'http://smartlabel1.runasp.net/Uploads/${widget.cubit.categoryProductsModel!.data?.imageUrl}',
+                        'http://smartlabel1.runasp.net/Uploads/${cubit.categoryProductsModel!.data?.imageUrl}',
                     height: screenHeight(context) * .15,
                     width: screenWidth(context) * .3,
                     placeholder: (context, url) => Center(

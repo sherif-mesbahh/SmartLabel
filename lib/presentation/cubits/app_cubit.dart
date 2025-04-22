@@ -733,4 +733,79 @@ class AppCubit extends Cubit<AppStates> {
       log('Failed with error: ${e.toString()}');
     }
   }
+
+  Future<void> deleteProduct({
+    required int productId,
+    required int cateoryId,
+  }) async {
+    emit(DeleteProductLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().delete(
+          ApiEndpoints.deleteProductById(productId),
+          headers: {'Authorization': 'Bearer $accessToken'});
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        getCategoryProducts(id: cateoryId);
+        emit(DeleteProductSuccessState());
+      } else {
+        emit(DeleteProductErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(DeleteProductErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  Future<void> addProduct({
+    required String name,
+    required String oldPrice,
+    required String discount,
+    required String description,
+    required int categoryId,
+    required File mainImage,
+    required List<XFile> imageFiles,
+  }) async {
+    emit(AddProductLoadingState());
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      double? oldPrice_ = double.tryParse(oldPrice);
+      int? discount_ = int.tryParse(discount);
+      final formData = FormData.fromMap({
+        'Name': name,
+        'OldPrice': oldPrice_,
+        'Discount': discount_,
+        'Description': description,
+        'CatId': categoryId,
+        'MainImage': await MultipartFile.fromFile(mainImage.path),
+        'ImagesFiles': [
+          for (var image in imageFiles)
+            await MultipartFile.fromFile(image.path),
+        ],
+      });
+
+      final response = await ApiService().post(
+        ApiEndpoints.addProduct,
+        formData,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'multipart/form-data',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(AddProductSuccessState());
+      } else {
+        emit(
+            AddProductErrorState('Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(AddProductErrorState(e.toString()));
+      log('Failed with error: ${e.toString()}');
+    }
+  }
 }

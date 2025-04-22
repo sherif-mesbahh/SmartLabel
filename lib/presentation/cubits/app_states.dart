@@ -239,3 +239,23 @@ class UpdateCategoryErrorState extends AppStates {
 
   UpdateCategoryErrorState(this.error);
 }
+
+class DeleteProductLoadingState extends AppStates {}
+
+class DeleteProductSuccessState extends AppStates {}
+
+class DeleteProductErrorState extends AppStates {
+  String error;
+
+  DeleteProductErrorState(this.error);
+}
+
+class AddProductLoadingState extends AppStates {}
+
+class AddProductSuccessState extends AppStates {}
+
+class AddProductErrorState extends AppStates {
+  String error;
+
+  AddProductErrorState(this.error);
+}

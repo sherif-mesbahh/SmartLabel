@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
 class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
   const AdminCategoryDetailsProductsGridViewItem({
@@ -53,7 +55,63 @@ class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
             top: -10,
             right: -10,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return BlocBuilder<AppCubit, AppStates>(
+                      builder: (context, state) {
+                        return AlertDialog(
+                          title: const Text('Confirm Deletion'),
+                          content: const Text(
+                              'Are you sure you want to delete this Product?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: state is DeleteProductLoadingState
+                                  ? null
+                                  : () {
+                                      cubit
+                                          .deleteProduct(
+                                              productId: cubit
+                                                      .categoryProductsModel!
+                                                      .data
+                                                      ?.products?[index]
+                                                      .id ??
+                                                  1,
+                                              cateoryId: cubit
+                                                      .categoryProductsModel
+                                                      ?.data!
+                                                      .id ??
+                                                  1)
+                                          .then((_) {
+                                        Navigator.of(context).pop();
+                                      });
+                                    },
+                              child: state is DeleteProductLoadingState
+                                  ? SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : const Text(
+                                      'Delete',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                );
+              },
               icon: Icon(
                 Icons.delete,
                 color: Colors.red,
