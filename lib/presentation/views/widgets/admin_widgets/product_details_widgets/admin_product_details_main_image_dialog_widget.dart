@@ -6,23 +6,22 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
-import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
-class AddMainBannerImageDialogWidget extends StatefulWidget {
+class AddMainProductImageDialogWidget extends StatefulWidget {
 
-  const AddMainBannerImageDialogWidget({
+  const AddMainProductImageDialogWidget({
     super.key,
   });
 
   @override
-  State<AddMainBannerImageDialogWidget> createState() =>
-      _AddMainBannerImageDialogWidgetState();
+  State<AddMainProductImageDialogWidget> createState() =>
+      _AddMainProductImageDialogWidgetState();
 }
 
-class _AddMainBannerImageDialogWidgetState
-    extends State<AddMainBannerImageDialogWidget> {
+class _AddMainProductImageDialogWidgetState
+    extends State<AddMainProductImageDialogWidget> {
   XFile? mainImage;
   final picker = ImagePicker();
 
@@ -37,7 +36,7 @@ class _AddMainBannerImageDialogWidgetState
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.white,
-      title: Text('Set Main Banner Image', style: TextStyles.headline2),
+      title: Text('Set Main Product Image', style: TextStyles.headline2),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -77,7 +76,7 @@ class _AddMainBannerImageDialogWidgetState
             child: Text('Apply', style: TextStyles.productTitle),
             onPressed: () {
               if (mainImage != null) {
-                AppCubit.get(context).mainBannerImageToUpload = mainImage;
+                AppCubit.get(context).mainproductImageToUpload = mainImage;
                 AppCubit.get(context).emit(AppUpdateState());
               }
               Navigator.of(context).pop();

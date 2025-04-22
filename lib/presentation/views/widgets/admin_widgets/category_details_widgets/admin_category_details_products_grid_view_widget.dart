@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/admin_category_product_grid_view_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/admin_category_product_grid_view_widget.dart';
 
 class AdminCategoryDetailsProductsGridViewWidget extends StatelessWidget {
   const AdminCategoryDetailsProductsGridViewWidget({
@@ -26,8 +26,10 @@ class AdminCategoryDetailsProductsGridViewWidget extends StatelessWidget {
       itemCount: cubit.categoryProductsModel!.data?.products!.length,
       itemBuilder: (context, index) {
         return AdminCategoryDetailsProductsGridViewItem(
-          index: index,
           cubit: cubit,
+          categoryId: categoryId,
+          index: index,
+          productId: cubit.categoryProductsModel!.data!.products![index].id!,
         );
       },
     );

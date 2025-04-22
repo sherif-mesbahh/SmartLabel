@@ -3,30 +3,33 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
-import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_image_model.dart';
+import 'package:smart_label_software_engineering/models/product_details_model/product_details_data_images_model.dart';
+import 'package:smart_label_software_engineering/models/product_details_model/product_details_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
-class AdminBannerDetailsImagesSliderWidget extends StatefulWidget {
-  const AdminBannerDetailsImagesSliderWidget({
+class ProductDetailsImagesWidget extends StatefulWidget {
+  const ProductDetailsImagesWidget({
     super.key,
-    required this.bannerImages,
+    required this.productImages,
+    required this.product,
   });
 
-  final List<BannerDatailsDataImageModel> bannerImages;
+  final List<ProductDetailsDataImagesModel> productImages;
+  final ProductDetailsDataModel product;
 
   @override
-  State<AdminBannerDetailsImagesSliderWidget> createState() =>
-      _AdminBannerDetailsImagesSliderWidgetState();
+  State<ProductDetailsImagesWidget> createState() =>
+      _AdminProductDetailsImagesWidgetState();
 }
 
-class _AdminBannerDetailsImagesSliderWidgetState
-    extends State<AdminBannerDetailsImagesSliderWidget> {
+class _AdminProductDetailsImagesWidgetState
+    extends State<ProductDetailsImagesWidget> {
   final Set<int> deletedImageIds = {};
 
   @override
   Widget build(BuildContext context) {
-    final filteredImages = widget.bannerImages
+    final filteredImages = widget.productImages
         .where((img) => !deletedImageIds.contains(img.imageId))
         .toList();
 
@@ -91,9 +94,9 @@ class _AdminBannerDetailsImagesSliderWidgetState
                                 });
 
                                 final cubit = AppCubit.get(context);
-                                if (!cubit.bannerDetailsImagesToDelete
+                                if (!cubit.productImagesToDelete
                                     .contains(image.imageId)) {
-                                  cubit.bannerDetailsImagesToDelete
+                                  cubit.productImagesToDelete
                                       .add(image.imageId!);
                                 }
                                 AppCubit.get(context).emit(AppUpdateState());

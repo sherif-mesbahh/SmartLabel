@@ -18,7 +18,6 @@ class BannerDetailsBannerImaegsWidget extends StatelessWidget {
     return Column(
       children: [
         AdminBannerDetailsImagesSliderWidget(
-          banner: banner!,
           bannerImages: bannerImages,
         ),
       ],

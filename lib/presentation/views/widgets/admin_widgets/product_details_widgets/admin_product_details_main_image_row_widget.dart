@@ -4,19 +4,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
-import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/change_banner_details_main_image_dialog.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/product_details_widgets/admin_product_details_main_image_dialog_widget.dart';
 
-class BannerDetailsMainImageRowWidget extends StatelessWidget {
-  const BannerDetailsMainImageRowWidget({
+class ProductDetailsMainImageWidget extends StatelessWidget {
+  const ProductDetailsMainImageWidget({
     super.key,
     required this.cubit,
-    required this.banner,
   });
 
   final AppCubit cubit;
-  final BannerDetailsDataModel? banner;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +22,17 @@ class BannerDetailsMainImageRowWidget extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: cubit.mainBannerImageToUpload != null
+          child: cubit.mainproductImageToUpload != null
               ? Image.file(
-                  File(cubit.mainBannerImageToUpload!.path),
+                  File(cubit.mainproductImageToUpload!.path),
                   height: 80,
                   width: 80,
                   fit: BoxFit.cover,
                 )
-              : cubit.bannerDetailsModel!.data?.mainImage != null
+              : cubit.productDetailsModel!.data?.mainImage != null
                   ? CachedNetworkImage(
                       imageUrl:
-                          "http://smartlabel1.runasp.net/Uploads/${cubit.bannerDetailsModel!.data!.mainImage}",
+                          "http://smartlabel1.runasp.net/Uploads/${cubit.productDetailsModel!.data!.mainImage}",
                       height: 80,
                       width: 80,
                       fit: BoxFit.cover,
@@ -65,7 +62,7 @@ class BannerDetailsMainImageRowWidget extends StatelessWidget {
           onPressed: () async {
             showDialog(
               context: context,
-              builder: (context) => AddMainBannerImageDialogWidget(),
+              builder: (context) => AddMainProductImageDialogWidget(),
             );
           },
           child: Text(

@@ -808,4 +808,82 @@ class AppCubit extends Cubit<AppStates> {
       log('Failed with error: ${e.toString()}');
     }
   }
+
+  List<XFile> productImagesToUpload = [];
+  List<int> productImagesToDelete = [];
+  XFile? mainproductImageToUpload;
+
+  Future<void> updateProduct({
+    required int productId,
+    required int categoryId,
+    required String name,
+    required String price,
+    required String discount,
+    required String description,
+    List<XFile>? imageFiles,
+    List<int>? imagesToDelete,
+    XFile? mainImage,
+  }) async {
+    emit(UpdateProductLoadingState());
+    print("Sending update for productId: $productId");
+    print("Sending update for CategoryId: $categoryId");
+
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      double price_ = double.tryParse(price)!;
+      int discount_ = int.tryParse(discount)!;
+      String? mainImagePath;
+      if (mainImage != null) {
+        mainImagePath = mainImage.path;
+      } else {
+        final serverFile =
+            await getFileFromServer(productDetailsModel?.data?.mainImage ?? "");
+        if (!File(serverFile.path).existsSync()) {
+          emit(UpdateProductErrorState('Fallback main image file not found.'));
+          return;
+        }
+        mainImagePath = serverFile.path;
+      }
+      final formData = FormData.fromMap({
+        'Id': productId,
+        'CatId': categoryId,
+        'Name': name,
+        'Description': description,
+        'OldPrice': price_,
+        'Discount': discount_,
+        'MainImage': await MultipartFile.fromFile(mainImagePath),
+        'ImagesFiles': imageFiles != []
+            ? [
+                for (var image in imageFiles!)
+                  await MultipartFile.fromFile(image.path),
+              ]
+            : [],
+        'RemovedImageIds': imagesToDelete != [] ? imagesToDelete : [],
+      });
+      print("Sending update for productId: $productId");
+
+      print("FormData: ${formData.fields}");
+      print("Files: ${formData.files.map((f) => f.key)}");
+
+      final response = await ApiService().put(
+        ApiEndpoints.updateProduct,
+        formData,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'multipart/form-data',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(UpdateProductSuccessState());
+      } else {
+        emit(UpdateProductErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(UpdateProductErrorState(e.toString()));
+      log('Failed withdfdsdfsdf error: ${e.toString()}');
+    }
+  }
 }

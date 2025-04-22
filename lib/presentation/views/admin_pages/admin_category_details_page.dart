@@ -75,7 +75,8 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
               fontSize: 16,
             );
             cubit.getCategories().then((onValue) {
-              pushNavigator(context, AdminCategoriesPage(), slideLeftToRigth);
+              cubit.mainCategoryImageToUpload = null;
+              popNavigator(context);
             });
           }
           if (state is UpdateCategoryErrorState) {

@@ -259,3 +259,13 @@ class AddProductErrorState extends AppStates {
 
   AddProductErrorState(this.error);
 }
+
+class UpdateProductLoadingState extends AppStates {}
+
+class UpdateProductSuccessState extends AppStates {}
+
+class UpdateProductErrorState extends AppStates {
+  String error;
+
+  UpdateProductErrorState(this.error);
+}

@@ -94,7 +94,10 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
               fontSize: 16,
             );
             cubit.getBanners().then((onValue) {
-              pushNavigator(context, AdminCategoriesPage(), slideLeftToRigth);
+              cubit.bannerDetailsImagesToUpload = [];
+              cubit.bannerDetailsImagesToDelete = [];
+              cubit.mainBannerImageToUpload = null;
+              popNavigator(context);
             });
           }
           if (state is UpdateBannerErrorState) {

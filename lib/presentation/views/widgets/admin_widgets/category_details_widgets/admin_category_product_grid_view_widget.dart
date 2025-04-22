@@ -1,25 +1,55 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
+import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_product_details_page.dart';
 
 class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
   const AdminCategoryDetailsProductsGridViewItem({
     super.key,
-    required this.index,
     required this.cubit,
+    required this.categoryId,
+    required this.productId,
+    required this.index,
   });
-  final int index;
+  final int categoryId;
   final AppCubit cubit;
+  final int productId;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // pushNavigator(context, AdminEditProductPage(), slideRightToLeft);
+      onTap: () async {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => const Center(
+            child: CircularProgressIndicator(color: primaryColor),
+          ),
+        );
+
+        await AppCubit.get(context).getProductDetails(id: productId);
+
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+
+        if (context.mounted) {
+          pushNavigator(
+            context,
+            AdminProductDetailsPage(
+              cubit: cubit,
+              productId: productId,
+              categoryId: categoryId,
+            ),
+            slideRightToLeft,
+          );
+        }
       },
       child: Stack(
         alignment: Alignment.topRight,
