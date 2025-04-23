@@ -14,15 +14,6 @@ public class CategoryRepository(AppDbContext context, IUserFavProductRepository 
 {
 	public async Task<IEnumerable<GetAllCategoriesDto?>> GetAllCategoriesAsync()
 	{
-		//return await context.Categories
-		//	.AsNoTracking()
-		//	.Select(c => new GetAllCategoriesDto()
-		//	{
-		//		Id = c.Id,
-		//		Name = c.Name,
-		//		ImageUrl = c.ImageUrl
-		//	}).ToListAsync();
-
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = "SELECT Id, Name, ImageUrl FROM Categories";
 		var categoryResponse = await connection
@@ -38,24 +29,6 @@ public class CategoryRepository(AppDbContext context, IUserFavProductRepository 
 
 	public async Task<GetCategoryByIdDto?> GetCategoryByIdAsync(int id, string? userId)
 	{
-		//return await context.Categories
-		//	.Where(x => x.Id == id)
-		//	.Select(c => new GetCategoryByIdDto()
-		//	{
-		//		Id = c.Id,
-		//		Name = c.Name,
-		//		ImageUrl = c.ImageUrl,
-		//		Products = c.Products
-		//			.Select(p => new GetAllProductsDto()
-		//			{
-		//				Name = p.Name,
-		//				CategoryName = p.Category.Name,
-		//				Discount = p.Discount,
-		//				OldPrice = p.OldPrice,
-		//				NewPrice = p.NewPrice,
-		//				ImageUrl = p.MainImage
-		//			}).ToList()
-		//	}).FirstOrDefaultAsync();
 		using var connection = sqlConnectionFactory.Create();
 		Dictionary<int, GetCategoryByIdDto> categoryDictionary = new();
 

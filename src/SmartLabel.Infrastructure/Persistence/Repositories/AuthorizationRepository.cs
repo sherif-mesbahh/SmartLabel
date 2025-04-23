@@ -41,13 +41,11 @@ public class AuthorizationRepository(AppDbContext context, UserManager<Applicati
 	public async Task<IEnumerable<string>> GetUserRolesAsync(ApplicationUser user)
 	{
 		return await userManager.GetRolesAsync(user);
-
 	}
 
 	public async Task<IdentityResult> AddUserToRoleAsync(ApplicationUser user, string roleName)
 	{
-		var result = await userManager.AddToRoleAsync(user, roleName);
-		return result;
+		return await userManager.AddToRoleAsync(user, roleName);
 	}
 
 	public async Task RemoveUserFromRoleAsync(ApplicationUser user, string roleName)

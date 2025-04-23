@@ -11,19 +11,6 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 {
 	public async Task<IEnumerable<GetAllProductsDto?>> GetAllProductsAsync(string? userId)
 	{
-		//return await context.Products
-		//	.AsNoTracking()
-		//	.Select(p => new GetAllProductsDto()
-		//	{
-		//		Id = p.Id,
-		//		Name = p.Name,
-		//		CategoryName = p.Category.Name,
-		//		Discount = p.Discount,
-		//		OldPrice = p.OldPrice,
-		//		NewPrice = p.NewPrice,
-		//		ImageUrl = p.MainImage
-		//	})
-		//	.ToListAsync();
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -67,20 +54,6 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 
 	public async Task<GetProductByIdDto?> GetProductByIdAsync(int id)
 	{
-		//return await context.Products
-		//	.AsNoTracking()
-		//	.Where(x => x.Id == id)
-		//	.Select(p => new GetProductByIdDto()
-		//	{
-		//		Id = p.Id,
-		//		Name = p.Name,
-		//		CategoryName = p.Category.Name,
-		//		Discount = p.Discount,
-		//		OldPrice = p.OldPrice,
-		//		NewPrice = p.NewPrice,
-		//		Description = p.Description,
-		//		Images = p.Images.Select(pi => pi.ImageUrl).ToList()
-		//	}).FirstOrDefaultAsync();
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -127,20 +100,6 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 
 	public async Task<GetProductByIdDto?> GetProductByIdUserAsync(int id, string? userId)
 	{
-		//return await context.Products
-		//	.AsNoTracking()
-		//	.Where(x => x.Id == id)
-		//	.Select(p => new GetProductByIdDto()
-		//	{
-		//		Id = p.Id,
-		//		Name = p.Name,
-		//		CategoryName = p.Category.Name,
-		//		Discount = p.Discount,
-		//		OldPrice = p.OldPrice,
-		//		NewPrice = p.NewPrice,
-		//		Description = p.Description,
-		//		Images = p.Images.Select(pi => pi.ImageUrl).ToList()
-		//	}).FirstOrDefaultAsync();
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -209,7 +168,7 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 				.SetProperty(p => p.Name, product.Name)
 				.SetProperty(p => p.Description, product.Description)
 				.SetProperty(p => p.CatId, product.CatId)
-				.SetProperty(p => p.Discount, p => p.Discount)
+				.SetProperty(p => p.Discount, product.Discount)
 				.SetProperty(p => p.OldPrice, product.OldPrice)
 				.SetProperty(p => p.NewPrice, product.NewPrice)
 				.SetProperty(p => p.MainImage, product.MainImage)

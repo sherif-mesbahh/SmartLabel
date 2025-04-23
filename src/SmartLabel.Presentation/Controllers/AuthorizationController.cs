@@ -17,10 +17,10 @@ public class AuthorizationController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(new GetAllRolesQuery()));
 	}
-	[HttpGet("user-roles/{email}")]
-	public async Task<IActionResult> GetUserRoles(string email)
+	[HttpGet("user-roles/{id}")]
+	public async Task<IActionResult> GetUserRoles(int id)
 	{
-		return NewResult(await sender.Send(new GetUserRolesQuery(email)));
+		return NewResult(await sender.Send(new GetUserRolesQuery(id)));
 	}
 	[HttpPost("roles/{name}")]
 	public async Task<IActionResult> AddRole(string name)
