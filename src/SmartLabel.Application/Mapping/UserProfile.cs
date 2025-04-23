@@ -12,7 +12,7 @@ public class UserProfile : Profile
 			.ForMember(dest => dest.UserName,
 				src => src.MapFrom(x => x.Email));
 		CreateMap<UpdateUserCommand, ApplicationUser>();
-		CreateMap<ApplicationUser, GetAllUsersResult>();
-		CreateMap<ApplicationUser, GetUserByIdResult>();
+		CreateMap<ApplicationUser, GetAllUsersDto>();
+		CreateMap<ApplicationUser, GetUserByIdDto>();
 	}
 }

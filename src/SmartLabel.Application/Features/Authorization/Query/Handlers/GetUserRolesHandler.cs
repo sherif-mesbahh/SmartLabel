@@ -10,12 +10,12 @@ public class GetUserRolesHandler(IAuthorizationRepository authorizationRepositor
 {
 	public async Task<Response<IEnumerable<string>>> Handle(GetUserRolesQuery request, CancellationToken cancellationToken)
 	{
-		var existingUser = await userManager.FindByEmailAsync(request.Email);
+		var existingUser = await userManager.FindByIdAsync(request.Id.ToString());
 		if (existingUser is null)
 		{
 			return NotFound<IEnumerable<string>>(
 				message: "User not found",
-				errors: [$"User with email '{request.Email}' doesn't exist"]);
+				errors: [$"User with id '{request.Id}' doesn't exist"]);
 
 		}
 

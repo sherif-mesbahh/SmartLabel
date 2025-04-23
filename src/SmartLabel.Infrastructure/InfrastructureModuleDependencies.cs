@@ -34,6 +34,7 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<IUnitOfWork, UnitOfWork>();
 		services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
 		services.AddTransient<IAuthorizationRepository, AuthorizationRepository>();
+		services.AddTransient<IUsersRepository, UsersRepository>();
 		services.AddTransient<IUserFavProductRepository, UserFavProductRepository>();
 		services.AddTransient<ISqlConnectionFactory, SqlConnectionFactory>();
 		services.AddIdentity<ApplicationUser, Role>(
