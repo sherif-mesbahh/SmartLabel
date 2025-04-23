@@ -32,11 +32,9 @@
  
  ## ⚡ Performance Optimizations  
  - ✅ Optimized stored procedures for pagination  
- @@ -35,7 +35,7 @@
- - Role-based access control (RBAC)
- - Input validation and sanitization
+ - ✅ Role-based access control (RBAC)
+ - ✅Input validation and sanitization
  
- 🛠️ Tech Stack
  ## 🛠️ Tech Stack
  - Backend: ASP.NET Core 6+
  - Database: SQL Server
