@@ -3,9 +3,15 @@ class UserInfoDataModel {
   String? lastName;
   String? email;
   String? passwordHash;
+  List<String>? roles;
 
-  UserInfoDataModel(
-      {this.firstName, this.lastName, this.email, this.passwordHash});
+  UserInfoDataModel({
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.passwordHash,
+    this.roles,
+  });
 
   factory UserInfoDataModel.fromJson(Map<String, dynamic> json) =>
       UserInfoDataModel(
@@ -13,6 +19,9 @@ class UserInfoDataModel {
         lastName: json['lastName'] as String?,
         email: json['email'] as String?,
         passwordHash: json['passwordHash'] as String?,
+        roles: (json['roles'] as List<dynamic>?)
+            ?.map((role) => role.toString())
+            .toList(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -20,5 +29,6 @@ class UserInfoDataModel {
         'lastName': lastName,
         'email': email,
         'passwordHash': passwordHash,
+        'roles': roles,
       };
 }

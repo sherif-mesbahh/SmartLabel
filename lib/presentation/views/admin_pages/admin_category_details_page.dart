@@ -7,7 +7,7 @@ import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/add_new_product_dialog_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/add_new_product_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/admin_category_details_app_bar_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/admin_category_details_edit_image_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/admin_category_details_name_text_field_widget.dart';
@@ -126,7 +126,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                   ),
                 SizedBox(height: 10),
 
-                // Categor Products
+                // Category Products
                 Text(
                   '${widget.cubit.categoryProductsModel!.data?.name ?? ''} Products',
                   style: TextStyles.headline2,

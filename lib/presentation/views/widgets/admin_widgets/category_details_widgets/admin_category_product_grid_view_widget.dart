@@ -58,6 +58,7 @@ class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Product Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
@@ -75,12 +76,16 @@ class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
+              // Product Name
               Text(
                 cubit.categoryProductsModel?.data!.products?[index].name ?? '',
                 style: TextStyles.productTitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
+          // Delete Button
           Positioned(
             top: -10,
             right: -10,

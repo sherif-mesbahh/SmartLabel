@@ -81,6 +81,9 @@ class AdminCategoriesGridViewItem extends StatelessWidget {
                   Text(
                     categoryModel?.data?[index].name ?? '',
                     style: TextStyles.productTitle,
+                    maxLines: 1,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

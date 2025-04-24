@@ -12,21 +12,29 @@ class UserDetailsRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.grey[700],
-            fontSize: 16,
+        Expanded(
+          child: Text(
+            title,
+            softWrap: true,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[700],
+              fontSize: 16,
+            ),
           ),
         ),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.black87,
+        SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            value,
+            softWrap: true,
+            textAlign: TextAlign.end,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black87,
+            ),
           ),
         ),
       ],

@@ -19,7 +19,7 @@ class CategoriesListViewItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
             radius: 42,
@@ -33,14 +33,16 @@ class CategoriesListViewItem extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: 10,
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              model.name ?? 'No Name',
+              style: TextStyles.productTitle,
+              maxLines: 2,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-          Text(
-            model.name ?? 'No Name',
-            style: TextStyles.productTitle,
-          ),
-          Spacer(),
           IconButton(
             onPressed: () {
               AppCubit.get(context)

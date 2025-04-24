@@ -38,9 +38,15 @@ class ListViewSearchCategoriesWidget extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
-            cubit.categorySearchModel?.data?[index].name ?? 'No Name',
-            style: TextStyles.productTitle,
+          Expanded(
+            flex: 10,
+            child: Text(
+              cubit.categorySearchModel?.data?[index].name ?? 'No Name',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              style: TextStyles.productTitle,
+            ),
           ),
           Spacer(),
           IconButton(

@@ -72,29 +72,33 @@ class ListViewSearchProductWidget extends StatelessWidget {
                   ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product?.name ?? '',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyles.productTitle.copyWith(fontSize: 12),
-                  ),
-                  Text(
-                    '${product?.newPrice}\$',
-                    style: TextStyles.productPrice,
-                  ),
-                  if (hasDiscount) ...[
-                    const SizedBox(width: 10),
+            Expanded(
+              flex: 10,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      '${product?.oldPrice}\$',
-                      style: TextStyles.productOldPrice,
+                      product?.name ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      style: TextStyles.productTitle.copyWith(fontSize: 12),
                     ),
+                    Text(
+                      '${product?.newPrice}\$',
+                      style: TextStyles.productPrice,
+                    ),
+                    if (hasDiscount) ...[
+                      const SizedBox(width: 10),
+                      Text(
+                        '${product?.oldPrice}\$',
+                        style: TextStyles.productOldPrice,
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
             Spacer(),

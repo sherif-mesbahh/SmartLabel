@@ -75,30 +75,38 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Admin Panel', style: TextStyles.cartItemTitle),
-                    IconButton(
-                      color: primaryColor,
-                      iconSize: 30,
-                      onPressed: () {
-                        AppCubit.get(context).getBanners().then((onValue) {
-                          AppCubit.get(context).getCategories().then((onValue) {
-                            pushNavigator(
-                                context, AdminCategoriesPage(), fadeTransition);
+              SizedBox(height: 20),
+              if (AppCubit.get(context)
+                  .userInfoModel!
+                  .data!
+                  .roles!
+                  .contains('Admin'))
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Admin Panel', style: TextStyles.cartItemTitle),
+                      IconButton(
+                        color: primaryColor,
+                        iconSize: 30,
+                        onPressed: () {
+                          AppCubit.get(context).getBanners().then((onValue) {
+                            AppCubit.get(context)
+                                .getCategories()
+                                .then((onValue) {
+                              pushNavigator(context, AdminCategoriesPage(),
+                                  fadeTransition);
+                            });
                           });
-                        });
-                      },
-                      icon: Icon(
-                        Icons.admin_panel_settings,
+                        },
+                        icon: Icon(
+                          Icons.admin_panel_settings,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
               CustomButtonWidget(
                 onTap: () {
                   AppCubit.get(context).logout().then((onValue) {
