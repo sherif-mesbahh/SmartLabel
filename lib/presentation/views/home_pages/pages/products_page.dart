@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -36,8 +37,12 @@ class ProductsPage extends StatelessWidget {
                 final banners = cubit.activeBannersModel?.data;
 
                 if (state is GetActiveBannersLoadingState) {
-                  return const Center(
-                    child: CircularProgressIndicator(color: primaryColor),
+                  return Center(
+                    child: Lottie.asset(
+                      'assets/lottie/loading_indicator.json',
+                      width: 100,
+                      height: 100,
+                    ),
                   );
                 }
 
@@ -54,7 +59,13 @@ class ProductsPage extends StatelessWidget {
                 final products = cubit.productModel?.data;
 
                 if (state is GetProductsLoadingState) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: Lottie.asset(
+                      'assets/lottie/loading_indicator.json',
+                      width: 100,
+                      height: 100,
+                    ),
+                  );
                 }
 
                 if (products == null) {

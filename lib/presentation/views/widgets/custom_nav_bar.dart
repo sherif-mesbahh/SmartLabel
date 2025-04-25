@@ -40,19 +40,27 @@ class _CustomNavBarState extends State<CustomNavBar> {
             unselectedItemColor: darkColor,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: ImageIcon(
+                  AssetImage('assets/images/home_white.png'),
+                ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.production_quantity_limits),
+                icon: ImageIcon(
+                  AssetImage('assets/images/category_white.png'),
+                ),
                 label: 'Categories',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.category),
+                icon: ImageIcon(
+                  AssetImage('assets/images/favorite_white.png'),
+                ),
                 label: 'Favoriets',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: ImageIcon(
+                  AssetImage('assets/images/profile_white.png'),
+                ),
                 label: 'Profile',
               ),
             ],

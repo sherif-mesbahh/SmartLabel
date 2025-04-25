@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_image_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -61,9 +62,12 @@ class _AdminBannerDetailsImagesSliderWidgetState
                                 imageUrl:
                                     "http://smartlabel1.runasp.net/Uploads/${image.imageUrl}",
                                 fit: BoxFit.cover,
-                                placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator(
-                                      color: primaryColor),
+                                placeholder: (context, url) =>  Center(
+                                  child: Lottie.asset(
+                                    'assets/lottie/loading_indicator.json',
+                                    width: 100,
+                                    height: 100,
+                                  ),
                                 ),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.broken_image),

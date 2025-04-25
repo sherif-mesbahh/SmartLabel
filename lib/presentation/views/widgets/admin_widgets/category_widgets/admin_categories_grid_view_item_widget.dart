@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
@@ -29,8 +30,12 @@ class AdminCategoriesGridViewItem extends StatelessWidget {
             showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (context) => const Center(
-                child: CircularProgressIndicator(color: primaryColor),
+              builder: (context) => Center(
+                child: Lottie.asset(
+                  'assets/lottie/loading_indicator.json',
+                  width: 100,
+                  height: 100,
+                ),
               ),
             );
 
@@ -69,8 +74,10 @@ class AdminCategoriesGridViewItem extends StatelessWidget {
                       width: double.infinity,
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Center(
-                        child: CircularProgressIndicator(
-                          color: primaryColor,
+                        child: Lottie.asset(
+                          'assets/lottie/loading_indicator.json',
+                          width: 100,
+                          height: 100,
                         ),
                       ),
                       errorWidget: (context, url, error) => Icon(Icons.error),
@@ -124,9 +131,10 @@ class AdminCategoriesGridViewItem extends StatelessWidget {
                                       ? SizedBox(
                                           height: 20,
                                           width: 20,
-                                          child: CircularProgressIndicator(
-                                            color: primaryColor,
-                                            strokeWidth: 2,
+                                          child: Lottie.asset(
+                                            'assets/lottie/loading_indicator.json',
+                                            width: 100,
+                                            height: 100,
                                           ),
                                         )
                                       : const Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -95,9 +96,12 @@ class _SearchPageState extends State<SearchPage> {
                         showDialog(
                           context: context,
                           barrierDismissible: false,
-                          builder: (_) => const Center(
-                            child:
-                                CircularProgressIndicator(color: primaryColor),
+                          builder: (_) => Center(
+                            child: Lottie.asset(
+                              'assets/lottie/loading_indicator.json',
+                              width: 100,
+                              height: 100,
+                            ),
                           ),
                         );
 

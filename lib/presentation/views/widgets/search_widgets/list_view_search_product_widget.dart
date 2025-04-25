@@ -54,9 +54,11 @@ class ListViewSearchProductWidget extends StatelessWidget {
                           ? 'http://smartlabel1.runasp.net/Uploads/${product!.mainImage}'
                           : 'https://via.placeholder.com/150',
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(
-                          color: primaryColor,
+                      placeholder: (context, url) => Center(
+                        child: Lottie.asset(
+                          'assets/lottie/loading_indicator.json',
+                          width: 100,
+                          height: 100,
                         ),
                       ),
                       errorWidget: (context, url, error) =>

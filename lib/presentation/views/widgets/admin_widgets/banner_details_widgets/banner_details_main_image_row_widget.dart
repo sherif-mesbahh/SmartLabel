@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_model.dart';
@@ -39,11 +40,15 @@ class BannerDetailsMainImageRowWidget extends StatelessWidget {
                       height: 80,
                       width: 80,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => const SizedBox(
+                      placeholder: (context, url) => SizedBox(
                         height: 80,
                         width: 80,
                         child: Center(
-                          child: CircularProgressIndicator(color: primaryColor),
+                          child: Lottie.asset(
+                            'assets/lottie/loading_indicator.json',
+                            width: 100,
+                            height: 100,
+                          ),
                         ),
                       ),
                       errorWidget: (context, url, error) => Container(

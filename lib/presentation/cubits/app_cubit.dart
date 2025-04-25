@@ -45,7 +45,6 @@ class AppCubit extends Cubit<AppStates> {
     required int index,
   }) {
     navBarCurrentIndex = index;
-    getUserInfo();
 
     emit(ChangeNavBarCurrentIndexState());
 
@@ -56,7 +55,7 @@ class AppCubit extends Cubit<AppStates> {
 
     if (index == 1) getCategories();
     if (index == 2) getFav();
-    if (index == 3) getActiveBanners();
+    if (index == 3) getUserInfo();
   }
 
   IconData signUpPasswordSuffix = Icons.visibility;

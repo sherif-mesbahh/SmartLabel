@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
@@ -104,17 +105,17 @@ class AdminCategoriesPage extends StatelessWidget {
                     height: 10,
                   ),
                   AppCubit.get(context).bannersModel?.data?.isEmpty ?? false
-                      ? SizedBox()
+                      ? Center(
+                          child: Text(
+                            'There is no Banners',
+                            style: TextStyles.productTitle,
+                          ),
+                        )
                       : BlocListener<AppCubit, AppStates>(
                           listener: (context, state) {},
-                          child: state is DeleteBannerLoadingState
-                              ? Center(
-                                  child: CircularProgressIndicator(
-                                      color: primaryColor),
-                                )
-                              : AdminBannersCustomSliderWidget(
-                                  cubit: AppCubit.get(context),
-                                ),
+                          child: AdminBannersCustomSliderWidget(
+                            cubit: AppCubit.get(context),
+                          ),
                         ),
                   //Add Banner Button
                   SizedBox(

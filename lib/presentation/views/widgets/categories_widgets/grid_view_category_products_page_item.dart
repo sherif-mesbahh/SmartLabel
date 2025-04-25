@@ -55,8 +55,10 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                             'http://smartlabel1.runasp.net/Uploads/${model.mainImage}',
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(
-                            color: primaryColor,
+                          child: Lottie.asset(
+                            'assets/lottie/loading_indicator.json',
+                            width: 100,
+                            height: 100,
                           ),
                         ),
                         errorWidget: (context, url, error) => Icon(Icons.error),

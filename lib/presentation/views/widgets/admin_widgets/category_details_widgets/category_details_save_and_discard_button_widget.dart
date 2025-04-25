@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
@@ -34,8 +35,10 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
             children: [
               // Save Changes
               state is UpdateCategoryLoadingState
-                  ? const CircularProgressIndicator(
-                      color: primaryColor,
+                  ? Lottie.asset(
+                      'assets/lottie/loading_indicator.json',
+                      width: 100,
+                      height: 100,
                     )
                   : InkWell(
                       child: Text(

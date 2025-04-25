@@ -93,6 +93,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
         },
         builder: (context, state) {
           final category = cubit.categoryProductsModel?.data;
+          final products = cubit.categoryProductsModel!.data!.products;
           if (category == null) {
             return const Center(
               child: Text(
@@ -132,10 +133,17 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                   style: TextStyles.headline2,
                 ),
                 SizedBox(height: 10),
-                AdminCategoryDetailsProductsGridViewWidget(
-                  cubit: cubit,
-                  categoryId: category.id!,
-                ),
+                products != null && products.isNotEmpty
+                    ? AdminCategoryDetailsProductsGridViewWidget(
+                        cubit: cubit,
+                        categoryId: category.id!,
+                      )
+                    : Center(
+                        child: Text(
+                          'No Products Available for this Category',
+                          style: TextStyles.productTitle,
+                        ),
+                      ),
               ],
             ),
           );

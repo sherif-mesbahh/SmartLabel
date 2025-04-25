@@ -57,8 +57,12 @@ class FavListViewItem extends StatelessWidget {
                             imageUrl:
                                 'http://smartlabel1.runasp.net/Uploads/$imageUrl',
                             fit: BoxFit.cover,
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(),
+                            placeholder: (context, url) => Center(
+                              child: Lottie.asset(
+                                'assets/lottie/loading_indicator.json',
+                                width: 100,
+                                height: 100,
+                              ),
                             ),
                             errorWidget: (context, url, error) => const Icon(
                               Icons.broken_image,

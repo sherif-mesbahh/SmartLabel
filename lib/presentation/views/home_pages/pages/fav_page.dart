@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/fav_widgets/fav_list_view_item.dart';
@@ -16,10 +16,17 @@ class FavPage extends StatelessWidget {
         final favData = cubit.favModel?.data;
 
         if (state is GetFavProductsLoadingState) {
-          return const Center(
-              child: CircularProgressIndicator(
-            color: primaryColor,
-          ));
+          return Column(
+            children: [
+              Center(
+                child: Lottie.asset(
+                  'assets/lottie/loading_indicator.json',
+                  width: 100,
+                  height: 100,
+                ),
+              ),
+            ],
+          );
         }
 
         if (favData == null) {

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'dart:io';
 
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -272,8 +273,10 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                 }
               },
               child: state is AddBannerLoadingState
-                  ? CircularProgressIndicator(
-                      color: primaryColor,
+                  ? Lottie.asset(
+                      'assets/lottie/loading_indicator.json',
+                      width: 100,
+                      height: 100,
                     )
                   : TextButton(
                       child: Text('Apply', style: TextStyles.productTitle),

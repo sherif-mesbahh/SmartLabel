@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_banner_details_page.dart';
 
 class AdminBannersCustomSliderWidget extends StatelessWidget {
@@ -35,8 +38,12 @@ class AdminBannersCustomSliderWidget extends StatelessWidget {
                 showDialog(
                   context: context,
                   barrierDismissible: false,
-                  builder: (context) => const Center(
-                    child: CircularProgressIndicator(color: primaryColor),
+                  builder: (context) => Center(
+                    child: Lottie.asset(
+                      'assets/lottie/loading_indicator.json',
+                      width: 100,
+                      height: 100,
+                    ),
                   ),
                 );
 
@@ -73,8 +80,12 @@ class AdminBannersCustomSliderWidget extends StatelessWidget {
                         imageUrl:
                             "http://smartlabel1.runasp.net/Uploads/${banner.mainImage}",
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(color: primaryColor),
+                        placeholder: (context, url) => Center(
+                          child: Lottie.asset(
+                            'assets/lottie/loading_indicator.json',
+                            width: 100,
+                            height: 100,
+                          ),
                         ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.broken_image),
@@ -88,7 +99,54 @@ class AdminBannersCustomSliderWidget extends StatelessWidget {
                     right: 8,
                     child: InkWell(
                       onTap: () {
-                        cubit.deleteBanner(id: banner.id!);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return BlocBuilder<AppCubit, AppStates>(
+                              builder: (context, state) {
+                                return AlertDialog(
+                                  title: const Text('Confirm Deletion'),
+                                  content: const Text(
+                                      'Are you sure you want to delete this Banner?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: state
+                                              is DeleteBannerLoadingState
+                                          ? null
+                                          : () {
+                                              cubit
+                                                  .deleteBanner(id: banner.id!)
+                                                  .then((_) {
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                      child: state is DeleteBannerLoadingState
+                                          ? SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child: Lottie.asset(
+                                                'assets/lottie/loading_indicator.json',
+                                                width: 100,
+                                                height: 100,
+                                              ),
+                                            )
+                                          : const Text(
+                                              'Delete',
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                       child: Container(
                         decoration: BoxDecoration(

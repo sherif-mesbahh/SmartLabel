@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -24,8 +25,12 @@ class CategoriesPage extends StatelessWidget {
             final categories = cubit.categoryModel?.data;
 
             if (state is GetCategoriesLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(color: primaryColor),
+              return  Center(
+                child: Lottie.asset(
+                  'assets/lottie/loading_indicator.json',
+                  width: 100,
+                  height: 100,
+                ),
               );
             }
 

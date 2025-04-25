@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
@@ -15,13 +16,14 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+    return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
         if (state is GetUserInfoLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: primaryColor,
+          return Center(
+            child: Lottie.asset(
+              'assets/lottie/loading_indicator.json',
+              width: 100,
+              height: 100,
             ),
           );
         }

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -34,8 +35,12 @@ class CustomSlider extends StatelessWidget {
                 showDialog(
                   context: context,
                   barrierDismissible: false,
-                  builder: (context) => const Center(
-                    child: CircularProgressIndicator(color: primaryColor),
+                  builder: (context) => Center(
+                    child: Lottie.asset(
+                      'assets/lottie/loading_indicator.json',
+                      width: 100,
+                      height: 100,
+                    ),
                   ),
                 );
 
@@ -67,10 +72,13 @@ class CustomSlider extends StatelessWidget {
                     imageUrl:
                         "http://smartlabel1.runasp.net/Uploads/${banner.mainImage}",
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(
-                      color: primaryColor,
-                    )),
+                    placeholder: (context, url) => Center(
+                      child: Lottie.asset(
+                        'assets/lottie/loading_indicator.json',
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.broken_image),
                   ),

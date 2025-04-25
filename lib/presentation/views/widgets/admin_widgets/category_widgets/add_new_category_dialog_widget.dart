@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -112,7 +113,11 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
               onPressed: () => Navigator.of(context).pop(),
             ),
             state is AddCategoryLoadingState
-                ? CircularProgressIndicator(color: primaryColor)
+                ? Lottie.asset(
+                      'assets/lottie/loading_indicator.json',
+                      width: 100,
+                      height: 100,
+                    )
                 : TextButton(
                     child: Text('Apply', style: TextStyles.productTitle),
                     onPressed: () {
