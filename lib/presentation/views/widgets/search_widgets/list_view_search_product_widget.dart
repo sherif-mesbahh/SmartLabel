@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -110,7 +111,19 @@ class ListViewSearchProductWidget extends StatelessWidget {
                 return favorite
                     ? InkWell(
                         onTap: () {
-                          cubit.removeFromFav(model: product!);
+                          if (AppCubit.get(context).isLogin) {
+                            cubit.removeFromFav(model: product!);
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'You must be logged in.',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }
                         },
                         child: Lottie.asset(
                           'assets/lottie/inFavAnimation.json',
@@ -124,7 +137,19 @@ class ListViewSearchProductWidget extends StatelessWidget {
                       )
                     : InkWell(
                         onTap: () {
-                          cubit.addToFav(model: product!);
+                          if (AppCubit.get(context).isLogin) {
+                            cubit.addToFav(model: product!);
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'You must be logged in.',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

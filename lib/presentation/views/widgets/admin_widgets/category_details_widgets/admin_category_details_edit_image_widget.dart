@@ -7,7 +7,6 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/category_products_model/category_products_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
-import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_category_details_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/edit_category_image_dialog.dart';
 
 class AdminCategoryDetailsEditImageWidget extends StatelessWidget {

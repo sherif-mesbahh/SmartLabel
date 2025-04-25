@@ -54,8 +54,17 @@ class AppCubit extends Cubit<AppStates> {
     }
 
     if (index == 1) getCategories();
-    if (index == 2) getFav();
-    if (index == 3) getUserInfo();
+    if (index == 2) {
+      if (isLogin) {
+        getFav();
+      }
+    }
+
+    if (index == 3) {
+      if (isLogin) {
+        getUserInfo();
+      }
+    }
   }
 
   IconData signUpPasswordSuffix = Icons.visibility;
@@ -396,6 +405,7 @@ class AppCubit extends Cubit<AppStates> {
       await SecureTokenStorage.clearTokens();
       isLogin = false;
       navBarCurrentIndex = 0;
+      getProducts();
 
       emit(CheckLoginStatusState());
     } catch (e) {

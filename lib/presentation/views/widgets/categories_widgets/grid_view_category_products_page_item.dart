@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -105,7 +106,19 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                 child: model.favorite!
                     ? InkWell(
                         onTap: () {
-                          AppCubit.get(context).removeFromFav(model: model);
+                          if (AppCubit.get(context).isLogin) {
+                            AppCubit.get(context).removeFromFav(model: model);
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'You must be logged in.',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }
                         },
                         child: Lottie.asset(
                           'assets/lottie/inFavAnimation.json',
@@ -119,7 +132,19 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                       )
                     : InkWell(
                         onTap: () {
-                          AppCubit.get(context).addToFav(model: model);
+                          if (AppCubit.get(context).isLogin) {
+                            AppCubit.get(context).addToFav(model: model);
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'You must be logged in.',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

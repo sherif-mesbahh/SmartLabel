@@ -28,31 +28,47 @@ class FavPage extends StatelessWidget {
             ],
           );
         }
+        if (AppCubit.get(context).isLogin) {
+          if (favData == null) {
+            return const Center(child: Text('Loading favorites...'));
+          }
 
-        if (favData == null) {
-          return const Center(child: Text('Loading favorites...'));
-        }
-
-        if (favData.isEmpty) {
-          return const Center(child: Text('No favorites found'));
-        }
-        if (state is AddToFavSuccessState ||
-            state is RemoveFromFavSuccessState) {
-          cubit.getFav();
-        }
-
-        return ListView.builder(
-          itemBuilder: (context, index) {
-            return FavListViewItem(
-              favModel: favData[index],
-              cubit: cubit,
-              index: index,
+          if (favData.isEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Center(child: Text('No favorites found')),
+              ],
             );
-          },
-          itemCount: favData.length,
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-        );
+          }
+          if (state is AddToFavSuccessState ||
+              state is RemoveFromFavSuccessState) {
+            cubit.getFav();
+          }
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return FavListViewItem(
+                favModel: favData[index],
+                cubit: cubit,
+                index: index,
+              );
+            },
+            itemCount: favData.length,
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+          );
+        } else {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Center(
+                child: Text(
+                  'Please login first',
+                ),
+              ),
+            ],
+          );
+        }
       },
     );
   }

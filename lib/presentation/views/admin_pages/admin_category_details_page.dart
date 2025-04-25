@@ -6,7 +6,6 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/add_new_product_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/admin_category_details_app_bar_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/admin_category_details_edit_image_widget.dart';
@@ -61,6 +60,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
     final cubit = widget.cubit;
 
     return Scaffold(
+      backgroundColor: secondaryColor,
       appBar: AdminCategoryDetailsAppBarWidget(cubit: cubit),
       body: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
@@ -111,6 +111,8 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                 // Category Name
                 AdminCategoryDetailsNameTextFieldWidget(
                     nameController: nameController),
+                SizedBox(height: 10),
+
                 // Category Image
                 AdminCategoryDetailsEditImageWidget(
                   cubit: cubit,

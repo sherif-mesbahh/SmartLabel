@@ -7,7 +7,6 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_image_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_description_text_field.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_save_and_discard_buttons_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_start_date_text_field.dart';
@@ -80,6 +79,7 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
     final cubit = widget.cubit;
 
     return Scaffold(
+      backgroundColor: secondaryColor,
       appBar: AdminBannerDetailsAppBarWidget(cubit: cubit),
       body: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
