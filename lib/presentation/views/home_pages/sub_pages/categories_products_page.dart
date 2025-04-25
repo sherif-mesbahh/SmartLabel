@@ -20,6 +20,7 @@ class CategoriesProductsPage extends StatelessWidget {
     final cubit = AppCubit.get(context);
 
     return Scaffold(
+      backgroundColor: secondaryColor,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,

@@ -69,7 +69,7 @@ class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl:
                       'http://smartlabel1.runasp.net/Uploads/${cubit.categoryProductsModel?.data!.products?[index].mainImage}',
-                  height: screenHeight(context) * .2,
+                  height: screenHeight(context) * .15,
                   width: double.infinity,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Center(

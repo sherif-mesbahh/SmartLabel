@@ -70,7 +70,7 @@ class AdminCategoriesGridViewItem extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl:
                           'http://smartlabel1.runasp.net/Uploads/${categoryModel?.data?[index].imageUrl}',
-                      height: screenHeight(context) * .2,
+                      height: screenHeight(context) * .15,
                       width: double.infinity,
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Center(

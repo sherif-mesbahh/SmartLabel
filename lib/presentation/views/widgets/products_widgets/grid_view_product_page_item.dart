@@ -55,7 +55,7 @@ class GridViewProductPageItem extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 children: [
                   Container(
-                    height: screenHeight(context) * .2,
+                    height: screenHeight(context) * .15,
                     width: screenWidth(context) * .5,
                     decoration: BoxDecoration(
                       color: primaryColor,
