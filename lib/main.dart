@@ -5,10 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/token_refresher.dart';
 import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
-import 'package:smart_label_software_engineering/features/onBoarding/presentaion/views/on_boarding_page.dart';
+import 'package:smart_label_software_engineering/features/splashScreen/presentation/views/splash_screen_page.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/home_pages/layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +48,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
-          return showOnBoarding ? const OnBoardingPage() : const Layout();
+          return SplashScreenPage(showOnBoarding: showOnBoarding);
         },
       ),
     );
