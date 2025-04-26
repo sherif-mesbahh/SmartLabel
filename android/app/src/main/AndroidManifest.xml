@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
-        android:label="smart_label_software_engineering"
+        android:label="Smart Label"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
         <!-- ✅ Add this provider inside <application> -->
         <provider
