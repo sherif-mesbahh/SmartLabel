@@ -88,7 +88,10 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                 children: [
                   // Product Name
                   _buildTextField(
-                      controller: nameController, label: 'Product Name'),
+                    controller: nameController,
+                    label: 'Product Name',
+                    keyboardType: TextInputType.text,
+                  ),
                   const SizedBox(height: 10),
 
                   // Price
@@ -107,9 +110,11 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
 
                   // Description
                   _buildTextField(
-                      controller: descController,
-                      label: 'Description',
-                      maxLines: 3),
+                    controller: descController,
+                    label: 'Description',
+                    maxLines: 3,
+                    keyboardType: TextInputType.text,
+                  ),
                   const SizedBox(height: 10),
 
                   // Main Image

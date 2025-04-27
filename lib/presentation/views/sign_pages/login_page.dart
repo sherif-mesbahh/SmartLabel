@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                       showDialog(
                         context: context,
                         barrierDismissible: false,
-                        builder: (_) =>  Center(
+                        builder: (_) => Center(
                           child: Lottie.asset(
                             'assets/lottie/loading_indicator.json',
                             width: 100,
@@ -97,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomTextFormFieldWidget(
+                            keyboardType: TextInputType.emailAddress,
                             labelText: 'Email',
                             hintText: 'Enter your email',
                             obscureText: false,
@@ -111,6 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 16.0),
                           CustomTextFormFieldWidget(
+                            keyboardType: TextInputType.visiblePassword,
                             labelText: 'Password',
                             hintText: 'Enter your password',
                             obscureText:

@@ -69,6 +69,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
+                  keyboardType: TextInputType.name,
                   controller: nameController,
                   decoration: InputDecoration(
                     labelText: 'Name',

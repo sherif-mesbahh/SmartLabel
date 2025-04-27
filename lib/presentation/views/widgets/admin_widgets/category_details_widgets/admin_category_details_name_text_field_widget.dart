@@ -13,6 +13,7 @@ class AdminCategoryDetailsNameTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: TextInputType.text,
       controller: nameController,
       decoration: InputDecoration(
         labelText: 'Category Name',

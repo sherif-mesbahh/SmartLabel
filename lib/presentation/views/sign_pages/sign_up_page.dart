@@ -99,6 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Column(
                         children: [
                           CustomTextFormFieldWidget(
+                            keyboardType: TextInputType.name,
                             controller: firstNameController,
                             labelText: 'First Name',
                             hintText: 'Enter your first name',
@@ -110,6 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           const SizedBox(height: 16.0),
                           CustomTextFormFieldWidget(
+                            keyboardType: TextInputType.name,
                             controller: lastNameController,
                             labelText: 'Last Name',
                             hintText: 'Enter your last name',
@@ -121,6 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           const SizedBox(height: 16.0),
                           CustomTextFormFieldWidget(
+                            keyboardType: TextInputType.emailAddress,
                             controller: emailController,
                             labelText: 'Email',
                             hintText: 'Enter your email',
@@ -132,6 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           const SizedBox(height: 16.0),
                           CustomTextFormFieldWidget(
+                            keyboardType: TextInputType.visiblePassword,
                             controller: passwordController,
                             labelText: 'Password',
                             hintText: 'Enter your password',
@@ -150,6 +154,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           const SizedBox(height: 16.0),
                           CustomTextFormFieldWidget(
+                            keyboardType: TextInputType.visiblePassword,
                             controller: confirmPasswordController,
                             labelText: 'Confirm Password',
                             hintText: 'Enter your Confirm Password',

@@ -8,6 +8,9 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.d
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_change_password_dialog_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_delete_account_dialog_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_edit_details_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/user_details_row_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
@@ -39,6 +42,32 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   Text('Profile', style: TextStyles.headline1),
+                  // Edit Profile
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => EditProfileDialogWidget(),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Image.asset(
+                            'assets/images/edit_icon.png',
+                            width: 30,
+                            height: 30,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // User Details
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
@@ -84,12 +113,50 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Change Password
+                      TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ChangePasswordDialogWidget(),
+                          );
+                        },
+                        child: Text(
+                          'Change Password',
+                          style: TextStyles.buttonText.copyWith(
+                            color: primaryColor,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      // Delete Account
+                      TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => DeleteAccountDialogWidget(),
+                          );
+                        },
+                        child: Text(
+                          'Delete Account',
+                          style: TextStyles.buttonText.copyWith(
+                            color: Colors.red,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   if (AppCubit.get(context)
                       .userInfoModel!
                       .data!
                       .roles!
                       .contains('Admin'))
+                    // Admin Panel
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -118,6 +185,7 @@ class ProfilePage extends StatelessWidget {
                         ],
                       ),
                     ),
+                  // Sign out
                   CustomButtonWidget(
                     onTap: () {
                       AppCubit.get(context).logout().then((onValue) {
@@ -134,6 +202,8 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
           );
+
+          // Sign
         } else {
           return Column(
             children: [

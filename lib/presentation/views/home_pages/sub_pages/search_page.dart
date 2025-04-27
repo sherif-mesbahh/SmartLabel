@@ -79,6 +79,7 @@ class _SearchPageState extends State<SearchPage> {
 
                   // Wrap the search field in a const to prevent unnecessary rebuilds
                   CustomTextFormFieldWidget(
+                    keyboardType: TextInputType.text,
                     controller: searchController,
                     hintText: 'Search $selectedType',
                     labelText: 'Search',

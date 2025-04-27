@@ -13,6 +13,7 @@ class BannerDetailsDescriptionTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: TextInputType.text,
       controller: descController,
       maxLines: 3,
       decoration: InputDecoration(

@@ -170,6 +170,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                       cubit: widget.cubit, product: product),
                   // Name
                   TextField(
+                    keyboardType: TextInputType.text,
                     controller: nameController,
                     decoration: InputDecoration(
                       labelText: 'Name',
@@ -193,6 +194,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
 
                   // price
                   TextField(
+                    keyboardType: TextInputType.number,
                     controller: priceController,
                     decoration: InputDecoration(
                       labelText: 'Price',
@@ -216,6 +218,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
 
                   // Discount
                   TextField(
+                    keyboardType: TextInputType.number,
                     controller: discountController,
                     decoration: InputDecoration(
                       labelText: 'Discount',
@@ -239,6 +242,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
 
                   // Description
                   TextField(
+                    keyboardType: TextInputType.text,
                     controller: descController,
                     maxLines: 3,
                     decoration: InputDecoration(

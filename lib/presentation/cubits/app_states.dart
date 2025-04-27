@@ -269,3 +269,33 @@ class UpdateProductErrorState extends AppStates {
 
   UpdateProductErrorState(this.error);
 }
+
+class UpdateProfileLoadingState extends AppStates {}
+
+class UpdateProfileSuccessState extends AppStates {}
+
+class UpdateProfileErrorState extends AppStates {
+  String error;
+
+  UpdateProfileErrorState(this.error);
+}
+
+class ChangePasswordLoadingState extends AppStates {}
+
+class ChangePasswordSuccessState extends AppStates {}
+
+class ChangePasswordErrorState extends AppStates {
+  String error;
+
+  ChangePasswordErrorState(this.error);
+}
+
+class DeleteAccountLoadingState extends AppStates {}
+
+class DeleteAccountSuccessState extends AppStates {}
+
+class DeleteAccountErrorState extends AppStates {
+  String error;
+
+  DeleteAccountErrorState(this.error);
+}

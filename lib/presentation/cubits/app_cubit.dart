@@ -895,4 +895,140 @@ class AppCubit extends Cubit<AppStates> {
       log('Failed withdfdsdfsdf error: ${e.toString()}');
     }
   }
+
+  Future<void> updateProfile({
+    required String firstName,
+    required String lastName,
+    required String email,
+  }) async {
+    emit(UpdateProfileLoadingState());
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final body = {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+      };
+      final response = await ApiService().put(
+        ApiEndpoints.updateProfile,
+        body,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(UpdateProfileSuccessState());
+      } else {
+        emit(UpdateProfileErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(UpdateProfileErrorState(errorMessage));
+          } else {
+            emit(UpdateProfileErrorState('Unknown error occurred'));
+          }
+        } else {
+          emit(UpdateProfileErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(UpdateProfileErrorState(e.toString()));
+      }
+    }
+  }
+
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    emit(ChangePasswordLoadingState());
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final body = {
+        'currentPassword': currentPassword,
+        'newPassword': newPassword,
+        'confirmPassword': confirmPassword,
+      };
+      final response = await ApiService().put(
+        ApiEndpoints.changePassword,
+        body,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(ChangePasswordSuccessState());
+      } else {
+        emit(ChangePasswordErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(ChangePasswordErrorState(errorMessage));
+          } else {
+            emit(ChangePasswordErrorState('Unknown error occurred'));
+          }
+        } else {
+          emit(ChangePasswordErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(ChangePasswordErrorState(e.toString()));
+      }
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    emit(DeleteAccountLoadingState());
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().delete(
+        ApiEndpoints.deleteAccount,
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(DeleteAccountSuccessState());
+        await SecureTokenStorage.clearTokens();
+        isLogin = false;
+      } else {
+        emit(DeleteAccountErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(DeleteAccountErrorState(errorMessage));
+          } else {
+            emit(DeleteAccountErrorState('Unknown error occurred'));
+          }
+        } else {
+          emit(DeleteAccountErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(DeleteAccountErrorState(e.toString()));
+      }
+    }
+  }
 }

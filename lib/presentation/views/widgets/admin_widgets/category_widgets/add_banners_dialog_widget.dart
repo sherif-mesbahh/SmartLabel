@@ -96,6 +96,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
               children: [
                 // Title
                 TextField(
+                  keyboardType: TextInputType.text,
                   controller: titleController,
                   decoration: InputDecoration(
                     labelText: 'Title',
@@ -118,6 +119,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                 const SizedBox(height: 10),
                 // Description
                 TextField(
+                  keyboardType: TextInputType.text,
                   controller: descController,
                   maxLines: 3,
                   decoration: InputDecoration(

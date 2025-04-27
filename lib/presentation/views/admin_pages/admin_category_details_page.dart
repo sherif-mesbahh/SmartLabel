@@ -90,6 +90,29 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
               fontSize: 16,
             );
           }
+
+          if (state is DeleteProductSuccessState) {
+            Fluttertoast.showToast(
+              msg: 'Product Deleted Successfully',
+              backgroundColor: Colors.green,
+              textColor: secondaryColor,
+              gravity: ToastGravity.BOTTOM,
+              toastLength: Toast.LENGTH_LONG,
+              timeInSecForIosWeb: 1,
+              fontSize: 16,
+            );
+          }
+          if (state is DeleteProductErrorState) {
+            Fluttertoast.showToast(
+              msg: 'Error while Deleting Product, try again',
+              backgroundColor: Colors.red,
+              textColor: secondaryColor,
+              gravity: ToastGravity.BOTTOM,
+              toastLength: Toast.LENGTH_LONG,
+              timeInSecForIosWeb: 1,
+              fontSize: 16,
+            );
+          }
         },
         builder: (context, state) {
           final category = cubit.categoryProductsModel?.data;

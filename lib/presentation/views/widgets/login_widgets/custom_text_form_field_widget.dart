@@ -12,6 +12,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final ValueChanged<String>? onFieldSubmitted;
   final bool showSuffixIcon; // ✅ new
+  final TextInputType keyboardType;
 
   const CustomTextFormFieldWidget({
     super.key,
@@ -21,6 +22,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
     required this.obscureText,
     required this.suffixIconOnPressed,
     this.validator,
+    this.keyboardType = TextInputType.text,
     this.onFieldSubmitted,
     this.suffixIcon = Icons.visibility,
     this.showSuffixIcon = false, // ✅ default is false
@@ -29,6 +31,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       obscureText: obscureText,
       controller: controller,
       onFieldSubmitted: onFieldSubmitted,
