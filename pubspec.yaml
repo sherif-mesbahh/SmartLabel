@@ -39,19 +39,21 @@ dependencies:
   flutter_bloc: ^9.1.0
   flutter_secure_storage: ^9.2.4
   fluttertoast: ^8.2.12
+  full_screen_image: ^2.0.0
   google_fonts: ^6.2.1
   image_picker: ^1.1.2
   intl: 0.19.0
   lottie: ^3.3.1
   path_provider: ^2.1.5
+  photo_view: ^0.15.0
   shared_preferences: ^2.5.3
   smooth_page_indicator: ^1.2.1
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.14.3"
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.14.3"
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

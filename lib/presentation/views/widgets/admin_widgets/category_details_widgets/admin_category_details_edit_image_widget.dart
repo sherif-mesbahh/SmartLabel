@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/core/utils/full_screen_image.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/category_products_model/category_products_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -31,19 +32,32 @@ class AdminCategoryDetailsEditImageWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               )
             : cubit.categoryProductsModel!.data?.imageUrl != null
-                ? CachedNetworkImage(
-                    imageUrl:
-                        'http://smartlabel1.runasp.net/Uploads/${cubit.categoryProductsModel!.data?.imageUrl}',
-                    height: screenHeight(context) * .15,
-                    width: screenWidth(context) * .3,
-                    placeholder: (context, url) => Center(
-                      child: Lottie.asset(
-                        'assets/lottie/loading_indicator.json',
-                        width: 100,
-                        height: 100,
+                ? GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => FullScreenImagePage(
+                            imageUrl:
+                                "http://smartlabel1.runasp.net/Uploads/${cubit.categoryProductsModel!.data?.imageUrl}",
+                          ),
+                        ),
+                      );
+                    },
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'http://smartlabel1.runasp.net/Uploads/${cubit.categoryProductsModel!.data?.imageUrl}',
+                      height: screenHeight(context) * .15,
+                      width: screenWidth(context) * .3,
+                      placeholder: (context, url) => Center(
+                        child: Lottie.asset(
+                          'assets/lottie/loading_indicator.json',
+                          width: 100,
+                          height: 100,
+                        ),
                       ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
                   )
                 : Container(
                     height: 80,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/core/utils/full_screen_image.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_image_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -58,19 +59,32 @@ class _AdminBannerDetailsImagesSliderWidgetState
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: image.imageUrl != null
-                            ? CachedNetworkImage(
-                                imageUrl:
-                                    "http://smartlabel1.runasp.net/Uploads/${image.imageUrl}",
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>  Center(
-                                  child: Lottie.asset(
-                                    'assets/lottie/loading_indicator.json',
-                                    width: 100,
-                                    height: 100,
+                            ? GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => FullScreenImagePage(
+                                        imageUrl:
+                                            "http://smartlabel1.runasp.net/Uploads/${image.imageUrl}",
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "http://smartlabel1.runasp.net/Uploads/${image.imageUrl}",
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => Center(
+                                    child: Lottie.asset(
+                                      'assets/lottie/loading_indicator.json',
+                                      width: 100,
+                                      height: 100,
+                                    ),
                                   ),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.broken_image),
                                 ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.broken_image),
                               )
                             : const Icon(Icons.image_not_supported, size: 60),
                       ),

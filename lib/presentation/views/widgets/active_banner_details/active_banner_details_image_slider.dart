@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/core/utils/full_screen_image.dart';
 
 class ActiveBannerDetailsImageSlider extends StatelessWidget {
   const ActiveBannerDetailsImageSlider({
@@ -27,31 +28,44 @@ class ActiveBannerDetailsImageSlider extends StatelessWidget {
       items: bannerImages.map((imageUrl) {
         return Builder(
           builder: (BuildContext context) {
-            return Container(
-              width: screenWidth(context),
-              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              decoration: BoxDecoration(
-                color: secondaryColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: imageUrl.isNotEmpty
-                    ? CachedNetworkImage(
-                        imageUrl:
-                            "http://smartlabel1.runasp.net/Uploads/$imageUrl",
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Center(
-                          child: Lottie.asset(
-                            'assets/lottie/loading_indicator.json',
-                            width: 100,
-                            height: 100,
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => FullScreenImagePage(
+                      imageUrl:
+                          "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                width: screenWidth(context),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                  color: secondaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: imageUrl.isNotEmpty
+                      ? CachedNetworkImage(
+                          imageUrl:
+                              "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Center(
+                            child: Lottie.asset(
+                              'assets/lottie/loading_indicator.json',
+                              width: 100,
+                              height: 100,
+                            ),
                           ),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.broken_image),
-                      )
-                    : const Icon(Icons.image_not_supported, size: 60),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.broken_image),
+                        )
+                      : const Icon(Icons.image_not_supported, size: 60),
+                ),
               ),
             );
           },

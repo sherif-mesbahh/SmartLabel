@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/core/utils/full_screen_image.dart';
 
 class ProductImagesPageView extends StatelessWidget {
   final List<String> images;
@@ -31,18 +32,30 @@ class ProductImagesPageView extends StatelessWidget {
             );
           }
 
-          return CachedNetworkImage(
-            imageUrl: 'http://smartlabel1.runasp.net/Uploads/$imageUrl',
-            fit: BoxFit.cover,
-            placeholder: (context, url) => Center(
-              child: Lottie.asset(
-                'assets/lottie/loading_indicator.json',
-                width: 100,
-                height: 100,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => FullScreenImagePage(
+                    imageUrl: "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                  ),
+                ),
+              );
+            },
+            child: CachedNetworkImage(
+              imageUrl: 'http://smartlabel1.runasp.net/Uploads/$imageUrl',
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Center(
+                child: Lottie.asset(
+                  'assets/lottie/loading_indicator.json',
+                  width: 100,
+                  height: 100,
+                ),
               ),
-            ),
-            errorWidget: (context, url, error) => const Center(
-              child: Icon(Icons.broken_image, size: 60, color: Colors.grey),
+              errorWidget: (context, url, error) => const Center(
+                child: Icon(Icons.broken_image, size: 60, color: Colors.grey),
+              ),
             ),
           );
         },
