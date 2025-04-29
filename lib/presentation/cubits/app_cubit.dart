@@ -242,12 +242,20 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   ProductSearchModel? productSearchModel;
-  Future<void> getProductSearch({required String name}) async {
+  Future<void> getProductSearch({
+    required String name,
+    required String sortType,
+    required String orderType,
+  }) async {
     emit(GetProductSearchLoadingState());
 
     try {
-      final response = await ApiService()
-          .get(ApiEndpoints.productSearch, queryParams: {'Search': name});
+      final response =
+          await ApiService().get(ApiEndpoints.productSearch, queryParams: {
+        'Search': name,
+        'SortColumn': sortType,
+        'SortOrder': orderType,
+      });
       if (response.statusCode == 200) {
         productSearchModel = ProductSearchModel.fromJson(response.data);
         emit(GetProductSearchSuccessState());
@@ -263,12 +271,20 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   CategorySearchModel? categorySearchModel;
-  Future<void> getCategorySearch({required String name}) async {
+  Future<void> getCategorySearch({
+    required String name,
+    required String sortType,
+    required String orderType,
+  }) async {
     emit(GetCategorySearchLoadingState());
 
     try {
-      final response = await ApiService()
-          .get(ApiEndpoints.categorySearch, queryParams: {'Search': name});
+      final response =
+          await ApiService().get(ApiEndpoints.categorySearch, queryParams: {
+        'Search': name,
+        'SortColumn': sortType,
+        'SortOrder': orderType,
+      });
       if (response.statusCode == 200) {
         categorySearchModel = CategorySearchModel.fromJson(response.data);
         emit(GetCategorySearchSuccessState());

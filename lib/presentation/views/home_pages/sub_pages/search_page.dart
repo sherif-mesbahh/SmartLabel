@@ -21,6 +21,9 @@ class _SearchPageState extends State<SearchPage> {
   final formKey = GlobalKey<FormState>();
 
   String selectedType = 'Products';
+  String selectedSort = 'default';
+  String selectedOrder = 'asc';
+
   @override
   void dispose() {
     searchController.dispose();
@@ -30,8 +33,16 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    AppCubit.get(context).getProductSearch(name: searchController.text);
-    AppCubit.get(context).getCategorySearch(name: searchController.text);
+    AppCubit.get(context).getProductSearch(
+      name: searchController.text,
+      sortType: 'id',
+      orderType: 'asc',
+    );
+    AppCubit.get(context).getCategorySearch(
+      name: searchController.text,
+      sortType: 'id',
+      orderType: 'asc',
+    );
   }
 
   @override
@@ -58,7 +69,11 @@ class _SearchPageState extends State<SearchPage> {
                         selectedColor: primaryColor,
                         onSelected: (selected) {
                           if (selected) {
-                            setState(() => selectedType = 'Products');
+                            setState(() {
+                              selectedType = 'Products';
+                              selectedSort = 'default';
+                              selectedOrder = 'asc';
+                            });
                           }
                         },
                       ),
@@ -69,13 +84,97 @@ class _SearchPageState extends State<SearchPage> {
                         selectedColor: primaryColor,
                         onSelected: (selected) {
                           if (selected) {
-                            setState(() => selectedType = 'Categories');
+                            setState(() {
+                              selectedType = 'Categories';
+                              selectedSort = 'default';
+                              selectedOrder = 'asc';
+                            });
                           }
                         },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DropdownButton<String>(
+                        value: selectedSort,
+                        items: (selectedType == 'Products'
+                                ? ['default', 'name', 'price']
+                                : ['default', 'name'])
+                            .map((sortOption) => DropdownMenuItem(
+                                  value: sortOption,
+                                  child: Text(
+                                    sortOption[0].toUpperCase() +
+                                        sortOption.substring(
+                                            1), // Capitalize first letter
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: (newValue) async {
+                          setState(() {
+                            selectedSort = newValue!;
+                          });
+                          if (selectedType == 'Products') {
+                            await cubit.getProductSearch(
+                              name: searchController.text,
+                              sortType: selectedSort == 'default'
+                                  ? 'id'
+                                  : selectedSort == 'price'
+                                      ? 'new-price'
+                                      : selectedSort,
+                              orderType: selectedOrder,
+                            );
+                          } else {
+                            await cubit.getCategorySearch(
+                              name: searchController.text,
+                              sortType: selectedSort == 'default'
+                                  ? 'id'
+                                  : selectedSort,
+                              orderType: selectedOrder,
+                            );
+                          }
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      DropdownButton<String>(
+                        value: selectedOrder,
+                        items: ['asc', 'desc']
+                            .map((orderOption) => DropdownMenuItem(
+                                  value: orderOption,
+                                  child: Text(orderOption),
+                                ))
+                            .toList(),
+                        onChanged: (newValue) async {
+                          setState(() {
+                            selectedOrder = newValue!;
+                          });
+                          if (selectedType == 'Products') {
+                            await cubit.getProductSearch(
+                              name: searchController.text,
+                              sortType: selectedSort == 'default'
+                                  ? 'id'
+                                  : selectedSort == 'price'
+                                      ? 'new-price'
+                                      : selectedSort,
+                              orderType: selectedOrder,
+                            );
+                          } else {
+                            await cubit.getCategorySearch(
+                              name: searchController.text,
+                              sortType: selectedSort == 'default'
+                                  ? 'id'
+                                  : selectedSort,
+                              orderType: selectedOrder,
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
 
                   // Wrap the search field in a const to prevent unnecessary rebuilds
                   CustomTextFormFieldWidget(
@@ -92,31 +191,42 @@ class _SearchPageState extends State<SearchPage> {
                       return null;
                     },
                     onFieldSubmitted: (value) async {
-                      if (formKey.currentState!.validate()) {
-                        // Show loading dialog
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (_) => Center(
-                            child: Lottie.asset(
-                              'assets/lottie/loading_indicator.json',
-                              width: 100,
-                              height: 100,
-                            ),
+                      // Show loading dialog
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => Center(
+                          child: Lottie.asset(
+                            'assets/lottie/loading_indicator.json',
+                            width: 100,
+                            height: 100,
                           ),
-                        );
+                        ),
+                      );
 
-                        try {
-                          // Await the search operation
-                          if (selectedType == 'Products') {
-                            await cubit.getProductSearch(name: value);
-                          } else if (selectedType == 'Categories') {
-                            await cubit.getCategorySearch(name: value);
-                          }
-                        } finally {
-                          // Always close the dialog
-                          if (context.mounted) Navigator.of(context).pop();
+                      try {
+                        // Await the search operation
+                        if (selectedType == 'Products') {
+                          await cubit.getProductSearch(
+                            name: searchController.text,
+                            sortType: selectedSort == 'default'
+                                ? 'id'
+                                : selectedSort == 'price'
+                                    ? 'new-price'
+                                    : selectedSort,
+                            orderType: selectedOrder,
+                          );
+                        } else if (selectedType == 'Categories') {
+                          await cubit.getCategorySearch(
+                            name: searchController.text,
+                            sortType:
+                                selectedSort == 'default' ? 'id' : selectedSort,
+                            orderType: selectedOrder,
+                          );
                         }
+                      } finally {
+                        // Always close the dialog
+                        if (context.mounted) Navigator.of(context).pop();
                       }
                     },
                   ),
