@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -47,15 +48,27 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
                             .copyWith(color: primaryColor),
                       ),
                       onTap: () {
-                        cubit
-                            .updateCategory(
-                          id: widget.categoryId,
-                          name: nameController.text,
-                          categoryImage: cubit.mainCategoryImageToUpload,
-                        )
-                            .then((_) {
-                          cubit.getCategoryProducts(id: widget.categoryId);
-                        });
+                        if (nameController.text.length >= 3) {
+                          cubit
+                              .updateCategory(
+                            id: widget.categoryId,
+                            name: nameController.text,
+                            categoryImage: cubit.mainCategoryImageToUpload,
+                          )
+                              .then((_) {
+                            cubit.getCategoryProducts(id: widget.categoryId);
+                          });
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: 'Name must be at least 3 characters',
+                            backgroundColor: Colors.red,
+                            textColor: secondaryColor,
+                            gravity: ToastGravity.BOTTOM,
+                            toastLength: Toast.LENGTH_LONG,
+                            timeInSecForIosWeb: 1,
+                            fontSize: 16,
+                          );
+                        }
                       },
                     ),
               // Discard

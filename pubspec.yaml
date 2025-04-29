@@ -39,7 +39,6 @@ dependencies:
   flutter_bloc: ^9.1.0
   flutter_secure_storage: ^9.2.4
   fluttertoast: ^8.2.12
-  full_screen_image: ^2.0.0
   google_fonts: ^6.2.1
   image_picker: ^1.1.2
   intl: 0.19.0

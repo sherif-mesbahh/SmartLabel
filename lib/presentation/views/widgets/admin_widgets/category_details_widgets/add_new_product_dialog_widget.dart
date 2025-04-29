@@ -167,14 +167,23 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                 : TextButton(
                     child: Text('Add', style: TextStyles.productTitle),
                     onPressed: () {
-                      if (nameController.text.isEmpty ||
-                          priceController.text.isEmpty ||
-                          discountController.text.isEmpty ||
-                          descController.text.isEmpty ||
-                          mainImage == null ||
-                          productImages.isEmpty) {
+                      // 1. Check if name is empty
+                      if (nameController.text.isEmpty) {
                         Fluttertoast.showToast(
-                          msg: "Please fill in all fields and select images.",
+                          msg: "Product name must not be empty.",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                        return;
+                      }
+
+                      // 2. Check if price is empty or invalid
+                      if (priceController.text.isEmpty) {
+                        Fluttertoast.showToast(
+                          msg: "Price must not be empty.",
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -197,10 +206,36 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                         return;
                       }
 
+                      // 3. Check if discount is empty or invalid
+                      if (discountController.text.isEmpty) {
+                        Fluttertoast.showToast(
+                          msg: "Discount must not be empty.",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                        return;
+                      }
+
                       final discount = double.tryParse(discountController.text);
                       if (discount == null || discount % 1 != 0) {
                         Fluttertoast.showToast(
                           msg: "Discount must be a whole number (e.g., 10).",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                        return;
+                      }
+
+                      // 4. Check if main image is null
+                      if (mainImage == null) {
+                        Fluttertoast.showToast(
+                          msg: "Please select a main image.",
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,

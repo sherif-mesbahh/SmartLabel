@@ -1,11 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'dart:io';
-
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -265,7 +265,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   AppCubit.get(context).getBanners();
                 } else if (state is AddBannerErrorState) {
                   Fluttertoast.showToast(
-                    msg: "Failed to add banner. Try again.",
+                    msg: state.error,
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     backgroundColor: Colors.red,
@@ -283,14 +283,10 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   : TextButton(
                       child: Text('Apply', style: TextStyles.productTitle),
                       onPressed: () {
-                        if (titleController.text.isEmpty ||
-                            descController.text.isEmpty ||
-                            startDate == null ||
-                            endDate == null ||
-                            mainImage == null ||
-                            bannerImages.isEmpty) {
+                        // 1. Validate title
+                        if (titleController.text.trim().isEmpty) {
                           Fluttertoast.showToast(
-                            msg: "Please fill in all fields and select images.",
+                            msg: "Title must not be empty.",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -299,10 +295,36 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                           );
                           return;
                         }
-                        if (!startDate!.isBefore(endDate!) ||
-                            startDate == endDate) {
+
+                        // 2. Validate dates
+                        if (startDate == null || endDate == null) {
+                          Fluttertoast.showToast(
+                            msg: "Start and end dates must be selected.",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+
+                        if (!startDate!.isBefore(endDate!)) {
                           Fluttertoast.showToast(
                             msg: "Start date must be before end date.",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+
+                        // 3. Validate main image
+                        if (mainImage == null) {
+                          Fluttertoast.showToast(
+                            msg: "Please select a main image.",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,

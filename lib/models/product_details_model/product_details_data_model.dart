@@ -3,9 +3,9 @@ import 'package:smart_label_software_engineering/models/product_details_model/pr
 class ProductDetailsDataModel {
   int? id;
   String? name;
-  int? oldPrice;
+  double? oldPrice;
   int? discount;
-  int? newPrice;
+  double? newPrice;
   String? description;
   String? mainImage;
   int? categoryId;
@@ -29,9 +29,9 @@ class ProductDetailsDataModel {
       ProductDetailsDataModel(
         id: (json['id'] as num?)?.toInt(),
         name: json['name'] as String?,
-        oldPrice: (json['oldPrice'] as num?)?.toInt(),
+        oldPrice: (json['oldPrice'] as num?)?.toDouble(),
         discount: (json['discount'] as num?)?.toInt(),
-        newPrice: (json['newPrice'] as num?)?.toInt(),
+        newPrice: (json['newPrice'] as num?)?.toDouble(),
         description: json['description'] as String?,
         categoryId: json['categoryId'] as int?,
         favorite: json['favorite'],

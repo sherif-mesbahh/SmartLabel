@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -32,8 +33,8 @@ import 'package:smart_label_software_engineering/presentation/views/home_pages/p
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
-  static AppCubit get(context) => BlocProvider.of(context);
 
+  static AppCubit get(context) => BlocProvider.of(context);
   List<Widget> screens = [
     ProductsPage(),
     CategoriesPage(),
@@ -387,7 +388,6 @@ class AppCubit extends Cubit<AppStates> {
       emit(LoginSuccessState());
     } else {
       getUserInfo();
-      emit(LoginErrorState('Not logged in'));
     }
   }
 
@@ -561,8 +561,21 @@ class AppCubit extends Cubit<AppStates> {
         log('Failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      emit(AddBannerErrorState(e.toString()));
-      log('Failed with error: ${e.toString()}');
+      if (e is DioException) {
+        final response = e.response;
+        if (response != null && response.statusCode == 422) {
+          final errors = response.data['errors'];
+          final errorMessage = (errors as List).join('\n');
+          emit(AddBannerErrorState(errorMessage));
+          log('Validation errors: $errorMessage');
+        } else {
+          emit(AddBannerErrorState(e.message ?? 'Unknown error'));
+          log('Dio error: ${e.message}');
+        }
+      } else {
+        emit(AddBannerErrorState(e.toString()));
+        log('Non-Dio error: ${e.toString()}');
+      }
     }
   }
 
@@ -653,8 +666,21 @@ class AppCubit extends Cubit<AppStates> {
         log('Failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      emit(UpdateBannerErrorState(e.toString()));
-      log('Failed with error: ${e.toString()}');
+      if (e is DioException) {
+        final response = e.response;
+        if (response != null && response.statusCode == 422) {
+          final errors = response.data['errors'];
+          final errorMessage = (errors as List).join('\n');
+          emit(UpdateBannerErrorState(errorMessage));
+          log('Validation errors: $errorMessage');
+        } else {
+          emit(UpdateBannerErrorState(e.message ?? 'Unknown error'));
+          log('Dio error: ${e.message}');
+        }
+      } else {
+        emit(UpdateBannerErrorState(e.toString()));
+        log('Non-Dio error: ${e.toString()}');
+      }
     }
   }
 
@@ -711,8 +737,21 @@ class AppCubit extends Cubit<AppStates> {
         log('Failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      emit(AddCategoryErrorState(e.toString()));
-      log('Failed with error: ${e.toString()}');
+      if (e is DioException) {
+        final response = e.response;
+        if (response != null && response.statusCode == 422) {
+          final errors = response.data['errors'];
+          final errorMessage = (errors as List).join('\n');
+          emit(AddCategoryErrorState(errorMessage));
+          log('Validation errors: $errorMessage');
+        } else {
+          emit(AddCategoryErrorState(e.message ?? 'Unknown error'));
+          log('Dio error: ${e.message}');
+        }
+      } else {
+        emit(AddCategoryErrorState(e.toString()));
+        log('Non-Dio error: ${e.toString()}');
+      }
     }
   }
 
@@ -754,8 +793,21 @@ class AppCubit extends Cubit<AppStates> {
         log('Failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      emit(UpdateCategoryErrorState(e.toString()));
-      log('Failed with error: ${e.toString()}');
+      if (e is DioException) {
+        final response = e.response;
+        if (response != null && response.statusCode == 422) {
+          final errors = response.data['errors'];
+          final errorMessage = (errors as List).join('\n');
+          emit(UpdateCategoryErrorState(errorMessage));
+          log('Validation errors: $errorMessage');
+        } else {
+          emit(UpdateCategoryErrorState(e.message ?? 'Unknown error'));
+          log('Dio error: ${e.message}');
+        }
+      } else {
+        emit(UpdateCategoryErrorState(e.toString()));
+        log('Non-Dio error: ${e.toString()}');
+      }
     }
   }
 
@@ -829,8 +881,25 @@ class AppCubit extends Cubit<AppStates> {
         log('Failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      emit(AddProductErrorState(e.toString()));
-      log('Failed with error: ${e.toString()}');
+      if (e is DioException) {
+        final response = e.response;
+        if (response != null && response.statusCode == 422) {
+          // Extract and join validation errors from the backend response
+          final errors = response.data['errors'];
+          final errorMessage = (errors as List).join('\n');
+          emit(AddProductErrorState(
+              errorMessage)); // Emit all errors to the state
+          log('Validation errors: $errorMessage');
+        } else {
+          // Handle general errors if status is not 422
+          emit(AddProductErrorState(e.message ?? 'Unknown error'));
+          log('Dio error: ${e.message}');
+        }
+      } else {
+        // Catch non-Dio errors (e.g., parsing issues)
+        emit(AddProductErrorState(e.toString()));
+        log('Non-Dio error: ${e.toString()}');
+      }
     }
   }
 
@@ -907,8 +976,21 @@ class AppCubit extends Cubit<AppStates> {
         log('Failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      emit(UpdateProductErrorState(e.toString()));
-      log('Failed withdfdsdfsdf error: ${e.toString()}');
+      if (e is DioException) {
+        final response = e.response;
+        if (response != null && response.statusCode == 422) {
+          final errors = response.data['errors'];
+          final errorMessage = (errors as List).join('\n');
+          emit(UpdateProductErrorState(errorMessage));
+          log('Validation errors: $errorMessage');
+        } else {
+          emit(UpdateProductErrorState(e.message ?? 'Unknown Dio error'));
+          log('Dio error: ${e.message}');
+        }
+      } else {
+        emit(UpdateProductErrorState(e.toString()));
+        log('Non-Dio error: ${e.toString()}');
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -21,6 +22,7 @@ class BannerDetailsPage extends StatelessWidget {
     final cubit = AppCubit.get(context);
 
     return Scaffold(
+      backgroundColor: secondaryColor,
       appBar: ActiveBannerDetailsAppBar(),
       body: BlocBuilder<AppCubit, AppStates>(
         buildWhen: (previous, current) =>

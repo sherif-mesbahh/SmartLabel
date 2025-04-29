@@ -7,15 +7,15 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_image_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_description_text_field.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_save_and_discard_buttons_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_start_date_text_field.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_title_text_field.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_add_images_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_appBar_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_banner_images_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_description_text_field.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_end_date_text_field.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_main_image_row_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_save_and_discard_buttons_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_start_date_text_field.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/banner_details_title_text_field.dart';
 
 class AdminBannerDetailsPage extends StatefulWidget {
   const AdminBannerDetailsPage(
@@ -102,7 +102,7 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
           }
           if (state is UpdateBannerErrorState) {
             Fluttertoast.showToast(
-              msg: 'Error while Updating Banner, try again',
+              msg: state.error,
               backgroundColor: Colors.red,
               textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,

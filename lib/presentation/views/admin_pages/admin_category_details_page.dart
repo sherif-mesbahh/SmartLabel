@@ -81,7 +81,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
           }
           if (state is UpdateCategoryErrorState) {
             Fluttertoast.showToast(
-              msg: 'Error while Updating Category, try again',
+              msg: state.error,
               backgroundColor: Colors.red,
               textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,

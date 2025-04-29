@@ -39,6 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: secondaryColor,
       body: Column(
         children: [
           Container(
@@ -83,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       showDialog(
                         context: context,
                         barrierDismissible: false,
-                        builder: (_) =>  Center(
+                        builder: (_) => Center(
                           child: Lottie.asset(
                             'assets/lottie/loading_indicator.json',
                             width: 100,

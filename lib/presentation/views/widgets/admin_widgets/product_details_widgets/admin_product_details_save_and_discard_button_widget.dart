@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -44,8 +45,8 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
               state is UpdateProductLoadingState
                   ? Lottie.asset(
                       'assets/lottie/loading_indicator.json',
-                      width: 100,
-                      height: 100,
+                      width: 50,
+                      height: 50,
                     )
                   : InkWell(
                       child: Text(
@@ -54,6 +55,60 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                             .copyWith(color: primaryColor),
                       ),
                       onTap: () {
+                        if (nameController.text.isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: "Name must not be empty.",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+
+                        final price = double.tryParse(priceController.text);
+                        if (priceController.text.isEmpty ||
+                            price == null ||
+                            price <= 0) {
+                          Fluttertoast.showToast(
+                            msg: "Price must be a valid positive number.",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+
+                        final discountText = discountController.text.trim();
+                        final discount = double.tryParse(discountText);
+
+                        if (discountText.isEmpty || discount == null) {
+                          Fluttertoast.showToast(
+                            msg:
+                                "Discount must be a valid whole number (e.g., 10).",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+
+                        if (discount % 1 != 0) {
+                          Fluttertoast.showToast(
+                            msg: "Discount must be a whole number (e.g., 10).",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
                         cubit
                             .updateProduct(
                           productId: productId,

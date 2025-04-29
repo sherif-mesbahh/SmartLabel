@@ -115,17 +115,42 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
             ),
             state is AddCategoryLoadingState
                 ? Lottie.asset(
-                      'assets/lottie/loading_indicator.json',
-                      width: 100,
-                      height: 100,
-                    )
+                    'assets/lottie/loading_indicator.json',
+                    width: 100,
+                    height: 100,
+                  )
                 : TextButton(
                     child: Text('Apply', style: TextStyles.productTitle),
                     onPressed: () {
-                      if (nameController.text.isEmpty ||
-                          categoryImage == null) {
+                      if (nameController.text.isEmpty) {
                         Fluttertoast.showToast(
-                          msg: "Please enter name and pick an image.",
+                          msg: "Category name must not be empty.",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                        return;
+                      }
+
+                      // 2. Optional: check name length
+                      if (nameController.text.length < 3) {
+                        Fluttertoast.showToast(
+                          msg: "Category name must be at least 3 characters.",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                        return;
+                      }
+
+                      // 3. Check if image is picked
+                      if (categoryImage == null) {
+                        Fluttertoast.showToast(
+                          msg: "Please select an image for the category.",
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
