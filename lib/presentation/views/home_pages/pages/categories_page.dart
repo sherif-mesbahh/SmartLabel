@@ -26,7 +26,7 @@ class CategoriesPage extends StatelessWidget {
         }
 
         if (categories == null) {
-          return const Center(child: Text('Loading...'));
+          return const Center(child: Text('Failed to load categories'));
         }
 
         if (categories.isEmpty) {

@@ -68,7 +68,7 @@ class ProductsPage extends StatelessWidget {
                 }
 
                 if (products == null) {
-                  return const Center(child: Text('Loading...'));
+                  return const Center(child: Text('Failed to load products'));
                 }
 
                 if (products.isEmpty) {

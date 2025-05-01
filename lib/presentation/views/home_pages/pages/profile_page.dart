@@ -31,9 +31,10 @@ class ProfilePage extends StatelessWidget {
               ),
             );
           }
+
           if (state is GetUserInfoErrorState) {
             return Center(
-              child: Text(state.error, style: TextStyles.headline1),
+              child: Text('Failed to load user info'),
             );
           }
           return SingleChildScrollView(

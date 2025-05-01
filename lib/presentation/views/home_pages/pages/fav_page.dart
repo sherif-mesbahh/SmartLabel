@@ -30,7 +30,7 @@ class FavPage extends StatelessWidget {
         }
         if (AppCubit.get(context).isLogin) {
           if (favData == null) {
-            return const Center(child: Text('Loading favorites...'));
+            return const Center(child: Text('Failed to load favorites'));
           }
 
           if (favData.isEmpty) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/token_refresher.dart';
 import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
+import 'package:smart_label_software_engineering/core/utils/internet_monitor.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
 import 'package:smart_label_software_engineering/features/splashScreen/presentation/views/splash_screen_page.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -38,14 +39,18 @@ class MyApp extends StatelessWidget {
   final bool showOnBoarding;
 
   const MyApp({super.key, required this.showOnBoarding});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      useInheritedMediaQuery:
-          true, // Required for DevicePreview to work correctly
-      locale: DevicePreview.locale(context), // Also important
-      builder: DevicePreview.appBuilder, // Also required
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        // Start monitoring from global context
+        InternetMonitor().startMonitoring(context);
+        return DevicePreview.appBuilder(context, child);
+      },
       home: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
           return SplashScreenPage(showOnBoarding: showOnBoarding);
