@@ -33,8 +33,24 @@ class ProfilePage extends StatelessWidget {
           }
 
           if (state is GetUserInfoErrorState) {
-            return Center(
-              child: Text('Failed to load user info'),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Failed to load user info'),
+                const SizedBox(height: 16),
+                CustomButtonWidget(
+                  onTap: () {
+                    AppCubit.get(context).logout().then((onValue) {
+                      pushNavigator(context, SignPage(), fadeTransition);
+                    });
+                  },
+                  color: primaryColor,
+                  child: Text(
+                    'Sign out',
+                    style: TextStyles.buttonText,
+                  ),
+                )
+              ],
             );
           }
           return SingleChildScrollView(
@@ -89,8 +105,8 @@ class ProfilePage extends StatelessWidget {
                         UserDetailsRowWidget(
                             title: 'First Name',
                             value: AppCubit.get(context)
-                                    .userInfoModel!
-                                    .data
+                                    .userInfoModel
+                                    ?.data
                                     ?.firstName ??
                                 ''),
                         const SizedBox(height: 12),

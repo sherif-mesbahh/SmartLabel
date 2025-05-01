@@ -6,11 +6,12 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
+import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_edit_users_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/layout.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/add_new_category_dialog_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/admin_categetoies_section_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/admin_banners_custom_slider_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/add_banners_dialog_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/add_new_category_dialog_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/admin_banners_custom_slider_widget.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_widgets/admin_categetoies_section_widget.dart';
 
 class AdminCategoriesPage extends StatelessWidget {
   AdminCategoriesPage({super.key});
@@ -98,6 +99,23 @@ class AdminCategoriesPage extends StatelessWidget {
                       Text(
                         'All Banners',
                         style: TextStyles.headline2,
+                      ),
+                      Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          pushNavigator(
+                            context,
+                            AdminEditUsersPage(),
+                            slideRightToLeft,
+                          );
+                        },
+                        child: Text(
+                          'Edit Users',
+                          style: TextStyles.buttonText.copyWith(
+                            color: primaryColor,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ],
                   ),
