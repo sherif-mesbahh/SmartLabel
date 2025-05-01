@@ -2,7 +2,7 @@
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Repositories;
-using SmartLabel.Domain.Services;
+using SmartLabel.Application.Services;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
 public class DeleteProductHandler(IProductRepository repository, IFileService fileService)

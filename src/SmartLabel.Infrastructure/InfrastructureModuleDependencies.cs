@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Repositories.StoredProceduresRepositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities.Identity;
 using SmartLabel.Domain.Helpers;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Interfaces;
 using SmartLabel.Infrastructure.Persistence.Data;
 using SmartLabel.Infrastructure.Persistence.Repositories;
@@ -37,6 +37,7 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<IUsersRepository, UsersRepository>();
 		services.AddTransient<IUserFavProductRepository, UserFavProductRepository>();
 		services.AddTransient<ISqlConnectionFactory, SqlConnectionFactory>();
+		services.AddTransient<IEmailService, EmailService>();
 		services.AddIdentity<ApplicationUser, Role>(
 				options =>
 				{
@@ -58,6 +59,9 @@ public static class InfrastructureModuleDependencies
 		var jwtSettings = new JwtSettings();
 		configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
 		services.AddSingleton(jwtSettings);
+		var emailSettings = new EmailSettings();
+		configuration.GetSection(nameof(EmailSettings)).Bind(emailSettings);
+		services.AddSingleton(emailSettings);
 
 		services.AddAuthentication(
 				x =>

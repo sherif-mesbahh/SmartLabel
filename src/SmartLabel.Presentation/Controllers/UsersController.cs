@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using SmartLabel.Application.Enumeration;
 using SmartLabel.Application.Features.Users.Command.Models;
 using SmartLabel.Application.Features.Users.Query.Models;
+using SmartLabel.Application.Services;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
 [Route("api")]
 [ApiController]
-public class UsersController(ISender sender) : AppControllerBase
+public class UsersController(ISender sender, IEmailService emailService) : AppControllerBase
 {
 	[Authorize(Roles = nameof(Roles.Admin))]
 	[HttpGet("admin")]

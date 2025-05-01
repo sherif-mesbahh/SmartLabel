@@ -10,7 +10,7 @@ public interface ICategoryRepository
 	Task UpdateCategoryAsync(int categoryId, Category category);
 	Task DeleteCategoryAsync(int categoryId);
 	Task<string?> GetCategoryImageByIdAsync(int id);
-	Task<bool> IsCategoryExistAsync(int id);
+	Task<bool> IsCategoryExistAsync(int id, CancellationToken cancellationToken);
 	Task<bool> IsCategoryNameExist(string name, CancellationToken cancellationToken);
 	Task<bool> IsCategoryNameAndIdExist(int id, string name, CancellationToken cancellationToken);
 }

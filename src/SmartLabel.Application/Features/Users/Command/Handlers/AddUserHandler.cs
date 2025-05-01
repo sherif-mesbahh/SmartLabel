@@ -34,6 +34,7 @@ public class AddUserHandler(IMapper mapper, UserManager<ApplicationUser> userMan
 		}
 
 		await userManager.AddToRoleAsync(user, Roles.User.ToString());
+		//To do "Send confirm Email"
 		return Created<string>("User registered successfully");
 	}
 }

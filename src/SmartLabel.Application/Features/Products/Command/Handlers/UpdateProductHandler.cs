@@ -4,9 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
 public class UpdateProductHandler(IMapper mapper, IProductRepository productRepository, IFileService fileService, IUnitOfWork unitOfWork)

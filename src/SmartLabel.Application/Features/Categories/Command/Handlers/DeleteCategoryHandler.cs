@@ -2,7 +2,7 @@
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Command.Models;
 using SmartLabel.Application.Repositories;
-using SmartLabel.Domain.Services;
+using SmartLabel.Application.Services;
 
 namespace SmartLabel.Application.Features.Categories.Command.Handlers;
 public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFileService fileService)
@@ -10,7 +10,7 @@ public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFile
 {
 	public async Task<Response<string>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
 	{
-		if (!await categoryRepository.IsCategoryExistAsync(request.Id))
+		if (!await categoryRepository.IsCategoryExistAsync(request.Id, cancellationToken))
 			return NotFound<string>([$"Category ID: {request.Id} not found"], "Category discontinued");
 
 		try

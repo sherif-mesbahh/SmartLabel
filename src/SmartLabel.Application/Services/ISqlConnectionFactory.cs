@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace SmartLabel.Domain.Services;
+namespace SmartLabel.Application.Services;
 public interface ISqlConnectionFactory
 {
 	public IDbConnection Create();

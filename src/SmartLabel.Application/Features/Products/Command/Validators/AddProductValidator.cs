@@ -5,11 +5,12 @@ using SmartLabel.Application.Repositories;
 namespace SmartLabel.Application.Features.Products.Command.Validators;
 public class AddProductValidator : AbstractValidator<AddProductCommand>
 {
-	private readonly IProductRepository _repository;
-
-	public AddProductValidator(IProductRepository repository)
+	private readonly IProductRepository _productRepository;
+	private readonly ICategoryRepository _categoryRepository;
+	public AddProductValidator(IProductRepository repository, ICategoryRepository repo)
 	{
-		_repository = repository;
+		_productRepository = repository;
+		_categoryRepository = repo;
 		ApplyValidationRules();
 		AddCustomValidationRules();
 	}
@@ -32,7 +33,10 @@ public class AddProductValidator : AbstractValidator<AddProductCommand>
 	private void AddCustomValidationRules()
 	{
 		RuleFor(x => x.Name)
-			.MustAsync(async (name, cancellationToken) => !await _repository.IsProductNameExistAsync(name, cancellationToken))
+			.MustAsync(async (name, cancellationToken) => !await _productRepository.IsProductNameExistAsync(name, cancellationToken))
 			.WithMessage("Product name already exists.");
+		RuleFor(x => x.CatId)
+			.MustAsync(async (id, cancellationToken) => await _categoryRepository.IsCategoryExistAsync(id, cancellationToken))
+			.WithMessage($"Category with this id is not found");
 	}
 }

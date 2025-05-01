@@ -77,8 +77,8 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
-app.UseRouting();
 app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

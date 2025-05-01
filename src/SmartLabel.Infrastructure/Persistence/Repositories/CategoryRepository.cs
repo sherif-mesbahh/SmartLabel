@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using SmartLabel.Application.Features.Categories.Query.Results;
 using SmartLabel.Application.Features.Products.Query.Results;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Persistence.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;
@@ -124,9 +124,9 @@ public class CategoryRepository(AppDbContext context, IUserFavProductRepository 
 			.FirstOrDefaultAsync();
 	}
 
-	public async Task<bool> IsCategoryExistAsync(int id)
+	public async Task<bool> IsCategoryExistAsync(int id, CancellationToken cancellationToken)
 	{
-		return await context.Categories.AnyAsync(x => x.Id == id);
+		return await context.Categories.AnyAsync(x => x.Id == id, cancellationToken);
 	}
 
 	public async Task<bool> IsCategoryNameExist(string name, CancellationToken cancellationToken)

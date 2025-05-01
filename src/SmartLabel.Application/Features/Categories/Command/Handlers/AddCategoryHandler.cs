@@ -3,9 +3,9 @@ using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Command.Models;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Categories.Command.Handlers;
 public class AddCategoryHandler(IMapper mapper, ICategoryRepository categoryRepository, IFileService fileService, IUnitOfWork unitOfWork)

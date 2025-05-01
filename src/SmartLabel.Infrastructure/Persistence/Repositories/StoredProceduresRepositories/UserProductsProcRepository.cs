@@ -2,7 +2,7 @@
 using SmartLabel.Application.Features.Products.Query.Results;
 using SmartLabel.Application.Features.UserFavProducts.Query.Models;
 using SmartLabel.Application.Repositories.StoredProceduresRepositories;
-using SmartLabel.Domain.Services;
+using SmartLabel.Application.Services;
 using System.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories.StoredProceduresRepositories;

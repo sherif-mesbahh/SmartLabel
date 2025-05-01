@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using SmartLabel.Domain.Services;
+using SmartLabel.Application.Services;
 using System.Data;
 
 namespace SmartLabel.Infrastructure.Services;

@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SmartLabel.Application.Features.Banners.Query.Results;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Persistence.Data;
 using GetBannerByIdDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannerByIdDto;
 using GetBannersDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannersDto;

@@ -3,8 +3,8 @@ using MediatR;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Command.Models;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Categories.Command.Handlers;
 public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapper mapper, IFileService fileService)
@@ -14,7 +14,7 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 	public async Task<Response<string>> Handle(UpdateCategoryCommand request,
 		CancellationToken cancellationToken)
 	{
-		if (!await categoryRepository.IsCategoryExistAsync(request.Id))
+		if (!await categoryRepository.IsCategoryExistAsync(request.Id, cancellationToken))
 			return NotFound<string>([$"Category ID: {request.Id} not found"], "Category discontinued");
 
 		try
