@@ -124,7 +124,6 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
             return const Center(
               child: Text(
                 "Failed to load banner details",
-                style: TextStyle(color: Colors.red),
               ),
             );
           }

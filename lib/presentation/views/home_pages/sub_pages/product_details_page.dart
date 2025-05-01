@@ -79,7 +79,6 @@ class ProductDetailsPage extends StatelessWidget {
               return const Center(
                 child: Text(
                   'Failed to load product details.',
-                  style: TextStyle(color: Colors.red),
                 ),
               );
             }

@@ -38,7 +38,6 @@ class BannerDetailsPage extends StatelessWidget {
             return const Center(
               child: Text(
                 "Failed to load banner details",
-                style: TextStyle(color: Colors.red),
               ),
             );
           }
