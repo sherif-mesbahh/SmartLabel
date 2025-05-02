@@ -1,98 +1,91 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getAll } from "../../services/userServices";
-import { toggleBlock } from "../../services/userServices";
+import { editUser, getAll } from "../../services/userServices";
 import NotFound from "../../component/NotFound";
-import Search from "../../component/Search";
 
 function UsersAdminPage() {
-  const { searchTerm } = useParams();
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
+
   useEffect(() => {
-    loadUsers(searchTerm);
-  }, [searchTerm]);
+    loadUsers();
+  }, []);
 
   const loadUsers = async () => {
-    const users = await getAll(searchTerm);
-    setUsers(users);
+    try {
+      const res = await getAll();
+      setUsers(res.data.data || []);
+    } catch {}
   };
-  const handletoggleBlock = async (userId) => {
-    const isBlocked = await toggleBlock(userId);
-    setUsers((oldusers) =>
-      oldusers.map((user) =>
-        user._id === userId ? { ...user, isBlocked } : user
-      )
-    );
-  };
-  return (
-    <div className="container mx-auto p-8">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Manage Users</h2>
-      <div className="overflow-x-auto">
-        <Search
-          SearchRoute={"/admin/users/"}
-          defaultRoute={"/admin/users"}
-          placeholder={" Search For User"}
-        />
 
-        <table className="min-w-full border border-gray-200 shadow-lg">
-          <thead className="bg-gray-100">
+  const handleSubmit = async (email, currentRole) => {
+    const newRole = currentRole === "Admin" ? "user" : "Admin";
+    await editUser(email, newRole);
+    loadUsers();
+  };
+
+  return (
+    <div className="container mx-auto p-6">
+      <h2 className="text-3xl font-bold text-indigo-700 text-center mb-8">
+        Manage Users
+      </h2>
+      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+        <table className="min-w-full border-collapse">
+          <thead className="bg-indigo-50">
             <tr>
-              <th className="py-3 px-6 text-left text-gray-700 font-medium">
+              <th className="py-4 px-6 text-left text-indigo-700 font-semibold border-b">
                 Name
               </th>
-              <th className="py-3 px-6 text-left text-gray-700 font-medium">
+              <th className="py-4 px-6 text-left text-indigo-700 font-semibold border-b">
                 Email
               </th>
-              <th className="py-3 px-6 text-left text-gray-700 font-medium">
-                Address
-              </th>
-              <th className="py-3 px-6 text-center text-gray-700 font-medium">
+              <th className="py-4 px-6 text-center text-indigo-700 font-semibold border-b">
                 Admin
               </th>
-              <th className="py-3 px-6 text-center text-gray-700 font-medium">
-                Actions
+              <th className="py-4 px-6 text-center text-indigo-700 font-semibold border-b">
+                Action
               </th>
             </tr>
           </thead>
-          {!users ? (
-            <NotFound message={"not users found"} />
-          ) : (
-            users.map((user) => (
-              <tbody key={user._id}>
-                {" "}
-                <tr className="border-b border-gray-200">
-                  <td className="py-3 px-6 text-gray-800">{user.name}</td>
-                  <td className="py-3 px-6 text-gray-800">{user.email}</td>
-                  <td className="py-3 px-6 text-gray-800">{user.address}</td>
-                  {user.isAdmin ? (
-                    <td className="py-3 px-6 text-center">
-                      <span className="text-green-500">✓</span>
-                    </td>
-                  ) : (
-                    <td className="py-3 px-6 text-center">
-                      <span className="text-red-500">✗</span>
-                    </td>
-                  )}
-                  <td className="py-3 px-6 text-center">
-                    <Link
-                      to={`/admin/editUser/${user._id}`}
-                      className="text-blue-600 hover:underline mr-4"
-                    >
-                      Edit
-                    </Link>
-                    {!user.isAdmin && (
-                      <Link
-                        onClick={() => handletoggleBlock(user._id)}
-                        className="text-purple-600 hover:underline"
-                      >
-                        {user.isBlocked ? "Unblock" : "block"}
-                      </Link>
+          <tbody>
+            {users.length === 0 ? (
+              <tr>
+                <td colSpan="4">
+                  <NotFound message="No users found" />
+                </td>
+              </tr>
+            ) : (
+              users.map((user, idx) => (
+                <tr key={idx} className="hover:bg-indigo-50 transition">
+                  <td className="py-3 px-6 text-gray-800 border-b">
+                    {user.firstName}
+                  </td>
+                  <td className="py-3 px-6 text-gray-800 border-b">
+                    {user.email}
+                  </td>
+                  <td className="py-3 px-6 text-center border-b">
+                    {user.roles[0] === "Admin" ? (
+                      <span className="text-green-600 font-bold">✓</span>
+                    ) : (
+                      <span className="text-red-500 font-bold">✗</span>
                     )}
                   </td>
+                  <td className="py-3 px-6 text-center border-b">
+                    <button
+                      onClick={() => handleSubmit(user.email, user.roles[0])}
+                      className={`px-4 py-1 rounded text-white font-medium transition ${
+                        user.roles[0] === "Admin"
+                          ? "bg-red-500 hover:bg-red-600"
+                          : "bg-blue-500 hover:bg-blue-600"
+                      }`}
+                    >
+                      {user.roles[0] === "Admin"
+                        ? "Revoke Admin"
+                        : "Make Admin"}
+                    </button>
+                  </td>
                 </tr>
-              </tbody>
-            ))
-          )}
+              ))
+            )}
+          </tbody>
         </table>
       </div>
     </div>

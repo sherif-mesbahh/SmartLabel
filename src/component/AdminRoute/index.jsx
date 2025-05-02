@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth.jsx";
 import NotFound from "../NotFound/index.jsx";
-import AuthRoute from "../AuthRoute/index.jsx";
+import { UserInfo } from "../../services/userServices.js";
 function AdminRoute({ children }) {
-  const { user } = useAuth();
-  return user ? (
+  const { userInfo } = useAuth();
+
+  return userInfo.data.roles[0] == "Admin" ? (
     <div>{children}</div>
   ) : (
     <NotFound message={"this page is only for Admins"} />
@@ -12,10 +13,6 @@ function AdminRoute({ children }) {
 }
 
 function AdminRouteExport({ children }) {
-  return (
-    <AuthRoute>
-      <AdminRoute>{children}</AdminRoute>
-    </AuthRoute>
-  );
+  return <AdminRoute>{children}</AdminRoute>;
 }
 export default AdminRouteExport;

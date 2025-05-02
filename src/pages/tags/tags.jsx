@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../component/Sidebar";
-import { getAll, getAllTags } from "../../services/foodServices";
+import { getAll, getAllByCat, getAllCat } from "../../services/foodServices";
 import ProductGrid from "../../component/ProductGrid";
+import { useParams } from "react-router-dom";
 
 function Tags() {
   const [food, setFood] = useState([]);
-  const [tags, setTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]); // Track selected categories
+  const [cats, setcats] = useState([]);
+  const { id } = useParams(); // Track selected categories
 
   useEffect(() => {
-    getAll().then((data) => setFood(data.data));
-    getAllTags().then((data) => setTags(data.data));
-  }, []);
-
-  // Function to toggle category selection
-
-  // Filter products based on selected categories
+    getAllCat().then((data) => setcats(data.data));
+    getAllByCat(id).then((data) => setFood(data.data.products));
+    if (!id) {
+      getAll().then((data) => setFood(data.data));
+    }
+  }, [id]);
 
   return (
     <div className="flex">
-      <Sidebar tags={tags} />
+      <Sidebar cats={cats} />
       <div className="flex-1 p-4">
         <ProductGrid food={food} />
       </div>

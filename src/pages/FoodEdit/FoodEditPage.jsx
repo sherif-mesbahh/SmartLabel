@@ -1,133 +1,136 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { addFood, getById, updateFood } from "../../services/foodServices";
-import { uploadImage } from "../../services/uploadServices";
 import { toast } from "react-toastify";
-import { useAuth } from "../../hooks/useAuth";
 
 function FoodEditPage() {
-  const { foodId } = useParams();
+  const { foodId, categoryId } = useParams();
   const isEditMode = !!foodId;
-  const [Food, setFood] = useState();
-  const [Image, setImageUrl] = useState();
-  const [Name, setName] = useState();
-  const [Price, setPrice] = useState();
+
+  const [images, setImages] = useState();
+  const [MainImage, setMainImage] = useState();
+  const [RemovedImageIds, setRemovedImageId] = useState([]);
+  const [Name, setName] = useState("");
+  const [OLdPrice, setOldPrice] = useState("");
   const [CategoryId, setCategoryId] = useState();
-  const [Discount, setdiscount] = useState();
-  const [ExpirationDate, setExpirationDate] = useState();
+  const [Discount, setdiscount] = useState("");
+  const [Description, setDescription] = useState("");
+
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   useEffect(() => {
-    if (!isEditMode) return;
-    console.log(user);
-    getById(foodId).then((food) => {
-      setImageUrl(food.imagePath);
-      setName(food.name);
-      setPrice(food.price);
-      setCategoryId(food.categoryId);
+    if (!isEditMode) {
+      setCategoryId(categoryId);
+      return;
+    }
 
-      setdiscount(food.discount);
+    getById(foodId).then((food) => {
+      const data = food.data;
+      setName(data.name);
+      setOldPrice(data.oldPrice);
+      setCategoryId(data.categoryId);
+      setDescription(data.description);
+      setdiscount(data.discount);
+      setMainImage(data.mainImage);
+      setImages(data.images?.map((img) => img.imageUrl) || [null]);
+      setRemovedImageId(data.images?.map((img) => img.imageId));
     });
-  }, [foodId, isEditMode]);
+  }, [foodId, isEditMode, categoryId]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Name:", Name);
 
     if (isEditMode) {
       await updateFood(
+        foodId,
         Name,
-        Image,
-        Price,
+        OLdPrice,
         Discount,
-        ExpirationDate,
+        Description,
         CategoryId,
-        foodId
+        MainImage,
+        images,
+        RemovedImageIds
       );
-      toast.success(`food ${Name} updated successfully`);
+      toast.success(`Food ${Name} updated successfully`);
     } else {
       const newFood = await addFood(
         Name,
-        Image,
-        Price,
+        OLdPrice,
         Discount,
-        ExpirationDate,
-        CategoryId
-      ); // Corrected function call here
-      console.log(newFood);
-      toast.success(`Food ${newFood.name} added successfully`);
-      navigate(`/admin/editfood/${newFood.id}`, { replace: true }); // Corrected typo
+        Description,
+        CategoryId,
+        MainImage,
+        images
+      );
+      toast.success(`Food ${Name} added successfully`);
+      navigate(`/admin/editfood/${newFood.id}`, { replace: true });
     }
   };
-  // const upload = async (event) => {
-  //   setImageUrl(null);
-  //   const imageUrl = await uploadImage(event);
-  //   setImageUrl(imageUrl);
-  // };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">
+    <div className="flex justify-center items-center min-h-screen bg-slate-100 px-4">
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
+        <h2 className="text-3xl font-bold text-center text-indigo-600 mb-8">
           {isEditMode ? "Edit Food" : "Add Food"}
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <input
             type="text"
             placeholder="Name"
             onChange={(e) => setName(e.target.value)}
             value={Name}
-            className="block w-full border border-gray-300 rounded p-2"
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
-          <label className=" text-gray-700">Select Image:</label>
-          <input
-            type="text"
-            placeholder=" Image url ..."
-            onChange={(e) => setImageUrl(e.target.value)}
-            className="block w-full text-sm text-gray-500 border border-gray-300 rounded p-2"
-          />
-          {Image && (
-            <a href={Image} target="_blank" rel="noopener noreferrer">
-              <img
-                src={Image}
-                alt="Preview"
-                className="my-4 w-full h-48 object-cover rounded"
-              />
-            </a>
-          )}
-
           <input
             type="number"
             placeholder="Price"
-            onChange={(e) => setPrice(e.target.value)}
-            value={Price}
-            className="block w-full border border-gray-300 rounded p-2"
+            onChange={(e) => setOldPrice(e.target.value)}
+            value={OLdPrice}
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
           <input
             type="number"
             placeholder="Discount"
             onChange={(e) => setdiscount(e.target.value)}
             value={Discount}
-            className="block w-full border border-gray-300 rounded p-2"
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
-          <input
-            type="text"
-            placeholder="Expiration Date"
-            onChange={(e) => setExpirationDate(e.target.value)}
-            value={ExpirationDate}
-            className="block w-full border border-gray-300 rounded p-2"
-          />
-          <input
-            type="number"
-            placeholder="Category Id"
-            onChange={(e) => setCategoryId(e.target.value)}
-            value={CategoryId}
-            className="block w-full border border-gray-300 rounded p-2"
-          />
+          <textarea
+            placeholder="Description"
+            onChange={(e) => setDescription(e.target.value)}
+            value={Description}
+            className="w-full border border-gray-300 rounded-lg p-3 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          ></textarea>
+
+          <div>
+            <label className="block mb-2 text-sm text-gray-700 font-medium">
+              Select Main Image
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setMainImage(e.target.files[0])}
+              className="w-full text-sm border border-gray-300 rounded-lg p-2.5"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm text-gray-700 font-medium">
+              Select Images
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => setImages(Array.from(e.target.files))}
+              className="w-full text-sm border border-gray-300 rounded-lg p-2.5"
+            />
+          </div>
 
           <button
             type="submit"
-            className="block w-full bg-blue-500 text-white rounded p-2 mt-4"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition duration-200"
           >
             {isEditMode ? "Update" : "Add"}
           </button>

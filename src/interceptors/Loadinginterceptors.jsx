@@ -3,7 +3,8 @@ import axios from "axios";
 export const SetLoadingInterceptors = ({ hideLoading, showLoading }) => {
   axios.interceptors.request.use(
     (req) => {
-      if (!(req.data instanceof FormData)) showLoading();
+      if (!req.skipGlobalLoading && !(req.data instanceof FormData))
+        showLoading();
 
       return req;
     },

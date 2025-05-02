@@ -1,97 +1,67 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-function Loginpage() {
-  const { user, login } = useAuth();
-  const [email, setEmai] = useState("");
-  const [password, setPassword] = useState("");
-  const [usernameerror, setUserNameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const navigate = useNavigate();
-  const [params] = useSearchParams();
-  const redirectTo = params.get("redirect_to") || "/";
+function LoginPage() {
+  const { login } = useAuth();
+
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Reset errors
-    setUserNameError("");
-    setPasswordError("");
-
-    // Input validation
-    let valid = true;
-
-    if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters long");
-      valid = false;
-    }
-
-    if (!valid) return;
+    setIsLoading(true);
 
     try {
-      await login(email, password);
-    } catch (err) {
-      // Handle login failure (e.g., incorrect credentials)
-      setUserNameError("Incorrect Username or password");
-      setPasswordError("Incorrect username or password");
+      await login(formData.email, formData.password);
+    } catch (error) {
+      // Error toast is already handled in the `login` function
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (!user) return;
-    if (user) {
-      // Redirect only once when user is logged in
-      navigate(redirectTo);
-    }
-  }, [user]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Login Page</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmai(e.target.value)}
-              className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                user ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {usernameerror && (
-              <p className="text-red-500 text-sm mt-1">{usernameerror}</p>
-            )}
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                passwordError ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {passwordError && (
-              <p className="text-red-500 text-sm mt-1">{passwordError}</p>
-            )}
-          </div>
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+            autoFocus
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+            minLength={6}
+          />
           <button
             type="submit"
-            className="w-full p-2 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition duration-300"
+            disabled={isLoading}
+            className={`w-full p-2 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition duration-300 ${
+              isLoading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
         <p className="mt-4 text-center">
-          new user ?{" "}
-          <Link
-            className="text-blue-500 underline"
-            to={`/register${redirectTo ? `?redirect_to=` + redirectTo : ``}`}
-          >
+          New user?{" "}
+          <Link to="/register" className="text-blue-500 hover:underline">
             Register here
           </Link>
         </p>
@@ -100,4 +70,4 @@ function Loginpage() {
   );
 }
 
-export default Loginpage;
+export default LoginPage;

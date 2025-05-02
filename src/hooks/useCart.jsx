@@ -1,67 +1,80 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { addFav, deleteFav, getFav } from "../services/foodServices";
 
 const favoriteContext = createContext(null);
 
 function FavoriteProvider({ children }) {
   const [favoriteItems, setFavoriteItems] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const totalCount = favoriteItems.length;
 
-  useEffect(() => {
-    // Fetch initial favorites from API on mount
-    getFav().then((response) => {
-      const items = response.data.data || [];
-
-      setFavoriteItems(items);
-      setTotalCount(items.length);
-    });
-  }, []);
-
-  const toggleFavorite = async (food) => {
-    const existingItem = favoriteItems.find((item) => item.id === food.id);
-
-    if (existingItem) {
-      await DeleteFavorite(food);
-    } else {
-      await addFavorite(food);
-    }
-  };
-  const addFavorite = async (food) => {
+  const fetchFavorites = useCallback(async () => {
     try {
-      await addFav(food.id);
       const response = await getFav();
       const items = response.data.data || [];
-
       setFavoriteItems(items);
-      setTotalCount(items.length);
     } catch (error) {
-      console.error("Failed to add favorite:", error);
+      console.error("Failed to fetch favorites:", error);
     }
-  };
+  }, []);
 
-  const DeleteFavorite = async (food) => {
-    try {
-      await deleteFav(food.id);
-      const updated = favoriteItems.filter((item) => item.id !== food.id);
-      setFavoriteItems(updated);
-      setTotalCount(updated.length);
-    } catch (error) {
-      console.error("Failed to delete favorite:", error);
-    }
-  };
+  useEffect(() => {
+    fetchFavorites();
+  }, [fetchFavorites]);
 
-  const clearFavorites = () => {
-    setFavoriteItems([]);
-    setTotalCount(0);
-    // Optional: implement a clear API call if needed
-  };
+  const addFavorite = useCallback(
+    async (food) => {
+      try {
+        setFavoriteItems((prev) => [...prev, food]);
+        await addFav(food.id);
+        fetchFavorites().catch(console.error);
+      } catch (error) {
+        setFavoriteItems((prev) => prev.filter((item) => item.id !== food.id));
+        console.error("Failed to add favorite:", error);
+      }
+    },
+    [fetchFavorites]
+  );
+
+  const DeleteFavorite = useCallback(
+    async (food) => {
+      try {
+        // Optimistic update
+        setFavoriteItems((prev) => prev.filter((item) => item.id !== food.id));
+        await deleteFav(food.id);
+        // Confirm with server (but don't wait for response to update UI)
+        fetchFavorites().catch(console.error);
+      } catch (error) {
+        // Rollback on error
+        fetchFavorites();
+        console.error("Failed to delete favorite:", error);
+      }
+    },
+    [fetchFavorites]
+  );
+
+  const toggleFavorite = useCallback(
+    async (food) => {
+      const isFavorite = favoriteItems.some((item) => item.id === food.id);
+      if (isFavorite) {
+        await DeleteFavorite(food);
+      } else {
+        await addFavorite(food);
+      }
+    },
+    [favoriteItems, DeleteFavorite, addFavorite]
+  );
 
   return (
     <favoriteContext.Provider
       value={{
         favorites: { items: favoriteItems, totalCount },
         toggleFavorite,
-        clearFavorites,
         DeleteFavorite,
       }}
     >

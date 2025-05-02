@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 
 function RegisterPage() {
-  const { register, user } = useAuth();
+  const { register } = useAuth();
 
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
@@ -16,8 +16,6 @@ function RegisterPage() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const navigate = useNavigate();
-  const [params] = useSearchParams();
-  const redirectTo = params.get("redirect_to") || "/";
 
   const validateEmail = (email) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -58,12 +56,6 @@ function RegisterPage() {
       setError(err.message || "Registration failed");
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate(redirectTo);
-    }
-  }, [user, navigate, redirectTo]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -145,10 +137,7 @@ function RegisterPage() {
 
         <p className="mt-4 text-center">
           Already have an account?{" "}
-          <Link
-            className="text-blue-500 underline"
-            to={`/login${redirectTo ? `?redirect_to=` + redirectTo : ``}`}
-          >
+          <Link className="text-blue-500 underline" to={`/login`}>
             Login
           </Link>
         </p>

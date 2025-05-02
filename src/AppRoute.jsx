@@ -5,7 +5,6 @@ import FoodPage from "./pages/Food/FoodPage";
 import CartPage from "./pages/Cart/CartPage";
 import Loginpage from "./pages/login/Loginpage";
 import RegisterPage from "./pages/Register/RegisterPage";
-import AuthRoute from "./component/AuthRoute";
 
 import ProfilePage from "./pages/Profile/ProfilePage";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -18,6 +17,9 @@ import CategoryEditPage from "./pages/CategoriesEdit/CategoryEditPage";
 import Tags from "./pages/tags/tags";
 import BannerPage from "./pages/Banner/BannerPage";
 import AllProductPage from "./pages/allProduct/AllProductPage";
+import BannerAdminPage from "./pages/BannerAdmin/BannerAdminPage";
+import BannerEditPage from "./pages/BannerEditPage/BannerEditPage";
+import UsersAdminPage from "./pages/UsersAdminPage/UsersAdminPage";
 
 function AppRoute() {
   return (
@@ -25,7 +27,7 @@ function AppRoute() {
       <Route path="/" element={<Homepage />} />
       <Route path="/Search/:searchTerm" element={<Homepage />} />
 
-      <Route path="/tags/:Tag?" element={<Tags />} />
+      <Route path="/category/:id?" element={<Tags />} />
       <Route path="/food/:id" element={<FoodPage />} />
       <Route path="/fav" element={<CartPage />} />
       <Route path="/login" element={<Loginpage />} />
@@ -33,23 +35,9 @@ function AppRoute() {
       <Route path="/banner/:id" element={<BannerPage />} />
       <Route path="/allproduct" element={<AllProductPage />} />
 
-      <Route
-        path="/profile"
-        element={
-          <AuthRoute>
-            <ProfilePage />
-          </AuthRoute>
-        }
-      />
+      <Route path="/profile" element={<ProfilePage />} />
 
-      <Route
-        path="/dashboard"
-        element={
-          <AuthRoute>
-            <Dashboard />
-          </AuthRoute>
-        }
-      />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route
         path="/admin/foods/:searchTerm?"
         element={
@@ -67,7 +55,15 @@ function AppRoute() {
         }
       />
       <Route
-        path="/admin/addfood"
+        path="/admin/banners/:searchTerm?"
+        element={
+          <AdminRouteExport>
+            <BannerAdminPage />
+          </AdminRouteExport>
+        }
+      />
+      <Route
+        path="/admin/addfood/:categoryId"
         element={
           <AdminRouteExport>
             <FoodEditPage />
@@ -95,6 +91,30 @@ function AppRoute() {
         element={
           <AdminRouteExport>
             <CategoryEditPage />
+          </AdminRouteExport>
+        }
+      />
+      <Route
+        path="/admin/addbanner"
+        element={
+          <AdminRouteExport>
+            <BannerEditPage />
+          </AdminRouteExport>
+        }
+      />
+      <Route
+        path="/admin/editbanner/:bannerId"
+        element={
+          <AdminRouteExport>
+            <BannerEditPage />
+          </AdminRouteExport>
+        }
+      />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <AdminRouteExport>
+            <UsersAdminPage />
           </AdminRouteExport>
         }
       />

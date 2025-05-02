@@ -13,16 +13,16 @@ export const search = async (searchTerm) => {
   );
   return data;
 };
-export const getAllTags = async () => {
+export const getAllCat = async () => {
   const { data } = await axios.get(
     "http://smartlabel1.runasp.net/api/Categories"
   );
 
   return data;
 };
-export const getAllByTags = async (id) => {
+export const getAllByCat = async (id) => {
   const { data } = await axios.get(
-    "http://newsmartlabel.runasp.net/api/product/category/" + id
+    "http://smartlabel1.runasp.net/api/Categories/" + id
   );
 
   return data;
@@ -36,7 +36,7 @@ export const getById = async (foodid) => {
 
 export const DeleteFoodId = async (id) => {
   const { data } = await axios.delete(
-    `http://newsmartlabel.runasp.net/api/categories/${id}`
+    `http://smartlabel1.runasp.net/api/Products/${id}`
   );
   return data;
 };
@@ -46,12 +46,11 @@ export const addCategory = async (Name, Image) => {
   formData.append("Name", Name);
   formData.append("Image", Image);
   const { data } = await axios.post(
-    "http://newsmartlabel.runasp.net/api/categories",
+    "http://smartlabel1.runasp.net/api/Categories",
     formData,
 
     {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMzMzNjMWEzLTNjYWUtNDcwMC04ZTk1LWVhZjk3ZWIwNTFlZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ5eSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Inl5QGdtYWlsLmNvbSIsImp0aSI6IjFmYWQ5MDg2LWY5MmMtNGQxNS05NTVkLTRhNmQ4YjM1MjE0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiaXNBZG1pbiI6IlRydWUiLCJleHAiOjE3MzYwMjk3MDAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDQyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTUifQ.0Q-6GZg6eDCwrt4MzmPLwuPO6bQNMlf-Fu0pCfubX9E`, // Attach the token in the Authorization header
         "Content-Type": "multipart/form-data", // Set content type for FormData
       },
     }
@@ -59,44 +58,54 @@ export const addCategory = async (Name, Image) => {
   return data;
 };
 export const addFood = async (
-  name,
-  imageFile,
-  price,
-  discount = 0,
-  expirationDate = "",
-  categoryId = 1
+  Name,
+  OLdPrice,
+  Discount,
+  Description,
+  CategoryId,
+  MainImage,
+  ImagesFiles
 ) => {
   const formData = new FormData();
-  formData.append("Name", name);
-  formData.append("Image", imageFile);
-  formData.append("Price", price);
-  formData.append("Discount", discount);
-  formData.append("ExpirationDate", expirationDate);
-  formData.append("CategoryId", categoryId);
+  formData.append("Name", Name);
+  formData.append("OLdPrice", OLdPrice);
+  formData.append("Discount", Discount);
+  formData.append("Description", Description);
+  formData.append("CatId", CategoryId);
+  formData.append("MainImage", MainImage);
+  formData.append("ImagesFiles", ImagesFiles);
+  if (MainImage) {
+    formData.append("MainImage", MainImage);
+  }
+
+  ImagesFiles.forEach((file) => {
+    if (file) {
+      formData.append("ImagesFiles", file);
+    }
+  });
   const { data } = await axios.post(
-    "http://newsmartlabel.runasp.net/api/product",
+    "http://smartlabel1.runasp.net/api/Products",
     formData,
 
     {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMzMzNjMWEzLTNjYWUtNDcwMC04ZTk1LWVhZjk3ZWIwNTFlZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ5eSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Inl5QGdtYWlsLmNvbSIsImp0aSI6IjFmYWQ5MDg2LWY5MmMtNGQxNS05NTVkLTRhNmQ4YjM1MjE0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiaXNBZG1pbiI6IlRydWUiLCJleHAiOjE3MzYwMjk3MDAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDQyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTUifQ.0Q-6GZg6eDCwrt4MzmPLwuPO6bQNMlf-Fu0pCfubX9E`, // Attach the token in the Authorization header
         "Content-Type": "multipart/form-data", // Set content type for FormData
       },
     }
   );
   return data;
 };
-export const updateCategory = async (Name, Image, id) => {
+export const updateCategory = async (Id, Name, Image) => {
   const formData = new FormData();
+  formData.append("Id", Id);
   formData.append("Name", Name);
   formData.append("Image", Image);
   const { data } = await axios.put(
-    `http://newsmartlabel.runasp.net/api/categories/${id}`,
+    `http://smartlabel1.runasp.net/api/Categories`,
     formData,
 
     {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMzMzNjMWEzLTNjYWUtNDcwMC04ZTk1LWVhZjk3ZWIwNTFlZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ5eSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Inl5QGdtYWlsLmNvbSIsImp0aSI6IjFmYWQ5MDg2LWY5MmMtNGQxNS05NTVkLTRhNmQ4YjM1MjE0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiaXNBZG1pbiI6IlRydWUiLCJleHAiOjE3MzYwMjk3MDAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDQyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTUifQ.0Q-6GZg6eDCwrt4MzmPLwuPO6bQNMlf-Fu0pCfubX9E`, // Attach the token in the Authorization header
         "Content-Type": "multipart/form-data", // Set content type for FormData
       },
     }
@@ -104,39 +113,146 @@ export const updateCategory = async (Name, Image, id) => {
   return data;
 };
 export const updateFood = async (
-  name,
-  imageFile,
-  price,
-  discount = 0,
-  expirationDate = "",
-  categoryId = 1,
-  id
+  Id,
+  Name,
+  OldPrice,
+  Discount,
+  Description,
+  CatId,
+  MainImage,
+  ImagesFiles,
+  RemovedImageIds
 ) => {
   const formData = new FormData();
-  formData.append("Name", name);
-  formData.append("Image", imageFile);
-  formData.append("Price", price);
-  formData.append("Discount", discount);
-  formData.append("ExpirationDate", expirationDate);
-  formData.append("CategoryId", categoryId);
+  formData.append("Id", Id);
+  formData.append("Name", Name);
+  formData.append("OldPrice", OldPrice);
+  formData.append("Discount", Discount);
+  formData.append("Description", Description);
+  formData.append("CatId", CatId);
+
+  if (MainImage) {
+    formData.append("MainImage", MainImage);
+  }
+
+  ImagesFiles.forEach((file) => {
+    if (file) {
+      formData.append("ImagesFiles", file);
+    }
+  });
+
+  RemovedImageIds.forEach((id) => {
+    if (id) {
+      formData.append("RemovedImageIds", id);
+    }
+  });
+
   const { data } = await axios.put(
-    `http://newsmartlabel.runasp.net/api/product/${id}`,
+    `http://smartlabel1.runasp.net/api/Products`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return data;
+};
+
+export const getBanners = async () => {
+  const data = await axios.get("http://smartlabel1.runasp.net/api/Banners");
+  return data;
+};
+export const addBanner = async (
+  Title,
+  Description,
+  StartDate,
+  EndDate,
+  MainImage,
+  ImagesFiles
+) => {
+  const formData = new FormData();
+  formData.append("Title", Title);
+  formData.append("Description", Description);
+  formData.append("StartDate", StartDate);
+  formData.append("EndDate", EndDate);
+  formData.append("MainImage", MainImage);
+  formData.append("ImagesFiles", ImagesFiles);
+  if (MainImage) {
+    formData.append("MainImage", MainImage);
+  }
+
+  ImagesFiles.forEach((file) => {
+    if (file) {
+      formData.append("ImagesFiles", file);
+    }
+  });
+
+  const { data } = await axios.post(
+    "http://smartlabel1.runasp.net/api/Banners",
     formData,
 
     {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMzMzNjMWEzLTNjYWUtNDcwMC04ZTk1LWVhZjk3ZWIwNTFlZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ5eSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Inl5QGdtYWlsLmNvbSIsImp0aSI6IjFmYWQ5MDg2LWY5MmMtNGQxNS05NTVkLTRhNmQ4YjM1MjE0NCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiaXNBZG1pbiI6IlRydWUiLCJleHAiOjE3MzYwMjk3MDAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDQyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjU1NTUifQ.0Q-6GZg6eDCwrt4MzmPLwuPO6bQNMlf-Fu0pCfubX9E`, // Attach the token in the Authorization header
         "Content-Type": "multipart/form-data", // Set content type for FormData
       },
     }
   );
   return data;
 };
-export const getBanners = async () => {
-  const data = await axios.get("http://smartlabel1.runasp.net/api/Banners");
+export const updateBanner = async (
+  Id,
+  Title,
+  Description,
+  StartDate,
+  EndDate,
+  MainImage,
+  ImagesFiles,
+  RemovedImageIds
+) => {
+  const formData = new FormData();
+  formData.append("Id", Id);
+  formData.append("Title", Title);
+  formData.append("Description", Description);
+  formData.append("StartDate", StartDate);
+  formData.append("EndDate", EndDate);
+  formData.append("MainImage", MainImage);
+  formData.append("ImagesFiles", ImagesFiles);
+  formData.append("RemovedImageIds", RemovedImageIds);
+  if (MainImage) {
+    formData.append("MainImage", MainImage);
+  }
+
+  ImagesFiles.forEach((file) => {
+    if (file) {
+      formData.append("ImagesFiles", file);
+    }
+  });
+
+  RemovedImageIds.forEach((id) => {
+    if (id) {
+      formData.append("RemovedImageIds", id);
+    }
+  });
+
+  const { data } = await axios.put(
+    "http://smartlabel1.runasp.net/api/Banners",
+    formData,
+
+    {
+      headers: {
+        "Content-Type": "multipart/form-data", // Set content type for FormData
+      },
+    }
+  );
   return data;
 };
-
+export const DeleteBannerId = async (id) => {
+  const { data } = await axios.delete(
+    `http://smartlabel1.runasp.net/api/Banners/${id}`
+  );
+  return data;
+};
 export const getBannerById = async (id) => {
   const data = await axios.get(
     `http://smartlabel1.runasp.net/api/Banners/${id}`
@@ -145,19 +261,32 @@ export const getBannerById = async (id) => {
 };
 export const getFav = async () => {
   const data = await axios.get(
-    "http://smartlabel1.runasp.net/api/me/favorites"
+    "http://smartlabel1.runasp.net/api/me/favorites",
+    { skipGlobalLoading: true }
   );
   return data;
 };
 export const addFav = async (id) => {
   const data = await axios.post(
-    "http://smartlabel1.runasp.net/api/me/favorites/" + id
+    "http://smartlabel1.runasp.net/api/me/favorites/" + id,
+    null,
+    {
+      skipGlobalLoading: true,
+    }
   );
   return data;
 };
 export const deleteFav = async (id) => {
   const data = await axios.delete(
-    "http://smartlabel1.runasp.net/api/me/favorites/" + id
+    "http://smartlabel1.runasp.net/api/me/favorites/" + id,
+    { skipGlobalLoading: true }
+  );
+  return data;
+};
+
+export const deleteCategory = async (id) => {
+  const data = axios.delete(
+    `http://smartlabel1.runasp.net/api/Categories/${id}`
   );
   return data;
 };

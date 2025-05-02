@@ -1,66 +1,73 @@
 import axios from "axios";
 
+const API_URL = "http://smartlabel1.runasp.net";
+
 export const getUser = () => {
-  return localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
+  const user = localStorage.getItem("user");
+  const userinfo = localStorage.getItem("userInfo");
+  if (!user || user === "undefined") return null;
+
+  try {
+    return JSON.parse(user), JSON.parse(userinfo);
+  } catch (err) {
+    console.error("Invalid user JSON:", err);
+    return null;
+  }
 };
 
-export const Login = async (email, password) => {
-  const { data } = await axios.post(
-    "http://smartlabel1.runasp.net/api/Authentication/login",
-    { email, password }
-  );
-  localStorage.setItem("user", JSON.stringify(data));
-  return data;
+export const Login = (email, password) => {
+  return axios.post(`${API_URL}/api/Authentication/login`, { email, password });
 };
 
-export const register = async (
+export const register = (
   firstName,
   lastName,
   email,
   password,
   confirmPassword
 ) => {
-  const { data } = await axios.post(
-    "http://smartlabel1.runasp.net/api/Authentication/register",
-    { firstName, lastName, email, password, confirmPassword }
-  );
-  localStorage.setItem("user", JSON.stringify(data));
-  return data;
+  return axios.post(`${API_URL}/api/Authentication/register`, {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+  });
 };
 
 export const Logout = () => {
   localStorage.removeItem("user");
 };
-export const updateProfile = async (updateuser) => {
-  const { data } = await axios.put("/api/users/updateProfile", updateuser);
 
-  localStorage.setItem("user", JSON.stringify(data));
-  return data;
+export const refreshToken = (refreshToken) => {
+  return axios.post(`${API_URL}/api/Authentication/refresh-token`, {
+    refreshToken,
+  });
 };
-export const changePassword = async (passwords) => {
-  const { data } = await axios.put("/api/users/changePassword", passwords);
-  localStorage.setItem("user", JSON.stringify(data));
-  return data;
-};
-export const getAll = async (searchTerm) => {
-  const { data } = await axios.get("/api/users/getAll/" + (searchTerm ?? ""));
 
-  return data;
+export const getAll = (searchTerm) => {
+  return axios.get(`${API_URL}/api/admin${searchTerm ?? ""}`);
 };
-export const toggleBlock = async (userId) => {
-  const { data } = await axios.put("/api/users/toggleBlock/" + userId);
 
-  return data;
+export const getById = (id) => {
+  return axios.get(`${API_URL}/api/Authorization/user-roles/${id}`);
 };
-export const getById = async (userId) => {
-  const { data } = await axios.get("/api/users/getById/" + userId);
 
-  return data;
+export const editUser = (email, roleName) => {
+  return axios.put(`${API_URL}/api/Authorization/user-roles`, {
+    email,
+    roleName,
+  });
 };
-export const EditUser = async (userForm) => {
-  const { data } = await axios.put("/api/users/EditUser", userForm);
 
-  return data;
+export const updateProfile = (updateuser) => {
+  return axios.put(`${API_URL}/api/me`, updateuser);
+};
+
+export const changePassword = (passwords) => {
+  return axios.put(`${API_URL}/api/me/password`, passwords);
+};
+
+export const UserInfo = () => {
+  return axios.get(`${API_URL}/api/me`);
 };

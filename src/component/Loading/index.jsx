@@ -18,11 +18,9 @@ function Loading() {
   return (
     <div className="fixed w-full h-full bg-white z-50 flex items-center justify-center">
       <div className="flex flex-col items-center">
-        <img
-          src="/icons/bouncing-ball.svg"
-          alt="Loading"
-          className="h-[200px] w-[150px]"
-        />
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-orange-500"></div>
+        </div>
         <p className="text-lg font-medium mt-2">Loading...</p>
       </div>
     </div>
