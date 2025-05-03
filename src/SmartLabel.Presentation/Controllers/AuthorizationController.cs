@@ -33,10 +33,10 @@ public class AuthorizationController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[HttpDelete("roles/{name}")]
-	public async Task<IActionResult> DeleteRole(string name)
+	[HttpDelete("roles/{id}")]
+	public async Task<IActionResult> DeleteRole(int id)
 	{
-		var command = new DeleteRoleCommand { Name = name };
+		var command = new DeleteRoleCommand { RoleId = id };
 		return NewResult(await sender.Send(command));
 	}
 	[HttpPost("user-roles/remove")]

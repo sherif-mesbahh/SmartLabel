@@ -19,7 +19,7 @@ public class UpdateUserToRoleHandler(UserManager<ApplicationUser> userManager, I
 				errors: [$"User with email '{request.Email}' doesn't exist"]);
 
 		}
-		if (!await authorizationRepository.IsRoleExist(request.RoleName))
+		if (!await authorizationRepository.IsRoleExistByName(request.RoleName))
 			return NotFound<string>([$"Role with name {request.RoleName} not found"], "Role not exist");
 
 		try

@@ -6,7 +6,7 @@ public class DeleteRoleValidator : AbstractValidator<DeleteRoleCommand>
 {
 	public DeleteRoleValidator()
 	{
-		RuleFor(x => x.Name)
-			.NotEmpty().WithMessage("{PropertyName} is required");
+		RuleFor(x => x.RoleId)
+			.GreaterThan(0).WithErrorCode("{PropertyName} must be greater than 0");
 	}
 }

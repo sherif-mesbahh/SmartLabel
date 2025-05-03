@@ -21,7 +21,7 @@ public class AddUserValidator : AbstractValidator<AddUserCommand>
 		RuleFor(x => x.Email)
 			.NotEmpty().WithMessage("{PropertyName} is required");
 
-		RuleFor(x => x.ConfirmPassword)
+		RuleFor(x => x.Password)
 			.NotEmpty().WithMessage("{PropertyName} is required");
 		RuleFor(x => x.Password)
 			.NotEmpty().WithMessage("{PropertyName} is required")
