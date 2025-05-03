@@ -66,7 +66,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       navigatorAndRemove(context, SignPage(), slideRightToLeft);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Register Success'),
+                          content: Text(
+                              'Registration successful! We have sent a confirmation email to your address.'),
                           backgroundColor: Colors.green,
                         ),
                       );

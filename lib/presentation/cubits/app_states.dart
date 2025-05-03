@@ -299,3 +299,23 @@ class DeleteAccountErrorState extends AppStates {
 
   DeleteAccountErrorState(this.error);
 }
+
+class MakeAdminLoadingState extends AppStates {}
+
+class MakeAdminSuccessState extends AppStates {}
+
+class MakeAdminErrorState extends AppStates {
+  String error;
+
+  MakeAdminErrorState(this.error);
+}
+
+class DeleteAdminLoadingState extends AppStates {}
+
+class DeleteAdminSuccessState extends AppStates {}
+
+class DeleteAdminErrorState extends AppStates {
+  String error;
+
+  DeleteAdminErrorState(this.error);
+}

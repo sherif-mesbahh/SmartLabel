@@ -1129,4 +1129,91 @@ class AppCubit extends Cubit<AppStates> {
       }
     }
   }
+
+  Future<void> makeAdmin({
+    required String email,
+  }) async {
+    emit(MakeAdminLoadingState());
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().put(
+        ApiEndpoints.makeAdmin,
+        {
+          'email': email,
+          'roleName': 'admin',
+        },
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(MakeAdminSuccessState());
+      } else {
+        emit(MakeAdminErrorState('Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(MakeAdminErrorState(errorMessage));
+          } else {
+            emit(MakeAdminErrorState('Unknown error occurred'));
+          }
+        } else {
+          emit(MakeAdminErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(MakeAdminErrorState(e.toString()));
+      }
+    }
+  }
+
+  Future<void> deleteAdmin({
+    required String email,
+  }) async {
+    emit(DeleteAdminLoadingState());
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().put(
+        ApiEndpoints.deleteAdmin,
+        {
+          'email': email,
+          'roleName': 'user',
+        },
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(DeleteAdminSuccessState());
+      } else {
+        emit(DeleteAdminErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(DeleteAdminErrorState(errorMessage));
+          } else {
+            emit(DeleteAdminErrorState('Unknown error occurred'));
+          }
+        } else {
+          emit(DeleteAdminErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(DeleteAdminErrorState(e.toString()));
+      }
+    }
+  }
 }

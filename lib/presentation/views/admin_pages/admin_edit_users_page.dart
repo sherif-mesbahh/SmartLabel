@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
+import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
@@ -107,46 +111,122 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                           },
                         ),
                         const SizedBox(height: 24),
-                        Row(
-                          children: [
-                            // Make Admin
-                            Expanded(
-                              child: CustomButtonWidget(
-                                onTap: () {
-                                  if (formKey.currentState!.validate()) {}
-                                },
-                                color: primaryColor,
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(
-                                    'Make Admin',
-                                    style: TextStyles.buttonText.copyWith(
-                                      color: secondaryColor,
+                        BlocConsumer<AppCubit, AppStates>(
+                          listener: (context, state) {
+                            if (state is MakeAdminSuccessState) {
+                              Fluttertoast.showToast(
+                                msg: '${emailController.text} is admin now',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 2,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                              emailController.clear();
+                            }
+
+                            if (state is MakeAdminErrorState) {
+                              Fluttertoast.showToast(
+                                msg: state.error,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 2,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                            }
+                            if (state is DeleteAdminSuccessState) {
+                              Fluttertoast.showToast(
+                                msg:
+                                    '${emailController.text} is no longer admin',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 2,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                              emailController.clear();
+                            }
+
+                            if (state is DeleteAdminErrorState) {
+                              Fluttertoast.showToast(
+                                msg: state.error,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 2,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                            }
+                          },
+                          builder: (context, state) {
+                            return Row(
+                              children: [
+                                // Make Admin
+                                Expanded(
+                                  child: CustomButtonWidget(
+                                    onTap: () {
+                                      if (formKey.currentState!.validate()) {
+                                        AppCubit.get(context).makeAdmin(
+                                          email: emailController.text,
+                                        );
+                                      }
+                                    },
+                                    color: primaryColor,
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: state is MakeAdminLoadingState
+                                          ? CircularProgressIndicator(
+                                              color: secondaryColor)
+                                          : FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: Text(
+                                                'Make Admin',
+                                                style: TextStyles.buttonText
+                                                    .copyWith(
+                                                  color: secondaryColor,
+                                                ),
+                                              ),
+                                            ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            // Remove Admin
-                            Expanded(
-                              child: CustomButtonWidget(
-                                onTap: () {
-                                  if (formKey.currentState!.validate()) {}
-                                },
-                                color: Colors.red,
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(
-                                    'Remove Admin',
-                                    style: TextStyles.buttonText.copyWith(
-                                      color: secondaryColor,
-                                    ),
+                                const SizedBox(width: 10),
+                                // Remove Admin
+                                Expanded(
+                                  child: CustomButtonWidget(
+                                    onTap: () {
+                                      if (formKey.currentState!.validate()) {
+                                        if (formKey.currentState!.validate()) {
+                                          AppCubit.get(context).deleteAdmin(
+                                            email: emailController.text,
+                                          );
+                                        }
+                                      }
+                                    },
+                                    color: Colors.red,
+                                    child: state is DeleteAdminLoadingState
+                                        ? CircularProgressIndicator(
+                                            color: secondaryColor)
+                                        : FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: Text(
+                                              'Remove Admin',
+                                              style: TextStyles.buttonText
+                                                  .copyWith(
+                                                color: secondaryColor,
+                                              ),
+                                            ),
+                                          ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
+                              ],
+                            );
+                          },
                         ),
                       ],
                     ),

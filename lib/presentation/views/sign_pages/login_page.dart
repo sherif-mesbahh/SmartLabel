@@ -70,10 +70,21 @@ class _LoginPageState extends State<LoginPage> {
                     }
                     if (state is LoginErrorState) {
                       Navigator.of(context, rootNavigator: true).pop();
+
+                      final isEmailNotConfirmed =
+                          state.error.contains('Email is not confirmed');
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(state.error),
-                          backgroundColor: Colors.red,
+                          content: Text(
+                            isEmailNotConfirmed
+                                ? 'Email is not confirmed, please check your email'
+                                : state.error,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor:
+                              isEmailNotConfirmed ? Colors.orange : Colors.red,
+                          duration: const Duration(seconds: 3),
                         ),
                       );
                     }
