@@ -7,6 +7,7 @@ import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/layout.dart';
+import 'package:smart_label_software_engineering/presentation/views/sign_pages/forgot_password_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
@@ -144,7 +145,24 @@ class _LoginPageState extends State<LoginPage> {
                                 AppCubit.get(context).loginPasswordSuffix,
                             controller: passwordController,
                           ),
-                          const SizedBox(height: 16.0),
+                          const SizedBox(height: 8.0),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: InkWell(
+                              onTap: () {
+                                pushNavigator(
+                                  context,
+                                  ForgotPasswordPage(),
+                                  slideBottomToTop,
+                                );
+                              },
+                              child: Text(
+                                'Forgot Password?',
+                                style: TextStyles.smallText,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
                           CustomButtonWidget(
                             onTap: () {
                               if (formKey.currentState!.validate()) {

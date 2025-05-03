@@ -319,3 +319,33 @@ class DeleteAdminErrorState extends AppStates {
 
   DeleteAdminErrorState(this.error);
 }
+
+class ForgotPasswordSendCodeLoadingState extends AppStates {}
+
+class ForgotPasswordSendCodeSuccessState extends AppStates {}
+
+class ForgotPasswordSendCodeErrorState extends AppStates {
+  String error;
+
+  ForgotPasswordSendCodeErrorState(this.error);
+}
+
+class ForgotPasswordVerifyCodeLoadingState extends AppStates {}
+
+class ForgotPasswordVerifyCodeSuccessState extends AppStates {}
+
+class ForgotPasswordVerifyCodeErrorState extends AppStates {
+  String error;
+
+  ForgotPasswordVerifyCodeErrorState(this.error);
+}
+
+class ForgotPasswordChangePasswordLoadingState extends AppStates {}
+
+class ForgotPasswordChangePasswordSuccessState extends AppStates {}
+
+class ForgotPasswordChangePasswordErrorState extends AppStates {
+  String error;
+
+  ForgotPasswordChangePasswordErrorState(this.error);
+}

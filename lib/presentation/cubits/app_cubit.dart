@@ -1216,4 +1216,129 @@ class AppCubit extends Cubit<AppStates> {
       }
     }
   }
+
+  bool codeSent = false;
+  Future<void> forgotPasswordSendCode({
+    required String email,
+  }) async {
+    emit(ForgotPasswordSendCodeLoadingState());
+    try {
+      final response = await ApiService().post(
+        ApiEndpoints.forgotPasswordSendCode,
+        {
+          'email': email,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        codeSent = true;
+        emit(ForgotPasswordSendCodeSuccessState());
+      } else {
+        emit(ForgotPasswordSendCodeErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(ForgotPasswordSendCodeErrorState(errorMessage));
+          } else {
+            emit(ForgotPasswordSendCodeErrorState('Unknown error occurred'));
+          }
+        } else {
+          emit(ForgotPasswordSendCodeErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(ForgotPasswordSendCodeErrorState(e.toString()));
+      }
+    }
+  }
+
+  bool codeVerified = false;
+  Future<void> forgotPasswordVerifyCode({
+    required String email,
+    required String code,
+  }) async {
+    emit(ForgotPasswordVerifyCodeLoadingState());
+    try {
+      final response = await ApiService().post(
+        ApiEndpoints.forgotPasswordVerifyCode,
+        {
+          'email': email,
+          'code': code,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        codeVerified = true;
+        emit(ForgotPasswordVerifyCodeSuccessState());
+      } else {
+        emit(ForgotPasswordVerifyCodeErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(ForgotPasswordVerifyCodeErrorState(errorMessage));
+          } else {
+            emit(ForgotPasswordVerifyCodeErrorState('Unknown error occurred'));
+          }
+        } else {
+          emit(ForgotPasswordVerifyCodeErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(ForgotPasswordVerifyCodeErrorState(e.toString()));
+      }
+    }
+  }
+
+  Future<void> forgotPasswordChangePassword({
+    required String email,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    emit(ForgotPasswordChangePasswordLoadingState());
+    try {
+      final response = await ApiService().post(
+        ApiEndpoints.forgotPasswordChangePassword,
+        {
+          'email': email,
+          'password': password,
+          'confirmPassword': confirmPassword,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(ForgotPasswordChangePasswordSuccessState());
+      } else {
+        emit(ForgotPasswordChangePasswordErrorState(
+            'Failed with status: ${response.statusCode}'));
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorResponse = e.response?.data;
+        if (errorResponse != null && errorResponse is Map<String, dynamic>) {
+          final errors = errorResponse['errors'];
+          if (errors != null && errors is List) {
+            final errorMessage = errors.join('\n'); // join all errors
+            emit(ForgotPasswordChangePasswordErrorState(errorMessage));
+          } else {
+            emit(ForgotPasswordChangePasswordErrorState(
+                'Unknown error occurred'));
+          }
+        } else {
+          emit(
+              ForgotPasswordChangePasswordErrorState('Unknown error occurred'));
+        }
+      } else {
+        emit(ForgotPasswordChangePasswordErrorState(e.toString()));
+      }
+    }
+  }
 }
