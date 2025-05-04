@@ -22,7 +22,7 @@ public class SignInHandler(UserManager<ApplicationUser> userManager, IAuthentica
 			var scheme = httpContextAccessor.HttpContext.Request.Scheme;
 			var host = httpContextAccessor.HttpContext.Request.Host;
 			var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-			var encodedCode = WebUtility.UrlEncode(code); // or Uri.EscapeDataString(code)
+			var encodedCode = WebUtility.UrlEncode(code);
 			var url = $"{scheme}://{host}/api/Authentication/confirm-email?UserId={user.Id}&Code={encodedCode}";
 			await emailService.Send(user.Email, "Confirm your email - Required for Login",
 				$"Please confirm your account by <a href='{url}'>clicking here</a>.");

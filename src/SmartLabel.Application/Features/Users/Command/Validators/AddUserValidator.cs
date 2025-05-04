@@ -23,8 +23,18 @@ public class AddUserValidator : AbstractValidator<AddUserCommand>
 
 		RuleFor(x => x.Password)
 			.NotEmpty().WithMessage("{PropertyName} is required");
-		RuleFor(x => x.Password)
+		RuleFor(x => x.ConfirmPassword)
 			.NotEmpty().WithMessage("{PropertyName} is required")
-			.Equal(x => x.ConfirmPassword).WithMessage("Password and ConfirmPassword is not similar");
+			.Equal(x => x.Password).WithMessage("Password and ConfirmPassword is not similar");
+	}
+
+	private void AddCustomValidator()
+	{
+		RuleFor(x => x.Password)
+			.Must((x) => x?.Length >= 8)
+			.WithMessage("Password length must be at least 8 characters");
+		RuleFor(x => x.ConfirmPassword)
+			.Must((x) => x?.Length >= 8)
+			.WithMessage("ConfirmPassword length must be at least 8 characters");
 	}
 }
