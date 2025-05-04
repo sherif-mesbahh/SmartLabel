@@ -71,3 +71,27 @@ export const changePassword = (passwords) => {
 export const UserInfo = () => {
   return axios.get(`${API_URL}/api/me`);
 };
+export const ForgetPassword = (email) => {
+  return axios.post(
+    `${API_URL}/api/Authentication/forget-password`,
+    { email },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+export const ResetCode = (email, code) => {
+  return axios.post(`${API_URL}/api/Authentication/reset-code`, {
+    email,
+    code,
+  });
+};
+export const ResetPassword = (email, password, confirmPassword) => {
+  return axios.post(`${API_URL}/api/Authentication/reset-password`, {
+    email,
+    password,
+    confirmPassword,
+  });
+};
