@@ -39,91 +39,93 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Scaffold(
       backgroundColor: secondaryColor,
       appBar: ForgotPasswordAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: BlocConsumer<AppCubit, AppStates>(
-            listener: (context, state) {
-              if (state is ForgotPasswordSendCodeSuccessState) {
-                Fluttertoast.showToast(
-                  msg: 'Code sent successfully, check your email',
-                  backgroundColor: Colors.green,
-                  textColor: secondaryColor,
-                  gravity: ToastGravity.BOTTOM,
-                  toastLength: Toast.LENGTH_LONG,
-                  timeInSecForIosWeb: 1,
-                  fontSize: 16,
-                );
-              }
-              if (state is ForgotPasswordSendCodeErrorState) {
-                Fluttertoast.showToast(
-                  msg: state.error,
-                  backgroundColor: Colors.red,
-                  textColor: secondaryColor,
-                  gravity: ToastGravity.BOTTOM,
-                  toastLength: Toast.LENGTH_LONG,
-                  timeInSecForIosWeb: 1,
-                  fontSize: 16,
-                );
-              }
-              if (state is ForgotPasswordVerifyCodeSuccessState) {
-                Fluttertoast.showToast(
-                  msg: 'Code Verified Successfully',
-                  backgroundColor: Colors.green,
-                  textColor: secondaryColor,
-                  gravity: ToastGravity.BOTTOM,
-                  toastLength: Toast.LENGTH_LONG,
-                  timeInSecForIosWeb: 1,
-                  fontSize: 16,
-                );
-              }
-              if (state is ForgotPasswordVerifyCodeErrorState) {
-                Fluttertoast.showToast(
-                  msg: state.error,
-                  backgroundColor: Colors.red,
-                  textColor: secondaryColor,
-                  gravity: ToastGravity.BOTTOM,
-                  toastLength: Toast.LENGTH_LONG,
-                  timeInSecForIosWeb: 1,
-                  fontSize: 16,
-                );
-              }
-              if (state is ForgotPasswordChangePasswordSuccessState) {
-                Fluttertoast.showToast(
-                  msg: 'Password Changed Successfully',
-                  backgroundColor: Colors.green,
-                  textColor: secondaryColor,
-                  gravity: ToastGravity.BOTTOM,
-                  toastLength: Toast.LENGTH_LONG,
-                  timeInSecForIosWeb: 1,
-                  fontSize: 16,
-                );
-                popNavigator(context);
-                AppCubit.get(context).codeSent = false;
-                AppCubit.get(context).codeVerified = false;
-              }
-              if (state is ForgotPasswordChangePasswordErrorState) {
-                Fluttertoast.showToast(
-                  msg: state.error,
-                  backgroundColor: Colors.red,
-                  textColor: secondaryColor,
-                  gravity: ToastGravity.BOTTOM,
-                  toastLength: Toast.LENGTH_LONG,
-                  timeInSecForIosWeb: 1,
-                  fontSize: 16,
-                );
-              }
-            },
-            builder: (context, state) {
-              return ForgotPasswordEmailSection(
-                  emailFormKey: emailFormKey,
-                  emailController: emailController,
-                  codeFormKey: codeFormKey,
-                  codeController: codeController,
-                  passwordFormKey: passwordFormKey,
-                  newPasswordController: newPasswordController,
-                  confirmPasswordController: confirmPasswordController);
-            },
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlocConsumer<AppCubit, AppStates>(
+              listener: (context, state) {
+                if (state is ForgotPasswordSendCodeSuccessState) {
+                  Fluttertoast.showToast(
+                    msg: 'Code sent successfully, check your email',
+                    backgroundColor: Colors.green,
+                    textColor: secondaryColor,
+                    gravity: ToastGravity.BOTTOM,
+                    toastLength: Toast.LENGTH_LONG,
+                    timeInSecForIosWeb: 1,
+                    fontSize: 16,
+                  );
+                }
+                if (state is ForgotPasswordSendCodeErrorState) {
+                  Fluttertoast.showToast(
+                    msg: state.error,
+                    backgroundColor: Colors.red,
+                    textColor: secondaryColor,
+                    gravity: ToastGravity.BOTTOM,
+                    toastLength: Toast.LENGTH_LONG,
+                    timeInSecForIosWeb: 1,
+                    fontSize: 16,
+                  );
+                }
+                if (state is ForgotPasswordVerifyCodeSuccessState) {
+                  Fluttertoast.showToast(
+                    msg: 'Code Verified Successfully',
+                    backgroundColor: Colors.green,
+                    textColor: secondaryColor,
+                    gravity: ToastGravity.BOTTOM,
+                    toastLength: Toast.LENGTH_LONG,
+                    timeInSecForIosWeb: 1,
+                    fontSize: 16,
+                  );
+                }
+                if (state is ForgotPasswordVerifyCodeErrorState) {
+                  Fluttertoast.showToast(
+                    msg: state.error,
+                    backgroundColor: Colors.red,
+                    textColor: secondaryColor,
+                    gravity: ToastGravity.BOTTOM,
+                    toastLength: Toast.LENGTH_LONG,
+                    timeInSecForIosWeb: 1,
+                    fontSize: 16,
+                  );
+                }
+                if (state is ForgotPasswordChangePasswordSuccessState) {
+                  Fluttertoast.showToast(
+                    msg: 'Password Changed Successfully',
+                    backgroundColor: Colors.green,
+                    textColor: secondaryColor,
+                    gravity: ToastGravity.BOTTOM,
+                    toastLength: Toast.LENGTH_LONG,
+                    timeInSecForIosWeb: 1,
+                    fontSize: 16,
+                  );
+                  popNavigator(context);
+                  AppCubit.get(context).codeSent = false;
+                  AppCubit.get(context).codeVerified = false;
+                }
+                if (state is ForgotPasswordChangePasswordErrorState) {
+                  Fluttertoast.showToast(
+                    msg: state.error,
+                    backgroundColor: Colors.red,
+                    textColor: secondaryColor,
+                    gravity: ToastGravity.BOTTOM,
+                    toastLength: Toast.LENGTH_LONG,
+                    timeInSecForIosWeb: 1,
+                    fontSize: 16,
+                  );
+                }
+              },
+              builder: (context, state) {
+                return ForgotPasswordEmailSection(
+                    emailFormKey: emailFormKey,
+                    emailController: emailController,
+                    codeFormKey: codeFormKey,
+                    codeController: codeController,
+                    passwordFormKey: passwordFormKey,
+                    newPasswordController: newPasswordController,
+                    confirmPasswordController: confirmPasswordController);
+              },
+            ),
           ),
         ),
       ),

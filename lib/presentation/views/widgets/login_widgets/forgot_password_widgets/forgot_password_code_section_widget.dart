@@ -29,36 +29,43 @@ class ForgotPasswordCodeSection extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          AppCubit.get(context).codeVerified == false
+              ? Column(
+                  children: [
+                    Form(
+                      key: codeFormKey,
+                      child: CustomTextFormFieldWidget(
+                        enabled: AppCubit.get(context).codeVerified == false
+                            ? true
+                            : false,
+                        controller: codeController,
+                        hintText: 'Enter your code',
+                        labelText: 'Code',
+                        obscureText: false,
+                        suffixIconOnPressed: () {},
+                        keyboardType: TextInputType.number,
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter your code';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // Check Code Button
+                    ForgotPasswordCheckCodeButton(
+                        emailFormKey: emailFormKey,
+                        codeFormKey: codeFormKey,
+                        emailController: emailController,
+                        codeController: codeController),
+                  ],
+                )
+              : SizedBox(),
           // Code Field
-          Form(
-            key: codeFormKey,
-            child: CustomTextFormFieldWidget(
-              enabled:
-                  AppCubit.get(context).codeVerified == false ? true : false,
-              controller: codeController,
-              hintText: 'Enter your code',
-              labelText: 'Code',
-              obscureText: false,
-              suffixIconOnPressed: () {},
-              keyboardType: TextInputType.number,
-              validator: (p0) {
-                if (p0 == null || p0.isEmpty) {
-                  return 'Please enter your code';
-                }
-                return null;
-              },
-            ),
-          ),
-          const SizedBox(height: 10),
-          // Check Code Button
-          ForgotPasswordCheckCodeButton(
-              emailFormKey: emailFormKey,
-              codeFormKey: codeFormKey,
-              emailController: emailController,
-              codeController: codeController),
-          SizedBox(height: 10),
+
           AppCubit.get(context).codeVerified == true
               ? ForgotPasswordPasswordsSection(
                   passwordFormKey: passwordFormKey,

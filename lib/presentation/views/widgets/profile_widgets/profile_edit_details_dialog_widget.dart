@@ -18,7 +18,6 @@ class EditProfileDialogWidget extends StatefulWidget {
 class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
   late TextEditingController firstNameController;
   late TextEditingController lastNameController;
-  late TextEditingController emailController;
 
   @override
   void initState() {
@@ -27,14 +26,12 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
     firstNameController =
         TextEditingController(text: userData?.firstName ?? '');
     lastNameController = TextEditingController(text: userData?.lastName ?? '');
-    emailController = TextEditingController(text: userData?.email ?? '');
   }
 
   @override
   void dispose() {
     firstNameController.dispose();
     lastNameController.dispose();
-    emailController.dispose();
     super.dispose();
   }
 
@@ -77,29 +74,6 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
               controller: lastNameController,
               decoration: InputDecoration(
                 labelText: 'Last Name',
-                labelStyle: TextStyles.smallText,
-                hintStyle: TextStyles.smallText,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: primaryColor),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            // Email
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
                 labelStyle: TextStyles.smallText,
                 hintStyle: TextStyles.smallText,
                 border: OutlineInputBorder(
@@ -166,7 +140,9 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
                       AppCubit.get(context).updateProfile(
                         firstName: firstNameController.text.trim(),
                         lastName: lastNameController.text.trim(),
-                        email: emailController.text.trim(),
+                        email:
+                            AppCubit.get(context).userInfoModel!.data?.email ??
+                                '',
                       );
                     },
                   );

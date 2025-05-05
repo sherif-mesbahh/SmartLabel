@@ -29,7 +29,7 @@ class ForgotPasswordPasswordsSection extends StatelessWidget {
       child: Form(
         key: passwordFormKey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // New Password Field
             CustomTextFormFieldWidget(
@@ -66,15 +66,14 @@ class ForgotPasswordPasswordsSection extends StatelessWidget {
             // Change Password Button
             Container(
               height: screenHeight(context) * .07,
-              width: screenWidth(context) * .3,
+              width: screenWidth(context) * .2,
               decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: GestureDetector(
                 onTap: () {
-                  if (emailFormKey.currentState!.validate() &&
-                      passwordFormKey.currentState!.validate()) {
+                  if (passwordFormKey.currentState!.validate()) {
                     AppCubit.get(context).forgotPasswordChangePassword(
                       email: emailController.text,
                       password: newPasswordController.text,
@@ -98,7 +97,7 @@ class ForgotPasswordPasswordsSection extends StatelessWidget {
                                       ),
                                     )
                                   : Text(
-                                      'Change Password',
+                                      'Submit',
                                       style: TextStyles.buttonText,
                                       textAlign: TextAlign.center,
                                     ),

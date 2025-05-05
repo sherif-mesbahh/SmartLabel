@@ -23,15 +23,14 @@ class ForgotPasswordCheckCodeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: screenHeight(context) * .07,
-      width: screenWidth(context) * .3,
+      width: screenWidth(context) * .2,
       decoration: BoxDecoration(
         color: primaryColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: GestureDetector(
         onTap: () {
-          if (emailFormKey.currentState!.validate() &&
-              codeFormKey.currentState!.validate()) {
+          if (codeFormKey.currentState!.validate()) {
             AppCubit.get(context).forgotPasswordVerifyCode(
               email: emailController.text,
               code: codeController.text,
@@ -53,7 +52,7 @@ class ForgotPasswordCheckCodeButton extends StatelessWidget {
                           ),
                         )
                       : Text(
-                          'Check Code',
+                          'Submit',
                           style: TextStyles.buttonText,
                           textAlign: TextAlign.center,
                         ),

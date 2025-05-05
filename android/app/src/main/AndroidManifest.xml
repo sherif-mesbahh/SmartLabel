@@ -3,6 +3,7 @@
     <!-- ✅ Add these permissions at the top level -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:label="Smart Label"

@@ -27,33 +27,41 @@ class ForgotPasswordEmailSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Email Field
-        Form(
-          key: emailFormKey,
-          child: CustomTextFormFieldWidget(
-            enabled: AppCubit.get(context).codeSent == false ? true : false,
-            controller: emailController,
-            labelText: 'Email',
-            hintText: 'Enter your email',
-            obscureText: false,
-            keyboardType: TextInputType.emailAddress,
-            showSuffixIcon: false,
-            validator: (p0) {
-              if (p0 == null || p0.isEmpty) {
-                return 'Please enter your email';
-              }
-              return null;
-            },
-            suffixIconOnPressed: () {},
-          ),
-        ),
-        const SizedBox(height: 10),
-        // Send Code Button
-        ForgotPasswordSendCodeButton(
-            emailFormKey: emailFormKey, emailController: emailController),
-        const SizedBox(height: 10),
+        AppCubit.get(context).codeSent == false
+            ? Column(
+                children: [
+                  Form(
+                    key: emailFormKey,
+                    child: CustomTextFormFieldWidget(
+                      enabled: AppCubit.get(context).codeSent == false
+                          ? true
+                          : false,
+                      controller: emailController,
+                      labelText: 'Email',
+                      hintText: 'Enter your email',
+                      obscureText: false,
+                      keyboardType: TextInputType.emailAddress,
+                      showSuffixIcon: false,
+                      validator: (p0) {
+                        if (p0 == null || p0.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        return null;
+                      },
+                      suffixIconOnPressed: () {},
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // Send Code Button
+                  ForgotPasswordSendCodeButton(
+                      emailFormKey: emailFormKey,
+                      emailController: emailController),
+                ],
+              )
+            : SizedBox(),
         AppCubit.get(context).codeSent == true
             ? ForgotPasswordCodeSection(
                 codeFormKey: codeFormKey,

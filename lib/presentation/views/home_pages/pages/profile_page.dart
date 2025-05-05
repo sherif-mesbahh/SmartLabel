@@ -7,7 +7,9 @@ import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_categories_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/sign_pages/login_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_up_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_change_password_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_delete_account_dialog_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_edit_details_dialog_widget.dart';
@@ -205,9 +207,7 @@ class ProfilePage extends StatelessWidget {
                   // Sign out
                   CustomButtonWidget(
                     onTap: () {
-                      AppCubit.get(context).logout().then((onValue) {
-                        pushNavigator(context, SignPage(), fadeTransition);
-                      });
+                      AppCubit.get(context).logout().then((onValue) {});
                     },
                     color: primaryColor,
                     child: Text(
@@ -223,16 +223,28 @@ class ProfilePage extends StatelessWidget {
           // Sign
         } else {
           return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
               CustomButtonWidget(
                 onTap: () {
-                  pushNavigator(context, SignPage(), fadeTransition);
+                  pushNavigator(context, LoginPage(), fadeTransition);
                   AppCubit.get(context).navBarCurrentIndex = 0;
                 },
                 color: primaryColor,
                 child: Text(
-                  'Sign',
+                  'Sign In',
+                  style: TextStyles.buttonText,
+                ),
+              ),
+              const SizedBox(height: 12),
+              CustomButtonWidget(
+                onTap: () {
+                  pushNavigator(context, SignUpPage(), fadeTransition);
+                  AppCubit.get(context).navBarCurrentIndex = 0;
+                },
+                color: primaryColor,
+                child: Text(
+                  'Sign Up',
                   style: TextStyles.buttonText,
                 ),
               ),
