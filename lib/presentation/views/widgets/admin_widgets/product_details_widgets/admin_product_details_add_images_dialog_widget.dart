@@ -1,8 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_data_model.dart';
@@ -39,8 +39,8 @@ class _AddProductsDialogWidgetState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text('Add Product Images', style: TextStyles.headline2),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      title: Text('Add Product Images', style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -53,7 +53,7 @@ class _AddProductsDialogWidgetState
               ),
               child: Text(
                 "Pick Product Images",
-                style: TextStyles.buttonText.copyWith(
+                style: TextStyles.buttonText(context).copyWith(
                   fontSize: 12,
                 ),
               ),
@@ -70,7 +70,7 @@ class _AddProductsDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle),
+          child: Text('Cancel', style: TextStyles.productTitle(context)),
           onPressed: () {
             AppCubit.get(context).getProductDetails(
               id: widget.productId,
@@ -81,7 +81,7 @@ class _AddProductsDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text('Apply', style: TextStyles.productTitle),
+            child: Text('Apply', style: TextStyles.productTitle(context)),
             onPressed: () {
               AppCubit.get(context)
                   .productImagesToUpload

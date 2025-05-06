@@ -21,6 +21,16 @@ class SharedPrefs {
     return _prefs.getBool(_onBoardingFinishedKey) ?? false;
   }
 
+  static const String _keyDarkMode = "isDarkMode";
+
+  static Future<void> setIsDarkMode(bool value) async {
+    await _prefs.setBool(_keyDarkMode, value);
+  }
+
+  static bool getIsDarkMode() {
+    return _prefs.getBool(_keyDarkMode) ?? false;
+  }
+
   // Optionally: Clear all preferences (if needed)
   static Future<void> clearAll() async {
     await _prefs.clear();

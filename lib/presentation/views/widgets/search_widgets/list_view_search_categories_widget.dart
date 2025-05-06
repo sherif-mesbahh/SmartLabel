@@ -45,7 +45,7 @@ class ListViewSearchCategoriesWidget extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               softWrap: true,
-              style: TextStyles.productTitle,
+              style: TextStyles.productTitle(context),
             ),
           ),
           Spacer(),

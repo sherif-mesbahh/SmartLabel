@@ -67,7 +67,7 @@ class AdminCategoriesPage extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: secondaryColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
             backgroundColor: primaryColor,
             leading: IconButton(
@@ -82,7 +82,7 @@ class AdminCategoriesPage extends StatelessWidget {
             centerTitle: true,
             title: Text(
               'Admin Panel',
-              style: TextStyles.appBarTitle,
+              style: TextStyles.appBarTitle(context),
             ),
           ),
           body: SingleChildScrollView(
@@ -98,7 +98,7 @@ class AdminCategoriesPage extends StatelessWidget {
                     children: [
                       Text(
                         'All Banners',
-                        style: TextStyles.headline2,
+                        style: TextStyles.headline2(context),
                       ),
                       Spacer(),
                       TextButton(
@@ -111,7 +111,7 @@ class AdminCategoriesPage extends StatelessWidget {
                         },
                         child: Text(
                           'Edit Users',
-                          style: TextStyles.buttonText.copyWith(
+                          style: TextStyles.buttonText(context).copyWith(
                             color: primaryColor,
                             fontSize: 16,
                           ),
@@ -126,7 +126,7 @@ class AdminCategoriesPage extends StatelessWidget {
                       ? Center(
                           child: Text(
                             'There is no Banners',
-                            style: TextStyles.productTitle,
+                            style: TextStyles.productTitle(context),
                           ),
                         )
                       : BlocListener<AppCubit, AppStates>(
@@ -143,13 +143,13 @@ class AdminCategoriesPage extends StatelessWidget {
                     children: [
                       Text(
                         'All Categories',
-                        style: TextStyles.headline2,
+                        style: TextStyles.headline2(context),
                       ),
                       Spacer(),
                       TextButton(
                         child: Text(
                           'Add Banners',
-                          style: TextStyles.productTitle
+                          style: TextStyles.productTitle(context)
                               .copyWith(color: primaryColor),
                         ),
                         onPressed: () {
@@ -169,7 +169,7 @@ class AdminCategoriesPage extends StatelessWidget {
                       ? Center(
                           child: Text(
                             'There is no Categories',
-                            style: TextStyles.productTitle,
+                            style: TextStyles.productTitle(context),
                           ),
                         )
                       : AdminCategoriesSectionWidget(),

@@ -52,7 +52,7 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                       child: Text(
                         'Save changes',
                         style: TextStyles.productTitle
-                            .copyWith(color: primaryColor),
+                           (context) .copyWith(color: primaryColor),
                       ),
                       onTap: () {
                         if (nameController.text.isEmpty) {
@@ -134,7 +134,7 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
               InkWell(
                 child: Text(
                   'Discard',
-                  style: TextStyles.productTitle.copyWith(color: primaryColor),
+                  style: TextStyles.productTitle(context).copyWith(color: primaryColor),
                 ),
                 onTap: () {
                   cubit.productImagesToUpload = [];

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/token_refresher.dart';
+import 'package:smart_label_software_engineering/core/themes/themes.dart';
 import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
 import 'package:smart_label_software_engineering/core/utils/internet_monitor.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
@@ -17,6 +18,7 @@ void main() async {
 
   final isOnBoardingFinished = SharedPrefs.isOnBoardingFinished();
   final appCubit = AppCubit();
+  await appCubit.loadTheme();
   await appCubit.checkLoginStatus();
 
   if (appCubit.isLogin) {
@@ -42,20 +44,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        // Start monitoring from global context
-        InternetMonitor().startMonitoring(context);
-        return DevicePreview.appBuilder(context, child);
+    return BlocBuilder<AppCubit, AppStates>(
+      builder: (context, state) {
+        final appCubit = context.read<AppCubit>();
+        return MaterialApp(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: appCubit.themeMode,
+          builder: (context, child) {
+            // Start monitoring from global context
+            InternetMonitor().startMonitoring(context);
+            return DevicePreview.appBuilder(context, child);
+          },
+          home: SplashScreenPage(showOnBoarding: showOnBoarding),
+        );
       },
-      home: BlocBuilder<AppCubit, AppStates>(
-        builder: (context, state) {
-          return SplashScreenPage(showOnBoarding: showOnBoarding);
-        },
-      ),
     );
   }
 }

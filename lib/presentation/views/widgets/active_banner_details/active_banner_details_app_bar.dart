@@ -14,7 +14,7 @@ class ActiveBannerDetailsAppBar extends StatelessWidget
       centerTitle: true,
       title: Text(
         'Banner Details',
-        style: TextStyles.appBarTitle,
+        style: TextStyles.appBarTitle(context),
       ),
       leading: IconButton(
         onPressed: () => popNavigator(context),

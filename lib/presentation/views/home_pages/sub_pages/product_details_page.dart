@@ -11,9 +11,15 @@ import 'package:smart_label_software_engineering/presentation/views/widgets/prod
 
 class ProductDetailsPage extends StatelessWidget {
   final int categoryId;
+  final bool isSearchProduct;
+  final String searchSort;
+  final String searchOrder;
   ProductDetailsPage({
     super.key,
     this.categoryId = 1,
+    this.isSearchProduct = true,
+    this.searchSort = 'asc',
+    this.searchOrder = 'id',
   });
   final PageController pageController = PageController();
 
@@ -30,18 +36,31 @@ class ProductDetailsPage extends StatelessWidget {
               onPressed: () {
                 if (AppCubit.get(context).navBarCurrentIndex == 0) {
                   AppCubit.get(context).getProducts();
-                  AppCubit.get(context).getBanners();
+                  AppCubit.get(context).getActiveBanners();
                   popNavigator(context);
                 }
                 if (AppCubit.get(context).navBarCurrentIndex == 1) {
-                  AppCubit.get(context).getCategoryProducts(
-                    id: categoryId,
-                  );
                   popNavigator(context);
                 }
                 if (AppCubit.get(context).navBarCurrentIndex == 2) {
                   AppCubit.get(context).getFav();
                   popNavigator(context);
+                }
+                if (AppCubit.get(context).navBarCurrentIndex == 3) {
+                  popNavigator(context);
+                }
+                if (isSearchProduct) {
+                  AppCubit.get(context).getProductSearch(
+                    name: '',
+                    orderType: searchOrder,
+                    sortType: searchSort,
+                  );
+                } else {
+                  AppCubit.get(context).getCategorySearch(
+                    name: '',
+                    orderType: searchOrder,
+                    sortType: searchSort,
+                  );
                 }
               },
               icon: Icon(
@@ -59,11 +78,11 @@ class ProductDetailsPage extends StatelessWidget {
               image: AssetImage('assets/images/smart_label_logo.png'),
             ),
             const SizedBox(width: 10),
-            Text('Smart Label', style: TextStyles.appBarTitle),
+            Text('Smart Label', style: TextStyles.appBarTitle(context)),
           ],
         ),
       ),
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: BlocListener<AppCubit, AppStates>(
         listener: (context, state) {
           if (state is GetProductDetailsLoadingState) {}
@@ -92,7 +111,7 @@ class ProductDetailsPage extends StatelessWidget {
                   children: [
                     Text(
                       product.name ?? 'No Name',
-                      style: TextStyles.headline2,
+                      style: TextStyles.headline2(context),
                     ),
                     const SizedBox(height: 10),
                     if (product.images != null && product.images!.isNotEmpty)
@@ -133,9 +152,8 @@ class ProductDetailsPage extends StatelessWidget {
                     const SizedBox(height: 10),
                     Text(
                       'Description:',
-                      style: TextStyles.description.copyWith(
+                      style: TextStyles.description(context).copyWith(
                         fontSize: 18,
-                        color: darkColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -144,7 +162,7 @@ class ProductDetailsPage extends StatelessWidget {
                       product.description?.trim().isNotEmpty == true
                           ? product.description!
                           : 'No description available.',
-                      style: TextStyles.description,
+                      style: TextStyles.description(context),
                     ),
                   ],
                 ),

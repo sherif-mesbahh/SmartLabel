@@ -79,7 +79,7 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
     final cubit = widget.cubit;
 
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AdminBannerDetailsAppBarWidget(cubit: cubit),
       body: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
@@ -124,6 +124,7 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
             return const Center(
               child: Text(
                 "Failed to load banner details",
+                style: TextStyle(color: Colors.red),
               ),
             );
           }

@@ -349,3 +349,5 @@ class ForgotPasswordChangePasswordErrorState extends AppStates {
 
   ForgotPasswordChangePasswordErrorState(this.error);
 }
+
+class ChangeThemeState extends AppStates {}

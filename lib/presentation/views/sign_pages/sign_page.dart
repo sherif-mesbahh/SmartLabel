@@ -30,7 +30,8 @@ class SignPage extends StatelessWidget {
               color: secondaryColor,
               child: Text(
                 'Sign in',
-                style: TextStyles.buttonText.copyWith(color: primaryColor),
+                style: TextStyles.buttonText(context)
+                    .copyWith(color: primaryColor),
               ),
             ),
             // Sign up Button
@@ -41,7 +42,8 @@ class SignPage extends StatelessWidget {
               },
               child: Text(
                 'Sign up',
-                style: TextStyles.buttonText.copyWith(color: secondaryColor),
+                style: TextStyles.buttonText(context)
+                    .copyWith(color: secondaryColor),
               ),
             ),
             Spacer(),

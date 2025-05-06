@@ -1,9 +1,8 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_model.dart';
@@ -40,8 +39,8 @@ class _AddBannersDialogWidgetState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text('Add Banner', style: TextStyles.headline2),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      title: Text('Add Banner', style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -54,7 +53,7 @@ class _AddBannersDialogWidgetState
               ),
               child: Text(
                 "Pick Banner Images",
-                style: TextStyles.buttonText.copyWith(
+                style: TextStyles.buttonText(context).copyWith(
                   fontSize: 12,
                 ),
               ),
@@ -71,7 +70,7 @@ class _AddBannersDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle),
+          child: Text('Cancel', style: TextStyles.productTitle(context)),
           onPressed: () {
             AppCubit.get(context).getBannerDetails(
               id: widget.bannerId,
@@ -82,7 +81,7 @@ class _AddBannersDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text('Apply', style: TextStyles.productTitle),
+            child: Text('Apply', style: TextStyles.productTitle(context)),
             onPressed: () {
               AppCubit.get(context)
                   .bannerDetailsImagesToUpload

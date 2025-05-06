@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           Container(
@@ -57,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
               physics: const BouncingScrollPhysics(),
               child: Container(
                 width: double.infinity,
-                color: secondaryColor,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 padding: const EdgeInsets.all(32.0),
                 child: BlocConsumer<AppCubit, AppStates>(
                   listener: (context, state) {
@@ -67,7 +67,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                              'Registration successful! We have sent a confirmation email to your address.'),
+                            'Registration successful! We have sent a confirmation email to your address.',
+                          ),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -193,14 +194,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             color: primaryColor,
                             child: Text(
                               'Sign up',
-                              style: TextStyles.buttonText
+                              style: TextStyles.buttonText(context)
                                   .copyWith(color: secondaryColor),
                             ),
                           ),
                           const SizedBox(height: 8.0),
                           TextButton(
                             onPressed: () => popNavigator(context),
-                            child: Text('go back', style: TextStyles.smallText),
+                            child: Text('go back',
+                                style: TextStyles.smallText(context)),
                           ),
                         ],
                       ),

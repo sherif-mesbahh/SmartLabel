@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -22,7 +21,7 @@ class BannerDetailsPage extends StatelessWidget {
     final cubit = AppCubit.get(context);
 
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: ActiveBannerDetailsAppBar(),
       body: BlocBuilder<AppCubit, AppStates>(
         buildWhen: (previous, current) =>
@@ -51,24 +50,24 @@ class BannerDetailsPage extends StatelessWidget {
                 if (bannerImages.isNotEmpty)
                   ActiveBannerDetailsImageSlider(bannerImages: bannerImages),
                 const SizedBox(height: 16.0),
-                Text("Title:", style: TextStyles.productTitle),
+                Text("Title:", style: TextStyles.productTitle(context)),
                 Text(banner.title ?? "No title provided",
-                    style: TextStyles.description),
+                    style: TextStyles.description(context)),
                 const SizedBox(height: 12.0),
-                Text("Start Date:", style: TextStyles.productTitle),
+                Text("Start Date:", style: TextStyles.productTitle(context)),
                 Text(_formatDate(banner.startDate),
-                    style: TextStyles.description),
+                    style: TextStyles.description(context)),
                 const SizedBox(height: 12.0),
-                Text("End Date:", style: TextStyles.productTitle),
+                Text("End Date:", style: TextStyles.productTitle(context)),
                 Text(_formatDate(banner.endDate),
-                    style: TextStyles.description),
+                    style: TextStyles.description(context)),
                 const SizedBox(height: 12.0),
-                Text("Description:", style: TextStyles.productTitle),
+                Text("Description:", style: TextStyles.productTitle(context)),
                 Text(
                   banner.description?.toString().trim().isEmpty == true
                       ? "No description provided"
                       : banner.description.toString(),
-                  style: TextStyles.description,
+                  style: TextStyles.description(context),
                 ),
                 const SizedBox(height: 20.0),
               ],

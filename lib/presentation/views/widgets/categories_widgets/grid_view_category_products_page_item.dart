@@ -80,19 +80,19 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                 '${model.name}',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyles.productTitle,
+                style: TextStyles.productTitle(context),
               ),
               Row(
                 children: [
                   Text(
                     '${model.newPrice}\$',
-                    style: TextStyles.productPrice,
+                    style: TextStyles.productPrice(context),
                   ),
                   SizedBox(width: 10),
                   if (model.newPrice != model.oldPrice)
                     Text(
                       '${model.oldPrice}\$',
-                      style: TextStyles.productOldPrice,
+                      style: TextStyles.productOldPrice(context),
                     ),
                 ],
               ),

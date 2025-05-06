@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -49,7 +51,7 @@ class ProfilePage extends StatelessWidget {
                   color: primaryColor,
                   child: Text(
                     'Sign out',
-                    style: TextStyles.buttonText,
+                    style: TextStyles.buttonText(context),
                   ),
                 )
               ],
@@ -60,7 +62,7 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Text('Profile', style: TextStyles.headline1),
+                  Text('Profile', style: TextStyles.headline1(context)),
                   // Edit Profile
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -91,7 +93,7 @@ class ProfilePage extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
@@ -146,7 +148,7 @@ class ProfilePage extends StatelessWidget {
                         },
                         child: Text(
                           'Change Password',
-                          style: TextStyles.buttonText.copyWith(
+                          style: TextStyles.buttonText(context).copyWith(
                             color: primaryColor,
                             fontSize: 14,
                           ),
@@ -162,7 +164,7 @@ class ProfilePage extends StatelessWidget {
                         },
                         child: Text(
                           'Delete Account',
-                          style: TextStyles.buttonText.copyWith(
+                          style: TextStyles.buttonText(context).copyWith(
                             color: Colors.red,
                             fontSize: 14,
                           ),
@@ -181,7 +183,8 @@ class ProfilePage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Admin Panel', style: TextStyles.cartItemTitle),
+                          Text('Admin Panel',
+                              style: TextStyles.cartItemTitle(context)),
                           IconButton(
                             color: primaryColor,
                             iconSize: 30,
@@ -204,15 +207,47 @@ class ProfilePage extends StatelessWidget {
                         ],
                       ),
                     ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Dark Mode',
+                          style: TextStyles.cartItemTitle(context),
+                        ),
+                        const Spacer(),
+                        CupertinoSwitch(
+                          value: context.read<AppCubit>().themeMode ==
+                              ThemeMode.dark,
+                          activeTrackColor: primaryColor,
+                          onChanged: (val) {
+                            context.read<AppCubit>().toggleTheme(val);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 12),
                   // Sign out
                   CustomButtonWidget(
                     onTap: () {
-                      AppCubit.get(context).logout().then((onValue) {});
+                      AppCubit.get(context).logout().then((onValue) {
+                        Fluttertoast.showToast(
+                          msg: 'Sign out successfully',
+                          backgroundColor: Colors.green,
+                          textColor: secondaryColor,
+                          gravity: ToastGravity.BOTTOM,
+                          toastLength: Toast.LENGTH_LONG,
+                          timeInSecForIosWeb: 1,
+                          fontSize: 16,
+                        );
+                      });
                     },
                     color: primaryColor,
                     child: Text(
                       'Sign out',
-                      style: TextStyles.buttonText,
+                      style: TextStyles.buttonText(context),
                     ),
                   ),
                 ],
@@ -225,6 +260,27 @@ class ProfilePage extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Dark Mode',
+                      style: TextStyles.cartItemTitle(context),
+                    ),
+                    const Spacer(),
+                    CupertinoSwitch(
+                      value:
+                          context.read<AppCubit>().themeMode == ThemeMode.dark,
+                      activeTrackColor: primaryColor,
+                      onChanged: (val) {
+                        context.read<AppCubit>().toggleTheme(val);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
               CustomButtonWidget(
                 onTap: () {
                   pushNavigator(context, LoginPage(), fadeTransition);
@@ -233,7 +289,7 @@ class ProfilePage extends StatelessWidget {
                 color: primaryColor,
                 child: Text(
                   'Sign In',
-                  style: TextStyles.buttonText,
+                  style: TextStyles.buttonText(context),
                 ),
               ),
               const SizedBox(height: 12),
@@ -245,7 +301,7 @@ class ProfilePage extends StatelessWidget {
                 color: primaryColor,
                 child: Text(
                   'Sign Up',
-                  style: TextStyles.buttonText,
+                  style: TextStyles.buttonText(context),
                 ),
               ),
             ],

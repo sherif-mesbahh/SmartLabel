@@ -14,8 +14,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         'Smart Label',
-        style: TextStyles.appBarTitle,
+        style: TextStyles.appBarTitle(context),
       ),
+      centerTitle: true,
       backgroundColor: primaryColor,
       leading: Image(
         image: AssetImage(

@@ -37,7 +37,7 @@ class CategoriesListViewItem extends StatelessWidget {
           Expanded(
             child: Text(
               model.name ?? 'No Name',
-              style: TextStyles.productTitle,
+              style: TextStyles.productTitle(context),
               maxLines: 2,
               softWrap: true,
               overflow: TextOverflow.ellipsis,

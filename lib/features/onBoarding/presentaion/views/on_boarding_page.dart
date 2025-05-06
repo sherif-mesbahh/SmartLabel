@@ -102,7 +102,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     onPressed: onSkip,
                     child: Text(
                       "Skip",
-                      style: TextStyles.buttonText.copyWith(fontSize: 14),
+                      style:
+                          TextStyles.buttonText(context).copyWith(fontSize: 14),
                     ),
                   ),
                   ElevatedButton(
@@ -112,7 +113,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     onPressed: onNextOrSignIn,
                     child: Text(
                       currentPage == 2 ? "Sign In" : "Next",
-                      style: TextStyles.buttonText.copyWith(fontSize: 14),
+                      style:
+                          TextStyles.buttonText(context).copyWith(fontSize: 14),
                     ),
                   ),
                 ],

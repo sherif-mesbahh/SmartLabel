@@ -31,7 +31,7 @@ class AdminCategoryDetailsAppBarWidget extends StatelessWidget
       centerTitle: true,
       title: Text(
         'Edit Category',
-        style: TextStyles.appBarTitle,
+        style: TextStyles.appBarTitle(context),
       ),
     );
   }

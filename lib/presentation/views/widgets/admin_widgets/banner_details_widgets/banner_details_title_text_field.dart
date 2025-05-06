@@ -17,8 +17,8 @@ class BannerDetailsTitleTextField extends StatelessWidget {
       controller: titleController,
       decoration: InputDecoration(
         labelText: 'Title',
-        labelStyle: TextStyles.smallText,
-        hintStyle: TextStyles.smallText,
+        labelStyle: TextStyles.smallText(context),
+        hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: greyColor),

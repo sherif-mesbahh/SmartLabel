@@ -38,8 +38,9 @@ class _AddMainBannerImageDialogWidgetState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text('Set New Category Image', style: TextStyles.headline2),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      title:
+          Text('Set New Category Image', style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -50,7 +51,7 @@ class _AddMainBannerImageDialogWidgetState
               style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
               child: Text(
                 "Pick Image",
-                style: TextStyles.buttonText.copyWith(fontSize: 12),
+                style: TextStyles.buttonText(context).copyWith(fontSize: 12),
               ),
             ),
             const SizedBox(height: 12),
@@ -68,7 +69,7 @@ class _AddMainBannerImageDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle),
+          child: Text('Cancel', style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -76,7 +77,7 @@ class _AddMainBannerImageDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text('Apply', style: TextStyles.productTitle),
+            child: Text('Apply', style: TextStyles.productTitle(context)),
             onPressed: () {
               if (categoryImage != null) {
                 AppCubit.get(context).mainCategoryImageToUpload = categoryImage;

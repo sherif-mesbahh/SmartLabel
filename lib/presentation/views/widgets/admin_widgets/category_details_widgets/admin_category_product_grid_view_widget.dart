@@ -86,7 +86,7 @@ class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
               // Product Name
               Text(
                 cubit.categoryProductsModel?.data!.products?[index].name ?? '',
-                style: TextStyles.productTitle,
+                style: TextStyles.productTitle(context),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

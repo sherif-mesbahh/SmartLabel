@@ -75,7 +75,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
     final cubit = widget.cubit;
 
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: primaryColor,
         leading: IconButton(
@@ -95,7 +95,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
         centerTitle: true,
         title: Text(
           'Edit Product',
-          style: TextStyles.appBarTitle,
+          style: TextStyles.appBarTitle(context),
         ),
       ),
       body: SingleChildScrollView(
@@ -149,7 +149,9 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                 return const Center(
                   child: Text(
                     "No Product details available.",
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
                   ),
                 );
               }
@@ -174,8 +176,8 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     controller: nameController,
                     decoration: InputDecoration(
                       labelText: 'Name',
-                      labelStyle: TextStyles.smallText,
-                      hintStyle: TextStyles.smallText,
+                      labelStyle: TextStyles.smallText(context),
+                      hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: greyColor),
@@ -198,8 +200,8 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     controller: priceController,
                     decoration: InputDecoration(
                       labelText: 'Price',
-                      labelStyle: TextStyles.smallText,
-                      hintStyle: TextStyles.smallText,
+                      labelStyle: TextStyles.smallText(context),
+                      hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: greyColor),
@@ -222,8 +224,8 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     controller: discountController,
                     decoration: InputDecoration(
                       labelText: 'Discount',
-                      labelStyle: TextStyles.smallText,
-                      hintStyle: TextStyles.smallText,
+                      labelStyle: TextStyles.smallText(context),
+                      hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: greyColor),
@@ -247,8 +249,8 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     maxLines: 3,
                     decoration: InputDecoration(
                       labelText: 'Description',
-                      labelStyle: TextStyles.smallText,
-                      hintStyle: TextStyles.smallText,
+                      labelStyle: TextStyles.smallText(context),
+                      hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: greyColor),

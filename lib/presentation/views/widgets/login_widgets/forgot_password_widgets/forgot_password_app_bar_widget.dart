@@ -19,7 +19,7 @@ class ForgotPasswordAppBar extends StatelessWidget
       centerTitle: true,
       title: Text(
         'Forgot Password',
-        style: TextStyles.appBarTitle,
+        style: TextStyles.appBarTitle(context),
       ),
       leading: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {

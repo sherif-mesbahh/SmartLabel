@@ -83,7 +83,7 @@ class ProductsPage extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('New Products', style: TextStyles.headline2),
+                    Text('New Products', style: TextStyles.headline2(context)),
                     const SizedBox(height: 10),
                     GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),

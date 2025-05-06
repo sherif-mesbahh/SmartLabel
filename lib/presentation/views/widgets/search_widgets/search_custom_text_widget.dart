@@ -13,7 +13,7 @@ class SearchCustomTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyles.productTitle.copyWith(
+      style: TextStyles.productTitle(context).copyWith(
         fontSize: 18,
         color: Colors.grey[600],
       ),

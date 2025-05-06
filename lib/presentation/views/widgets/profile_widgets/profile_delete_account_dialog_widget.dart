@@ -13,8 +13,8 @@ class DeleteAccountDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text('Delete Account', style: TextStyles.headline2),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      title: Text('Delete Account', style: TextStyles.headline2(context)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -26,14 +26,14 @@ class DeleteAccountDialogWidget extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'Are you sure you want to delete your account? This action cannot be undone.',
-            style: TextStyles.productTitle.copyWith(color: Colors.red),
+            style: TextStyles.productTitle(context).copyWith(color: Colors.red),
             textAlign: TextAlign.center,
           ),
         ],
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle),
+          child: Text('Cancel', style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -72,7 +72,7 @@ class DeleteAccountDialogWidget extends StatelessWidget {
                   )
                 : TextButton(
                     child: Text('Delete',
-                        style: TextStyles.productTitle
+                        style: TextStyles.productTitle(context)
                             .copyWith(color: Colors.red)),
                     onPressed: () {
                       AppCubit.get(context).deleteAccount();

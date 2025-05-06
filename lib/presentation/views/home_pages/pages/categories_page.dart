@@ -26,28 +26,38 @@ class CategoriesPage extends StatelessWidget {
         }
 
         if (categories == null) {
-          return const Center(child: Text('Failed to load categories'));
+          return const Center(
+            child: Text(
+              'Failed to load categories',
+              style: TextStyle(color: Colors.red),
+            ),
+          );
         }
 
         if (categories.isEmpty) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Center(child: Text('No categories found')),
+              const Center(
+                child: Text(
+                  'No categories found',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              ),
             ],
           );
         }
 
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: categories.length,
-              itemBuilder: (context, index) => CategoriesListViewItem(
-                model: categories[index],
-              ),
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: categories.length,
+            itemBuilder: (context, index) => CategoriesListViewItem(
+              model: categories[index],
             ),
           ),
         );

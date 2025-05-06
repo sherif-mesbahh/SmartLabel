@@ -18,8 +18,8 @@ class BannerDetailsDescriptionTextField extends StatelessWidget {
       maxLines: 3,
       decoration: InputDecoration(
         labelText: 'Description',
-        labelStyle: TextStyles.smallText,
-        hintStyle: TextStyles.smallText,
+        labelStyle: TextStyles.smallText(context),
+        hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: greyColor),

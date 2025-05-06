@@ -14,15 +14,13 @@ class UserDetailsRowWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: Text(
-            title,
-            softWrap: true,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[700],
-              fontSize: 16,
-            ),
+        Text(
+          title,
+          softWrap: true,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+            fontSize: 16,
           ),
         ),
         SizedBox(width: 8),
@@ -33,7 +31,7 @@ class UserDetailsRowWidget extends StatelessWidget {
             textAlign: TextAlign.end,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.black87,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),

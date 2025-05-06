@@ -20,7 +20,7 @@ class CategoriesProductsPage extends StatelessWidget {
     final cubit = AppCubit.get(context);
 
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -30,7 +30,7 @@ class CategoriesProductsPage extends StatelessWidget {
               width: 50,
               image: AssetImage('assets/images/smart_label_logo.png'),
             ),
-            Text('Smart Label', style: TextStyles.appBarTitle),
+            Text('Smart Label', style: TextStyles.appBarTitle(context)),
           ],
         ),
         backgroundColor: primaryColor,

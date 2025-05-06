@@ -48,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: SearchAppBar(),
       body: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
@@ -236,6 +236,8 @@ class _SearchPageState extends State<SearchPage> {
                   // Using BlocBuilder for SearchItemsList widget
                   SearchItemsList(
                     selectedType: selectedType,
+                    searchOrder: selectedOrder,
+                    searchSort: selectedSort,
                     cubit: cubit,
                   ),
                 ],

@@ -48,9 +48,9 @@ class CustomTextFormFieldWidget extends StatelessWidget {
             : null,
         suffixIconColor: primaryColor,
         hintText: hintText,
-        hintStyle: TextStyles.smallText,
+        hintStyle: TextStyles.smallText(context),
         labelText: labelText,
-        labelStyle: TextStyles.smallText,
+        labelStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: greyColor),

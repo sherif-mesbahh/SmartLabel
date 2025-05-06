@@ -17,8 +17,8 @@ class AdminCategoryDetailsNameTextFieldWidget extends StatelessWidget {
       controller: nameController,
       decoration: InputDecoration(
         labelText: 'Category Name',
-        labelStyle: TextStyles.smallText,
-        hintStyle: TextStyles.smallText,
+        labelStyle: TextStyles.smallText(context),
+        hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: greyColor),

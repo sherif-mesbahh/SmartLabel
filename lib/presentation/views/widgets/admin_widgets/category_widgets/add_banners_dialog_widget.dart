@@ -87,8 +87,8 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
       listener: (context, state) {},
       builder: (context, state) {
         return AlertDialog(
-          backgroundColor: Colors.white,
-          title: Text('Add Banner', style: TextStyles.headline2),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text('Add Banner', style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -100,8 +100,8 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   controller: titleController,
                   decoration: InputDecoration(
                     labelText: 'Title',
-                    labelStyle: TextStyles.smallText,
-                    hintStyle: TextStyles.smallText,
+                    labelStyle: TextStyles.smallText(context),
+                    hintStyle: TextStyles.smallText(context),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: greyColor),
@@ -124,8 +124,8 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   maxLines: 3,
                   decoration: InputDecoration(
                     labelText: 'Description',
-                    labelStyle: TextStyles.smallText,
-                    hintStyle: TextStyles.smallText,
+                    labelStyle: TextStyles.smallText(context),
+                    hintStyle: TextStyles.smallText(context),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: greyColor),
@@ -162,7 +162,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                             ),
                             child: Text(
                               formatDateTimeForDisplay(startDate),
-                              style: TextStyles.buttonText.copyWith(
+                              style: TextStyles.buttonText(context).copyWith(
                                 fontSize: 12,
                               ),
                             ),
@@ -189,7 +189,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                             ),
                             child: Text(
                               formatDateTimeForDisplay(endDate),
-                              style: TextStyles.buttonText.copyWith(
+                              style: TextStyles.buttonText(context).copyWith(
                                 fontSize: 12,
                               ),
                             ),
@@ -208,7 +208,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   ),
                   child: Text(
                     "Pick Main Image",
-                    style: TextStyles.buttonText.copyWith(
+                    style: TextStyles.buttonText(context).copyWith(
                       fontSize: 12,
                     ),
                   ),
@@ -226,7 +226,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   ),
                   child: Text(
                     "Pick Banner Images",
-                    style: TextStyles.buttonText.copyWith(
+                    style: TextStyles.buttonText(context).copyWith(
                       fontSize: 12,
                     ),
                   ),
@@ -244,7 +244,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
           actions: [
             // Cancel
             TextButton(
-              child: Text('Cancel', style: TextStyles.productTitle),
+              child: Text('Cancel', style: TextStyles.productTitle(context)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -281,7 +281,8 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                       height: 100,
                     )
                   : TextButton(
-                      child: Text('Apply', style: TextStyles.productTitle),
+                      child: Text('Apply',
+                          style: TextStyles.productTitle(context)),
                       onPressed: () {
                         // 1. Validate title
                         if (titleController.text.trim().isEmpty) {

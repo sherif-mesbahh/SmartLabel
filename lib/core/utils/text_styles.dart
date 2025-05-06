@@ -1,78 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smart_label_software_engineering/core/utils/constants.dart';
 
 class TextStyles {
-  static TextStyle headline1 = GoogleFonts.poppins(
-    fontSize: 28,
-    fontWeight: FontWeight.bold,
-    color: darkColor,
-  );
+  static TextStyle headline1(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onSurface,
+      );
 
-  static TextStyle headline2 = GoogleFonts.poppins(
-    fontSize: 24,
-    fontWeight: FontWeight.w600,
-    color: darkColor,
-  );
+  static TextStyle headline2(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: Theme.of(context).colorScheme.onSurface,
+      );
 
-  static TextStyle productTitle = GoogleFonts.poppins(
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
-    color: darkColor,
-  );
+  static TextStyle productTitle(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: Theme.of(context).colorScheme.onSurface,
+      );
 
-  static TextStyle productPrice = GoogleFonts.poppins(
-    fontSize: 12,
-    fontWeight: FontWeight.bold,
-    color: primaryColor,
-  );
+  static TextStyle productPrice(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.primary,
+      );
 
-  static TextStyle productOldPrice = GoogleFonts.poppins(
-    fontSize: 12,
-    fontWeight: FontWeight.bold,
-    color: greyColor,
-    decoration: TextDecoration.lineThrough,
-  );
+  static TextStyle productOldPrice(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).disabledColor,
+        decoration: TextDecoration.lineThrough,
+      );
 
-  static TextStyle description = GoogleFonts.poppins(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    color: greyColor,
-  );
+  static TextStyle description(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).hintColor,
+      );
 
-  static TextStyle buttonText = GoogleFonts.poppins(
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-    color: secondaryColor,
-  );
+  static TextStyle buttonText(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onPrimary,
+      );
 
-  static TextStyle smallText = GoogleFonts.poppins(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    color: greyColor,
-  );
+  static TextStyle smallText(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).hintColor,
+      );
 
-  static TextStyle cartItemTitle = GoogleFonts.poppins(
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
-    color: darkColor,
-  );
+  static TextStyle cartItemTitle(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: Theme.of(context).colorScheme.onSurface,
+      );
 
-  static TextStyle cartItemPrice = GoogleFonts.poppins(
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    color: primaryColor,
-  );
+  static TextStyle cartItemPrice(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.primary,
+      );
 
-  static TextStyle appBarTitle = GoogleFonts.poppins(
-    fontSize: 22,
-    fontWeight: FontWeight.bold,
-    color: secondaryColor,
-  );
+  static TextStyle appBarTitle(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onPrimary,
+      );
 
-  static TextStyle discountText = GoogleFonts.poppins(
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    color: Colors.red,
-  );
+  static TextStyle discountText(BuildContext context) => GoogleFonts.poppins(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.red, // Optional: Theme.of(context).colorScheme.error
+      );
 }

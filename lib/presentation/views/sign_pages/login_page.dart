@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           Container(
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               physics: const BouncingScrollPhysics(),
               child: Container(
                 width: double.infinity,
-                color: secondaryColor,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 padding: const EdgeInsets.all(32.0),
                 child: BlocConsumer<AppCubit, AppStates>(
                   listener: (context, state) {
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Text(
                                 'Forgot Password?',
-                                style: TextStyles.smallText,
+                                style: TextStyles.smallText(context),
                               ),
                             ),
                           ),
@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: primaryColor,
                             child: Text(
                               'Sign in',
-                              style: TextStyles.buttonText
+                              style: TextStyles.buttonText(context)
                                   .copyWith(color: secondaryColor),
                             ),
                           ),
@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                           TextButton(
                             child: Text(
                               'go back',
-                              style: TextStyles.smallText,
+                              style: TextStyles.smallText(context),
                             ),
                             onPressed: () {
                               popNavigator(context);

@@ -29,7 +29,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: primaryColor,
         leading: IconButton(
@@ -43,7 +43,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
         centerTitle: true,
         title: Text(
           'Edit Users',
-          style: TextStyles.appBarTitle,
+          style: TextStyles.appBarTitle(context),
         ),
       ),
       body: Form(
@@ -62,7 +62,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                 // Manage Admin Roles
                 Text(
                   'Manage Admin Roles',
-                  style: TextStyles.headline2.copyWith(fontSize: 24),
+                  style: TextStyles.headline2(context).copyWith(fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
 
@@ -70,9 +70,8 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                 // Enter the user's email to add or remove admin access
                 Text(
                   'Enter the user\'s email to add or remove admin access.',
-                  style: TextStyles.cartItemTitle.copyWith(
+                  style: TextStyles.cartItemTitle(context).copyWith(
                     fontSize: 16,
-                    color: Colors.grey[600],
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -80,7 +79,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                 // Card
                 Card(
                   elevation: 5,
-                  color: secondaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   semanticContainer: true,
                   shadowColor: Colors.black,
@@ -98,7 +97,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                         // User Email
                         CustomTextFormFieldWidget(
                           controller: emailController,
-                          hintText: 'User Email',
+                          hintText: 'example@yahoo.com',
                           labelText: 'User Email',
                           obscureText: false,
                           suffixIconOnPressed: () {},
@@ -186,10 +185,8 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                                               fit: BoxFit.scaleDown,
                                               child: Text(
                                                 'Make Admin',
-                                                style: TextStyles.buttonText
-                                                    .copyWith(
-                                                  color: secondaryColor,
-                                                ),
+                                                style: TextStyles.buttonText(
+                                                    context),
                                               ),
                                             ),
                                     ),
@@ -216,10 +213,8 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                                             fit: BoxFit.scaleDown,
                                             child: Text(
                                               'Remove Admin',
-                                              style: TextStyles.buttonText
-                                                  .copyWith(
-                                                color: secondaryColor,
-                                              ),
+                                              style: TextStyles.buttonText(
+                                                  context),
                                             ),
                                           ),
                                   ),

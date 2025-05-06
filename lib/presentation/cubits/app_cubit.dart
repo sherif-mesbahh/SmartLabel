@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
+import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
 import 'package:smart_label_software_engineering/models/acitve_banners_model/acitve_banners_model.dart';
 import 'package:smart_label_software_engineering/models/active_banner_details_model/active_banner_details_model.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_model.dart';
@@ -1340,5 +1341,18 @@ class AppCubit extends Cubit<AppStates> {
         emit(ForgotPasswordChangePasswordErrorState(e.toString()));
       }
     }
+  }
+
+  ThemeMode themeMode = ThemeMode.light;
+
+  void toggleTheme(bool isDark) {
+    themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    SharedPrefs.setIsDarkMode(isDark); // Save user preference
+    emit(ChangeThemeState());
+  }
+
+  Future<void> loadTheme() async {
+    final isDark = SharedPrefs.getIsDarkMode();
+    themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
   }
 }

@@ -40,8 +40,8 @@ class _ChangePasswordDialogWidgetState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text('Change Password', style: TextStyles.headline2),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      title: Text('Change Password', style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -53,8 +53,8 @@ class _ChangePasswordDialogWidgetState
               controller: currentPasswordController,
               decoration: InputDecoration(
                 labelText: 'Current Password',
-                labelStyle: TextStyles.smallText,
-                hintStyle: TextStyles.smallText,
+                labelStyle: TextStyles.smallText(context),
+                hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: greyColor),
@@ -76,8 +76,8 @@ class _ChangePasswordDialogWidgetState
               controller: newPasswordController,
               decoration: InputDecoration(
                 labelText: 'New Password',
-                labelStyle: TextStyles.smallText,
-                hintStyle: TextStyles.smallText,
+                labelStyle: TextStyles.smallText(context),
+                hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: greyColor),
@@ -99,8 +99,8 @@ class _ChangePasswordDialogWidgetState
               controller: confirmPasswordController,
               decoration: InputDecoration(
                 labelText: 'Confirm Password',
-                labelStyle: TextStyles.smallText,
-                hintStyle: TextStyles.smallText,
+                labelStyle: TextStyles.smallText(context),
+                hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: greyColor),
@@ -120,7 +120,7 @@ class _ChangePasswordDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle),
+          child: Text('Cancel', style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -157,7 +157,8 @@ class _ChangePasswordDialogWidgetState
                     height: 50,
                   )
                 : TextButton(
-                    child: Text('Save', style: TextStyles.productTitle),
+                    child:
+                        Text('Save', style: TextStyles.productTitle(context)),
                     onPressed: () {
                       AppCubit.get(context).changePassword(
                         currentPassword: currentPasswordController.text.trim(),

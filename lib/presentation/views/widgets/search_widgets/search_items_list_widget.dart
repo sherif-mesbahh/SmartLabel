@@ -9,9 +9,13 @@ class SearchItemsList extends StatelessWidget {
     super.key,
     required this.selectedType,
     required this.cubit,
+    this.searchOrder = 'id',
+    this.searchSort = 'asc',
   });
 
   final String selectedType;
+  final String searchOrder;
+  final String searchSort;
   final AppCubit cubit;
 
   @override
@@ -39,6 +43,9 @@ class SearchItemsList extends StatelessWidget {
           // Directly return the appropriate widget based on selectedType
           if (selectedType == 'Products') {
             return ListViewSearchProductWidget(
+              isPrloduct: isProduct,
+              searchOrder: searchOrder,
+              searchSort: searchSort,
               cubit: cubit,
               index: index,
             );

@@ -92,20 +92,20 @@ class FavListViewItem extends StatelessWidget {
                   children: [
                     Text(
                       '${favModel.name}',
-                      style: TextStyles.productTitle,
+                      style: TextStyles.productTitle(context),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       '${favModel.newPrice}\$',
-                      style: TextStyles.productPrice,
+                      style: TextStyles.productPrice(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     if (hasDiscount)
                       Text(
                         '${favModel.oldPrice}\$',
-                        style: TextStyles.productOldPrice,
+                        style: TextStyles.productOldPrice(context),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

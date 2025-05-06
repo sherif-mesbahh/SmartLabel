@@ -10,7 +10,6 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.d
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
 class AddMainProductImageDialogWidget extends StatefulWidget {
-
   const AddMainProductImageDialogWidget({
     super.key,
   });
@@ -35,8 +34,9 @@ class _AddMainProductImageDialogWidgetState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text('Set Main Product Image', style: TextStyles.headline2),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      title:
+          Text('Set Main Product Image', style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -47,7 +47,7 @@ class _AddMainProductImageDialogWidgetState
               style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
               child: Text(
                 "Pick Main Image",
-                style: TextStyles.buttonText.copyWith(fontSize: 12),
+                style: TextStyles.buttonText(context).copyWith(fontSize: 12),
               ),
             ),
             const SizedBox(height: 12),
@@ -65,7 +65,7 @@ class _AddMainProductImageDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle),
+          child: Text('Cancel', style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -73,7 +73,7 @@ class _AddMainProductImageDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text('Apply', style: TextStyles.productTitle),
+            child: Text('Apply', style: TextStyles.productTitle(context)),
             onPressed: () {
               if (mainImage != null) {
                 AppCubit.get(context).mainproductImageToUpload = mainImage;

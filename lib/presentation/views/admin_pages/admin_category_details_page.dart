@@ -60,7 +60,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
     final cubit = widget.cubit;
 
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AdminCategoryDetailsAppBarWidget(cubit: cubit),
       body: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
@@ -121,7 +121,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
             return const Center(
               child: Text(
                 "No Category details available.",
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: Colors.red),
               ),
             );
           }
@@ -155,7 +155,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                 // Category Products
                 Text(
                   '${widget.cubit.categoryProductsModel!.data?.name ?? ''} Products',
-                  style: TextStyles.headline2,
+                  style: TextStyles.headline2(context),
                 ),
                 SizedBox(height: 10),
                 products != null && products.isNotEmpty
@@ -166,7 +166,9 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                     : Center(
                         child: Text(
                           'No Products Available for this Category',
-                          style: TextStyles.productTitle,
+                          style: TextStyles.productTitle(context).copyWith(
+                            color: Colors.red,
+                          ),
                         ),
                       ),
               ],

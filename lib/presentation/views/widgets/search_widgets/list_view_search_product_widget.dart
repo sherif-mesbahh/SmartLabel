@@ -15,10 +15,16 @@ class ListViewSearchProductWidget extends StatelessWidget {
     super.key,
     required this.cubit,
     required this.index,
+    this.isPrloduct = true,
+    this.searchOrder = 'id',
+    this.searchSort = 'asc',
   });
 
   final AppCubit cubit;
   final int index;
+  final bool isPrloduct;
+  final String searchOrder;
+  final String searchSort;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,14 @@ class ListViewSearchProductWidget extends StatelessWidget {
         AppCubit.get(context)
             .getProductDetails(id: product?.id ?? 0)
             .then((onValue) {
-          pushNavigator(context, ProductDetailsPage(), slideRightToLeft);
+          pushNavigator(
+              context,
+              ProductDetailsPage(
+                isSearchProduct: isPrloduct,
+                searchOrder: searchOrder,
+                searchSort: searchSort,
+              ),
+              slideRightToLeft);
         });
       },
       child: Padding(
@@ -87,17 +100,18 @@ class ListViewSearchProductWidget extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
-                      style: TextStyles.productTitle.copyWith(fontSize: 12),
+                      style: TextStyles.productTitle(context)
+                          .copyWith(fontSize: 12),
                     ),
                     Text(
                       '${product?.newPrice}\$',
-                      style: TextStyles.productPrice,
+                      style: TextStyles.productPrice(context),
                     ),
                     if (hasDiscount) ...[
                       const SizedBox(width: 10),
                       Text(
                         '${product?.oldPrice}\$',
-                        style: TextStyles.productOldPrice,
+                        style: TextStyles.productOldPrice(context),
                       ),
                     ],
                   ],

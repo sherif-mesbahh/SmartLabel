@@ -77,8 +77,8 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
       },
       builder: (context, state) {
         return AlertDialog(
-          backgroundColor: Colors.white,
-          title: Text('Add Product', style: TextStyles.headline2),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text('Add Product', style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Padding(
@@ -123,7 +123,8 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                     style:
                         ElevatedButton.styleFrom(backgroundColor: primaryColor),
                     child: Text("Pick Image",
-                        style: TextStyles.buttonText.copyWith(fontSize: 12)),
+                        style: TextStyles.buttonText(context)
+                            .copyWith(fontSize: 12)),
                   ),
                   if (mainImage != null)
                     Padding(
@@ -135,7 +136,8 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                     style:
                         ElevatedButton.styleFrom(backgroundColor: primaryColor),
                     child: Text("Pick Product Images",
-                        style: TextStyles.buttonText.copyWith(fontSize: 12)),
+                        style: TextStyles.buttonText(context)
+                            .copyWith(fontSize: 12)),
                   ),
                   if (productImages.isNotEmpty)
                     Padding(
@@ -155,7 +157,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
           ),
           actions: [
             TextButton(
-              child: Text('Cancel', style: TextStyles.productTitle),
+              child: Text('Cancel', style: TextStyles.productTitle(context)),
               onPressed: () => Navigator.of(context).pop(),
             ),
             state is AddProductLoadingState
@@ -165,7 +167,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                     height: 100,
                   )
                 : TextButton(
-                    child: Text('Add', style: TextStyles.productTitle),
+                    child: Text('Add', style: TextStyles.productTitle(context)),
                     onPressed: () {
                       // 1. Check if name is empty
                       if (nameController.text.isEmpty) {
@@ -274,8 +276,8 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyles.smallText,
-        hintStyle: TextStyles.smallText,
+        labelStyle: TextStyles.smallText(context),
+        hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: greyColor),

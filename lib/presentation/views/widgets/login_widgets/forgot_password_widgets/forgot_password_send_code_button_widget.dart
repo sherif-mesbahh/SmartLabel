@@ -48,7 +48,7 @@ class ForgotPasswordSendCodeButton extends StatelessWidget {
                         )
                       : Text(
                           'Submit',
-                          style: TextStyles.buttonText,
+                          style: TextStyles.buttonText(context),
                           textAlign: TextAlign.center,
                         ),
                 ),

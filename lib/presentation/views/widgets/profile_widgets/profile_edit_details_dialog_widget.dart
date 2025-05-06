@@ -38,8 +38,8 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text('Edit Profile', style: TextStyles.headline2),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      title: Text('Edit Profile', style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -51,8 +51,8 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 labelText: 'First Name',
-                labelStyle: TextStyles.smallText,
-                hintStyle: TextStyles.smallText,
+                labelStyle: TextStyles.smallText(context),
+                hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: greyColor),
@@ -74,8 +74,8 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
               controller: lastNameController,
               decoration: InputDecoration(
                 labelText: 'Last Name',
-                labelStyle: TextStyles.smallText,
-                hintStyle: TextStyles.smallText,
+                labelStyle: TextStyles.smallText(context),
+                hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: greyColor),
@@ -95,7 +95,7 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle),
+          child: Text('Cancel', style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -135,7 +135,8 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
                     height: 50,
                   )
                 : TextButton(
-                    child: Text('Save', style: TextStyles.productTitle),
+                    child:
+                        Text('Save', style: TextStyles.productTitle(context)),
                     onPressed: () {
                       AppCubit.get(context).updateProfile(
                         firstName: firstNameController.text.trim(),

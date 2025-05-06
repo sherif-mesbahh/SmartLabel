@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
-import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -24,14 +23,13 @@ class ProductDetailsPriceRow extends StatelessWidget {
       children: [
         Text(
           'Price: ',
-          style: TextStyles.productPrice.copyWith(
+          style: TextStyles.productTitle(context).copyWith(
             fontSize: 18,
-            color: darkColor,
           ),
         ),
         Text(
           '\$ $newPrice',
-          style: TextStyles.productPrice.copyWith(fontSize: 18),
+          style: TextStyles.productPrice(context).copyWith(fontSize: 18),
         ),
         SizedBox(
           width: 10,
@@ -39,7 +37,7 @@ class ProductDetailsPriceRow extends StatelessWidget {
         if (newPrice != oldPrice)
           Text(
             '\$ $oldPrice',
-            style: TextStyles.productOldPrice.copyWith(fontSize: 18),
+            style: TextStyles.productOldPrice(context).copyWith(fontSize: 18),
           ),
         Spacer(),
         BlocBuilder<AppCubit, AppStates>(

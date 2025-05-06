@@ -61,8 +61,8 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
       },
       builder: (context, state) {
         return AlertDialog(
-          backgroundColor: Colors.white,
-          title: Text('Add Category', style: TextStyles.headline2),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text('Add Category', style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -73,8 +73,8 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                   controller: nameController,
                   decoration: InputDecoration(
                     labelText: 'Name',
-                    labelStyle: TextStyles.smallText,
-                    hintStyle: TextStyles.smallText,
+                    labelStyle: TextStyles.smallText(context),
+                    hintStyle: TextStyles.smallText(context),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: greyColor),
@@ -97,7 +97,8 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                   ),
                   child: Text(
                     "Pick Category Image",
-                    style: TextStyles.buttonText.copyWith(fontSize: 12),
+                    style:
+                        TextStyles.buttonText(context).copyWith(fontSize: 12),
                   ),
                 ),
                 if (categoryImage != null)
@@ -110,7 +111,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
           ),
           actions: [
             TextButton(
-              child: Text('Cancel', style: TextStyles.productTitle),
+              child: Text('Cancel', style: TextStyles.productTitle(context)),
               onPressed: () => Navigator.of(context).pop(),
             ),
             state is AddCategoryLoadingState
@@ -120,7 +121,8 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                     height: 100,
                   )
                 : TextButton(
-                    child: Text('Apply', style: TextStyles.productTitle),
+                    child:
+                        Text('Apply', style: TextStyles.productTitle(context)),
                     onPressed: () {
                       if (nameController.text.isEmpty) {
                         Fluttertoast.showToast(

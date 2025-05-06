@@ -1,61 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:smart_label_software_engineering/core/utils/constants.dart';
-import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 
-class ThemeConfig {
-  // Primary and secondary colors
+// Shared color
+const Color primaryColor = Color(0xff3c63fe);
 
-  // Light Theme
-  static ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: primaryColor,
-    scaffoldBackgroundColor: secondaryColor,
-    appBarTheme: AppBarTheme(
-      backgroundColor: primaryColor,
-      titleTextStyle: TextStyles.appBarTitle,
-      iconTheme: const IconThemeData(color: secondaryColor),
-    ),
-    textTheme: TextTheme(
-      bodyLarge: TextStyles.description,
-      bodyMedium: TextStyles.smallText,
-      titleLarge: TextStyles.headline1,
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: primaryColor,
-        foregroundColor: secondaryColor,
-        textStyle: TextStyles.buttonText,
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-    ),
-    iconTheme: const IconThemeData(color: Colors.black),
-  );
+// Light theme colors
+const Color secondaryColor = Color(0xFFFFFFFF);
+const Color darkColor = Color(0xFF333333);
+const Color greyColor = Color(0xFF888888);
 
-  // Dark Theme
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: primaryColor,
-    scaffoldBackgroundColor: darkColor,
-    appBarTheme: AppBarTheme(
-      backgroundColor: greyColor,
-      titleTextStyle: TextStyles.appBarTitle,
-      iconTheme: const IconThemeData(color: secondaryColor),
-    ),
-    textTheme: TextTheme(
-      bodyLarge: TextStyles.description.copyWith(color: secondaryColor),
-      bodyMedium: TextStyles.smallText.copyWith(color: secondaryColor),
-      titleLarge: TextStyles.headline1.copyWith(color: secondaryColor),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: primaryColor,
-        foregroundColor: secondaryColor,
-        textStyle: TextStyles.buttonText,
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-    ),
-    iconTheme: const IconThemeData(color: Colors.white),
-  );
-}
+// Dark theme colors
+const Color darkBackground = Color(0xFF121212);
+const Color darkSurface = Color(0xFF1E1E1E);
+const Color darkOnBackground = Colors.white;
+const Color darkOnSurface = Colors.white70;
+
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: primaryColor,
+  scaffoldBackgroundColor: Colors.white,
+  colorScheme: ColorScheme.light(
+    primary: primaryColor,
+    secondary: greyColor,
+    background: Colors.white,
+    onBackground: darkColor,
+    surface: Colors.white,
+    onSurface: darkColor,
+    onPrimary: Colors.white,
+  ),
+);
+
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: primaryColor,
+  scaffoldBackgroundColor: darkBackground,
+  colorScheme: ColorScheme.dark(
+    primary: primaryColor,
+    secondary: greyColor,
+    background: darkBackground,
+    onBackground: darkOnBackground,
+    surface: darkSurface,
+    onSurface: darkOnSurface,
+    onPrimary: Colors.black,
+  ),
+);

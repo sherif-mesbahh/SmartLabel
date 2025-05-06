@@ -61,7 +61,7 @@ class CustomNavBar extends StatelessWidget {
     required bool isSelected,
   }) {
     final cubit = AppCubit.get(context);
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         cubit.changeNavBarCurrentIndex(index: index);
       },
