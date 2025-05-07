@@ -36,6 +36,18 @@ public class UserFavProductRepository(AppDbContext context, ISqlConnectionFactor
 		return productsList;
 	}
 
+	public async Task<IEnumerable<int>> GetUsersByProductId(int productId)
+	{
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		               SELECT UserId
+		               FROM UserFavProducts
+		               WHERE ProductId = @productID
+		               """;
+		var userIds = await connection.QueryAsync<int>(sqlQuery, new { productID = productId });
+		return userIds;
+	}
+
 	public async Task AddFavProductAsync(UserFavProduct userFavProduct)
 	{
 		await context.UserFavProducts.AddAsync(userFavProduct);

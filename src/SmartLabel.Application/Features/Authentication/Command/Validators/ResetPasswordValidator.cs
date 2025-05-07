@@ -7,7 +7,7 @@ public class ResetPasswordValidator : AbstractValidator<ResetPasswordCommand>
 	public ResetPasswordValidator()
 	{
 		ApplyValidationRules();
-		ApplyValidationRules();
+		AddCustomValidationRules();
 	}
 	private void ApplyValidationRules()
 	{

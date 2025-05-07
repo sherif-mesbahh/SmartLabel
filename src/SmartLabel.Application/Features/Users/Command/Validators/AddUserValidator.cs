@@ -7,6 +7,8 @@ public class AddUserValidator : AbstractValidator<AddUserCommand>
 	public AddUserValidator()
 	{
 		ApplyValidationRules();
+		AddCustomValidator();
+
 	}
 	private void ApplyValidationRules()
 	{

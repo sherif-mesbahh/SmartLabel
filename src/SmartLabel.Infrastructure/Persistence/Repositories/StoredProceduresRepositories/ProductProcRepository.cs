@@ -1,13 +1,12 @@
 ﻿using Dapper;
 using SmartLabel.Application.Features.Products.Query.Models;
 using SmartLabel.Application.Features.Products.Query.Results;
-using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Repositories.StoredProceduresRepositories;
 using SmartLabel.Application.Services;
 using System.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories.StoredProceduresRepositories;
-public class ProductProcRepository(ISqlConnectionFactory sqlConnectionFactory, IUserFavProductRepository userFavProduct) : IProductProcRepository
+public class ProductProcRepository(ISqlConnectionFactory sqlConnectionFactory) : IProductProcRepository
 {
 	public async Task<(int, IEnumerable<GetAllProductsDto>)> GetAllProductsPaged(GetAllProductsPaginatedQuery query, string? personId)
 	{

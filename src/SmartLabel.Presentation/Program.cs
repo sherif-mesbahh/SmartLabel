@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using SmartLabel.Application;
 using SmartLabel.Application.Enumeration;
 using SmartLabel.Infrastructure;
+using SmartLabel.Infrastructure.Hubs;
 using SmartLabel.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +54,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+builder.Services.AddSignalR();
 builder.Services.AddAuthorizationBuilder()
 	.AddPolicy(nameof(Roles.UserOrAdmin), policy =>
 		policy.RequireRole(Roles.User.ToString(), Roles.Admin.ToString()));
@@ -81,4 +83,5 @@ app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<NotificationHub>("/Notify");
 app.Run();

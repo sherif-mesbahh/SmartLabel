@@ -25,6 +25,9 @@ public class AuthorizationRepository(AppDbContext context, UserManager<Applicati
 	public async Task<IdentityResult> DeleteRoleAsync(int roleId)
 	{
 		var role = await roleManager.FindByIdAsync(roleId.ToString());
+		if (role == null)
+			return IdentityResult.Failed(new IdentityError { Description = "Role not found" });
+
 		var result = await roleManager.DeleteAsync(role);
 		return result;
 	}

@@ -9,7 +9,8 @@ using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
-public class UpdateProductHandler(IMapper mapper, IProductRepository productRepository, IFileService fileService, IUnitOfWork unitOfWork)
+public class UpdateProductHandler(IMapper mapper, IProductRepository productRepository, IUserFavProductRepository userFavProductRepository,
+	INotifierService notifierService, IFileService fileService, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<UpdateProductCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -52,6 +53,12 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			await productRepository.UpdateProductAsync(product.Id, product);
 			transaction.Commit();
+			var userIds = await userFavProductRepository.GetUsersByProductId(product.Id);
+			foreach (var userId in userIds)
+			{
+
+				await notifierService.SendToGroup($"user-{userId.ToString()}", $"price of {product.Name} product has been updated to {product.NewPrice}");
+			}
 			return NoContent<string>();
 		}
 		catch (Exception ex)

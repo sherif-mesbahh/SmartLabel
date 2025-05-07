@@ -5,7 +5,7 @@ using SmartLabel.Application.Services;
 namespace SmartLabel.Infrastructure.Services;
 public class FileService(IWebHostEnvironment host) : IFileService
 {
-	public async Task<string> BuildImageAsync(IFormFile? image)
+	public async Task<string> BuildImageAsync(IFormFile image)
 	{
 		if (image == null || image.Length == 0)
 			throw new BadHttpRequestException("No file uploaded.");

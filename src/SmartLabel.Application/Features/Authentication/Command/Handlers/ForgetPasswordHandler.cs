@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Authentication.Command.Models;
@@ -7,7 +6,7 @@ using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities.Identity;
 
 namespace SmartLabel.Application.Features.Authentication.Command.Handlers;
-public class ForgetPasswordHandler(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IEmailService emailService) : ResponseHandler, IRequestHandler<ForgetPasswordCommand, Response<string>>
+public class ForgetPasswordHandler(UserManager<ApplicationUser> userManager, IEmailService emailService) : ResponseHandler, IRequestHandler<ForgetPasswordCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(ForgetPasswordCommand request, CancellationToken cancellationToken)
 	{
@@ -29,7 +28,7 @@ public class ForgetPasswordHandler(UserManager<ApplicationUser> userManager, IHt
 				errors: errors);
 		}
 		var message = $"Code to reset password: {code}";
-		await emailService.Send(user.Email, "Reset your password", message);
+		await emailService.Send(request.Email, "Reset your password", message);
 		return Success<string>("");
 	}
 }

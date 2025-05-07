@@ -8,7 +8,7 @@ using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
-public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IFileService fileService, IUnitOfWork unitOfWork)
+public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IFileService fileService, INotifierService notifierService, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<AddBannerCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(AddBannerCommand request, CancellationToken cancellationToken)
@@ -38,6 +38,7 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 			}
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			transaction.Commit();
+			await notifierService.SendToAll("New banner has been added");
 			return Created<string>($"Banner {banner.Id} created successfully");
 		}
 		catch (Exception ex)

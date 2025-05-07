@@ -38,6 +38,7 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<IUserFavProductRepository, UserFavProductRepository>();
 		services.AddTransient<ISqlConnectionFactory, SqlConnectionFactory>();
 		services.AddTransient<IEmailService, EmailService>();
+		services.AddTransient<INotifierService, NotifierService>();
 		services.AddIdentity<ApplicationUser, Role>(
 				options =>
 				{

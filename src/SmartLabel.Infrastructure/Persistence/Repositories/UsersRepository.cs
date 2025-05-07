@@ -2,10 +2,9 @@
 using SmartLabel.Application.Features.Users.Query.Results;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Services;
-using SmartLabel.Infrastructure.Persistence.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;
-public class UsersRepository(AppDbContext context, ISqlConnectionFactory sqlConnectionFactory) : IUsersRepository
+public class UsersRepository(ISqlConnectionFactory sqlConnectionFactory) : IUsersRepository
 {
 	public async Task<IEnumerable<GetAllUsersDto>> GetAllUsersAsync()
 	{

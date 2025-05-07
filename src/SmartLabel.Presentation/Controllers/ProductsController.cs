@@ -41,6 +41,7 @@ public class ProductsController(ISender sender) : AppControllerBase
 	public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductCommand product)
 	{
 		return NewResult(await sender.Send(product));
+
 	}
 	[Authorize(Roles = nameof(Roles.Admin))]
 	[HttpDelete("{id:int}")]

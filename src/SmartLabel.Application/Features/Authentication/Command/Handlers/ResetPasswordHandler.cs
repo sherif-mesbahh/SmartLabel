@@ -16,6 +16,6 @@ public class ResetPasswordHandle(UserManager<ApplicationUser> userManager) : Res
 
 		await userManager.RemovePasswordAsync(user);
 		await userManager.AddPasswordAsync(user, request.Password);
-		return Success("Your password is rested successfully");
+		return Success("Your password is reseted successfully");
 	}
 }

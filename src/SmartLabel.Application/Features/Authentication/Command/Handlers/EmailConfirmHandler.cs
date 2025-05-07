@@ -10,6 +10,8 @@ public class EmailConfirmHandler(UserManager<ApplicationUser> userManager) : Res
 	public async Task<Response<string>> Handle(EmailConfirmCommand request, CancellationToken cancellationToken)
 	{
 		var user = await userManager.FindByIdAsync(request.UserId.ToString());
+		if (user is null)
+			return BadRequest<string>(["user is not found"], "Invalid data");
 
 		var res = await userManager.ConfirmEmailAsync(user, request.Code);
 		if (!res.Succeeded)

@@ -3,11 +3,10 @@ using SmartLabel.Application.Features.Categories.Query.Models;
 using SmartLabel.Application.Features.Categories.Query.Results;
 using SmartLabel.Application.Repositories.StoredProceduresRepositories;
 using SmartLabel.Application.Services;
-using SmartLabel.Infrastructure.Persistence.Data;
 using System.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories.StoredProceduresRepositories;
-public class CategoryProcRepository(AppDbContext context, ISqlConnectionFactory sqlConnectionFactory) : ICategoryProcRepository
+public class CategoryProcRepository(ISqlConnectionFactory sqlConnectionFactory) : ICategoryProcRepository
 {
 	public async Task<(int, IEnumerable<GetAllCategoriesDto>)> GetAllCategoriesPaged(GetAllCategoriesPaginatedQuery query)
 	{

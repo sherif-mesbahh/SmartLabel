@@ -8,4 +8,6 @@ public class ApplicationUser : IdentityUser<int>
 	public string? Code { get; set; }
 	public ICollection<UserToken> Tokens { get; set; }
 	public ICollection<UserFavProduct> UsserFavProducts { get; set; }
+	public ICollection<Notification> Notifications { get; set; }
+
 }
