@@ -3,6 +3,7 @@ using SmartLabel.Domain.Helpers;
 using System.Security.Claims;
 
 namespace SmartLabel.Infrastructure.Hubs;
+
 public class NotificationHub : Hub
 {
 	public override async Task OnConnectedAsync()
@@ -18,6 +19,6 @@ public class NotificationHub : Hub
 		var userId = Context.User?.FindFirstValue(nameof(UserClaimModel.UserId));
 		if (userId is not null)
 			await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"user-{userId}");
-		await base.OnConnectedAsync();
+		await base.OnDisconnectedAsync(exception);
 	}
 }
