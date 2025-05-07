@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/token_refresher.dart';
 import 'package:smart_label_software_engineering/core/themes/themes.dart';
 import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
+import 'package:smart_label_software_engineering/core/utils/flutter_local_notifications.dart';
 import 'package:smart_label_software_engineering/core/utils/internet_monitor.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
 import 'package:smart_label_software_engineering/features/splashScreen/presentation/views/splash_screen_page.dart';
@@ -14,6 +15,7 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_states.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  await NotificationHelper.init();
   await SharedPrefs.init();
 
   final isOnBoardingFinished = SharedPrefs.isOnBoardingFinished();
@@ -23,7 +25,9 @@ void main() async {
 
   if (appCubit.isLogin) {
     TokenRefresher.start();
+    appCubit.startSignalR();
   }
+
   runApp(
     DevicePreview(
       enabled: !kReleaseMode, // Only enable in debug or profile mode

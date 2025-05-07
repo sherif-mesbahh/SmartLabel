@@ -8,8 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:signalr_netcore/http_connection_options.dart';
+import 'package:signalr_netcore/hub_connection.dart';
+import 'package:signalr_netcore/hub_connection_builder.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
+import 'package:smart_label_software_engineering/core/utils/flutter_local_notifications.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
 import 'package:smart_label_software_engineering/models/acitve_banners_model/acitve_banners_model.dart';
@@ -1354,5 +1358,41 @@ class AppCubit extends Cubit<AppStates> {
   Future<void> loadTheme() async {
     final isDark = SharedPrefs.getIsDarkMode();
     themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+  }
+
+  late HubConnection hubConnection;
+
+  void startSignalR() async {
+    final serverUrl = ApiEndpoints.notifications;
+
+    hubConnection = HubConnectionBuilder()
+        .withUrl(
+          serverUrl,
+          options: HttpConnectionOptions(
+            accessTokenFactory: () async {
+              final token = await SecureTokenStorage.getAccessToken();
+              return token!;
+            },
+          ),
+        )
+        .withAutomaticReconnect()
+        .build();
+
+    hubConnection.on("ReceiveNotification", (messege) {
+      final body = messege != null && messege.isNotEmpty
+          ? messege[0].toString()
+          : "You have a new message";
+      NotificationHelper.showNotification(body);
+      print("📢 Notification: $body");
+
+      emit(ReceiveNotificationState());
+    });
+
+    try {
+      await hubConnection.start();
+      print("✅ SignalR connected.");
+    } catch (e) {
+      print("❌ SignalR connection failed: $e");
+    }
   }
 }

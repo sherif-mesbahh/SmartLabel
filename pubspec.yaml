@@ -38,6 +38,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0
+  flutter_local_notifications: ^19.1.0
   flutter_secure_storage: ^9.2.4
   fluttertoast: ^8.2.12
   google_fonts: ^6.2.1
@@ -48,6 +49,7 @@ dependencies:
   path_provider: ^2.1.5
   photo_view: ^0.15.0
   shared_preferences: ^2.5.3
+  signalr_netcore: ^1.4.3
   smooth_page_indicator: ^1.2.1
 
 dev_dependencies:
