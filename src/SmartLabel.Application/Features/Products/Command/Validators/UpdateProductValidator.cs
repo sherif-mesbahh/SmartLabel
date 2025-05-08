@@ -29,8 +29,9 @@ public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
 		RuleFor(x => x.CatId)
 			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
 
-		RuleFor(x => x.MainImage)
-			.NotEmpty().WithMessage("You should upload at least one Image");
+		//RuleFor(x => x.MainImage)
+		//	.NotEmpty().WithMessage("You should upload at least one Image")
+		//	.NotNull().WithMessage("You should upload at least one Image");
 	}
 
 	private void AddCustomValidationRules()

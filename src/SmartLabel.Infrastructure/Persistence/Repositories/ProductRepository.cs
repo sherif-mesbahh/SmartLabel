@@ -160,7 +160,7 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 
 		await context.ProductImages.AddRangeAsync(productImages);
 	}
-	public async Task UpdateProductAsync(int productId, Product product)
+	public async Task UpdateProductAsync(int productId, Product product, string mainImage)
 	{
 		await context.Products
 			.Where(x => x.Id == productId)
@@ -171,7 +171,7 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 				.SetProperty(p => p.Discount, product.Discount)
 				.SetProperty(p => p.OldPrice, product.OldPrice)
 				.SetProperty(p => p.NewPrice, product.NewPrice)
-				.SetProperty(p => p.MainImage, product.MainImage)
+				.SetProperty(p => p.MainImage, product.MainImage ?? mainImage)
 			);
 	}
 
@@ -226,10 +226,10 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 	{
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
-		                   SELECT NewPrice
-		                   FROM Products
-		                   WHERE Id = @productId;
-		                   """;
+		               SELECT NewPrice
+		               FROM Products
+		               WHERE Id = @productId;
+		               """;
 		var price = await connection.QueryAsync<decimal>(sqlQuery, new { productId = id });
 		return price.First();
 	}

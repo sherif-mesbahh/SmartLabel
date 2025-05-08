@@ -12,8 +12,8 @@ using SmartLabel.Infrastructure.Persistence.Data;
 namespace SmartLabel.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250504181302_AddNotificationTable")]
-    partial class AddNotificationTable
+    [Migration("20250508112642_AddUserNotifications")]
+    partial class AddUserNotifications
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -350,20 +350,12 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Notifications");
                 });
@@ -460,6 +452,29 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.ToTable("UserFavProducts");
                 });
 
+            modelBuilder.Entity("SmartLabel.Domain.Entities.UserNotification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotificationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserNotifications");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("SmartLabel.Domain.Entities.Identity.Role", null)
@@ -533,17 +548,6 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SmartLabel.Domain.Entities.Notification", b =>
-                {
-                    b.HasOne("SmartLabel.Domain.Entities.Identity.ApplicationUser", "User")
-                        .WithMany("Notifications")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("SmartLabel.Domain.Entities.Product", b =>
                 {
                     b.HasOne("SmartLabel.Domain.Entities.Category", "Category")
@@ -585,6 +589,25 @@ namespace SmartLabel.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SmartLabel.Domain.Entities.UserNotification", b =>
+                {
+                    b.HasOne("SmartLabel.Domain.Entities.Notification", "Notification")
+                        .WithMany("UserNotifications")
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartLabel.Domain.Entities.Identity.ApplicationUser", "User")
+                        .WithMany("UserNotifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Notification");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SmartLabel.Domain.Entities.Banner", b =>
                 {
                     b.Navigation("Images");
@@ -597,11 +620,16 @@ namespace SmartLabel.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Identity.ApplicationUser", b =>
                 {
-                    b.Navigation("Notifications");
-
                     b.Navigation("Tokens");
 
+                    b.Navigation("UserNotifications");
+
                     b.Navigation("UsserFavProducts");
+                });
+
+            modelBuilder.Entity("SmartLabel.Domain.Entities.Notification", b =>
+                {
+                    b.Navigation("UserNotifications");
                 });
 
             modelBuilder.Entity("SmartLabel.Domain.Entities.Product", b =>

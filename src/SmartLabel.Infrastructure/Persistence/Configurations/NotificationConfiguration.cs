@@ -9,8 +9,5 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 	{
 		builder.HasKey(x => x.Id);
 		builder.Property(x => x.Message).HasMaxLength(1000);
-		builder.HasOne(x => x.User)
-			.WithMany(x => x.Notifications)
-			.HasForeignKey(x => x.UserId);
 	}
 }

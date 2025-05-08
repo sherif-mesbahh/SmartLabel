@@ -39,4 +39,16 @@ public class UsersRepository(ISqlConnectionFactory sqlConnectionFactory) : IUser
 		);
 		return await result;
 	}
+
+	public async Task<IEnumerable<int>> GetUserIdsAsync()
+	{
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		               SELECT Id
+		               FROM AspNetUsers
+		               WHERE EmailConfirmed = 1
+		               """;
+		var userIds = await connection.QueryAsync<int>(sqlQuery);
+		return userIds;
+	}
 }

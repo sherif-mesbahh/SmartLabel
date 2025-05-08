@@ -18,7 +18,8 @@ public class AddBannerValidator : AbstractValidator<AddBannerCommand>
 		RuleFor(x => x.Description)
 			.MaximumLength(2000).WithMessage("{PropertyName} cannot exceed 2000 characters.");
 		RuleFor(x => x.MainImage)
-			.NotEmpty().WithMessage("You should upload at least one Image");
+			.NotEmpty().WithMessage("You should upload at least one Image")
+			.NotNull().WithMessage("You should upload at least one Image");
 	}
 	private void AddCustomValidationRules()
 	{

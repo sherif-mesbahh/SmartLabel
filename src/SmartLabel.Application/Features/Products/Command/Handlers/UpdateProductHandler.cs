@@ -9,7 +9,7 @@ using SmartLabel.Domain.Interfaces;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
 public class UpdateProductHandler(IMapper mapper, IProductRepository productRepository, IUserFavProductRepository userFavProductRepository,
-	INotifierService notifierService, IFileService fileService, IUnitOfWork unitOfWork)
+	INotifierService notifierService, IFileService fileService, INotificationRepository notificationRepository, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<UpdateProductCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -18,7 +18,6 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 
 		if (!await productRepository.IsProductExistAsync(request.Id))
 			return NotFound<string>([$"Product ID: {request.Id} not found"], "Product discontinued");
-		var price = await productRepository.GetProductPriceAsync(request.Id);
 		using var transaction = await unitOfWork.BeginTransaction();
 		try
 		{
@@ -35,7 +34,7 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 			}
 			var product = mapper.Map<Product>(request);
 			if (request.MainImage != null) product.MainImage = await fileService.BuildImageAsync(request.MainImage);
-
+			var price = await productRepository.GetProductPriceAsync(request.Id);
 			if (request.ImagesFiles is not null)
 			{
 				var productImages = new List<ProductImage>();
@@ -51,20 +50,21 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 				}
 				await productRepository.AddProductImagesAsync(productImages);
 			}
-			await unitOfWork.SaveChangesAsync(cancellationToken);
-			await productRepository.UpdateProductAsync(product.Id, product);
-			transaction.Commit();
+
+			var message = $"price of {product.Name} product has been updated to {product.NewPrice}";
+			await productRepository.UpdateProductAsync(product.Id, product, mainImage);
 			if (product.NewPrice != price)
 			{
 				var userIds = await userFavProductRepository.GetUsersByProductId(product.Id);
-
 				foreach (var userId in userIds)
 				{
 
-					await notifierService.SendToGroup($"user-{userId.ToString()}",
-						$"price of {product.Name} product has been updated to {product.NewPrice}");
+					await notifierService.SendToGroup($"user-{userId.ToString()}", message);
 				}
+				await notificationRepository.AddNotificationToUsers(message, userIds);
 			}
+			await unitOfWork.SaveChangesAsync(cancellationToken);
+			transaction.Commit();
 			return NoContent<string>();
 		}
 		catch (Exception ex)

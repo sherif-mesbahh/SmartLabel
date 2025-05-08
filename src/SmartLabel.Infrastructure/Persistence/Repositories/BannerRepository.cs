@@ -88,7 +88,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		await context.Banners.AddAsync(banner);
 	}
 
-	public async Task UpdateBannerAsync(int bannerId, Banner banner)
+	public async Task UpdateBannerAsync(int bannerId, Banner banner, string mainImage)
 	{
 		await context.Banners
 			.Where(x => x.Id == bannerId)
@@ -97,7 +97,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 				.SetProperty(x => x.Description, banner.Description)
 				.SetProperty(x => x.StartDate, banner.StartDate)
 				.SetProperty(x => x.EndDate, banner.EndDate)
-				.SetProperty(x => x.MainImage, banner.MainImage)
+				.SetProperty(p => p.MainImage, banner.MainImage ?? mainImage)
 			);
 	}
 

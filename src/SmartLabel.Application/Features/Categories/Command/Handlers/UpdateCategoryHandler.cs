@@ -23,7 +23,7 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 			var imageUrl = await categoryRepository.GetCategoryImageByIdAsync(category.Id);
 			if (request.Image is not null && imageUrl is not null) await fileService.DeleteImageAsync(imageUrl);
 			if (request.Image is not null) category.ImageUrl = await fileService.BuildImageAsync(request.Image);
-			await categoryRepository.UpdateCategoryAsync(category.Id, category);
+			await categoryRepository.UpdateCategoryAsync(category.Id, category, imageUrl);
 			return NoContent<string>();
 		}
 		catch (Exception ex)

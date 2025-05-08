@@ -100,13 +100,13 @@ public class CategoryRepository(AppDbContext context, IUserFavProductRepository 
 		await context.Categories.AddAsync(category);
 	}
 
-	public async Task UpdateCategoryAsync(int categoryId, Category category)
+	public async Task UpdateCategoryAsync(int categoryId, Category category, string imageUrl)
 	{
 		await context.Categories
 			.Where(x => x.Id == categoryId)
 			.ExecuteUpdateAsync(setters => setters
 				.SetProperty(c => c.Name, category.Name)
-				.SetProperty(c => c.ImageUrl, category.ImageUrl)
+				.SetProperty(p => p.ImageUrl, category.ImageUrl ?? imageUrl)
 			);
 	}
 	public async Task DeleteCategoryAsync(int categoryId)
