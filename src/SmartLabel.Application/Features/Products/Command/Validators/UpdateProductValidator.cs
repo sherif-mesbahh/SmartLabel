@@ -24,6 +24,8 @@ public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
 		RuleFor(x => x.OldPrice)
 			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
 
+		RuleFor(x => x.Discount)
+			.LessThanOrEqualTo(100).WithMessage("{PropertyName} must be less than or equal to 100%");
 		RuleFor(x => x.CatId)
 			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
 

@@ -17,4 +17,5 @@ public interface IProductRepository
 	Task<bool> IsProductExistAsync(int id);
 	Task<bool> IsProductNameExistAsync(string name, CancellationToken cancellationToken);
 	Task<bool> IsProductNameAndIdExistAsync(int id, string name, CancellationToken cancellationToken);
+	Task<decimal> GetProductPriceAsync(int id);
 }

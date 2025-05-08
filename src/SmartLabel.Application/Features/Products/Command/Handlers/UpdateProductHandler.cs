@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Repositories;
@@ -16,14 +15,16 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 	public async Task<Response<string>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
 	{
 
+
 		if (!await productRepository.IsProductExistAsync(request.Id))
 			return NotFound<string>([$"Product ID: {request.Id} not found"], "Product discontinued");
+		var price = await productRepository.GetProductPriceAsync(request.Id);
 		using var transaction = await unitOfWork.BeginTransaction();
 		try
 		{
 			var mainImage = await productRepository.GetProductImage(request.Id);
-			await fileService.DeleteImageAsync(mainImage);
-			if (!request.RemovedImageIds.IsNullOrEmpty())
+			if (request.MainImage is not null) await fileService.DeleteImageAsync(mainImage);
+			if (request.RemovedImageIds is not null)
 			{
 				var imageUrls = await productRepository.GetProductImageUrlsByIdsAsync(request.RemovedImageIds);
 				foreach (var imageUrl in imageUrls)
@@ -53,11 +54,16 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			await productRepository.UpdateProductAsync(product.Id, product);
 			transaction.Commit();
-			var userIds = await userFavProductRepository.GetUsersByProductId(product.Id);
-			foreach (var userId in userIds)
+			if (product.NewPrice != price)
 			{
+				var userIds = await userFavProductRepository.GetUsersByProductId(product.Id);
 
-				await notifierService.SendToGroup($"user-{userId.ToString()}", $"price of {product.Name} product has been updated to {product.NewPrice}");
+				foreach (var userId in userIds)
+				{
+
+					await notifierService.SendToGroup($"user-{userId.ToString()}",
+						$"price of {product.Name} product has been updated to {product.NewPrice}");
+				}
 			}
 			return NoContent<string>();
 		}

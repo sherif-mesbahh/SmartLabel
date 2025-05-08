@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Command.Models;
 using SmartLabel.Application.Repositories;
@@ -21,8 +20,8 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 		{
 
 			var mainImage = await bannerRepository.GetBannerImage(request.Id);
-			await fileService.DeleteImageAsync(mainImage);
-			if (!request.RemovedImageIds.IsNullOrEmpty())
+			if (request.MainImage is not null) await fileService.DeleteImageAsync(mainImage);
+			if (request.RemovedImageIds is not null)
 			{
 				var imageUrls = await bannerRepository.GetBannerImageUrlsByIdsAsync(request.RemovedImageIds);
 				foreach (var imageUrl in imageUrls)
@@ -31,7 +30,6 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 				}
 				await bannerRepository.DeleteBannerImagesAsync(request.RemovedImageIds);
 			}
-
 			var banner = mapper.Map<Banner>(request);
 			if (request.MainImage != null) banner.MainImage = await fileService.BuildImageAsync(request.MainImage);
 			if (request.ImagesFiles is not null)

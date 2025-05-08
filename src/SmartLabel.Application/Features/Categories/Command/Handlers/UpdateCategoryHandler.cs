@@ -21,7 +21,7 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 		{
 			var category = mapper.Map<Category>(request);
 			var imageUrl = await categoryRepository.GetCategoryImageByIdAsync(category.Id);
-			if (imageUrl is not null) await fileService.DeleteImageAsync(imageUrl);
+			if (request.Image is not null && imageUrl is not null) await fileService.DeleteImageAsync(imageUrl);
 			if (request.Image is not null) category.ImageUrl = await fileService.BuildImageAsync(request.Image);
 			await categoryRepository.UpdateCategoryAsync(category.Id, category);
 			return NoContent<string>();

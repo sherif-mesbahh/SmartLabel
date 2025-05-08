@@ -221,4 +221,16 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 		return await context.Products
 			.AnyAsync(c => c.Name == name && c.Id != id, cancellationToken);
 	}
+
+	public async Task<decimal> GetProductPriceAsync(int id)
+	{
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		                   SELECT NewPrice
+		                   FROM Products
+		                   WHERE Id = @productId;
+		                   """;
+		var price = await connection.QueryAsync<decimal>(sqlQuery, new { productId = id });
+		return price.First();
+	}
 }

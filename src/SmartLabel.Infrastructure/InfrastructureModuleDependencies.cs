@@ -92,9 +92,7 @@ public static class InfrastructureModuleDependencies
 							return Task.CompletedTask;
 						}
 					};
-				}
-				);
-
+				});
 
 		return services;
 	}
