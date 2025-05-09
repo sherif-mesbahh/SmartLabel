@@ -49,8 +49,8 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                   : InkWell(
                       child: Text(
                         'Save changes',
-                        style: TextStyles.productTitle
-                            (context).copyWith(color: primaryColor),
+                        style: TextStyles.productTitle(context)
+                            .copyWith(color: primaryColor),
                       ),
                       onTap: () {
                         cubit
@@ -73,7 +73,8 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
               InkWell(
                 child: Text(
                   'Discard',
-                  style: TextStyles.productTitle(context).copyWith(color: primaryColor),
+                  style: TextStyles.productTitle(context)
+                      .copyWith(color: primaryColor),
                 ),
                 onTap: () {
                   cubit.bannerDetailsImagesToUpload = [];

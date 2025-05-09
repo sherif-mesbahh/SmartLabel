@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.emailAddress,
                             labelText: 'Email',
-                            hintText: 'Enter your email',
+                            hintText: 'example@yahoo.com',
                             obscureText: false,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.visiblePassword,
                             labelText: 'Password',
-                            hintText: 'Enter your password',
+                            hintText: 'Password',
                             obscureText:
                                 AppCubit.get(context).loginIsPasswordObscured,
                             validator: (value) {

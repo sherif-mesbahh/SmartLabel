@@ -51,8 +51,8 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                   : InkWell(
                       child: Text(
                         'Save changes',
-                        style: TextStyles.productTitle
-                           (context) .copyWith(color: primaryColor),
+                        style: TextStyles.productTitle(context)
+                            .copyWith(color: primaryColor),
                       ),
                       onTap: () {
                         if (nameController.text.isEmpty) {
@@ -98,9 +98,12 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                           return;
                         }
 
-                        if (discount % 1 != 0) {
+                        if (discount % 1 != 0 ||
+                            discount < 0 ||
+                            discount > 100) {
                           Fluttertoast.showToast(
-                            msg: "Discount must be a whole number (e.g., 10).",
+                            msg:
+                                "Discount must be a valid whole number between 0 and 100.",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -121,12 +124,9 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                           discount: discountController.text,
                           price: priceController.text,
                         )
-                            .then((_) {
-                          cubit.productImagesToUpload = [];
-                          cubit.productImagesToDelete = [];
-                          cubit.mainproductImageToUpload = null;
-
-                          cubit.getCategoryProducts(id: categoryId);
+                            .then((_) async {
+                          await cubit.getCategoryProducts(id: categoryId);
+                          await cubit.getProductDetails(id: productId);
                         });
                       },
                     ),
@@ -134,7 +134,8 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
               InkWell(
                 child: Text(
                   'Discard',
-                  style: TextStyles.productTitle(context).copyWith(color: primaryColor),
+                  style: TextStyles.productTitle(context)
+                      .copyWith(color: primaryColor),
                 ),
                 onTap: () {
                   cubit.productImagesToUpload = [];

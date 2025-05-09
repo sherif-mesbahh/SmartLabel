@@ -41,7 +41,7 @@ class ForgotPasswordEmailSection extends StatelessWidget {
                           : false,
                       controller: emailController,
                       labelText: 'Email',
-                      hintText: 'Enter your email',
+                      hintText: 'example@yahoo.com',
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                       showSuffixIcon: false,

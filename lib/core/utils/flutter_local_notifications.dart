@@ -46,8 +46,8 @@ class NotificationHelper {
       ),
 
       // 🖼️ Large icon (optional - make sure you have it in res/drawable/)
-      largeIcon:
-          DrawableResourceAndroidBitmap('@mipmap/launcher_icon'), // or a custom one
+      largeIcon: DrawableResourceAndroidBitmap(
+          '@mipmap/launcher_icon'), // or a custom one
 
       ticker: 'Smart Label Alert',
       visibility:

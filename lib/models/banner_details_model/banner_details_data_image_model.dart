@@ -4,7 +4,8 @@ class BannerDatailsDataImageModel {
 
   BannerDatailsDataImageModel({this.imageId, this.imageUrl});
 
-  factory BannerDatailsDataImageModel.fromJson(Map<String, dynamic> json) => BannerDatailsDataImageModel(
+  factory BannerDatailsDataImageModel.fromJson(Map<String, dynamic> json) =>
+      BannerDatailsDataImageModel(
         imageId: json['imageId'] as int?,
         imageUrl: json['imageUrl'] as String?,
       );

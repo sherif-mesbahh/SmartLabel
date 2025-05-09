@@ -13,8 +13,8 @@ class ApiService {
   ApiService._internal() {
     _dio = Dio(BaseOptions(
       baseUrl: ApiEndpoints.baseUrl,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
       headers: {'Content-Type': 'application/json'},
     ));
 
@@ -75,7 +75,7 @@ class ApiService {
               } catch (e) {
                 print('[DIO] Token refresh failed: $e');
 
-                if (e is DioError) {
+                if (e is DioException) {
                   final statusCode = e.response?.statusCode;
 
                   if (statusCode == 401 || statusCode == 403) {

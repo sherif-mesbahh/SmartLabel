@@ -265,7 +265,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   AppCubit.get(context).getBanners();
                 } else if (state is AddBannerErrorState) {
                   Fluttertoast.showToast(
-                    msg: state.error,
+                    msg: 'Error occured while adding banner, Please try again.',
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     backgroundColor: Colors.red,

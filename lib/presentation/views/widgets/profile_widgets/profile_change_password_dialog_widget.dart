@@ -21,6 +21,27 @@ class _ChangePasswordDialogWidgetState
   late TextEditingController newPasswordController;
   late TextEditingController confirmPasswordController;
 
+  String newPassword = '';
+  bool hasUpper = false;
+  bool hasLower = false;
+  bool hasNumber = false;
+  bool hasMinLength = false;
+  bool hasSpecialChar = false;
+
+  final RegExp _specialCharExp = RegExp(r'[!@#$%^&*(),.?"_:{}|<>]');
+
+  void validatePassword(String value) {
+    setState(() {
+      newPassword = value;
+      hasUpper = RegExp(r'[A-Z]').hasMatch(value);
+      hasLower = RegExp(r'[a-z]').hasMatch(value);
+      hasNumber = RegExp(r'[0-9]').hasMatch(value);
+      hasSpecialChar = _specialCharExp.hasMatch(value);
+
+      hasMinLength = value.length >= 8;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -70,13 +91,16 @@ class _ChangePasswordDialogWidgetState
               ),
             ),
             const SizedBox(height: 12),
+
             // New Password
             TextField(
               keyboardType: TextInputType.visiblePassword,
               controller: newPasswordController,
+              onChanged: validatePassword,
               decoration: InputDecoration(
                 labelText: 'New Password',
                 labelStyle: TextStyles.smallText(context),
+                hintText: 'New Password',
                 hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -92,7 +116,41 @@ class _ChangePasswordDialogWidgetState
                 ),
               ),
             ),
+
+            const SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
+                Wrap(
+                  runSpacing: 6,
+                  children: [
+                    _buildRequirementText(
+                      'Password must be at least 8 characters',
+                      hasMinLength,
+                    ),
+                    _buildRequirementText(
+                      'Must contain at least one uppercase letter (A - Z)',
+                      hasUpper,
+                    ),
+                    _buildRequirementText(
+                      'Must contain at least one lowercase letter (a - z)',
+                      hasLower,
+                    ),
+                    _buildRequirementText(
+                      'Must contain at least one number (0 - 9)',
+                      hasNumber,
+                    ),
+                    _buildRequirementText(
+                        'At least one special character (!, @, #, etc.)',
+                        hasSpecialChar),
+                  ],
+                ),
+              ],
+            ),
+
             const SizedBox(height: 12),
+
             // Confirm Password
             TextField(
               keyboardType: TextInputType.visiblePassword,
@@ -150,6 +208,7 @@ class _ChangePasswordDialogWidgetState
             }
           },
           builder: (context, state) {
+            final canSubmit = hasUpper && hasLower && hasNumber && hasMinLength;
             return state is ChangePasswordLoadingState
                 ? Lottie.asset(
                     'assets/lottie/loading_indicator.json',
@@ -157,17 +216,44 @@ class _ChangePasswordDialogWidgetState
                     height: 50,
                   )
                 : TextButton(
+                    onPressed: canSubmit
+                        ? () {
+                            AppCubit.get(context).changePassword(
+                              currentPassword:
+                                  currentPasswordController.text.trim(),
+                              newPassword: newPasswordController.text.trim(),
+                              confirmPassword:
+                                  confirmPasswordController.text.trim(),
+                            );
+                          }
+                        : null,
                     child:
                         Text('Save', style: TextStyles.productTitle(context)),
-                    onPressed: () {
-                      AppCubit.get(context).changePassword(
-                        currentPassword: currentPasswordController.text.trim(),
-                        newPassword: newPasswordController.text.trim(),
-                        confirmPassword: confirmPasswordController.text.trim(),
-                      );
-                    },
                   );
           },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRequirementText(String text, bool isValid) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          isValid ? Icons.check_circle : Icons.cancel,
+          color: isValid ? Colors.green : Colors.red,
+          size: 12,
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 10,
+              color: isValid ? Colors.green : Colors.red,
+            ),
+          ),
         ),
       ],
     );

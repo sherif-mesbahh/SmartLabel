@@ -353,3 +353,13 @@ class ForgotPasswordChangePasswordErrorState extends AppStates {
 class ChangeThemeState extends AppStates {}
 
 class ReceiveNotificationState extends AppStates {}
+
+class GetNotificationsLoadingState extends AppStates {}
+
+class GetNotificationsSuccessState extends AppStates {}
+
+class GetNotificationsErrorState extends AppStates {
+  String error;
+
+  GetNotificationsErrorState(this.error);
+}

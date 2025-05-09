@@ -78,7 +78,8 @@ class AdminCategoryDetailsEditImageWidget extends StatelessWidget {
           },
           child: Text(
             'Edit Image',
-            style: TextStyles.productTitle(context).copyWith(color: primaryColor),
+            style:
+                TextStyles.productTitle(context).copyWith(color: primaryColor),
           ),
         ),
       ],

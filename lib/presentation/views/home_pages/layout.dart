@@ -4,14 +4,20 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.d
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/custom_app_bar.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/custom_nav_bar.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/layout_drawer_widget.dart';
 
 class Layout extends StatelessWidget {
-  const Layout({super.key});
+  Layout({super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    AppCubit.get(context).scaffoldKey = _scaffoldKey;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      key: _scaffoldKey,
+      endDrawer: LayoutDrawerWidget(),
       appBar: CustomAppBar(),
       body: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {

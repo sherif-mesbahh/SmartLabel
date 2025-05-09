@@ -89,7 +89,8 @@ class BannerDetailsMainImageRowWidget extends StatelessWidget {
           },
           child: Text(
             'Edit Main Image',
-            style: TextStyles.productTitle(context).copyWith(color: primaryColor),
+            style:
+                TextStyles.productTitle(context).copyWith(color: primaryColor),
           ),
         ),
       ],

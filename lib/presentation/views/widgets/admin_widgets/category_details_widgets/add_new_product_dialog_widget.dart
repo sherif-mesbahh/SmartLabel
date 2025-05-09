@@ -222,9 +222,13 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                       }
 
                       final discount = double.tryParse(discountController.text);
-                      if (discount == null || discount % 1 != 0) {
+                      if (discount == null ||
+                          discount % 1 != 0 ||
+                          discount < 0 ||
+                          discount > 100) {
                         Fluttertoast.showToast(
-                          msg: "Discount must be a whole number (e.g., 10).",
+                          msg:
+                              "Discount must be a valid number between 0 and 100.",
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,

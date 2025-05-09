@@ -113,13 +113,11 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                   toastLength: Toast.LENGTH_LONG,
                   timeInSecForIosWeb: 1,
                   fontSize: 16,
-                );
-                widget.cubit
-                    .getCategoryProducts(
-                        id: widget
-                                .cubit.productDetailsModel!.data!.categoryId ??
-                            1)
-                    .then((onValue) {
+                ).then((onValue) {
+                  cubit.productImagesToUpload = [];
+                  cubit.productImagesToDelete = [];
+                  cubit.mainproductImageToUpload = null;
+
                   popNavigator(context);
                 });
               }

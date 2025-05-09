@@ -25,6 +25,7 @@ import 'package:smart_label_software_engineering/models/category_products_model/
 import 'package:smart_label_software_engineering/models/category_search_model/category_search_model.dart';
 import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart';
 import 'package:smart_label_software_engineering/models/login_model/login_model.dart';
+import 'package:smart_label_software_engineering/models/notifications_model/notifications_model.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
 import 'package:smart_label_software_engineering/models/product_search_model/product_search_model.dart';
@@ -604,12 +605,20 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  Future<File> getFileFromServer(String fileName) async {
+  Future<File> getFileFromServer(String imageUrl) async {
     final dir = await getTemporaryDirectory();
-    final filePath = '${dir.path}/$fileName';
-    final file = File(filePath);
 
-    final imageUrl = 'http://smartlabel1.runasp.net/Uploads/$fileName';
+    // Extract *raw* filename from URL (already encoded)
+    final encodedFilename = Uri.parse(imageUrl).pathSegments.last;
+    final decodedFilename =
+        Uri.decodeComponent(encodedFilename); // "images (6).jpg"
+    final safeFilePath = '${dir.path}/$decodedFilename';
+
+    final file = File(safeFilePath);
+
+    print("Downloading from: $imageUrl");
+    print("Saving to: $safeFilePath");
+
     await Dio().download(imageUrl, file.path);
     return file;
   }
@@ -633,17 +642,23 @@ class AppCubit extends Cubit<AppStates> {
     try {
       final accessToken = await SecureTokenStorage.getAccessToken();
       final inputFormat = DateFormat('dd MMM yyyy');
+
+      String? mainImagePath;
+
+      if (mainImage != null) {
+        mainImagePath = mainImage.path;
+      } else {
+        mainImagePath = null;
+      }
       final formData = FormData.fromMap({
         'Id': id,
         'Title': title,
         'Description': description,
         'StartDate': inputFormat.parse(startDate).toIso8601String(),
         'EndDate': inputFormat.parse(endDate).toIso8601String(),
-        'MainImage': mainImage != null
-            ? await MultipartFile.fromFile(mainImage.path)
-            : await MultipartFile.fromFile((await getFileFromServer(
-                    bannerDetailsModel?.data!.mainImage ?? ""))
-                .path),
+        'MainImage': mainImagePath != null
+            ? await MultipartFile.fromFile(mainImagePath)
+            : null,
         'ImagesFiles': imageFiles != []
             ? [
                 for (var image in imageFiles!)
@@ -770,14 +785,19 @@ class AppCubit extends Cubit<AppStates> {
 
     try {
       final accessToken = await SecureTokenStorage.getAccessToken();
+      String? categoryImagePath;
+      if (categoryImage != null) {
+        categoryImagePath = categoryImage.path;
+      } else {
+        categoryImagePath = null;
+      }
+
       final formData = FormData.fromMap({
         'Id': id,
         'Name': name,
-        'Image': categoryImage != null
-            ? await MultipartFile.fromFile(categoryImage.path)
-            : await MultipartFile.fromFile((await getFileFromServer(
-                    categoryProductsModel?.data!.imageUrl ?? ""))
-                .path),
+        'Image': categoryImagePath != null
+            ? await MultipartFile.fromFile(categoryImagePath)
+            : null,
       });
       print(formData.fields);
       log("${formData.fields}");
@@ -931,18 +951,16 @@ class AppCubit extends Cubit<AppStates> {
       final accessToken = await SecureTokenStorage.getAccessToken();
       double price_ = double.tryParse(price)!;
       int discount_ = int.tryParse(discount)!;
+
       String? mainImagePath;
+
       if (mainImage != null) {
         mainImagePath = mainImage.path;
+        print("Using new main image: $mainImagePath");
       } else {
-        final serverFile =
-            await getFileFromServer(productDetailsModel?.data?.mainImage ?? "");
-        if (!File(serverFile.path).existsSync()) {
-          emit(UpdateProductErrorState('Fallback main image file not found.'));
-          return;
-        }
-        mainImagePath = serverFile.path;
+        mainImagePath = null;
       }
+
       final formData = FormData.fromMap({
         'Id': productId,
         'CatId': categoryId,
@@ -950,7 +968,9 @@ class AppCubit extends Cubit<AppStates> {
         'Description': description,
         'OldPrice': price_,
         'Discount': discount_,
-        'MainImage': await MultipartFile.fromFile(mainImagePath),
+        'MainImage': mainImagePath != null
+            ? await MultipartFile.fromFile(mainImagePath)
+            : null,
         'ImagesFiles': imageFiles != []
             ? [
                 for (var image in imageFiles!)
@@ -959,8 +979,6 @@ class AppCubit extends Cubit<AppStates> {
             : [],
         'RemovedImageIds': imagesToDelete != [] ? imagesToDelete : [],
       });
-      print("Sending update for productId: $productId");
-
       print("FormData: ${formData.fields}");
       print("Files: ${formData.files.map((f) => f.key)}");
 
@@ -978,9 +996,11 @@ class AppCubit extends Cubit<AppStates> {
       } else {
         emit(UpdateProductErrorState(
             'Failed with status: ${response.statusCode}'));
+        print("else error: ${formData.fields}");
         log('Failed with status: ${response.statusCode}');
       }
     } catch (e) {
+      print(e);
       if (e is DioException) {
         final response = e.response;
         if (response != null && response.statusCode == 422) {
@@ -1395,4 +1415,28 @@ class AppCubit extends Cubit<AppStates> {
       print("❌ SignalR connection failed: $e");
     }
   }
+
+  bool isAdminPanelLoading = false;
+
+  NotificationsModel? notificationsModel;
+
+  Future<void> getNotifications() async {
+    emit(GetNotificationsLoadingState());
+    try {
+      final response = await ApiService().get(ApiEndpoints.getNotifications);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        notificationsModel = NotificationsModel.fromJson(response.data);
+        emit(GetNotificationsSuccessState());
+      } else {
+        emit(GetNotificationsErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(GetNotificationsErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  GlobalKey<ScaffoldState>? scaffoldKey;
 }

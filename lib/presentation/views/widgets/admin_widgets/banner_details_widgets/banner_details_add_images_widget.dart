@@ -74,7 +74,8 @@ class BannerDetailsAddImagesWidget extends StatelessWidget {
               TextButton(
                 child: Text(
                   'Add Images',
-                  style: TextStyles.productTitle(context).copyWith(color: primaryColor),
+                  style: TextStyles.productTitle(context)
+                      .copyWith(color: primaryColor),
                 ),
                 onPressed: () {
                   showDialog(

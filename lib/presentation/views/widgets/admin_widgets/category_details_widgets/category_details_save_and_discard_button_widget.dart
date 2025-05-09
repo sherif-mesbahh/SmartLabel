@@ -44,8 +44,8 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
                   : InkWell(
                       child: Text(
                         'Save changes',
-                        style: TextStyles.productTitle
-                            (context).copyWith(color: primaryColor),
+                        style: TextStyles.productTitle(context)
+                            .copyWith(color: primaryColor),
                       ),
                       onTap: () {
                         if (nameController.text.length >= 3) {
@@ -75,7 +75,8 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
               InkWell(
                 child: Text(
                   'Discard',
-                  style: TextStyles.productTitle(context).copyWith(color: primaryColor),
+                  style: TextStyles.productTitle(context)
+                      .copyWith(color: primaryColor),
                 ),
                 onTap: () {
                   cubit.mainCategoryImageToUpload = null;

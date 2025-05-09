@@ -26,6 +26,52 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+  bool hasUpper = false;
+  bool hasLower = false;
+  bool hasNumber = false;
+  bool hasSpecialChar = false;
+  bool hasMinLength = false;
+
+  final RegExp specialCharExp = RegExp(r'[!@#$%^&*(),.?"_:{}|<>]');
+
+  void validatePassword(String value) {
+    setState(() {
+      hasUpper = RegExp(r'[A-Z]').hasMatch(value);
+      hasLower = RegExp(r'[a-z]').hasMatch(value);
+      hasNumber = RegExp(r'[0-9]').hasMatch(value);
+      hasSpecialChar = specialCharExp.hasMatch(value);
+      hasMinLength = value.length >= 8;
+    });
+  }
+
+  String? passwordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your password';
+    }
+    if (value.length < 8) return 'Must be at least 8 characters long';
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      return 'Must contain an uppercase letter';
+    }
+    if (!RegExp(r'[a-z]').hasMatch(value)) {
+      return 'Must contain a lowercase letter';
+    }
+    if (!RegExp(r'[0-9]').hasMatch(value)) return 'Must contain a number';
+    if (!specialCharExp.hasMatch(value)) {
+      return 'Must contain a special character';
+    }
+    return null;
+  }
+
+  String? confirmPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your confirm password';
+    }
+    if (value != passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
   @override
   void dispose() {
     firstNameController.dispose();
@@ -129,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             keyboardType: TextInputType.emailAddress,
                             controller: emailController,
                             labelText: 'Email',
-                            hintText: 'Enter your email',
+                            hintText: 'example@yahoo.com',
                             obscureText: false,
                             validator: (value) => value == null || value.isEmpty
                                 ? 'Please enter your email'
@@ -141,12 +187,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             keyboardType: TextInputType.visiblePassword,
                             controller: passwordController,
                             labelText: 'Password',
-                            hintText: 'Enter your password',
+                            hintText: 'Enter your Password',
                             obscureText:
                                 AppCubit.get(context).signUpIsPasswordObscured,
-                            validator: (value) => value == null || value.isEmpty
-                                ? 'Please enter your password'
-                                : null,
+                            onChanged: validatePassword,
+                            validator: passwordValidator,
                             suffixIconOnPressed: () {
                               AppCubit.get(context)
                                   .changeSignUpPasswordVisibility();
@@ -155,6 +200,43 @@ class _SignUpPageState extends State<SignUpPage> {
                                 AppCubit.get(context).signUpPasswordSuffix,
                             showSuffixIcon: true,
                           ),
+                          const SizedBox(height: 10),
+
+                          // Password Strength Indicators
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Wrap(
+                                runSpacing: 6,
+                                children: [
+                                  PasswordStrengthIndicator(
+                                    isValid: hasUpper,
+                                    text:
+                                        'Must contain an uppercase letter (A-Z)',
+                                  ),
+                                  PasswordStrengthIndicator(
+                                    isValid: hasLower,
+                                    text:
+                                        'Must contain a lowercase letter (a-z)',
+                                  ),
+                                  PasswordStrengthIndicator(
+                                    isValid: hasNumber,
+                                    text: 'Must contain a number (0-9)',
+                                  ),
+                                  PasswordStrengthIndicator(
+                                    isValid: hasSpecialChar,
+                                    text:
+                                        'Must contain a special character (!@#%^&*)',
+                                  ),
+                                  PasswordStrengthIndicator(
+                                    isValid: hasMinLength,
+                                    text: 'Must be at least 8 characters long',
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+
                           const SizedBox(height: 16.0),
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.visiblePassword,
@@ -170,12 +252,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               AppCubit.get(context)
                                   .changeSignUpConfirmPasswordVisibility();
                             },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your Confirm Password';
-                              }
-                              return null;
-                            },
+                            validator: confirmPasswordValidator,
                           ),
                           const SizedBox(height: 24.0),
                           CustomButtonWidget(
@@ -214,6 +291,41 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PasswordStrengthIndicator extends StatelessWidget {
+  final bool isValid;
+  final String text;
+
+  const PasswordStrengthIndicator({
+    super.key,
+    required this.isValid,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          isValid ? Icons.check_circle : Icons.cancel,
+          color: isValid ? Colors.green : Colors.red,
+          size: 14,
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 12,
+              color: isValid ? Colors.green : Colors.red,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
