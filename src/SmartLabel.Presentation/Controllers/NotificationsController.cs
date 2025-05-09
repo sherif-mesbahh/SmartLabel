@@ -11,7 +11,7 @@ namespace SmartLabel.Presentation.Controllers
 	[Authorize]
 	public class NotificationsController(ISender sender) : AppControllerBase
 	{
-		[HttpGet("/me")]
+		[HttpGet("me")]
 		public async Task<IActionResult> GetNotifications()
 		{
 			return NewResult(await sender.Send(new GetNotificationsCommand()));

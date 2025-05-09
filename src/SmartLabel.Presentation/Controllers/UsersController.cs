@@ -7,7 +7,7 @@ using SmartLabel.Application.Features.Users.Query.Models;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
-[Route("api")]
+[Route("api/[controller]")]
 [ApiController]
 public class UsersController(ISender sender) : AppControllerBase
 {
