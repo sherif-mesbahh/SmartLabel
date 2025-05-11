@@ -19,6 +19,8 @@ builder.Services
 	.AddInfrastructures(builder.Configuration)
 	.AddApplications();
 
+builder.Services.AddMemoryCache();
+
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
 	options.SuppressModelStateInvalidFilter = true; // Disable the default validation behavior
@@ -26,7 +28,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Smart Label", Version = "v1" });
 
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{

@@ -1,15 +1,21 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
+using SmartLabel.Domain.Helpers;
 using SmartLabel.Domain.Interfaces;
+using System.Security.Claims;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
-public class UpdateProductHandler(IMapper mapper, IProductRepository productRepository, IUserFavProductRepository userFavProductRepository,
-	INotifierService notifierService, IFileService fileService, INotificationRepository notificationRepository, IUnitOfWork unitOfWork)
+public class UpdateProductHandler(IMapper mapper, IProductRepository productRepository, IMemoryCache memoryCache, IHttpContextAccessor httpContextAccessor,
+	IUserFavProductRepository userFavProductRepository,
+	INotifierService notifierService, IFileService fileService,
+	INotificationRepository notificationRepository, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<UpdateProductCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -64,6 +70,8 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 				await notificationRepository.AddNotificationToUsers(message, userIds);
 			}
 			await unitOfWork.SaveChangesAsync(cancellationToken);
+			var userID = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
+			InvalidCache(userID, product.Id);
 			transaction.Commit();
 			return NoContent<string>();
 		}
@@ -72,5 +80,12 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 			transaction.Rollback();
 			return InternalServerError<string>([ex.Message], "Updating product temporarily unavailable");
 		}
+	}
+	private void InvalidCache(string userId, int productId)
+	{
+		memoryCache.Remove($"ProductsUserId-");
+		memoryCache.Remove($"ProductsUserId-{userId}");
+		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
+		memoryCache.Remove($"ProductId-{productId}UserId-");
 	}
 }

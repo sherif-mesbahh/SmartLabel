@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Command.Models;
 using SmartLabel.Application.Repositories;
@@ -8,7 +9,8 @@ using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
-public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IFileService fileService, IUnitOfWork unitOfWork)
+public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IMemoryCache memoryCache,
+	IFileService fileService, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<UpdateBannerCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(UpdateBannerCommand request, CancellationToken cancellationToken)
@@ -50,6 +52,7 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 			}
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			await bannerRepository.UpdateBannerAsync(banner.Id, banner, mainImage);
+			InvalidCache(banner.Id);
 			transaction.Commit();
 			return NoContent<string>();
 		}
@@ -58,5 +61,11 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 			transaction.Rollback();
 			return InternalServerError<string>([ex.Message], "Updating banner temporarily unavailable");
 		}
+	}
+	private void InvalidCache(int id)
+	{
+		memoryCache.Remove($"Banners");
+		memoryCache.Remove($"ActiveBanners");
+		memoryCache.Remove($"Banner-{id}");
 	}
 }

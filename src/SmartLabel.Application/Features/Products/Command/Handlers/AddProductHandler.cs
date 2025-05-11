@@ -1,15 +1,20 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
+using SmartLabel.Domain.Helpers;
 using SmartLabel.Domain.Interfaces;
+using System.Security.Claims;
 
 namespace SmartLabel.Application.Features.Products.Command.Handlers;
 
-public class AddProductHandler(IMapper mapper, IProductRepository repository, IFileService fileService, IUnitOfWork unitOfWork)
+public class AddProductHandler(IMapper mapper, IProductRepository repository, IFileService fileService,
+	IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, IMemoryCache memoryCache)
 	: ResponseHandler, IRequestHandler<AddProductCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(AddProductCommand request, CancellationToken cancellationToken)
@@ -38,6 +43,8 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 			}
 
 			await unitOfWork.SaveChangesAsync(cancellationToken);
+			var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
+			InvalidCache(userId, product.Id);
 			transaction.Commit();
 			return Created<string>($"Product with {product.Id} is added successfully");
 		}
@@ -46,5 +53,12 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 			transaction.Rollback();
 			return InternalServerError<string>([ex.Message], "Adding product temporarily unavailable");
 		}
+	}
+	private void InvalidCache(string? userId, int productId)
+	{
+		memoryCache.Remove($"ProductsUserId-");
+		memoryCache.Remove($"ProductsUserId-{userId}");
+		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
+		memoryCache.Remove($"ProductId-{productId}UserId-");
 	}
 }

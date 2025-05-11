@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Command.Models;
 using SmartLabel.Application.Repositories;
@@ -8,8 +9,9 @@ using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
-public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository, INotificationRepository notificationRepository,
-	IFileService fileService, INotifierService notifierService, IUsersRepository usersRepository, IUnitOfWork unitOfWork)
+public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IMemoryCache memoryCache,
+	INotificationRepository notificationRepository, IFileService fileService,
+	INotifierService notifierService, IUsersRepository usersRepository, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<AddBannerCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(AddBannerCommand request, CancellationToken cancellationToken)
@@ -43,6 +45,7 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 			await notificationRepository.AddNotificationToUsers(message, userIds);
 			await notifierService.SendToAll(message);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
+			InvalidCache(banner.Id);
 			transaction.Commit();
 			return Created<string>($"Banner {banner.Id} created successfully");
 		}
@@ -51,5 +54,11 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 			transaction.Rollback();
 			return InternalServerError<string>([ex.Message], "Adding banner temporarily unavailable");
 		}
+	}
+	private void InvalidCache(int id)
+	{
+		memoryCache.Remove($"Banners");
+		memoryCache.Remove($"ActiveBanners");
+		memoryCache.Remove($"Banner-{id}");
 	}
 }

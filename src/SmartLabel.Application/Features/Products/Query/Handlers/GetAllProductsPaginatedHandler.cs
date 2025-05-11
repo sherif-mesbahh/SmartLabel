@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Products.Query.Models;
 using SmartLabel.Application.Features.Products.Query.Results;
@@ -8,7 +9,8 @@ using SmartLabel.Domain.Helpers;
 using System.Security.Claims;
 
 namespace SmartLabel.Application.Features.Products.Query.Handlers;
-internal sealed class GetAllProductsPaginatedHandler(IProductProcRepository productProcRepository, IHttpContextAccessor httpContextAccessor) : ResponseHandler, IRequestHandler<GetAllProductsPaginatedQuery, PagedList<GetAllProductsDto>>
+internal sealed class GetAllProductsPaginatedHandler(IProductProcRepository productProcRepository, IMemoryCache memoryCache,
+	IHttpContextAccessor httpContextAccessor) : ResponseHandler, IRequestHandler<GetAllProductsPaginatedQuery, PagedList<GetAllProductsDto>>
 {
 	public async Task<PagedList<GetAllProductsDto>> Handle(GetAllProductsPaginatedQuery request, CancellationToken cancellationToken)
 	{
@@ -16,7 +18,7 @@ internal sealed class GetAllProductsPaginatedHandler(IProductProcRepository prod
 		(int totalCount, var pro) = await productProcRepository.GetAllProductsPaged(request, userId);
 		var pageSize = (request.PageSize == 0 ? 10 : request.PageSize);
 		var page = (request.PageNumber == 0 ? 1 : request.PageNumber);
-		var products = PagedList<GetAllProductsDto>.CreateAsync(pro, totalCount, page, pageSize);
-		return await products;
+		var products = await PagedList<GetAllProductsDto>.CreateAsync(pro, totalCount, page, pageSize);
+		return products;
 	}
 }

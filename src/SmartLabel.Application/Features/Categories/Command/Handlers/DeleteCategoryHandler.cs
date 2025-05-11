@@ -1,11 +1,16 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Categories.Command.Models;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Services;
+using SmartLabel.Domain.Helpers;
+using System.Security.Claims;
 
 namespace SmartLabel.Application.Features.Categories.Command.Handlers;
-public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFileService fileService)
+public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFileService fileService,
+	IMemoryCache memoryCache, IHttpContextAccessor httpContextAccessor)
 	: ResponseHandler, IRequestHandler<DeleteCategoryCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
@@ -18,11 +23,19 @@ public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFile
 			var categoryImage = await categoryRepository.GetCategoryImageByIdAsync(request.Id);
 			if (categoryImage is not null) await fileService.DeleteImageAsync(categoryImage);
 			await categoryRepository.DeleteCategoryAsync(request.Id);
+			var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
+			NewMethod(request.Id, userId);
 			return NoContent<string>();
 		}
 		catch (Exception ex)
 		{
 			return InternalServerError<string>([ex.Message], "Deleting category temporarily unavailable");
 		}
+	}
+	private void NewMethod(int categoryId, string? userId)
+	{
+		memoryCache.Remove($"Categories");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-");
 	}
 }
