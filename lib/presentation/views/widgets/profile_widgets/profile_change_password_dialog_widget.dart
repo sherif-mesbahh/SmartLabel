@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -62,7 +63,8 @@ class _ChangePasswordDialogWidgetState
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: Text('Change Password', style: TextStyles.headline2(context)),
+      title: Text(S.of(context).profilePageChangePasswordTitle,
+          style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -73,7 +75,7 @@ class _ChangePasswordDialogWidgetState
               keyboardType: TextInputType.visiblePassword,
               controller: currentPasswordController,
               decoration: InputDecoration(
-                labelText: 'Current Password',
+                labelText: S.of(context).profilePageChangePasswordCurrentPasswordLabel,
                 labelStyle: TextStyles.smallText(context),
                 hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
@@ -98,10 +100,8 @@ class _ChangePasswordDialogWidgetState
               controller: newPasswordController,
               onChanged: validatePassword,
               decoration: InputDecoration(
-                labelText: 'New Password',
+                labelText: S.of(context).profilePageChangePasswordNewPasswordLabel,
                 labelStyle: TextStyles.smallText(context),
-                hintText: 'New Password',
-                hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: greyColor),
@@ -126,23 +126,23 @@ class _ChangePasswordDialogWidgetState
                   runSpacing: 6,
                   children: [
                     _buildRequirementText(
-                      'Password must be at least 8 characters',
+                      S.of(context).passwordValidationMinLength,
                       hasMinLength,
                     ),
                     _buildRequirementText(
-                      'Must contain at least one uppercase letter (A - Z)',
+                      S.of(context).passwordValidationUpperCase,
                       hasUpper,
                     ),
                     _buildRequirementText(
-                      'Must contain at least one lowercase letter (a - z)',
+                      S.of(context).passwordValidationLowerCase,
                       hasLower,
                     ),
                     _buildRequirementText(
-                      'Must contain at least one number (0 - 9)',
+                      S.of(context).passwordValidationNumber,
                       hasNumber,
                     ),
                     _buildRequirementText(
-                        'At least one special character (!, @, #, etc.)',
+                        S.of(context).passwordValidationSpecialChar,
                         hasSpecialChar),
                   ],
                 ),
@@ -156,7 +156,7 @@ class _ChangePasswordDialogWidgetState
               keyboardType: TextInputType.visiblePassword,
               controller: confirmPasswordController,
               decoration: InputDecoration(
-                labelText: 'Confirm Password',
+                labelText: S.of(context).profilePageChangePasswordConfirmPasswordLabel,
                 labelStyle: TextStyles.smallText(context),
                 hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
@@ -178,7 +178,7 @@ class _ChangePasswordDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).cancelButton, style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -188,7 +188,7 @@ class _ChangePasswordDialogWidgetState
             if (state is ChangePasswordSuccessState) {
               Navigator.of(context).pop();
               Fluttertoast.showToast(
-                msg: 'Password changed successfully',
+                msg: S.of(context).passwordChangedSuccessfully,
                 backgroundColor: Colors.green,
                 textColor: secondaryColor,
                 gravity: ToastGravity.BOTTOM,
@@ -228,7 +228,7 @@ class _ChangePasswordDialogWidgetState
                           }
                         : null,
                     child:
-                        Text('Save', style: TextStyles.productTitle(context)),
+                        Text(S.of(context).saveButton, style: TextStyles.productTitle(context)),
                   );
           },
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
@@ -49,28 +50,29 @@ class _ForgotPasswordPasswordsSectionState
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your new password';
+      return S.of(context).forgotPasswordNewPasswordValidation;
     }
-    if (value.length < 8) return 'Must be at least 8 characters long';
+    if (value.length < 8) return S.of(context).passwordValidationMinLength;
     if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return 'Must contain an uppercase letter';
+      return S.of(context).passwordValidationUpperCase;
     }
     if (!RegExp(r'[a-z]').hasMatch(value)) {
-      return 'Must contain a lowercase letter';
+      return S.of(context).passwordValidationLowerCase;
     }
-    if (!RegExp(r'[0-9]').hasMatch(value)) return 'Must contain a number';
+    if (!RegExp(r'[0-9]').hasMatch(value))
+      return S.of(context).passwordValidationNumber;
     if (!specialCharExp.hasMatch(value)) {
-      return 'Must contain a special character';
+      return S.of(context).passwordValidationSpecialChar;
     }
     return null;
   }
 
   String? confirmValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your confirm password';
+      return S.of(context).forgotPasswordConfirmPasswordValidation;
     }
     if (value != widget.newPasswordController.text) {
-      return 'Passwords do not match';
+      return S.of(context).forgotPasswordConfirmPasswordDontMatch;
     }
     return null;
   }
@@ -87,8 +89,8 @@ class _ForgotPasswordPasswordsSectionState
             // New Password Field
             CustomTextFormFieldWidget(
               controller: widget.newPasswordController,
-              hintText: 'Enter your new password',
-              labelText: 'New Password',
+              hintText: S.of(context).forgotPasswordNewPasswordHint,
+              labelText: S.of(context).forgotPasswordNewPasswordLabel,
               obscureText: false,
               suffixIconOnPressed: () {},
               keyboardType: TextInputType.visiblePassword,
@@ -107,23 +109,23 @@ class _ForgotPasswordPasswordsSectionState
                   children: [
                     PasswordStrengthIndicator(
                       isValid: hasUpper,
-                      text: 'Must contain an uppercase letter (A-Z)',
+                      text: S.of(context).passwordValidationUpperCase,
                     ),
                     PasswordStrengthIndicator(
                       isValid: hasLower,
-                      text: 'Must contain a lowercase letter (a-z)',
+                      text: S.of(context).passwordValidationLowerCase,
                     ),
                     PasswordStrengthIndicator(
                       isValid: hasNumber,
-                      text: 'Must contain a number (0-9)',
+                      text: S.of(context).passwordValidationNumber,
                     ),
                     PasswordStrengthIndicator(
                       isValid: hasSpecialChar,
-                      text: 'Must contain a special character e.g. !@#',
+                      text: S.of(context).passwordValidationSpecialChar,
                     ),
                     PasswordStrengthIndicator(
                       isValid: hasMinLength,
-                      text: 'Must be at least 8 characters long',
+                      text: S.of(context).passwordValidationMinLength,
                     ),
                   ],
                 ),
@@ -135,8 +137,8 @@ class _ForgotPasswordPasswordsSectionState
             // Confirm Password Field
             CustomTextFormFieldWidget(
               controller: widget.confirmPasswordController,
-              hintText: 'Enter your confirm password',
-              labelText: 'Confirm Password',
+              hintText: S.of(context).forgotPasswordConfirmPasswordHint,
+              labelText: S.of(context).forgotPasswordConfirmPasswordLabel,
               obscureText: false,
               suffixIconOnPressed: () {},
               keyboardType: TextInputType.visiblePassword,
@@ -179,7 +181,7 @@ class _ForgotPasswordPasswordsSectionState
                                       ),
                                     )
                                   : Text(
-                                      'Submit',
+                                      S.of(context).forgotPasswordSubmitButton,
                                       style: TextStyles.buttonText(context),
                                       textAlign: TextAlign.center,
                                     ),

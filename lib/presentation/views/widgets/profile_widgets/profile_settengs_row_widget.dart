@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 
 class SettingsWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class SettingsWidget extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Settings',
+            S.of(context).profilePageSettings,
             style: TextStyles.cartItemTitle(context),
           ),
           const Spacer(),

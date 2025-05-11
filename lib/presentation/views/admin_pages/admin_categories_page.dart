@@ -71,8 +71,9 @@ class AdminCategoriesPage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: primaryColor,
             leading: IconButton(
-              onPressed: () =>
-                  navigatorAndRemove(context, Layout(), scaleTransition),
+              onPressed: () {
+                navigatorAndRemove(context, Layout(), scaleTransition);
+              },
               icon: const Icon(
                 Icons.arrow_back_outlined,
                 color: secondaryColor,

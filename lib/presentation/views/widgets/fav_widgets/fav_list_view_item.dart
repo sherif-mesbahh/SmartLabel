@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/fav_model/fav_datum.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -122,7 +123,7 @@ class FavListViewItem extends StatelessWidget {
                             cubit.removeFromFav(model: favModel);
                           } else {
                             Fluttertoast.showToast(
-                              msg: 'You must be logged in.',
+                              msg: S.of(context).youMustBeLoggedIn,
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
@@ -148,7 +149,7 @@ class FavListViewItem extends StatelessWidget {
                             cubit.addToFav(model: favModel);
                           } else {
                             Fluttertoast.showToast(
-                              msg: 'You must be logged in.',
+                              msg: S.of(context).youMustBeLoggedIn,
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,

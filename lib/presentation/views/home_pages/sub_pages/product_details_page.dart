@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/product_details_widgets/product_details_images_indicator_widget.dart';
@@ -71,16 +72,9 @@ class ProductDetailsPage extends StatelessWidget {
             );
           },
         ),
-        title: Row(
-          children: [
-            const Image(
-              height: 50,
-              image: AssetImage('assets/images/smart_label_logo.png'),
-            ),
-            const SizedBox(width: 10),
-            Text('Smart Label', style: TextStyles.appBarTitle(context)),
-          ],
-        ),
+        title: Text(S.of(context).productDetails,
+            style: TextStyles.appBarTitle(context)),
+        centerTitle: true,
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: BlocListener<AppCubit, AppStates>(
@@ -95,9 +89,9 @@ class ProductDetailsPage extends StatelessWidget {
             final product = cubit.productDetailsModel?.data;
 
             if (product == null) {
-              return const Center(
+              return Center(
                 child: Text(
-                  'Failed to load product details.',
+                  S.of(context).failedToLoadProductDetails,
                 ),
               );
             }
@@ -151,7 +145,7 @@ class ProductDetailsPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Description:',
+                      S.of(context).productDetailsDescription,
                       style: TextStyles.description(context).copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

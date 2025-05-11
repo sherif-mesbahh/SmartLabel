@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -22,7 +23,7 @@ class ProductDetailsPriceRow extends StatelessWidget {
     return Row(
       children: [
         Text(
-          'Price: ',
+          S.of(context).productDetailsPrice,
           style: TextStyles.productTitle(context).copyWith(
             fontSize: 18,
           ),
@@ -50,7 +51,7 @@ class ProductDetailsPriceRow extends StatelessWidget {
                         AppCubit.get(context).removeFromFav(model: model);
                       } else {
                         Fluttertoast.showToast(
-                          msg: 'You must be logged in.',
+                          msg: S.of(context).youMustBeLoggedIn,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,
@@ -76,7 +77,7 @@ class ProductDetailsPriceRow extends StatelessWidget {
                         AppCubit.get(context).addToFav(model: model);
                       } else {
                         Fluttertoast.showToast(
-                          msg: 'You must be logged in.',
+                          msg: S.of(context).youMustBeLoggedIn,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,

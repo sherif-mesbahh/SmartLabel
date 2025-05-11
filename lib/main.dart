@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/token_refresher.dart';
 import 'package:smart_label_software_engineering/core/themes/themes.dart';
 import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
@@ -9,6 +10,7 @@ import 'package:smart_label_software_engineering/core/utils/flutter_local_notifi
 import 'package:smart_label_software_engineering/core/utils/internet_monitor.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
 import 'package:smart_label_software_engineering/features/splashScreen/presentation/views/splash_screen_page.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -52,8 +54,15 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         final appCubit = context.read<AppCubit>();
         return MaterialApp(
+          locale: Locale('ar'),
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           useInheritedMediaQuery: true,
-          locale: DevicePreview.locale(context),
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,

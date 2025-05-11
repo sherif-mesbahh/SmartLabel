@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/sign_pages/login_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_up_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_settengs_row_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
 class NotLoginWidget extends StatelessWidget {
@@ -19,25 +20,10 @@ class NotLoginWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text(S.of(context).profilePageTitle, style: TextStyles.headline1(context)),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0),
-          child: Row(
-            children: [
-              Text(
-                'Dark Mode',
-                style: TextStyles.cartItemTitle(context),
-              ),
-              const Spacer(),
-              CupertinoSwitch(
-                value:
-                    context.read<AppCubit>().themeMode == ThemeMode.dark,
-                activeTrackColor: primaryColor,
-                onChanged: (val) {
-                  context.read<AppCubit>().toggleTheme(val);
-                },
-              ),
-            ],
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: SettingsWidget(),
         ),
         const SizedBox(height: 12),
         CustomButtonWidget(
@@ -47,7 +33,7 @@ class NotLoginWidget extends StatelessWidget {
           },
           color: primaryColor,
           child: Text(
-            'Sign In',
+            S.of(context).profilePageSignInButton,
             style: TextStyles.buttonText(context),
           ),
         ),
@@ -59,7 +45,7 @@ class NotLoginWidget extends StatelessWidget {
           },
           color: primaryColor,
           child: Text(
-            'Sign Up',
+            S.of(context).profilePageSingUpButton,
             style: TextStyles.buttonText(context),
           ),
         ),

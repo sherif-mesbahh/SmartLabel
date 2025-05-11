@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/products_widgets/custom_slider.dart';
@@ -68,14 +69,15 @@ class ProductsPage extends StatelessWidget {
                 }
 
                 if (products == null) {
-                  return const Center(child: Text('Failed to load products'));
+                  return Center(
+                      child: Text(S.of(context).failedToLoadProducts));
                 }
 
                 if (products.isEmpty) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Center(child: Text('No Products Found')),
+                       Center(child: Text(S.of(context).noProductsFound)),
                     ],
                   );
                 }
@@ -83,7 +85,8 @@ class ProductsPage extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('New Products', style: TextStyles.headline2(context)),
+                    Text(S.of(context).homePageNewProducts,
+                        style: TextStyles.headline2(context)),
                     const SizedBox(height: 10),
                     GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),

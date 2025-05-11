@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/user_details_row_widget.dart';
 
@@ -27,7 +28,7 @@ class UserInformationWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           UserDetailsRowWidget(
-              title: 'First Name',
+              title: S.of(context).profilePageUserInfoFirstName,
               value: AppCubit.get(context)
                       .userInfoModel
                       ?.data
@@ -35,7 +36,7 @@ class UserInformationWidget extends StatelessWidget {
                   ''),
           const SizedBox(height: 12),
           UserDetailsRowWidget(
-            title: 'Last Name',
+            title: S.of(context).profilePageUserInfoLastName,
             value: AppCubit.get(context)
                     .userInfoModel!
                     .data
@@ -44,7 +45,7 @@ class UserInformationWidget extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           UserDetailsRowWidget(
-            title: 'Email',
+            title: S.of(context).profilePageUserInfoEmail,
             value: AppCubit.get(context)
                     .userInfoModel!
                     .data

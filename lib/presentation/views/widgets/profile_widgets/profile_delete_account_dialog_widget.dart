@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -14,7 +15,7 @@ class DeleteAccountDialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: Text('Delete Account', style: TextStyles.headline2(context)),
+      title: Text(S.of(context).profilePageDeleteAccountTitle, style: TextStyles.headline2(context)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -25,7 +26,7 @@ class DeleteAccountDialogWidget extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Are you sure you want to delete your account? This action cannot be undone.',
+            S.of(context).profilePageDeleteAccountText,
             style: TextStyles.productTitle(context).copyWith(color: Colors.red),
             textAlign: TextAlign.center,
           ),
@@ -33,7 +34,7 @@ class DeleteAccountDialogWidget extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).cancelButton, style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -43,7 +44,7 @@ class DeleteAccountDialogWidget extends StatelessWidget {
             if (state is DeleteAccountSuccessState) {
               Navigator.of(context).pop();
               Fluttertoast.showToast(
-                msg: 'Account deleted successfully',
+                msg: S.of(context).accountDeletedSuccessfully,
                 backgroundColor: Colors.green,
                 textColor: secondaryColor,
                 gravity: ToastGravity.BOTTOM,
@@ -71,7 +72,7 @@ class DeleteAccountDialogWidget extends StatelessWidget {
                     height: 50,
                   )
                 : TextButton(
-                    child: Text('Delete',
+                    child: Text(S.of(context).deleteButton,
                         style: TextStyles.productTitle(context)
                             .copyWith(color: Colors.red)),
                     onPressed: () {

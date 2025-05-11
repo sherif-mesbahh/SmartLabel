@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/fav_widgets/fav_list_view_item.dart';
@@ -30,14 +31,18 @@ class FavPage extends StatelessWidget {
         }
         if (AppCubit.get(context).isLogin) {
           if (favData == null) {
-            return const Center(child: Text('Failed to load favorites'));
+            return Center(
+                child: Text(S.of(context).failedToLoadFavourites,
+                    style: TextStyle(color: Colors.red)));
           }
 
           if (favData.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Center(child: Text('No favorites found')),
+                Center(
+                    child: Text(S.of(context).noFavouritesFound,
+                        style: TextStyle(color: Colors.red))),
               ],
             );
           }
@@ -61,9 +66,10 @@ class FavPage extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Center(
+              Center(
                 child: Text(
-                  'Please login first',
+                  S.of(context).pleaseLoginFirst,
+                  style: TextStyle(color: Colors.red),
                 ),
               ),
             ],

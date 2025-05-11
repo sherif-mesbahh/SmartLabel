@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -39,7 +40,7 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: Text('Edit Profile', style: TextStyles.headline2(context)),
+      title: Text(S.of(context).profilePageEditProfileTitle, style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -50,7 +51,7 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
               controller: firstNameController,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
-                labelText: 'First Name',
+                labelText: S.of(context).profilePageEditProfileFirstNameLabel,
                 labelStyle: TextStyles.smallText(context),
                 hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
@@ -73,7 +74,7 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
               keyboardType: TextInputType.name,
               controller: lastNameController,
               decoration: InputDecoration(
-                labelText: 'Last Name',
+                labelText: S.of(context).profilePageEditProfileLastNameLabel,
                 labelStyle: TextStyles.smallText(context),
                 hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
@@ -95,7 +96,7 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).cancelButton, style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -105,7 +106,7 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
             if (state is UpdateProfileSuccessState) {
               Navigator.of(context).pop();
               Fluttertoast.showToast(
-                msg: 'Profile updated successfully',
+                msg: S.of(context).profileUpdatedSuccessfully,
                 backgroundColor: Colors.green,
                 textColor: secondaryColor,
                 gravity: ToastGravity.BOTTOM,
@@ -136,7 +137,7 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
                   )
                 : TextButton(
                     child:
-                        Text('Save', style: TextStyles.productTitle(context)),
+                        Text(S.of(context).saveButton, style: TextStyles.productTitle(context)),
                     onPressed: () {
                       AppCubit.get(context).updateProfile(
                         firstName: firstNameController.text.trim(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/forgot_password_widgets/forgot_password_code_section_widget.dart';
@@ -40,14 +41,14 @@ class ForgotPasswordEmailSection extends StatelessWidget {
                           ? true
                           : false,
                       controller: emailController,
-                      labelText: 'Email',
-                      hintText: 'example@yahoo.com',
+                      labelText: S.of(context).forgotPasswordEmailLabel,
+                      hintText: S.of(context).forgotPasswordEmailHint,
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                       showSuffixIcon: false,
                       validator: (p0) {
                         if (p0 == null || p0.isEmpty) {
-                          return 'Please enter your email';
+                          return S.of(context).forgotPasswordEmailValidation;
                         }
                         return null;
                       },

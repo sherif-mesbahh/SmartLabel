@@ -39,6 +39,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_local_notifications: ^19.1.0
+  flutter_localizations:
+        sdk: flutter
   flutter_secure_storage: ^9.2.4
   fluttertoast: ^8.2.12
   google_fonts: ^6.2.1
@@ -105,3 +107,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true

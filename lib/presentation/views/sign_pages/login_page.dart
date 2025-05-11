@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/layout.dart';
@@ -64,7 +65,9 @@ class _LoginPageState extends State<LoginPage> {
                       navigatorAndRemove(context, Layout(), slideRightToLeft);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Login Success'),
+                          content: Text(
+                            S.of(context).loginSuccess,
+                          ),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -79,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                         SnackBar(
                           content: Text(
                             isEmailNotConfirmed
-                                ? 'Email is not confirmed, please check your email'
+                                ? S.of(context).emailisnotconfirmedpleasecheckyouremail
                                 : state.error,
                             style: const TextStyle(color: Colors.white),
                           ),
@@ -111,12 +114,12 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.emailAddress,
-                            labelText: 'Email',
-                            hintText: 'example@yahoo.com',
+                            labelText: S.of(context).loginEmailLabel,
+                            hintText: S.of(context).loginEmailHint,
                             obscureText: false,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your email';
+                                return S.of(context).loginEmailValidation;
                               }
                               return null;
                             },
@@ -126,13 +129,13 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 16.0),
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.visiblePassword,
-                            labelText: 'Password',
-                            hintText: 'Password',
+                            labelText: S.of(context).loginPasswordLabel,
+                            hintText: S.of(context).loginPasswordHint,
                             obscureText:
                                 AppCubit.get(context).loginIsPasswordObscured,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
+                                return S.of(context).loginPasswordValidation;
                               }
                               return null;
                             },
@@ -157,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                               },
                               child: Text(
-                                'Forgot Password?',
+                                S.of(context).loginForgotPassword,
                                 style: TextStyles.smallText(context),
                               ),
                             ),
@@ -176,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             color: primaryColor,
                             child: Text(
-                              'Sign in',
+                              S.of(context).signInButton,
                               style: TextStyles.buttonText(context)
                                   .copyWith(color: secondaryColor),
                             ),
@@ -184,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 8.0),
                           TextButton(
                             child: Text(
-                              'go back',
+                              S.of(context).loginGoBackButton,
                               style: TextStyles.smallText(context),
                             ),
                             onPressed: () {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -52,7 +53,7 @@ class ForgotPasswordCheckCodeButton extends StatelessWidget {
                           ),
                         )
                       : Text(
-                          'Submit',
+                          S.of(context).forgotPasswordSubmitButton,
                           style: TextStyles.buttonText(context),
                           textAlign: TextAlign.center,
                         ),

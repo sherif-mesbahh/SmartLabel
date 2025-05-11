@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/category_products_model/category_products_data_product_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -110,7 +111,7 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                             AppCubit.get(context).removeFromFav(model: model);
                           } else {
                             Fluttertoast.showToast(
-                              msg: 'You must be logged in.',
+                              msg: S.of(context).youMustBeLoggedIn,
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
@@ -136,7 +137,7 @@ class GridViewCategoryProductsPageItem extends StatelessWidget {
                             AppCubit.get(context).addToFav(model: model);
                           } else {
                             Fluttertoast.showToast(
-                              msg: 'You must be logged in.',
+                              msg: S.of(context).youMustBeLoggedIn,
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,

@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_page.dart';
@@ -47,8 +48,15 @@ class ProfilePage extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Failed to load user info'),
-                const SizedBox(height: 16),
+                Text(S.of(context).profilePageTitle,
+                    style: TextStyles.headline1(context)),
+                const SizedBox(height: 12),
+                Text(S.of(context).failedToLoadUserInfo),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: SettingsWidget(),
+                ),
+                const SizedBox(height: 12),
                 CustomButtonWidget(
                   onTap: () {
                     AppCubit.get(context).logout().then((onValue) {
@@ -57,7 +65,7 @@ class ProfilePage extends StatelessWidget {
                   },
                   color: primaryColor,
                   child: Text(
-                    'Sign out',
+                    S.of(context).profilePageSingOutButton,
                     style: TextStyles.buttonText(context),
                   ),
                 )
@@ -70,9 +78,13 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Text('Profile', style: TextStyles.headline1(context)),
+                  Text(S.of(context).profilePageTitle,
+                      style: TextStyles.headline1(context)),
                   // Edit Profile Button
-                  EditInfoButtonWidget(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: EditInfoButtonWidget(),
+                  ),
                   // User Details
                   UserInformationWidget(),
                   SizedBox(height: 0),
@@ -95,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                     onTap: () {
                       AppCubit.get(context).logout().then((onValue) {
                         Fluttertoast.showToast(
-                          msg: 'Sign out successfully',
+                          msg: S.of(context).signOutSuccessfully,
                           backgroundColor: Colors.green,
                           textColor: secondaryColor,
                           gravity: ToastGravity.BOTTOM,
@@ -107,7 +119,7 @@ class ProfilePage extends StatelessWidget {
                     },
                     color: primaryColor,
                     child: Text(
-                      'Sign out',
+                      S.of(context).profilePageSingOutButton,
                       style: TextStyles.buttonText(context),
                     ),
                   ),

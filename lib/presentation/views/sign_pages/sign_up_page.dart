@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/sign_pages/sign_page.dart';
@@ -46,28 +47,30 @@ class _SignUpPageState extends State<SignUpPage> {
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return S.of(context).signupPasswordValidation;
     }
-    if (value.length < 8) return 'Must be at least 8 characters long';
+    if (value.length < 8) return S.of(context).passwordValidationMinLength;
     if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return 'Must contain an uppercase letter';
+      return S.of(context).passwordValidationUpperCase;
     }
     if (!RegExp(r'[a-z]').hasMatch(value)) {
-      return 'Must contain a lowercase letter';
+      return S.of(context).passwordValidationLowerCase;
     }
-    if (!RegExp(r'[0-9]').hasMatch(value)) return 'Must contain a number';
+    if (!RegExp(r'[0-9]').hasMatch(value)) {
+      return S.of(context).passwordValidationNumber;
+    }
     if (!specialCharExp.hasMatch(value)) {
-      return 'Must contain a special character';
+      return S.of(context).passwordValidationSpecialChar;
     }
     return null;
   }
 
   String? confirmPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your confirm password';
+      return S.of(context).signupConfirmPasswordValidation;
     }
     if (value != passwordController.text) {
-      return 'Passwords do not match';
+      return S.of(context).signupConfirmPasswordDontMatchValidation;
     }
     return null;
   }
@@ -113,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            'Registration successful! We have sent a confirmation email to your address.',
+                            S.of(context).registrationsuccessfulWehavesentaconfirmationemailtoyouraddress,
                           ),
                           backgroundColor: Colors.green,
                         ),
@@ -150,11 +153,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.name,
                             controller: firstNameController,
-                            labelText: 'First Name',
-                            hintText: 'Enter your first name',
+                            labelText: S.of(context).signupFirstNameLabel,
+                            hintText: S.of(context).signupFirstNameHint,
                             obscureText: false,
                             validator: (value) => value == null || value.isEmpty
-                                ? 'Please enter your first name'
+                                ? S.of(context).signupFirstNameValidation
                                 : null,
                             suffixIconOnPressed: () {},
                           ),
@@ -162,11 +165,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.name,
                             controller: lastNameController,
-                            labelText: 'Last Name',
-                            hintText: 'Enter your last name',
+                            labelText: S.of(context).signupLastNameLabel,
+                            hintText: S.of(context).signupLastNameHint,
                             obscureText: false,
                             validator: (value) => value == null || value.isEmpty
-                                ? 'Please enter your last name'
+                                ? S.of(context).signupLastNameValidation
                                 : null,
                             suffixIconOnPressed: () {},
                           ),
@@ -174,11 +177,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.emailAddress,
                             controller: emailController,
-                            labelText: 'Email',
-                            hintText: 'example@yahoo.com',
+                            labelText: S.of(context).signupEmailLabel,
+                            hintText: S.of(context).signupEmailHint,
                             obscureText: false,
                             validator: (value) => value == null || value.isEmpty
-                                ? 'Please enter your email'
+                                ? S.of(context).signupEmailValidation
                                 : null,
                             suffixIconOnPressed: () {},
                           ),
@@ -186,8 +189,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.visiblePassword,
                             controller: passwordController,
-                            labelText: 'Password',
-                            hintText: 'Enter your Password',
+                            labelText: S.of(context).signupPasswordLabel,
+                            hintText: S.of(context).signupPasswordHint,
                             obscureText:
                                 AppCubit.get(context).signUpIsPasswordObscured,
                             onChanged: validatePassword,
@@ -211,26 +214,32 @@ class _SignUpPageState extends State<SignUpPage> {
                                 children: [
                                   PasswordStrengthIndicator(
                                     isValid: hasUpper,
-                                    text:
-                                        'Must contain an uppercase letter (A-Z)',
+                                    text: S
+                                        .of(context)
+                                        .passwordValidationUpperCase,
                                   ),
                                   PasswordStrengthIndicator(
                                     isValid: hasLower,
-                                    text:
-                                        'Must contain a lowercase letter (a-z)',
+                                    text: S
+                                        .of(context)
+                                        .passwordValidationLowerCase,
                                   ),
                                   PasswordStrengthIndicator(
                                     isValid: hasNumber,
-                                    text: 'Must contain a number (0-9)',
+                                    text:
+                                        S.of(context).passwordValidationNumber,
                                   ),
                                   PasswordStrengthIndicator(
                                     isValid: hasSpecialChar,
-                                    text:
-                                        'Must contain a special character (!@#%^&*)',
+                                    text: S
+                                        .of(context)
+                                        .passwordValidationSpecialChar,
                                   ),
                                   PasswordStrengthIndicator(
                                     isValid: hasMinLength,
-                                    text: 'Must be at least 8 characters long',
+                                    text: S
+                                        .of(context)
+                                        .passwordValidationMinLength,
                                   ),
                                 ],
                               ),
@@ -241,8 +250,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           CustomTextFormFieldWidget(
                             keyboardType: TextInputType.visiblePassword,
                             controller: confirmPasswordController,
-                            labelText: 'Confirm Password',
-                            hintText: 'Enter your Confirm Password',
+                            labelText: S.of(context).signupConfirmPasswordLabel,
+                            hintText: S.of(context).signupConfirmPasswordHint,
                             obscureText: AppCubit.get(context)
                                 .signUpIsConfirmPasswordObscured,
                             showSuffixIcon: true,
@@ -270,7 +279,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                             color: primaryColor,
                             child: Text(
-                              'Sign up',
+                              S.of(context).signupButton,
                               style: TextStyles.buttonText(context)
                                   .copyWith(color: secondaryColor),
                             ),
@@ -278,8 +287,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           const SizedBox(height: 8.0),
                           TextButton(
                             onPressed: () => popNavigator(context),
-                            child: Text('go back',
-                                style: TextStyles.smallText(context)),
+                            child: Text(
+                              S.of(context).signupGoBackButton,
+                              style: TextStyles.smallText(context),
+                            ),
                           ),
                         ],
                       ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/forgot_password_widgets/forgot_password_app_bar_widget.dart';
@@ -47,7 +48,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               listener: (context, state) {
                 if (state is ForgotPasswordSendCodeSuccessState) {
                   Fluttertoast.showToast(
-                    msg: 'Code sent successfully, check your email',
+                    msg: S.of(context).codesentsuccessfullycheckyouremail,
                     backgroundColor: Colors.green,
                     textColor: secondaryColor,
                     gravity: ToastGravity.BOTTOM,
@@ -69,7 +70,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 }
                 if (state is ForgotPasswordVerifyCodeSuccessState) {
                   Fluttertoast.showToast(
-                    msg: 'Code Verified Successfully',
+                    msg: S.of(context).codeVerifiedSuccessfully,
                     backgroundColor: Colors.green,
                     textColor: secondaryColor,
                     gravity: ToastGravity.BOTTOM,
@@ -91,7 +92,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 }
                 if (state is ForgotPasswordChangePasswordSuccessState) {
                   Fluttertoast.showToast(
-                    msg: 'Password Changed Successfully',
+                    msg: S.of(context).passwordChangedSuccessfully,
                     backgroundColor: Colors.green,
                     textColor: secondaryColor,
                     gravity: ToastGravity.BOTTOM,

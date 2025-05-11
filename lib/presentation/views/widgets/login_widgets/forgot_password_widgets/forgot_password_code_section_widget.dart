@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/forgot_password_widgets/forgot_password_check_code_button_widget.dart';
@@ -41,14 +42,14 @@ class ForgotPasswordCodeSection extends StatelessWidget {
                             ? true
                             : false,
                         controller: codeController,
-                        hintText: 'Enter your code',
-                        labelText: 'Code',
+                        hintText: S.of(context).forgotPasswordCodeHint,
+                        labelText: S.of(context).forgotPasswordCodeLabel,
                         obscureText: false,
                         suffixIconOnPressed: () {},
                         keyboardType: TextInputType.number,
                         validator: (p0) {
                           if (p0 == null || p0.isEmpty) {
-                            return 'Please enter your code';
+                            return S.of(context).forgotPasswordCodeValidation;
                           }
                           return null;
                         },

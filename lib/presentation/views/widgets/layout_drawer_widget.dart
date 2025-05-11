@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 
 class LayoutDrawerWidget extends StatelessWidget {
@@ -19,7 +20,8 @@ class LayoutDrawerWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Settings', style: TextStyles.headline1(context)),
+              Text(S.of(context).profilePageSideMenuTitle,
+                  style: TextStyles.headline1(context)),
               const SizedBox(height: 24),
 
               // Dark Mode Toggle
@@ -30,7 +32,7 @@ class LayoutDrawerWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'Dark Mode',
+                      S.of(context).profilePageSideMenuDarkMode,
                       style: TextStyles.cartItemTitle(context),
                     ),
                     const Spacer(),
@@ -50,7 +52,8 @@ class LayoutDrawerWidget extends StatelessWidget {
               // Change Language
               ListTile(
                 leading: Icon(Icons.language, color: primaryColor),
-                title: Text('Change Language',
+                title: Text(
+                    S.of(context).profilePageSideMenuChangeLanguageTitle,
                     style: TextStyles.cartItemTitle(context)),
                 onTap: () {
                   Navigator.pop(context);
@@ -58,18 +61,24 @@ class LayoutDrawerWidget extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text('Select Language'),
+                      title: Text(S
+                          .of(context)
+                          .profilePageSideMenuChangeLanguageDialogTitle),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ListTile(
-                            title: const Text('English'),
+                            title: Text(S
+                                .of(context)
+                                .profilePageSideMenuChangeLanguageDialogEnglish),
                             onTap: () {
                               Navigator.pop(context);
                             },
                           ),
                           ListTile(
-                            title: const Text('Arabic'),
+                            title: Text(S
+                                .of(context)
+                                .profilePageSideMenuChangeLanguageDialogArabic),
                             onTap: () {
                               Navigator.pop(context);
                             },
@@ -85,21 +94,24 @@ class LayoutDrawerWidget extends StatelessWidget {
               // About Us
               ListTile(
                 leading: Icon(Icons.info_outline, color: primaryColor),
-                title:
-                    Text('About Us', style: TextStyles.cartItemTitle(context)),
+                title: Text(S.of(context).profilePageSideMenuAboutUsTitle,
+                    style: TextStyles.cartItemTitle(context)),
                 onTap: () {
                   Navigator.pop(context);
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text('About Us'),
-                      content: const Text(
-                        'Smart Label is a next-gen pricing and inventory platform for retailers.\n\nVersion: 1.0.0\n© 2025 Smart Label Inc.',
+                      title: Text(
+                          S.of(context).profilePageSideMenuAboutUsDialogTitle),
+                      content: Text(
+                        S.of(context).profilePageSideMenuAboutUsDialogText,
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('OK'),
+                          child: Text(S
+                              .of(context)
+                              .profilePageSideMenuAboutUsDialogButton),
                         ),
                       ],
                     ),

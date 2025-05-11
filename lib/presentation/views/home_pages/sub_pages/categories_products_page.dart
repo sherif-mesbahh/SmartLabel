@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/categories_widgets/grid_view_category_products_page_item.dart';
@@ -22,17 +23,9 @@ class CategoriesProductsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Image(
-              height: 50,
-              width: 50,
-              image: AssetImage('assets/images/smart_label_logo.png'),
-            ),
-            Text('Smart Label', style: TextStyles.appBarTitle(context)),
-          ],
-        ),
+        title: Text(S.of(context).categoryProducts,
+            style: TextStyles.appBarTitle(context)),
+        centerTitle: true,
         backgroundColor: primaryColor,
         leading: IconButton(
           onPressed: () => popNavigator(context),
@@ -62,11 +55,15 @@ class CategoriesProductsPage extends StatelessWidget {
           }
 
           if (products == null) {
-            return const Center(child: Text('Failed to load products'));
+            return Center(
+                child: Text(S.of(context).failedToLoadCategoryProducts,
+                    style: TextStyle(color: Colors.red)));
           }
 
           if (products.isEmpty) {
-            return const Center(child: Text('No Products Found'));
+            return Center(
+                child: Text(S.of(context).noCategoryProductsFoundInThisCategory,
+                    style: TextStyle(color: Colors.red)));
           }
 
           return SingleChildScrollView(
