@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_banner_details_page.dart';
@@ -48,18 +49,26 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                     )
                   : InkWell(
                       child: Text(
-                        'Save changes',
+                        S.of(context).editBannerSaveButton,
                         style: TextStyles.productTitle(context)
                             .copyWith(color: primaryColor),
                       ),
                       onTap: () {
+                        print(startDateController.text);
+                        print(endDateController.text);
+                        String fixedStart =
+                            normalizeArabicDateToUtc(startDateController.text);
+                        String fixedEnd =
+                            normalizeArabicDateToUtc(endDateController.text);
+                        print(fixedStart);
+                        print(fixedEnd);
                         cubit
                             .updateBanner(
                           id: widget.bannerId,
                           title: titleController.text,
                           description: descController.text,
-                          startDate: startDateController.text,
-                          endDate: endDateController.text,
+                          startDate: fixedStart,
+                          endDate: fixedEnd,
                           mainImage: cubit.mainBannerImageToUpload,
                           imageFiles: cubit.bannerDetailsImagesToUpload,
                           imagesToDelete: cubit.bannerDetailsImagesToDelete,
@@ -72,7 +81,7 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
               // Discard
               InkWell(
                 child: Text(
-                  'Discard',
+                  S.of(context).editBannerDiscardButton,
                   style: TextStyles.productTitle(context)
                       .copyWith(color: primaryColor),
                 ),
@@ -88,5 +97,30 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String normalizeArabicDateToUtc(String input) {
+    // Convert Arabic numerals to English
+    const arabicToEnglishDigits = {
+      '٠': '0',
+      '١': '1',
+      '٢': '2',
+      '٣': '3',
+      '٤': '4',
+      '٥': '5',
+      '٦': '6',
+      '٧': '7',
+      '٨': '8',
+      '٩': '9',
+    };
+
+    String englishDate = input.split('').map((char) {
+      return arabicToEnglishDigits[char] ?? char;
+    }).join();
+
+    // Parse, add one hour, and return formatted string
+    final parsed = DateTime.parse(englishDate);
+    final updated = parsed.add(Duration(hours: 0));
+    return updated.toUtc().toIso8601String();
   }
 }

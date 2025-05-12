@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -40,7 +41,8 @@ class _AddBannersDialogWidgetState
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: Text('Add Banner', style: TextStyles.headline2(context)),
+      title: Text(S.of(context).editBannerAddImagesDialogTitle,
+          style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -52,7 +54,7 @@ class _AddBannersDialogWidgetState
                 backgroundColor: primaryColor,
               ),
               child: Text(
-                "Pick Banner Images",
+                S.of(context).editBannerAddImagesDialogPickBannreImages,
                 style: TextStyles.buttonText(context).copyWith(
                   fontSize: 12,
                 ),
@@ -70,7 +72,8 @@ class _AddBannersDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).editBannerAddImagesDialogCancelButton,
+              style: TextStyles.productTitle(context)),
           onPressed: () {
             AppCubit.get(context).getBannerDetails(
               id: widget.bannerId,
@@ -81,7 +84,8 @@ class _AddBannersDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text('Apply', style: TextStyles.productTitle(context)),
+            child: Text(S.of(context).editBannerAddImagesDialogApplyButton,
+                style: TextStyles.productTitle(context)),
             onPressed: () {
               AppCubit.get(context)
                   .bannerDetailsImagesToUpload

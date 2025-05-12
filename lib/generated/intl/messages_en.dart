@@ -25,6 +25,50 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Account Deleted Successfully",
     ),
+    "addBannerButton": MessageLookupByLibrary.simpleMessage("Add Banner"),
+    "addBannerDialogBannerApply": MessageLookupByLibrary.simpleMessage("Apply"),
+    "addBannerDialogBannerCancel": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
+    "addBannerDialogBannerDescription": MessageLookupByLibrary.simpleMessage(
+      "Description",
+    ),
+    "addBannerDialogBannerEndDate": MessageLookupByLibrary.simpleMessage(
+      "End Date:",
+    ),
+    "addBannerDialogBannerPickBannerImages":
+        MessageLookupByLibrary.simpleMessage("Pick Banner Images"),
+    "addBannerDialogBannerPickMainImage": MessageLookupByLibrary.simpleMessage(
+      "Pick Main Image",
+    ),
+    "addBannerDialogBannerSelectDate": MessageLookupByLibrary.simpleMessage(
+      "Select Date",
+    ),
+    "addBannerDialogBannerStartDate": MessageLookupByLibrary.simpleMessage(
+      "Start Date:",
+    ),
+    "addBannerDialogBannerTitle": MessageLookupByLibrary.simpleMessage("Title"),
+    "addBannerDialogTitle": MessageLookupByLibrary.simpleMessage("Add Banner"),
+    "adminPanel": MessageLookupByLibrary.simpleMessage("Admin Panel"),
+    "allBanners": MessageLookupByLibrary.simpleMessage("All Banners"),
+    "allCategories": MessageLookupByLibrary.simpleMessage("All Categories"),
+    "areYouSureYouWantToDeleteThisBanner": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this Banner?",
+    ),
+    "bannerAddedSuccessfuly": MessageLookupByLibrary.simpleMessage(
+      "Banner added successfully.",
+    ),
+    "bannerBannerImagesValidation": MessageLookupByLibrary.simpleMessage(
+      "Please select at least one image.",
+    ),
+    "bannerConfirmDeletion": MessageLookupByLibrary.simpleMessage(
+      "Confirm Deletion",
+    ),
+    "bannerDeleteCancelButton": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "bannerDeleteDeleteButton": MessageLookupByLibrary.simpleMessage("Delete"),
+    "bannerDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Banner Deleted Successfully",
+    ),
     "bannerDetails": MessageLookupByLibrary.simpleMessage("Banner Details"),
     "bannerDetailsDescription": MessageLookupByLibrary.simpleMessage(
       "Description:",
@@ -34,7 +78,25 @@ class MessageLookup extends MessageLookupByLibrary {
       "Start Date:",
     ),
     "bannerDetailsTitle": MessageLookupByLibrary.simpleMessage("Title:"),
+    "bannerMainImageValidation": MessageLookupByLibrary.simpleMessage(
+      "Please select a main image.",
+    ),
+    "bannerStartAndEndDateValidation": MessageLookupByLibrary.simpleMessage(
+      "Start and end dates must be selected.",
+    ),
+    "bannerStartDateMustBeBeforeEndDate": MessageLookupByLibrary.simpleMessage(
+      "Start date must be before end date.",
+    ),
+    "bannerTitleValidation": MessageLookupByLibrary.simpleMessage(
+      "Title must not be empty.",
+    ),
+    "bannerUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Banner Updated Successfully",
+    ),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "categoryDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Category Deleted successfully",
+    ),
     "categoryProducts": MessageLookupByLibrary.simpleMessage(
       "Category Products",
     ),
@@ -45,10 +107,54 @@ class MessageLookup extends MessageLookupByLibrary {
       "Code sent successfully, check your email",
     ),
     "deleteButton": MessageLookupByLibrary.simpleMessage("Delete"),
+    "editBannerAddImagesButton": MessageLookupByLibrary.simpleMessage(
+      "Add Images",
+    ),
+    "editBannerAddImagesDialogApplyButton":
+        MessageLookupByLibrary.simpleMessage("Apply"),
+    "editBannerAddImagesDialogCancelButton":
+        MessageLookupByLibrary.simpleMessage("Cancel"),
+    "editBannerAddImagesDialogPickBannreImages":
+        MessageLookupByLibrary.simpleMessage("Pick Banner Images"),
+    "editBannerAddImagesDialogTitle": MessageLookupByLibrary.simpleMessage(
+      "Add Images",
+    ),
+    "editBannerDescriptionText": MessageLookupByLibrary.simpleMessage(
+      "Description",
+    ),
+    "editBannerDetails": MessageLookupByLibrary.simpleMessage("Banner Details"),
+    "editBannerDialogApplyButton": MessageLookupByLibrary.simpleMessage(
+      "Apply",
+    ),
+    "editBannerDialogPickMainImage": MessageLookupByLibrary.simpleMessage(
+      "Pick main image",
+    ),
+    "editBannerDiscardButton": MessageLookupByLibrary.simpleMessage("Discard"),
+    "editBannerEndDateText": MessageLookupByLibrary.simpleMessage("End Date"),
+    "editBannerMainImageButton": MessageLookupByLibrary.simpleMessage(
+      "Edit Main Image",
+    ),
+    "editBannerSaveButton": MessageLookupByLibrary.simpleMessage(
+      "Save Changes",
+    ),
+    "editBannerStartDateText": MessageLookupByLibrary.simpleMessage(
+      "Start Date",
+    ),
+    "editBannerTitleText": MessageLookupByLibrary.simpleMessage("Title"),
+    "editUsersButton": MessageLookupByLibrary.simpleMessage("Edit Users"),
     "emailisnotconfirmedpleasecheckyouremail":
         MessageLookupByLibrary.simpleMessage(
           "Email is not confirmed, please check your email",
         ),
+    "errorAddingBanner": MessageLookupByLibrary.simpleMessage(
+      "Error occured while adding banner, Please try again.",
+    ),
+    "errorDeletingBanner": MessageLookupByLibrary.simpleMessage(
+      "Error while Deleting Banner, try again",
+    ),
+    "errorDeletingCategory": MessageLookupByLibrary.simpleMessage(
+      "Error while Deleting Category, try again",
+    ),
     "failedToLoadBannerDetails": MessageLookupByLibrary.simpleMessage(
       "Failed to load banner details",
     ),
@@ -60,6 +166,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "failedToLoadFavourites": MessageLookupByLibrary.simpleMessage(
       "Failed to load favorites",
+    ),
+    "failedToLoadNotifications": MessageLookupByLibrary.simpleMessage(
+      "Failed to load notifications",
     ),
     "failedToLoadProductDetails": MessageLookupByLibrary.simpleMessage(
       "Failed to load product details.",
@@ -112,6 +221,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Forgot Password",
     ),
     "homePageNewProducts": MessageLookupByLibrary.simpleMessage("New Products"),
+    "isAdminNow": MessageLookupByLibrary.simpleMessage("is admin now"),
+    "isNoLongerAdmin": MessageLookupByLibrary.simpleMessage(
+      "is no longer admin",
+    ),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage("example@yahoo.com"),
     "loginEmailLabel": MessageLookupByLibrary.simpleMessage("Email"),
     "loginEmailValidation": MessageLookupByLibrary.simpleMessage(
@@ -127,6 +240,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter your password",
     ),
     "loginSuccess": MessageLookupByLibrary.simpleMessage("Login Success"),
+    "makeAdmin": MessageLookupByLibrary.simpleMessage("Make Admin"),
+    "manageAdminRules": MessageLookupByLibrary.simpleMessage(
+      "Manage Admin Roles",
+    ),
+    "manageAdminText": MessageLookupByLibrary.simpleMessage(
+      "Enter the user\'s email to add or remove admin access.",
+    ),
     "navBarCategories": MessageLookupByLibrary.simpleMessage("Categories"),
     "navBarFav": MessageLookupByLibrary.simpleMessage("Favourites"),
     "navBarHome": MessageLookupByLibrary.simpleMessage("Home"),
@@ -141,9 +261,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "noFavouritesFound": MessageLookupByLibrary.simpleMessage(
       "No favorites found",
     ),
+    "noItemsFoundWithThisName": MessageLookupByLibrary.simpleMessage(
+      "No items found with this name",
+    ),
+    "noNotificationsFound": MessageLookupByLibrary.simpleMessage(
+      "No notifications found",
+    ),
     "noProductsFound": MessageLookupByLibrary.simpleMessage(
       "No Products Found",
     ),
+    "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Password Changed Successfully",
     ),
@@ -247,7 +374,33 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Registration successful! We have sent a confirmation email to your address.",
         ),
+    "removeAdmin": MessageLookupByLibrary.simpleMessage("Remove Admin"),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
+    "search": MessageLookupByLibrary.simpleMessage("Search"),
+    "searchCategoriesLabel": MessageLookupByLibrary.simpleMessage("Categories"),
+    "searchForAnyItem": MessageLookupByLibrary.simpleMessage(
+      "Search for any item",
+    ),
+    "searchHint": MessageLookupByLibrary.simpleMessage("Search"),
+    "searchLabel": MessageLookupByLibrary.simpleMessage("Search"),
+    "searchOrderByAsc": MessageLookupByLibrary.simpleMessage("asc"),
+    "searchOrderByDesc": MessageLookupByLibrary.simpleMessage("desc"),
+    "searchProductsLabel": MessageLookupByLibrary.simpleMessage("Products"),
+    "searchSortCategoriesByDefault": MessageLookupByLibrary.simpleMessage(
+      "default",
+    ),
+    "searchSortCategoriesByName": MessageLookupByLibrary.simpleMessage("name"),
+    "searchSortProductsByDefault": MessageLookupByLibrary.simpleMessage(
+      "default",
+    ),
+    "searchSortProductsByName": MessageLookupByLibrary.simpleMessage("name"),
+    "searchSortProductsByPrice": MessageLookupByLibrary.simpleMessage("price"),
+    "searchValidation": MessageLookupByLibrary.simpleMessage(
+      "Please enter a search term",
+    ),
+    "setMainBannerImage": MessageLookupByLibrary.simpleMessage(
+      "Set Main Banner Image",
+    ),
     "signInButton": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Sign Out Successfully",
@@ -294,6 +447,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "signupPasswordLabel": MessageLookupByLibrary.simpleMessage("Password"),
     "signupPasswordValidation": MessageLookupByLibrary.simpleMessage(
       "Please enter your password",
+    ),
+    "thereIsNoBanners": MessageLookupByLibrary.simpleMessage(
+      "There is no Banners",
+    ),
+    "userEmailLabel": MessageLookupByLibrary.simpleMessage("User Email"),
+    "userEmailValidation": MessageLookupByLibrary.simpleMessage(
+      "Please enter user email",
     ),
     "youMustBeLoggedIn": MessageLookupByLibrary.simpleMessage(
       "You must be logged in.",

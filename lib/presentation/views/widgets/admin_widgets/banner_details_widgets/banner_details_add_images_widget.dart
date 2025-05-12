@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/banner_details_widgets/add_banner_details_images_dialog_widget.dart';
@@ -73,7 +74,7 @@ class BannerDetailsAddImagesWidget extends StatelessWidget {
               const SizedBox(height: 12.0),
               TextButton(
                 child: Text(
-                  'Add Images',
+                  S.of(context).editBannerAddImagesButton,
                   style: TextStyles.productTitle(context)
                       .copyWith(color: primaryColor),
                 ),

@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_data_image_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -43,10 +44,11 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
       titleController.text = banner.title ?? "";
       descController.text = banner.description ?? "";
       startDateController.text = banner.startDate != null
-          ? DateFormat('dd MMM yyyy').format(banner.startDate!)
+          ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(banner.startDate!)
           : "";
+
       endDateController.text = banner.endDate != null
-          ? DateFormat('dd MMM yyyy').format(banner.endDate!)
+          ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(banner.endDate!)
           : "";
     }
     titleController.addListener(_onTextChanged);
@@ -85,7 +87,7 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
         listener: (context, state) {
           if (state is UpdateBannerSuccessState) {
             Fluttertoast.showToast(
-              msg: 'Banner Updated Successfully',
+              msg: S.of(context).bannerUpdatedSuccessfully,
               backgroundColor: Colors.green,
               textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,
@@ -121,9 +123,9 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
               [];
 
           if (banner == null) {
-            return const Center(
+            return Center(
               child: Text(
-                "Failed to load banner details",
+                S.of(context).failedToLoadBannerDetails,
                 style: TextStyle(color: Colors.red),
               ),
             );

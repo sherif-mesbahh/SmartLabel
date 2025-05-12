@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 
 class BannerDetailsStartDateTextField extends StatelessWidget {
   const BannerDetailsStartDateTextField({
@@ -17,7 +18,7 @@ class BannerDetailsStartDateTextField extends StatelessWidget {
       controller: startDateController,
       readOnly: true,
       decoration: InputDecoration(
-        labelText: 'Start Date',
+        labelText: S.of(context).editBannerStartDateText,
         labelStyle: TextStyles.smallText(context),
         hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(
@@ -41,9 +42,29 @@ class BannerDetailsStartDateTextField extends StatelessWidget {
               firstDate: DateTime(2000),
               lastDate: DateTime(2100),
             );
+
             if (pickedDate != null) {
-              final formatted = DateFormat('dd MMM yyyy').format(pickedDate);
-              startDateController.text = formatted;
+              final pickedTime = await showTimePicker(
+                context: context,
+                initialTime: TimeOfDay.now(),
+              );
+
+              if (pickedTime != null) {
+                final combinedDateTime = DateTime(
+                  pickedDate.year,
+                  pickedDate.month,
+                  pickedDate.day,
+                  pickedTime.hourOfPeriod +
+                      (pickedTime.period == DayPeriod.pm
+                          ? 12
+                          : 0), // Handle AM/PM conversion
+                  pickedTime.minute,
+                );
+
+                final formatted = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    .format(combinedDateTime);
+                startDateController.text = formatted;
+              }
             }
           },
         ),

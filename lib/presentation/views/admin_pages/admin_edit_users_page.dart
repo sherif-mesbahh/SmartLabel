@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
@@ -42,7 +43,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
         ),
         centerTitle: true,
         title: Text(
-          'Edit Users',
+          S.of(context).editUsersButton,
           style: TextStyles.appBarTitle(context),
         ),
       ),
@@ -61,7 +62,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                 const SizedBox(height: 16),
                 // Manage Admin Roles
                 Text(
-                  'Manage Admin Roles',
+                  S.of(context).manageAdminRules,
                   style: TextStyles.headline2(context).copyWith(fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
@@ -69,7 +70,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                 const SizedBox(height: 8),
                 // Enter the user's email to add or remove admin access
                 Text(
-                  'Enter the user\'s email to add or remove admin access.',
+                  S.of(context).manageAdminText,
                   style: TextStyles.cartItemTitle(context).copyWith(
                     fontSize: 16,
                   ),
@@ -98,13 +99,13 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                         CustomTextFormFieldWidget(
                           controller: emailController,
                           hintText: 'example@yahoo.com',
-                          labelText: 'User Email',
+                          labelText: S.of(context).userEmailLabel,
                           obscureText: false,
                           suffixIconOnPressed: () {},
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter user email';
+                              return S.of(context).userEmailValidation;
                             }
                             return null;
                           },
@@ -114,7 +115,8 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                           listener: (context, state) {
                             if (state is MakeAdminSuccessState) {
                               Fluttertoast.showToast(
-                                msg: '${emailController.text} is admin now',
+                                msg:
+                                    '${emailController.text} ${S.of(context).isAdminNow}',
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 2,
@@ -139,7 +141,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                             if (state is DeleteAdminSuccessState) {
                               Fluttertoast.showToast(
                                 msg:
-                                    '${emailController.text} is no longer admin',
+                                    '${emailController.text} ${S.of(context).isNoLongerAdmin}',
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 2,
@@ -184,7 +186,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                                           : FittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: Text(
-                                                'Make Admin',
+                                                S.of(context).makeAdmin,
                                                 style: TextStyles.buttonText(
                                                     context),
                                               ),
@@ -212,7 +214,7 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
                                         : FittedBox(
                                             fit: BoxFit.scaleDown,
                                             child: Text(
-                                              'Remove Admin',
+                                              S.of(context).removeAdmin,
                                               style: TextStyles.buttonText(
                                                   context),
                                             ),

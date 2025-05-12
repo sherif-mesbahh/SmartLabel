@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
@@ -21,8 +22,9 @@ class _SearchPageState extends State<SearchPage> {
   final formKey = GlobalKey<FormState>();
 
   String selectedType = 'Products';
-  String selectedSort = 'default';
-  String selectedOrder = 'asc';
+  late String selectedSort;
+  late String selectedOrder;
+  bool _isInitialized = false;
 
   @override
   void dispose() {
@@ -31,18 +33,28 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    AppCubit.get(context).getProductSearch(
-      name: searchController.text,
-      sortType: 'id',
-      orderType: 'asc',
-    );
-    AppCubit.get(context).getCategorySearch(
-      name: searchController.text,
-      sortType: 'id',
-      orderType: 'asc',
-    );
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // This ensures the block runs only once
+    if (!_isInitialized) {
+      selectedSort = S.of(context).searchSortProductsByDefault;
+      selectedOrder = S.of(context).searchOrderByAsc;
+
+      final cubit = AppCubit.get(context);
+      cubit.getProductSearch(
+        name: searchController.text,
+        sortType: 'id',
+        orderType: 'asc',
+      );
+      cubit.getCategorySearch(
+        name: searchController.text,
+        sortType: 'id',
+        orderType: 'asc',
+      );
+
+      _isInitialized = true;
+    }
   }
 
   @override
@@ -65,30 +77,32 @@ class _SearchPageState extends State<SearchPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ChoiceChip(
-                        label: Text('Products'),
+                        label: Text(S.of(context).searchProductsLabel),
                         selected: selectedType == 'Products',
                         selectedColor: primaryColor,
                         onSelected: (selected) {
                           if (selected) {
                             setState(() {
                               selectedType = 'Products';
-                              selectedSort = 'default';
-                              selectedOrder = 'asc';
+                              selectedSort =
+                                  S.of(context).searchSortProductsByDefault;
+                              selectedOrder = S.of(context).searchOrderByAsc;
                             });
                           }
                         },
                       ),
                       const SizedBox(width: 10),
                       ChoiceChip(
-                        label: Text('Categories'),
+                        label: Text(S.of(context).searchCategoriesLabel),
                         selected: selectedType == 'Categories',
                         selectedColor: primaryColor,
                         onSelected: (selected) {
                           if (selected) {
                             setState(() {
                               selectedType = 'Categories';
-                              selectedSort = 'default';
-                              selectedOrder = 'asc';
+                              selectedSort =
+                                  S.of(context).searchSortCategoriesByDefault;
+                              selectedOrder = S.of(context).searchOrderByAsc;
                             });
                           }
                         },
@@ -103,8 +117,20 @@ class _SearchPageState extends State<SearchPage> {
                       DropdownButton<String>(
                         value: selectedSort,
                         items: (selectedType == 'Products'
-                                ? ['default', 'name', 'price']
-                                : ['default', 'name'])
+                                ? [
+                                    S.of(context).searchSortProductsByDefault,
+                                    S.of(context).searchSortProductsByName,
+                                    S.of(context).searchSortProductsByPrice,
+                                    // 'default',
+                                    // 'name',
+                                    // 'price',
+                                  ]
+                                : [
+                                    S.of(context).searchSortCategoriesByDefault,
+                                    S.of(context).searchSortCategoriesByName,
+                                    // 'default',
+                                    // 'name',
+                                  ])
                             .map((sortOption) => DropdownMenuItem(
                                   value: sortOption,
                                   child: Text(
@@ -118,23 +144,33 @@ class _SearchPageState extends State<SearchPage> {
                           setState(() {
                             selectedSort = newValue!;
                           });
+                          final isDefault = selectedSort ==
+                                  S.of(context).searchSortProductsByDefault ||
+                              selectedSort ==
+                                  S.of(context).searchSortCategoriesByDefault;
+                          final isPrice = selectedSort ==
+                              S.of(context).searchSortProductsByPrice;
+                          final sortKey = isDefault
+                              ? 'id'
+                              : (isPrice ? 'new-price' : 'name');
+
                           if (selectedType == 'Products') {
                             await cubit.getProductSearch(
                               name: searchController.text,
-                              sortType: selectedSort == 'default'
-                                  ? 'id'
-                                  : selectedSort == 'price'
-                                      ? 'new-price'
-                                      : selectedSort,
-                              orderType: selectedOrder,
+                              sortType: sortKey,
+                              orderType: selectedOrder ==
+                                      S.of(context).searchOrderByAsc
+                                  ? 'asc'
+                                  : 'desc',
                             );
                           } else {
                             await cubit.getCategorySearch(
                               name: searchController.text,
-                              sortType: selectedSort == 'default'
-                                  ? 'id'
-                                  : selectedSort,
-                              orderType: selectedOrder,
+                              sortType: sortKey,
+                              orderType: selectedOrder ==
+                                      S.of(context).searchOrderByAsc
+                                  ? 'asc'
+                                  : 'desc',
                             );
                           }
                         },
@@ -142,7 +178,12 @@ class _SearchPageState extends State<SearchPage> {
                       const SizedBox(width: 10),
                       DropdownButton<String>(
                         value: selectedOrder,
-                        items: ['asc', 'desc']
+                        items: [
+                          S.of(context).searchOrderByAsc,
+                          S.of(context).searchOrderByDesc,
+                          // 'asc',
+                          // 'desc',
+                        ]
                             .map((orderOption) => DropdownMenuItem(
                                   value: orderOption,
                                   child: Text(orderOption),
@@ -152,23 +193,31 @@ class _SearchPageState extends State<SearchPage> {
                           setState(() {
                             selectedOrder = newValue!;
                           });
+                          final isDefault = selectedSort ==
+                                  S.of(context).searchSortProductsByDefault ||
+                              selectedSort ==
+                                  S.of(context).searchSortCategoriesByDefault;
+                          final isPrice = selectedSort ==
+                              S.of(context).searchSortProductsByPrice;
+
+                          final sortKey = isDefault
+                              ? 'id'
+                              : (isPrice ? 'new-price' : 'name');
+                          final orderKey =
+                              selectedOrder == S.of(context).searchOrderByAsc
+                                  ? 'asc'
+                                  : 'desc';
                           if (selectedType == 'Products') {
                             await cubit.getProductSearch(
                               name: searchController.text,
-                              sortType: selectedSort == 'default'
-                                  ? 'id'
-                                  : selectedSort == 'price'
-                                      ? 'new-price'
-                                      : selectedSort,
-                              orderType: selectedOrder,
+                              sortType: sortKey,
+                              orderType: orderKey,
                             );
                           } else {
                             await cubit.getCategorySearch(
                               name: searchController.text,
-                              sortType: selectedSort == 'default'
-                                  ? 'id'
-                                  : selectedSort,
-                              orderType: selectedOrder,
+                              sortType: sortKey,
+                              orderType: orderKey,
                             );
                           }
                         },
@@ -181,13 +230,13 @@ class _SearchPageState extends State<SearchPage> {
                   CustomTextFormFieldWidget(
                     keyboardType: TextInputType.text,
                     controller: searchController,
-                    hintText: 'Search $selectedType',
-                    labelText: 'Search',
+                    hintText: S.of(context).searchHint,
+                    labelText: S.of(context).searchLabel,
                     obscureText: false,
                     suffixIconOnPressed: () {},
                     validator: (p0) {
                       if (p0!.isEmpty) {
-                        return 'Please enter $selectedType name';
+                        return S.of(context).searchValidation;
                       }
                       return null;
                     },

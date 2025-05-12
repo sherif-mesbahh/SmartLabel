@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -31,23 +32,63 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
   final picker = ImagePicker();
 
   Future<void> pickStartDate() async {
-    final picked = await showDatePicker(
+    final DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2020),
       lastDate: DateTime(2100),
     );
-    if (picked != null) setState(() => startDate = picked);
+
+    if (date != null) {
+      final TimeOfDay? time = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+
+      if (time != null) {
+        final DateTime combined = DateTime(
+          date.year,
+          date.month,
+          date.day,
+          time.hourOfPeriod + (time.period == DayPeriod.pm ? 12 : 0),
+          time.minute,
+        );
+
+        setState(() {
+          startDate = combined;
+        });
+      }
+    }
   }
 
   Future<void> pickEndDate() async {
-    final picked = await showDatePicker(
+    final DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2020),
       lastDate: DateTime(2100),
     );
-    if (picked != null) setState(() => endDate = picked);
+
+    if (date != null) {
+      final TimeOfDay? time = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+
+      if (time != null) {
+        final DateTime combined = DateTime(
+          date.year,
+          date.month,
+          date.day,
+          time.hourOfPeriod + (time.period == DayPeriod.pm ? 12 : 0),
+          time.minute,
+        );
+
+        setState(() {
+          endDate = combined;
+        });
+      }
+    }
   }
 
   Future<void> pickMainImage() async {
@@ -64,14 +105,14 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
 
   String formatDateTimeForRequest(DateTime? date) {
     return date != null
-        ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date)
-        : 'Select Date';
+        ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 'en').format(date)
+        : S.of(context).addBannerDialogBannerSelectDate;
   }
 
   String formatDateTimeForDisplay(DateTime? date) {
     return date != null
         ? DateFormat.yMMMd().add_jm().format(date)
-        : 'Select Date';
+        : S.of(context).addBannerDialogBannerSelectDate;
   }
 
   @override
@@ -88,18 +129,20 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
       builder: (context, state) {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          title: Text('Add Banner', style: TextStyles.headline2(context)),
+          title: Text(S.of(context).addBannerDialogTitle,
+              style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                SizedBox(height: 8),
                 // Title
                 TextField(
                   keyboardType: TextInputType.text,
                   controller: titleController,
                   decoration: InputDecoration(
-                    labelText: 'Title',
+                    labelText: S.of(context).addBannerDialogBannerTitle,
                     labelStyle: TextStyles.smallText(context),
                     hintStyle: TextStyles.smallText(context),
                     border: OutlineInputBorder(
@@ -123,7 +166,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   controller: descController,
                   maxLines: 3,
                   decoration: InputDecoration(
-                    labelText: 'Description',
+                    labelText: S.of(context).addBannerDialogBannerDescription,
                     labelStyle: TextStyles.smallText(context),
                     hintStyle: TextStyles.smallText(context),
                     border: OutlineInputBorder(
@@ -149,7 +192,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Start Date:',
+                            S.of(context).addBannerDialogBannerStartDate,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -176,7 +219,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'End Date:',
+                            S.of(context).addBannerDialogBannerEndDate,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -207,7 +250,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                     backgroundColor: primaryColor,
                   ),
                   child: Text(
-                    "Pick Main Image",
+                    S.of(context).addBannerDialogBannerPickMainImage,
                     style: TextStyles.buttonText(context).copyWith(
                       fontSize: 12,
                     ),
@@ -225,7 +268,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                     backgroundColor: primaryColor,
                   ),
                   child: Text(
-                    "Pick Banner Images",
+                    S.of(context).addBannerDialogBannerPickBannerImages,
                     style: TextStyles.buttonText(context).copyWith(
                       fontSize: 12,
                     ),
@@ -244,7 +287,8 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
           actions: [
             // Cancel
             TextButton(
-              child: Text('Cancel', style: TextStyles.productTitle(context)),
+              child: Text(S.of(context).addBannerDialogBannerCancel,
+                  style: TextStyles.productTitle(context)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -254,7 +298,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
               listener: (context, state) {
                 if (state is AddBannerSuccessState) {
                   Fluttertoast.showToast(
-                    msg: "Banner added successfully.",
+                    msg: S.of(context).bannerAddedSuccessfuly,
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     backgroundColor: Colors.green,
@@ -265,7 +309,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                   AppCubit.get(context).getBanners();
                 } else if (state is AddBannerErrorState) {
                   Fluttertoast.showToast(
-                    msg: 'Error occured while adding banner, Please try again.',
+                    msg: S.of(context).errorAddingBanner,
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     backgroundColor: Colors.red,
@@ -281,13 +325,13 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                       height: 100,
                     )
                   : TextButton(
-                      child: Text('Apply',
+                      child: Text(S.of(context).addBannerDialogBannerApply,
                           style: TextStyles.productTitle(context)),
                       onPressed: () {
                         // 1. Validate title
                         if (titleController.text.trim().isEmpty) {
                           Fluttertoast.showToast(
-                            msg: "Title must not be empty.",
+                            msg: S.of(context).bannerTitleValidation,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -300,7 +344,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                         // 2. Validate dates
                         if (startDate == null || endDate == null) {
                           Fluttertoast.showToast(
-                            msg: "Start and end dates must be selected.",
+                            msg: S.of(context).bannerStartAndEndDateValidation,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -312,7 +356,9 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
 
                         if (!startDate!.isBefore(endDate!)) {
                           Fluttertoast.showToast(
-                            msg: "Start date must be before end date.",
+                            msg: S
+                                .of(context)
+                                .bannerStartDateMustBeBeforeEndDate,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -325,7 +371,18 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                         // 3. Validate main image
                         if (mainImage == null) {
                           Fluttertoast.showToast(
-                            msg: "Please select a main image.",
+                            msg: S.of(context).bannerMainImageValidation,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+                        if (bannerImages.isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: S.of(context).bannerBannerImagesValidation,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -337,6 +394,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                         final formattedStart =
                             formatDateTimeForRequest(startDate);
                         final formattedEnd = formatDateTimeForRequest(endDate);
+                        print(formattedStart);
                         AppCubit.get(context).addBanner(
                           title: titleController.text,
                           description: descController.text,

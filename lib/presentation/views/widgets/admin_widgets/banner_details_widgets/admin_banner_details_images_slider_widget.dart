@@ -115,8 +115,6 @@ class _AdminBannerDetailsImagesSliderWidgetState
                                       .add(image.imageId!);
                                 }
                                 AppCubit.get(context).emit(AppUpdateState());
-                                debugPrint(
-                                    "Deleted image ID: ${image.imageId} — Total deleted: $deletedImageIds");
                               }
                             },
                           ),

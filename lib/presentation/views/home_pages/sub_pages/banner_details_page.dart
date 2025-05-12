@@ -14,7 +14,7 @@ class BannerDetailsPage extends StatelessWidget {
 
   String _formatDate(DateTime? date) {
     if (date == null) return "N/A";
-    return DateFormat('dd MMM yyyy').format(date);
+    return DateFormat('dd MMM yyyy, hh:mm a').format(date);
   }
 
   @override
@@ -35,7 +35,7 @@ class BannerDetailsPage extends StatelessWidget {
                   .toList() ??
               [];
           if (banner == null) {
-            return  Center(
+            return Center(
               child: Text(
                 S.of(context).failedToLoadBannerDetails,
               ),
@@ -51,19 +51,23 @@ class BannerDetailsPage extends StatelessWidget {
                 if (bannerImages.isNotEmpty)
                   ActiveBannerDetailsImageSlider(bannerImages: bannerImages),
                 const SizedBox(height: 16.0),
-                Text(S.of(context).bannerDetailsTitle, style: TextStyles.productTitle(context)),
+                Text(S.of(context).bannerDetailsTitle,
+                    style: TextStyles.productTitle(context)),
                 Text(banner.title ?? "No title provided",
                     style: TextStyles.description(context)),
                 const SizedBox(height: 12.0),
-                Text(S.of(context).bannerDetailsStartDate, style: TextStyles.productTitle(context)),
+                Text(S.of(context).bannerDetailsStartDate,
+                    style: TextStyles.productTitle(context)),
                 Text(_formatDate(banner.startDate),
                     style: TextStyles.description(context)),
                 const SizedBox(height: 12.0),
-                Text(S.of(context).bannerDetailsEndDate, style: TextStyles.productTitle(context)),
+                Text(S.of(context).bannerDetailsEndDate,
+                    style: TextStyles.productTitle(context)),
                 Text(_formatDate(banner.endDate),
                     style: TextStyles.description(context)),
                 const SizedBox(height: 12.0),
-                Text(S.of(context).bannerDetailsDescription, style: TextStyles.productTitle(context)),
+                Text(S.of(context).bannerDetailsDescription,
+                    style: TextStyles.productTitle(context)),
                 Text(
                   banner.description?.toString().trim().isEmpty == true
                       ? "No description provided"

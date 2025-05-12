@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/themes/themes.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/notification_widgets/notification_item_widget.dart';
@@ -29,7 +30,7 @@ class _NotificatioonsPageState extends State<NotificatioonsPage> {
         backgroundColor: primaryColor,
         centerTitle: true,
         title: Text(
-          'Notifications',
+          S.of(context).notifications,
           style: TextStyles.appBarTitle(context),
         ),
         leading: IconButton(
@@ -46,8 +47,8 @@ class _NotificatioonsPageState extends State<NotificatioonsPage> {
           final cubit = AppCubit.get(context);
 
           if (!cubit.isLogin) {
-            return const Center(
-                child: Text("You are not logged in",
+            return Center(
+                child: Text(S.of(context).youMustBeLoggedIn,
                     style: TextStyle(color: Colors.red)));
           }
 
@@ -62,9 +63,12 @@ class _NotificatioonsPageState extends State<NotificatioonsPage> {
           }
 
           if (state is GetNotificationsErrorState) {
-            return const Center(
-                child: Text("Failed to load notifications",
-                    style: TextStyle(color: Colors.red)));
+            return Center(
+              child: Text(
+                S.of(context).failedToLoadNotifications,
+                style: TextStyle(color: Colors.red),
+              ),
+            );
           }
 
           if (state is GetNotificationsSuccessState ||
@@ -80,9 +84,12 @@ class _NotificatioonsPageState extends State<NotificatioonsPage> {
             });
 
             if (notifications.isEmpty) {
-              return const Center(
-                  child: Text("No notifications found",
-                      style: TextStyle(color: Colors.red)));
+              return  Center(
+                child: Text(
+                  S.of(context).noNotificationsFound,
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
             }
 
             return ListView.builder(

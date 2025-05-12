@@ -538,12 +538,19 @@ class AppCubit extends Cubit<AppStates> {
 
     try {
       final accessToken = await SecureTokenStorage.getAccessToken();
+      final parsedStartDate = DateTime.parse(startDate);
+      final parsedEndDate = DateTime.parse(endDate);
+
+      final formatedStartDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 'en')
+          .format(parsedStartDate);
+      final formatedEndDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 'en')
+          .format(parsedEndDate);
 
       final formData = FormData.fromMap({
         'Title': title,
         'Description': description,
-        'StartDate': startDate,
-        'EndDate': endDate,
+        'StartDate': formatedStartDate,
+        'EndDate': formatedEndDate,
         'MainImage': await MultipartFile.fromFile(mainImage.path),
         'ImagesFiles': [
           for (var image in imageFiles)
@@ -562,6 +569,8 @@ class AppCubit extends Cubit<AppStates> {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         emit(AddBannerSuccessState());
+        print(formData.fields);
+        log("${formData.fields}");
       } else {
         emit(AddBannerErrorState('Failed with status: ${response.statusCode}'));
         log('Failed with status: ${response.statusCode}');
@@ -641,7 +650,13 @@ class AppCubit extends Cubit<AppStates> {
 
     try {
       final accessToken = await SecureTokenStorage.getAccessToken();
-      final inputFormat = DateFormat('dd MMM yyyy');
+      final parsedStartDate = DateTime.parse(startDate);
+      final parsedEndDate = DateTime.parse(endDate);
+
+      final formatedStartDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 'en')
+          .format(parsedStartDate);
+      final formatedEndDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 'en')
+          .format(parsedEndDate);
 
       String? mainImagePath;
 
@@ -654,8 +669,8 @@ class AppCubit extends Cubit<AppStates> {
         'Id': id,
         'Title': title,
         'Description': description,
-        'StartDate': inputFormat.parse(startDate).toIso8601String(),
-        'EndDate': inputFormat.parse(endDate).toIso8601String(),
+        'StartDate': formatedStartDate,
+        'EndDate': formatedEndDate,
         'MainImage': mainImagePath != null
             ? await MultipartFile.fromFile(mainImagePath)
             : null,

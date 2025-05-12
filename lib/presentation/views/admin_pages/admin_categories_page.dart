@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_edit_users_page.dart';
@@ -22,7 +23,7 @@ class AdminCategoriesPage extends StatelessWidget {
       listener: (context, state) {
         if (state is DeleteBannerSuccessState) {
           Fluttertoast.showToast(
-            msg: 'Banner Deleted Successfully',
+            msg: S.of(context).bannerDeletedSuccessfully,
             backgroundColor: Colors.green,
             textColor: secondaryColor,
             gravity: ToastGravity.BOTTOM,
@@ -33,7 +34,7 @@ class AdminCategoriesPage extends StatelessWidget {
         }
         if (state is DeleteBannerErrorState) {
           Fluttertoast.showToast(
-            msg: 'Error while Deleting Banner, try again',
+            msg: S.of(context).errorDeletingBanner,
             backgroundColor: Colors.red,
             textColor: secondaryColor,
             gravity: ToastGravity.BOTTOM,
@@ -44,7 +45,7 @@ class AdminCategoriesPage extends StatelessWidget {
         }
         if (state is DeleteCategorySuccessState) {
           Fluttertoast.showToast(
-            msg: 'Category Deleted successfully',
+            msg:S.of(context).categoryDeletedSuccessfully,
             backgroundColor: Colors.green,
             textColor: secondaryColor,
             gravity: ToastGravity.BOTTOM,
@@ -55,7 +56,7 @@ class AdminCategoriesPage extends StatelessWidget {
         }
         if (state is DeleteCategoryErrorState) {
           Fluttertoast.showToast(
-            msg: state.error,
+            msg:S.of(context).errorDeletingCategory,
             backgroundColor: Colors.red,
             textColor: secondaryColor,
             gravity: ToastGravity.BOTTOM,
@@ -82,7 +83,7 @@ class AdminCategoriesPage extends StatelessWidget {
             ),
             centerTitle: true,
             title: Text(
-              'Admin Panel',
+              S.of(context).adminPanel,
               style: TextStyles.appBarTitle(context),
             ),
           ),
@@ -98,7 +99,7 @@ class AdminCategoriesPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'All Banners',
+                        S.of(context).allBanners,
                         style: TextStyles.headline2(context),
                       ),
                       Spacer(),
@@ -111,7 +112,7 @@ class AdminCategoriesPage extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          'Edit Users',
+                          S.of(context).editUsersButton,
                           style: TextStyles.buttonText(context).copyWith(
                             color: primaryColor,
                             fontSize: 16,
@@ -126,7 +127,7 @@ class AdminCategoriesPage extends StatelessWidget {
                   AppCubit.get(context).bannersModel?.data?.isEmpty ?? false
                       ? Center(
                           child: Text(
-                            'There is no Banners',
+                            S.of(context).thereIsNoBanners,
                             style: TextStyles.productTitle(context),
                           ),
                         )
@@ -143,13 +144,13 @@ class AdminCategoriesPage extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'All Categories',
+                        S.of(context).allCategories,
                         style: TextStyles.headline2(context),
                       ),
                       Spacer(),
                       TextButton(
                         child: Text(
-                          'Add Banners',
+                          S.of(context).addBannerButton,
                           style: TextStyles.productTitle(context)
                               .copyWith(color: primaryColor),
                         ),

@@ -1184,6 +1184,701 @@ class S {
       args: [],
     );
   }
+
+  /// `Search`
+  String get search {
+    return Intl.message('Search', name: 'search', desc: '', args: []);
+  }
+
+  /// `Products`
+  String get searchProductsLabel {
+    return Intl.message(
+      'Products',
+      name: 'searchProductsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get searchCategoriesLabel {
+    return Intl.message(
+      'Categories',
+      name: 'searchCategoriesLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `default`
+  String get searchSortProductsByDefault {
+    return Intl.message(
+      'default',
+      name: 'searchSortProductsByDefault',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `name`
+  String get searchSortProductsByName {
+    return Intl.message(
+      'name',
+      name: 'searchSortProductsByName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `price`
+  String get searchSortProductsByPrice {
+    return Intl.message(
+      'price',
+      name: 'searchSortProductsByPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `default`
+  String get searchSortCategoriesByDefault {
+    return Intl.message(
+      'default',
+      name: 'searchSortCategoriesByDefault',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `name`
+  String get searchSortCategoriesByName {
+    return Intl.message(
+      'name',
+      name: 'searchSortCategoriesByName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `asc`
+  String get searchOrderByAsc {
+    return Intl.message('asc', name: 'searchOrderByAsc', desc: '', args: []);
+  }
+
+  /// `desc`
+  String get searchOrderByDesc {
+    return Intl.message('desc', name: 'searchOrderByDesc', desc: '', args: []);
+  }
+
+  /// `Search`
+  String get searchLabel {
+    return Intl.message('Search', name: 'searchLabel', desc: '', args: []);
+  }
+
+  /// `Search`
+  String get searchHint {
+    return Intl.message('Search', name: 'searchHint', desc: '', args: []);
+  }
+
+  /// `Please enter a search term`
+  String get searchValidation {
+    return Intl.message(
+      'Please enter a search term',
+      name: 'searchValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No items found with this name`
+  String get noItemsFoundWithThisName {
+    return Intl.message(
+      'No items found with this name',
+      name: 'noItemsFoundWithThisName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for any item`
+  String get searchForAnyItem {
+    return Intl.message(
+      'Search for any item',
+      name: 'searchForAnyItem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load notifications`
+  String get failedToLoadNotifications {
+    return Intl.message(
+      'Failed to load notifications',
+      name: 'failedToLoadNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No notifications found`
+  String get noNotificationsFound {
+    return Intl.message(
+      'No notifications found',
+      name: 'noNotificationsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Banner Deleted Successfully`
+  String get bannerDeletedSuccessfully {
+    return Intl.message(
+      'Banner Deleted Successfully',
+      name: 'bannerDeletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while Deleting Banner, try again`
+  String get errorDeletingBanner {
+    return Intl.message(
+      'Error while Deleting Banner, try again',
+      name: 'errorDeletingBanner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category Deleted successfully`
+  String get categoryDeletedSuccessfully {
+    return Intl.message(
+      'Category Deleted successfully',
+      name: 'categoryDeletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while Deleting Category, try again`
+  String get errorDeletingCategory {
+    return Intl.message(
+      'Error while Deleting Category, try again',
+      name: 'errorDeletingCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin Panel`
+  String get adminPanel {
+    return Intl.message('Admin Panel', name: 'adminPanel', desc: '', args: []);
+  }
+
+  /// `All Banners`
+  String get allBanners {
+    return Intl.message('All Banners', name: 'allBanners', desc: '', args: []);
+  }
+
+  /// `Edit Users`
+  String get editUsersButton {
+    return Intl.message(
+      'Edit Users',
+      name: 'editUsersButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Admin Roles`
+  String get manageAdminRules {
+    return Intl.message(
+      'Manage Admin Roles',
+      name: 'manageAdminRules',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the user's email to add or remove admin access.`
+  String get manageAdminText {
+    return Intl.message(
+      'Enter the user\'s email to add or remove admin access.',
+      name: 'manageAdminText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Email`
+  String get userEmailLabel {
+    return Intl.message(
+      'User Email',
+      name: 'userEmailLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter user email`
+  String get userEmailValidation {
+    return Intl.message(
+      'Please enter user email',
+      name: 'userEmailValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `is admin now`
+  String get isAdminNow {
+    return Intl.message('is admin now', name: 'isAdminNow', desc: '', args: []);
+  }
+
+  /// `is no longer admin`
+  String get isNoLongerAdmin {
+    return Intl.message(
+      'is no longer admin',
+      name: 'isNoLongerAdmin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make Admin`
+  String get makeAdmin {
+    return Intl.message('Make Admin', name: 'makeAdmin', desc: '', args: []);
+  }
+
+  /// `Remove Admin`
+  String get removeAdmin {
+    return Intl.message(
+      'Remove Admin',
+      name: 'removeAdmin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no Banners`
+  String get thereIsNoBanners {
+    return Intl.message(
+      'There is no Banners',
+      name: 'thereIsNoBanners',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Deletion`
+  String get bannerConfirmDeletion {
+    return Intl.message(
+      'Confirm Deletion',
+      name: 'bannerConfirmDeletion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this Banner?`
+  String get areYouSureYouWantToDeleteThisBanner {
+    return Intl.message(
+      'Are you sure you want to delete this Banner?',
+      name: 'areYouSureYouWantToDeleteThisBanner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get bannerDeleteCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'bannerDeleteCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get bannerDeleteDeleteButton {
+    return Intl.message(
+      'Delete',
+      name: 'bannerDeleteDeleteButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Categories`
+  String get allCategories {
+    return Intl.message(
+      'All Categories',
+      name: 'allCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Banner`
+  String get addBannerButton {
+    return Intl.message(
+      'Add Banner',
+      name: 'addBannerButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Banner`
+  String get addBannerDialogTitle {
+    return Intl.message(
+      'Add Banner',
+      name: 'addBannerDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get addBannerDialogBannerTitle {
+    return Intl.message(
+      'Title',
+      name: 'addBannerDialogBannerTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get addBannerDialogBannerDescription {
+    return Intl.message(
+      'Description',
+      name: 'addBannerDialogBannerDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get addBannerDialogBannerSelectDate {
+    return Intl.message(
+      'Select Date',
+      name: 'addBannerDialogBannerSelectDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date:`
+  String get addBannerDialogBannerStartDate {
+    return Intl.message(
+      'Start Date:',
+      name: 'addBannerDialogBannerStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date:`
+  String get addBannerDialogBannerEndDate {
+    return Intl.message(
+      'End Date:',
+      name: 'addBannerDialogBannerEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Main Image`
+  String get addBannerDialogBannerPickMainImage {
+    return Intl.message(
+      'Pick Main Image',
+      name: 'addBannerDialogBannerPickMainImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Banner Images`
+  String get addBannerDialogBannerPickBannerImages {
+    return Intl.message(
+      'Pick Banner Images',
+      name: 'addBannerDialogBannerPickBannerImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get addBannerDialogBannerApply {
+    return Intl.message(
+      'Apply',
+      name: 'addBannerDialogBannerApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get addBannerDialogBannerCancel {
+    return Intl.message(
+      'Cancel',
+      name: 'addBannerDialogBannerCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Banner added successfully.`
+  String get bannerAddedSuccessfuly {
+    return Intl.message(
+      'Banner added successfully.',
+      name: 'bannerAddedSuccessfuly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error occured while adding banner, Please try again.`
+  String get errorAddingBanner {
+    return Intl.message(
+      'Error occured while adding banner, Please try again.',
+      name: 'errorAddingBanner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title must not be empty.`
+  String get bannerTitleValidation {
+    return Intl.message(
+      'Title must not be empty.',
+      name: 'bannerTitleValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start and end dates must be selected.`
+  String get bannerStartAndEndDateValidation {
+    return Intl.message(
+      'Start and end dates must be selected.',
+      name: 'bannerStartAndEndDateValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start date must be before end date.`
+  String get bannerStartDateMustBeBeforeEndDate {
+    return Intl.message(
+      'Start date must be before end date.',
+      name: 'bannerStartDateMustBeBeforeEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a main image.`
+  String get bannerMainImageValidation {
+    return Intl.message(
+      'Please select a main image.',
+      name: 'bannerMainImageValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select at least one image.`
+  String get bannerBannerImagesValidation {
+    return Intl.message(
+      'Please select at least one image.',
+      name: 'bannerBannerImagesValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Banner Details`
+  String get editBannerDetails {
+    return Intl.message(
+      'Banner Details',
+      name: 'editBannerDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Banner Updated Successfully`
+  String get bannerUpdatedSuccessfully {
+    return Intl.message(
+      'Banner Updated Successfully',
+      name: 'bannerUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Main Image`
+  String get editBannerMainImageButton {
+    return Intl.message(
+      'Edit Main Image',
+      name: 'editBannerMainImageButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Main Banner Image`
+  String get setMainBannerImage {
+    return Intl.message(
+      'Set Main Banner Image',
+      name: 'setMainBannerImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick main image`
+  String get editBannerDialogPickMainImage {
+    return Intl.message(
+      'Pick main image',
+      name: 'editBannerDialogPickMainImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get editBannerDialogApplyButton {
+    return Intl.message(
+      'Apply',
+      name: 'editBannerDialogApplyButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Images`
+  String get editBannerAddImagesButton {
+    return Intl.message(
+      'Add Images',
+      name: 'editBannerAddImagesButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Images`
+  String get editBannerAddImagesDialogTitle {
+    return Intl.message(
+      'Add Images',
+      name: 'editBannerAddImagesDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Banner Images`
+  String get editBannerAddImagesDialogPickBannreImages {
+    return Intl.message(
+      'Pick Banner Images',
+      name: 'editBannerAddImagesDialogPickBannreImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get editBannerAddImagesDialogCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'editBannerAddImagesDialogCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get editBannerAddImagesDialogApplyButton {
+    return Intl.message(
+      'Apply',
+      name: 'editBannerAddImagesDialogApplyButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get editBannerTitleText {
+    return Intl.message(
+      'Title',
+      name: 'editBannerTitleText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date`
+  String get editBannerStartDateText {
+    return Intl.message(
+      'Start Date',
+      name: 'editBannerStartDateText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get editBannerEndDateText {
+    return Intl.message(
+      'End Date',
+      name: 'editBannerEndDateText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get editBannerDescriptionText {
+    return Intl.message(
+      'Description',
+      name: 'editBannerDescriptionText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get editBannerSaveButton {
+    return Intl.message(
+      'Save Changes',
+      name: 'editBannerSaveButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discard`
+  String get editBannerDiscardButton {
+    return Intl.message(
+      'Discard',
+      name: 'editBannerDiscardButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

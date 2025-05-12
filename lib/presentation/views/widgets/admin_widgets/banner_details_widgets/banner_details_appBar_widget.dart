@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 
 class AdminBannerDetailsAppBarWidget extends StatelessWidget
@@ -19,7 +20,7 @@ class AdminBannerDetailsAppBarWidget extends StatelessWidget
       backgroundColor: primaryColor,
       centerTitle: true,
       title: Text(
-        'Banner Details',
+        S.of(context).editBannerDetails,
         style: TextStyles.appBarTitle(context),
       ),
       leading: IconButton(

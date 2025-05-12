@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 
 class BannerDetailsDescriptionTextField extends StatelessWidget {
   const BannerDetailsDescriptionTextField({
@@ -17,7 +18,7 @@ class BannerDetailsDescriptionTextField extends StatelessWidget {
       controller: descController,
       maxLines: 3,
       decoration: InputDecoration(
-        labelText: 'Description',
+        labelText:S.of(context).editBannerDescriptionText,
         labelStyle: TextStyles.smallText(context),
         hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(

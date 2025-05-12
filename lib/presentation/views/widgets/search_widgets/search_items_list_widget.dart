@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/search_widgets/list_view_search_categories_widget.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/search_widgets/list_view_search_product_widget.dart';
@@ -28,7 +29,7 @@ class SearchItemsList extends StatelessWidget {
 
     if (!hasResults) {
       return SearchCustomTextWidget(
-        text: 'No ${selectedType.toLowerCase()} found with that name.',
+        text: S.of(context).noItemsFoundWithThisName,
       );
     }
 
@@ -53,7 +54,7 @@ class SearchItemsList extends StatelessWidget {
             return ListViewSearchCategoriesWidget(cubit: cubit, index: index);
           } else {
             return SearchCustomTextWidget(
-              text: 'Search for $selectedType',
+              text: S.of(context).searchForAnyItem,
             );
           }
         },
