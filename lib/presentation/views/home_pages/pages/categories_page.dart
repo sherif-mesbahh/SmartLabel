@@ -27,7 +27,7 @@ class CategoriesPage extends StatelessWidget {
         }
 
         if (categories == null) {
-          return  Center(
+          return Center(
             child: Text(
               S.of(context).failedToLoadCategories,
               style: TextStyle(color: Colors.red),
@@ -39,7 +39,7 @@ class CategoriesPage extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               Center(
+              Center(
                 child: Text(
                   S.of(context).noCategoriesFound,
                   style: TextStyle(

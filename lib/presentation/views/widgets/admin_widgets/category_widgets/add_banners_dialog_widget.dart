@@ -35,7 +35,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
     final DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
 
@@ -50,7 +50,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
           date.year,
           date.month,
           date.day,
-          time.hourOfPeriod + (time.period == DayPeriod.pm ? 12 : 0),
+          time.hourOfPeriod,
           time.minute,
         );
 
@@ -65,7 +65,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
     final DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
 
@@ -80,7 +80,7 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
           date.year,
           date.month,
           date.day,
-          time.hourOfPeriod + (time.period == DayPeriod.pm ? 12 : 0),
+          time.hourOfPeriod,
           time.minute,
         );
 
@@ -359,6 +359,22 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                             msg: S
                                 .of(context)
                                 .bannerStartDateMustBeBeforeEndDate,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+                        print(startDate);
+                        print(DateTime.now());
+
+                        if (startDate == null ||
+                            startDate!.isBefore(DateTime.now())) {
+                          Fluttertoast.showToast(
+                            msg:
+                                S.of(context).bannerStartDateMustNotBeBeforeNow,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,

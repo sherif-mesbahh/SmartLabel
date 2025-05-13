@@ -29,32 +29,20 @@ class UserInformationWidget extends StatelessWidget {
         children: [
           UserDetailsRowWidget(
               title: S.of(context).profilePageUserInfoFirstName,
-              value: AppCubit.get(context)
-                      .userInfoModel
-                      ?.data
-                      ?.firstName ??
-                  ''),
+              value:
+                  AppCubit.get(context).userInfoModel?.data?.firstName ?? ''),
           const SizedBox(height: 12),
           UserDetailsRowWidget(
             title: S.of(context).profilePageUserInfoLastName,
-            value: AppCubit.get(context)
-                    .userInfoModel!
-                    .data
-                    ?.lastName ??
-                '',
+            value: AppCubit.get(context).userInfoModel!.data?.lastName ?? '',
           ),
           const SizedBox(height: 12),
           UserDetailsRowWidget(
             title: S.of(context).profilePageUserInfoEmail,
-            value: AppCubit.get(context)
-                    .userInfoModel!
-                    .data
-                    ?.email ??
-                '',
+            value: AppCubit.get(context).userInfoModel!.data?.email ?? '',
           ),
         ],
       ),
     );
   }
 }
-

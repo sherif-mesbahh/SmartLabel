@@ -111,6 +111,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "bannerDetailsEndDate": MessageLookupByLibrary.simpleMessage(
       "تاريخ النهاية: ",
     ),
+    "bannerDetailsNotFound": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل البانر غير موجودة",
+    ),
     "bannerDetailsStartDate": MessageLookupByLibrary.simpleMessage(
       "تاريخ البدء: ",
     ),
@@ -123,6 +126,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bannerStartDateMustBeBeforeEndDate": MessageLookupByLibrary.simpleMessage(
       "يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء.",
+    ),
+    "bannerStartDateMustNotBeBeforeNow": MessageLookupByLibrary.simpleMessage(
+      "يجب أن لا يكون تاريخ البدء قبل الوقت الحالي.",
     ),
     "bannerTitleValidation": MessageLookupByLibrary.simpleMessage(
       "يجب ألا يكون العنوان فارغًا.",
@@ -365,6 +371,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "نسيت كلمة المرور",
     ),
     "homePageNewProducts": MessageLookupByLibrary.simpleMessage("منتجات جديدة"),
+    "invalidNotification": MessageLookupByLibrary.simpleMessage(
+      "اشعار غير صحيح",
+    ),
+    "invalidNotificationDetails": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل الاشعار غير صحيحة",
+    ),
     "isAdminNow": MessageLookupByLibrary.simpleMessage("اصبح مدير الآن"),
     "isNoLongerAdmin": MessageLookupByLibrary.simpleMessage("لم يعد مديرًا"),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage("example@yahoo.com"),
@@ -464,6 +476,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "productDetails": MessageLookupByLibrary.simpleMessage("تفاصيل المنتج"),
     "productDetailsDescription": MessageLookupByLibrary.simpleMessage(
       "الوصف: ",
+    ),
+    "productDetailsNotFound": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل المنتج غير موجودة",
     ),
     "productDetailsPrice": MessageLookupByLibrary.simpleMessage("السعر: "),
     "productFailedToAdd": MessageLookupByLibrary.simpleMessage(
@@ -637,6 +652,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "thereIsNoBanners": MessageLookupByLibrary.simpleMessage("لا يوجد بانرات"),
     "thereIsNoCategories": MessageLookupByLibrary.simpleMessage("لا يوجد فئات"),
+    "unknownNotificationTybe": MessageLookupByLibrary.simpleMessage(
+      "نوع الاشعار غير معروف",
+    ),
     "userEmailLabel": MessageLookupByLibrary.simpleMessage("بريد المستخدم"),
     "userEmailValidation": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال بريد المستخدم",

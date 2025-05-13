@@ -22,10 +22,7 @@ class SettingsWidget extends StatelessWidget {
           const Spacer(),
           IconButton(
             onPressed: () {
-              AppCubit.get(context)
-                  .scaffoldKey
-                  ?.currentState
-                  ?.openEndDrawer();
+              AppCubit.get(context).scaffoldKey?.currentState?.openEndDrawer();
             },
             icon: Icon(
               Icons.settings,

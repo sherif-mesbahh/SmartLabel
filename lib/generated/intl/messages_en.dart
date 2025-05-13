@@ -115,6 +115,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Description:",
     ),
     "bannerDetailsEndDate": MessageLookupByLibrary.simpleMessage("End Date:"),
+    "bannerDetailsNotFound": MessageLookupByLibrary.simpleMessage(
+      "Banner details not found",
+    ),
     "bannerDetailsStartDate": MessageLookupByLibrary.simpleMessage(
       "Start Date:",
     ),
@@ -127,6 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bannerStartDateMustBeBeforeEndDate": MessageLookupByLibrary.simpleMessage(
       "Start date must be before end date.",
+    ),
+    "bannerStartDateMustNotBeBeforeNow": MessageLookupByLibrary.simpleMessage(
+      "Start date must not be before our time.",
     ),
     "bannerTitleValidation": MessageLookupByLibrary.simpleMessage(
       "Title must not be empty.",
@@ -379,6 +385,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Forgot Password",
     ),
     "homePageNewProducts": MessageLookupByLibrary.simpleMessage("New Products"),
+    "invalidNotification": MessageLookupByLibrary.simpleMessage(
+      "Invalid notification",
+    ),
+    "invalidNotificationDetails": MessageLookupByLibrary.simpleMessage(
+      "Invalid notification details",
+    ),
     "isAdminNow": MessageLookupByLibrary.simpleMessage("is admin now"),
     "isNoLongerAdmin": MessageLookupByLibrary.simpleMessage(
       "is no longer admin",
@@ -488,6 +500,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "productDetails": MessageLookupByLibrary.simpleMessage("Product Details"),
     "productDetailsDescription": MessageLookupByLibrary.simpleMessage(
       "Description:",
+    ),
+    "productDetailsNotFound": MessageLookupByLibrary.simpleMessage(
+      "Product details not found",
     ),
     "productDetailsPrice": MessageLookupByLibrary.simpleMessage("Price:"),
     "productFailedToAdd": MessageLookupByLibrary.simpleMessage(
@@ -658,6 +673,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "thereIsNoCategories": MessageLookupByLibrary.simpleMessage(
       "There is no Categories",
+    ),
+    "unknownNotificationTybe": MessageLookupByLibrary.simpleMessage(
+      "Unknown Notification Type",
     ),
     "userEmailLabel": MessageLookupByLibrary.simpleMessage("User Email"),
     "userEmailValidation": MessageLookupByLibrary.simpleMessage(

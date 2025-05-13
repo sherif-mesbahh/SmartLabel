@@ -75,7 +75,8 @@ class _ChangePasswordDialogWidgetState
               keyboardType: TextInputType.visiblePassword,
               controller: currentPasswordController,
               decoration: InputDecoration(
-                labelText: S.of(context).profilePageChangePasswordCurrentPasswordLabel,
+                labelText:
+                    S.of(context).profilePageChangePasswordCurrentPasswordLabel,
                 labelStyle: TextStyles.smallText(context),
                 hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
@@ -100,7 +101,8 @@ class _ChangePasswordDialogWidgetState
               controller: newPasswordController,
               onChanged: validatePassword,
               decoration: InputDecoration(
-                labelText: S.of(context).profilePageChangePasswordNewPasswordLabel,
+                labelText:
+                    S.of(context).profilePageChangePasswordNewPasswordLabel,
                 labelStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -156,7 +158,8 @@ class _ChangePasswordDialogWidgetState
               keyboardType: TextInputType.visiblePassword,
               controller: confirmPasswordController,
               decoration: InputDecoration(
-                labelText: S.of(context).profilePageChangePasswordConfirmPasswordLabel,
+                labelText:
+                    S.of(context).profilePageChangePasswordConfirmPasswordLabel,
                 labelStyle: TextStyles.smallText(context),
                 hintStyle: TextStyles.smallText(context),
                 border: OutlineInputBorder(
@@ -178,7 +181,8 @@ class _ChangePasswordDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text(S.of(context).cancelButton, style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).cancelButton,
+              style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -227,8 +231,8 @@ class _ChangePasswordDialogWidgetState
                             );
                           }
                         : null,
-                    child:
-                        Text(S.of(context).saveButton, style: TextStyles.productTitle(context)),
+                    child: Text(S.of(context).saveButton,
+                        style: TextStyles.productTitle(context)),
                   );
           },
         ),

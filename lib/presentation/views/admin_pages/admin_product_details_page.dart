@@ -145,7 +145,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                   [];
 
               if (product == null) {
-                return  Center(
+                return Center(
                   child: Text(
                     S.of(context).noProductDetailsAvailable,
                     style: TextStyle(

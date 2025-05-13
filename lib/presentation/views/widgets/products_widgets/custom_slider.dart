@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
-import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/banner_details_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/active_banner_details_page.dart';
 
 class CustomSlider extends StatelessWidget {
   final List<dynamic> banners;
@@ -54,7 +54,7 @@ class CustomSlider extends StatelessWidget {
                 if (context.mounted) {
                   pushNavigator(
                     context,
-                    BannerDetailsPage(id: banner.id ?? 1),
+                    ActiveBannerDetailsPage(id: banner.id ?? 1),
                     slideRightToLeft,
                   );
                 }

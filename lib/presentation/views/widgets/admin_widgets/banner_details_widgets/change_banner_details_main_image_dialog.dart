@@ -35,8 +35,8 @@ class _AddMainBannerImageDialogWidgetState
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title:
-          Text(S.of(context).setMainBannerImage, style: TextStyles.headline2(context)),
+      title: Text(S.of(context).setMainBannerImage,
+          style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -65,7 +65,8 @@ class _AddMainBannerImageDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text(S.of(context).cancelButton, style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).cancelButton,
+              style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -73,7 +74,8 @@ class _AddMainBannerImageDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text(S.of(context).editBannerDialogApplyButton, style: TextStyles.productTitle(context)),
+            child: Text(S.of(context).editBannerDialogApplyButton,
+                style: TextStyles.productTitle(context)),
             onPressed: () {
               if (mainImage != null) {
                 AppCubit.get(context).mainBannerImageToUpload = mainImage;

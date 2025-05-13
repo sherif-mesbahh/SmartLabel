@@ -18,7 +18,7 @@ class BannerDetailsDescriptionTextField extends StatelessWidget {
       controller: descController,
       maxLines: 3,
       decoration: InputDecoration(
-        labelText:S.of(context).editBannerDescriptionText,
+        labelText: S.of(context).editBannerDescriptionText,
         labelStyle: TextStyles.smallText(context),
         hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(

@@ -15,7 +15,8 @@ class DeleteAccountDialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: Text(S.of(context).profilePageDeleteAccountTitle, style: TextStyles.headline2(context)),
+      title: Text(S.of(context).profilePageDeleteAccountTitle,
+          style: TextStyles.headline2(context)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -34,7 +35,8 @@ class DeleteAccountDialogWidget extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          child: Text(S.of(context).cancelButton, style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).cancelButton,
+              style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },

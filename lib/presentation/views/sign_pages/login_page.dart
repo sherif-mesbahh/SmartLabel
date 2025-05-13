@@ -82,7 +82,9 @@ class _LoginPageState extends State<LoginPage> {
                         SnackBar(
                           content: Text(
                             isEmailNotConfirmed
-                                ? S.of(context).emailisnotconfirmedpleasecheckyouremail
+                                ? S
+                                    .of(context)
+                                    .emailisnotconfirmedpleasecheckyouremail
                                 : state.error,
                             style: const TextStyle(color: Colors.white),
                           ),

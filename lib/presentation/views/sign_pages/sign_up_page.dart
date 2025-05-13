@@ -116,7 +116,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            S.of(context).registrationsuccessfulWehavesentaconfirmationemailtoyouraddress,
+                            S
+                                .of(context)
+                                .registrationsuccessfulWehavesentaconfirmationemailtoyouraddress,
                           ),
                           backgroundColor: Colors.green,
                         ),

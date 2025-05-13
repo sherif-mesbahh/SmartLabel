@@ -365,3 +365,13 @@ class GetNotificationsErrorState extends AppStates {
 
   GetNotificationsErrorState(this.error);
 }
+
+class GetNotificationDetailsLoadingState extends AppStates {}
+
+class GetNotificationDetailsSuccessState extends AppStates {}
+
+class GetNotificationDetailsErrorState extends AppStates {
+  String error;
+
+  GetNotificationDetailsErrorState(this.error);
+}

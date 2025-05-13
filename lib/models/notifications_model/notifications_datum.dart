@@ -5,7 +5,8 @@ class NotificationsDatum {
 
   NotificationsDatum({this.id, this.message, this.createdAt});
 
-  factory NotificationsDatum.fromJson(Map<String, dynamic> json) => NotificationsDatum(
+  factory NotificationsDatum.fromJson(Map<String, dynamic> json) =>
+      NotificationsDatum(
         id: json['id'] as int?,
         message: json['message'] as String?,
         createdAt: json['createdAt'] == null

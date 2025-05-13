@@ -20,7 +20,8 @@ class NotLoginWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(S.of(context).profilePageTitle, style: TextStyles.headline1(context)),
+        Text(S.of(context).profilePageTitle,
+            style: TextStyles.headline1(context)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: SettingsWidget(),

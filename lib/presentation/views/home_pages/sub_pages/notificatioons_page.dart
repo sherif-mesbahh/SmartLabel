@@ -84,7 +84,7 @@ class _NotificatioonsPageState extends State<NotificatioonsPage> {
             });
 
             if (notifications.isEmpty) {
-              return  Center(
+              return Center(
                 child: Text(
                   S.of(context).noNotificationsFound,
                   style: TextStyle(color: Colors.red),
@@ -100,6 +100,7 @@ class _NotificatioonsPageState extends State<NotificatioonsPage> {
                 return NotificationItem(
                   message: notification.message,
                   createdAt: notification.createdAt,
+                  id: notification.id,
                 );
               },
             );

@@ -40,7 +40,8 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: Text(S.of(context).profilePageEditProfileTitle, style: TextStyles.headline2(context)),
+      title: Text(S.of(context).profilePageEditProfileTitle,
+          style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -96,7 +97,8 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
       ),
       actions: [
         TextButton(
-          child: Text(S.of(context).cancelButton, style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).cancelButton,
+              style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -136,8 +138,8 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
                     height: 50,
                   )
                 : TextButton(
-                    child:
-                        Text(S.of(context).saveButton, style: TextStyles.productTitle(context)),
+                    child: Text(S.of(context).saveButton,
+                        style: TextStyles.productTitle(context)),
                     onPressed: () {
                       AppCubit.get(context).updateProfile(
                         firstName: firstNameController.text.trim(),

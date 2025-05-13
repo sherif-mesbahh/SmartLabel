@@ -86,7 +86,7 @@ class ProductDetailsMainImageWidget extends StatelessWidget {
             );
           },
           child: Text(
-            S. of(context).editProductEditMainImageButton,
+            S.of(context).editProductEditMainImageButton,
             style:
                 TextStyles.productTitle(context).copyWith(color: primaryColor),
           ),

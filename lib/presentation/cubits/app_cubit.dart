@@ -25,6 +25,7 @@ import 'package:smart_label_software_engineering/models/category_products_model/
 import 'package:smart_label_software_engineering/models/category_search_model/category_search_model.dart';
 import 'package:smart_label_software_engineering/models/fav_model/fav_model.dart';
 import 'package:smart_label_software_engineering/models/login_model/login_model.dart';
+import 'package:smart_label_software_engineering/models/notification_details_model/notification_details_model.dart';
 import 'package:smart_label_software_engineering/models/notifications_model/notifications_model.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_model.dart';
 import 'package:smart_label_software_engineering/models/product_model/prodcut_model.dart';
@@ -167,6 +168,8 @@ class AppCubit extends Cubit<AppStates> {
 
   ActiveBannerDetailsModel? activeBannerDetailsModel;
   Future<void> getActiveBannerDetails({required int id}) async {
+    activeBannerDetailsModel = null; // Clear old banner data
+
     emit(GetActiveBannerDetailsLoadingState());
 
     try {
@@ -230,6 +233,8 @@ class AppCubit extends Cubit<AppStates> {
 
   ProductDetailsModel? productDetailsModel;
   Future<void> getProductDetails({required int id}) async {
+    productDetailsModel = null; // Clear old product data
+
     emit(GetProductDetailsLoadingState());
 
     try {
@@ -353,6 +358,8 @@ class AppCubit extends Cubit<AppStates> {
         isLogin = true;
 
         // Call initial data fetch
+        startSignalR();
+
         getProducts();
         getActiveBanners();
 
@@ -602,6 +609,7 @@ class AppCubit extends Cubit<AppStates> {
       final response = await ApiService().get(ApiEndpoints.bannerById(id));
       if (response.statusCode == 200 || response.statusCode == 201) {
         bannerDetailsModel = BannerDetailsModel.fromJson(response.data);
+        print(bannerDetailsModel?.data?.title);
         emit(GetBannerDetailsSuccessState());
       } else {
         emit(GetBannerDetailsErrorState(
@@ -1462,6 +1470,29 @@ class AppCubit extends Cubit<AppStates> {
       }
     } catch (e) {
       emit(GetNotificationsErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  NotificationDetailsModel? notificationDetailsModel;
+  Future<void> getNotificationDetails({required int id}) async {
+    notificationDetailsModel = null; // Clear old data
+
+    emit(GetNotificationDetailsLoadingState());
+    try {
+      final response =
+          await ApiService().get(ApiEndpoints.getNotificationById(id));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        notificationDetailsModel =
+            NotificationDetailsModel.fromJson(response.data);
+        emit(GetNotificationDetailsSuccessState());
+      } else {
+        emit(GetNotificationDetailsErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(GetNotificationDetailsErrorState(e.toString()));
       log('Failed with status: ${e.toString()}');
     }
   }

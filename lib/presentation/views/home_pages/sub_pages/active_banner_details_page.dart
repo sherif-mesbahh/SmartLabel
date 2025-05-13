@@ -8,8 +8,8 @@ import 'package:smart_label_software_engineering/presentation/cubits/app_states.
 import 'package:smart_label_software_engineering/presentation/views/widgets/active_banner_details/active_banner_details_app_bar.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/active_banner_details/active_banner_details_image_slider.dart';
 
-class BannerDetailsPage extends StatelessWidget {
-  const BannerDetailsPage({super.key, required this.id});
+class ActiveBannerDetailsPage extends StatelessWidget {
+  const ActiveBannerDetailsPage({super.key, required this.id});
   final int id;
 
   String _formatDate(DateTime? date) {

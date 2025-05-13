@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -60,6 +61,29 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                             normalizeArabicDateToUtc(startDateController.text);
                         String fixedEnd =
                             normalizeArabicDateToUtc(endDateController.text);
+                        final parsedStartDate =
+                            DateTime.tryParse(fixedStart)?.toLocal();
+
+                        if (parsedStartDate == null) {
+                          Fluttertoast.showToast(
+                            msg: "Invalid start date format",
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
+                          return;
+                        }
+
+                        final nowLocal = DateTime.now(); // local time
+                        print(nowLocal);
+                        if (parsedStartDate.isBefore(nowLocal)) {
+                          Fluttertoast.showToast(
+                            msg:
+                                S.of(context).bannerStartDateMustNotBeBeforeNow,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
+                          return;
+                        }
                         print(fixedStart);
                         print(fixedEnd);
                         cubit

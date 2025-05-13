@@ -51,4 +51,3 @@ class ChangePasswordAndDeleleAccountWidget extends StatelessWidget {
     );
   }
 }
-

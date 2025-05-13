@@ -61,7 +61,7 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
                           });
                         } else {
                           Fluttertoast.showToast(
-                            msg:  S.of(context).editCategoryNameValidation,
+                            msg: S.of(context).editCategoryNameValidation,
                             backgroundColor: Colors.red,
                             textColor: secondaryColor,
                             gravity: ToastGravity.BOTTOM,
@@ -75,7 +75,7 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
               // Discard
               InkWell(
                 child: Text(
-                   S.of(context).editCategoryDiscardChangesButton,
+                  S.of(context).editCategoryDiscardChangesButton,
                   style: TextStyles.productTitle(context)
                       .copyWith(color: primaryColor),
                 ),

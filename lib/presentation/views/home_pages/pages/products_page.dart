@@ -77,7 +77,7 @@ class ProductsPage extends StatelessWidget {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Center(child: Text(S.of(context).noProductsFound)),
+                      Center(child: Text(S.of(context).noProductsFound)),
                     ],
                   );
                 }

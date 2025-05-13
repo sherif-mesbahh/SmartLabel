@@ -14,7 +14,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   final bool showSuffixIcon;
   final TextInputType keyboardType;
   final bool enabled;
-  final ValueChanged<String>? onChanged; 
+  final ValueChanged<String>? onChanged;
 
   const CustomTextFormFieldWidget({
     super.key,
@@ -23,8 +23,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
     required this.labelText,
     required this.obscureText,
     required this.suffixIconOnPressed,
-    this.onChanged, 
-
+    this.onChanged,
     this.validator,
     this.keyboardType = TextInputType.text,
     this.onFieldSubmitted,
@@ -42,7 +41,6 @@ class CustomTextFormFieldWidget extends StatelessWidget {
       controller: controller,
       onFieldSubmitted: onFieldSubmitted,
       onChanged: onChanged,
-
       validator: validator,
       decoration: InputDecoration(
         suffixIcon: showSuffixIcon

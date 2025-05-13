@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/profile_widgets/profile_edit_details_dialog_widget.dart';
 
-
 class EditInfoButtonWidget extends StatelessWidget {
   const EditInfoButtonWidget({
     super.key,

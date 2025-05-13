@@ -172,6 +172,7 @@
     "bannerTitleValidation": "Title must not be empty.",
     "bannerStartAndEndDateValidation": "Start and end dates must be selected.",
     "bannerStartDateMustBeBeforeEndDate": "Start date must be before end date.",
+    "bannerStartDateMustNotBeBeforeNow": "Start date must not be before our time.",
     "bannerMainImageValidation": "Please select a main image.",
     "bannerBannerImagesValidation": "Please select at least one image.",
     "editBannerDetails": "Banner Details",
@@ -267,5 +268,10 @@
     "editProductPriceValidation": "Price must be not empty",
     "editProductPricePositiveValidation": "Price must be a valid positive number",
     "editProductDiscountValidation": "Discount must be not empty",
-    "editProductDiscountNumberValidation": "Discount must be a valid number between 0 and 100"
+    "editProductDiscountNumberValidation": "Discount must be a valid number between 0 and 100",
+    "unknownNotificationTybe": "Unknown Notification Type",
+    "bannerDetailsNotFound": "Banner details not found",
+    "productDetailsNotFound": "Product details not found",
+    "invalidNotificationDetails": "Invalid notification details",
+    "invalidNotification": "Invalid notification"
 }

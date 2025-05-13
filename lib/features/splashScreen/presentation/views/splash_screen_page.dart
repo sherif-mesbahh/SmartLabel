@@ -21,7 +21,7 @@ class SplashScreenPage extends StatelessWidget {
         ],
       ),
       splashIconSize: 150,
-      nextScreen: showOnBoarding ? const OnBoardingPage() :  Layout(),
+      nextScreen: showOnBoarding ? const OnBoardingPage() : Layout(),
       backgroundColor: const Color.fromARGB(255, 60, 99, 254),
       duration: 1000,
       splashTransition: SplashTransition.scaleTransition,

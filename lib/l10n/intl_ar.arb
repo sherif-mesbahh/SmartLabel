@@ -172,6 +172,7 @@
     "bannerTitleValidation": "يجب ألا يكون العنوان فارغًا.",
     "bannerStartAndEndDateValidation": "يجب تحديد تاريخ البدء والانتهاء.",
     "bannerStartDateMustBeBeforeEndDate": "يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء.",
+    "bannerStartDateMustNotBeBeforeNow": "يجب أن لا يكون تاريخ البدء قبل الوقت الحالي.",
     "bannerMainImageValidation": "يرجى اختيار صورة رئيسية.",
     "bannerBannerImagesValidation": "يرجى اختيار صورة واحدة على الأقل.",
     "editBannerDetails": "تفاصيل البانر",
@@ -267,5 +268,10 @@
     "editProductPriceValidation": "السعر لا يمكن ان يكون فارغ.",
     "editProductPricePositiveValidation": "السعر يجب ان يكون رقما صحيحا.",
     "editProductDiscountValidation": "الخصم لا يمكن ان يكون فارغ.",
-    "editProductDiscountNumberValidation": "الخصم يجب ان يكون رقما صحيحا بين 0 و 100."
+    "editProductDiscountNumberValidation": "الخصم يجب ان يكون رقما صحيحا بين 0 و 100.",
+    "unknownNotificationTybe": "نوع الاشعار غير معروف",
+    "bannerDetailsNotFound": "تفاصيل البانر غير موجودة",
+    "productDetailsNotFound": "تفاصيل المنتج غير موجودة",
+    "invalidNotificationDetails": "تفاصيل الاشعار غير صحيحة",
+    "invalidNotification": "اشعار غير صحيح"
 }

@@ -1690,6 +1690,16 @@ class S {
     );
   }
 
+  /// `Start date must not be before our time.`
+  String get bannerStartDateMustNotBeBeforeNow {
+    return Intl.message(
+      'Start date must not be before our time.',
+      name: 'bannerStartDateMustNotBeBeforeNow',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please select a main image.`
   String get bannerMainImageValidation {
     return Intl.message(
@@ -2635,6 +2645,56 @@ class S {
     return Intl.message(
       'Discount must be a valid number between 0 and 100',
       name: 'editProductDiscountNumberValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown Notification Type`
+  String get unknownNotificationTybe {
+    return Intl.message(
+      'Unknown Notification Type',
+      name: 'unknownNotificationTybe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Banner details not found`
+  String get bannerDetailsNotFound {
+    return Intl.message(
+      'Banner details not found',
+      name: 'bannerDetailsNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product details not found`
+  String get productDetailsNotFound {
+    return Intl.message(
+      'Product details not found',
+      name: 'productDetailsNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid notification details`
+  String get invalidNotificationDetails {
+    return Intl.message(
+      'Invalid notification details',
+      name: 'invalidNotificationDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid notification`
+  String get invalidNotification {
+    return Intl.message(
+      'Invalid notification',
+      name: 'invalidNotification',
       desc: '',
       args: [],
     );
