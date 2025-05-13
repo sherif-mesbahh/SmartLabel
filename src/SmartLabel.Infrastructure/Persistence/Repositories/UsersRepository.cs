@@ -33,8 +33,7 @@ public class UsersRepository(ISqlConnectionFactory sqlConnectionFactory) : IUser
 				}
 
 				return user;
-			}
-			,
+			},
 			splitOn: "Name"
 		);
 		return await result;

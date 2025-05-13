@@ -50,8 +50,8 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 				}
 				await bannerRepository.AddBannerImagesAsync(bannerImages);
 			}
-			await unitOfWork.SaveChangesAsync(cancellationToken);
 			await bannerRepository.UpdateBannerAsync(banner.Id, banner, mainImage);
+			await unitOfWork.SaveChangesAsync(cancellationToken);
 			InvalidCache(banner.Id);
 			transaction.Commit();
 			return NoContent<string>();

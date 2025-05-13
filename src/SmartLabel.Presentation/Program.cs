@@ -86,7 +86,7 @@ builder.Services.AddAuthorizationBuilder()
 var app = builder.Build();
 
 app.UseCors(x => x
-	.WithOrigins("http://localhost:5173", "http://localhost:5174", "https://smart-label-pink.vercel.app")
+	.WithOrigins("http://localhost:5173", "http://localhost:5174", "https://smartlabell.netlify.app")
 	.AllowAnyMethod()
 	.AllowAnyHeader());
 

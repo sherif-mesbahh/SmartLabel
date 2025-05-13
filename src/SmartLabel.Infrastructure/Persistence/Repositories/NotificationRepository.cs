@@ -29,7 +29,7 @@ public class NotificationRepository(AppDbContext context, ISqlConnectionFactory 
 
 	public async Task AddNotificationToUsers(string? message, IEnumerable<int> userIds, int type, int typeId)
 	{
-		var notification = new Notification { Id = 0, Message = message!, CreatedAt = DateTime.UtcNow, Type = type, TypeId = typeId };
+		var notification = new Notification { Id = 0, Message = message!, CreatedAt = DateTime.Now.AddHours(1), Type = type, TypeId = typeId };
 		await AddNotificationAsync(notification);
 		await context.SaveChangesAsync();
 		List<UserNotification> userNotifications = new();

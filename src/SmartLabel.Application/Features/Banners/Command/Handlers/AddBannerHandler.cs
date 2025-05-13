@@ -40,7 +40,7 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			InvalidCache(banner.Id);
 			transaction.Commit();
-			return Created<string>($"Banner {banner.Id} created successfully");
+			return Created<string>($"Banner {banner.Id} and {banner.StartDate} created successfully");
 		}
 		catch (Exception ex)
 		{

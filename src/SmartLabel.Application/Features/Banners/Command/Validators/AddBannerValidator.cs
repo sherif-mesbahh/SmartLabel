@@ -12,6 +12,7 @@ public class AddBannerValidator : AbstractValidator<AddBannerCommand>
 	}
 	private void ApplyValidationRules()
 	{
+		var currentTime = DateTime.Now;
 		RuleFor(x => x.Title)
 			.NotEmpty().WithMessage("{PropertyName} must be not empty")
 			.MaximumLength(1000).WithMessage("{PropertyName} cannot exceed 1000 characters.");
@@ -21,7 +22,7 @@ public class AddBannerValidator : AbstractValidator<AddBannerCommand>
 			.NotEmpty().WithMessage("You should upload at least one Image")
 			.NotNull().WithMessage("You should upload at least one Image");
 		RuleFor(x => x.StartDate)
-			.GreaterThanOrEqualTo(DateTime.UtcNow)
+			.GreaterThanOrEqualTo(currentTime)
 			.WithMessage("You should add active banner (start date >= current date");
 	}
 	private void AddCustomValidationRules()

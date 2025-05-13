@@ -22,7 +22,7 @@ public class UpdateBannerValidator : AbstractValidator<UpdateBannerCommand>
 		RuleFor(x => x.Description)
 			.MaximumLength(2000).WithMessage("{PropertyName} cannot exceed 2000 characters.");
 		RuleFor(x => x.StartDate)
-			.GreaterThanOrEqualTo(DateTime.UtcNow)
+			.GreaterThanOrEqualTo(DateTime.Now)
 			.WithMessage("You should add active banner (start date >= current date");
 	}
 	private void AddCustomValidationRules()

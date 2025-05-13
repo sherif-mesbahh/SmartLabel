@@ -34,7 +34,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		                   b.Title AS Title, 
 		                   b.MainImage AS MainImage
 		               FROM Banners b 
-		               WHERE GETUTCDATE() BETWEEN b.StartDate AND b.EndDate
+		               WHERE DATEADD(hour, 1, GETDATE()) BETWEEN b.StartDate AND b.EndDate
 		               """;
 		var banners = await connection.QueryAsync<GetBannersDto>(sqlQuery);
 		return banners.ToList();
@@ -150,7 +150,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		var sqlQuery = """
 		               SELECT Id
 		               FROM Banners
-		               WHERE (GETUTCDATE() BETWEEN StartDate AND EndDate) AND (IsActive = @c)
+		               WHERE (DATEADD(hour, 1, GETDATE()) BETWEEN StartDate AND EndDate) AND (IsActive = @c)
 		               """;
 		var IDs = await connection.QueryAsync<int>(sqlQuery, new { c = 0 });
 		return IDs.ToList();
