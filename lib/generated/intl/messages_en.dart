@@ -49,6 +49,47 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addBannerDialogBannerTitle": MessageLookupByLibrary.simpleMessage("Title"),
     "addBannerDialogTitle": MessageLookupByLibrary.simpleMessage("Add Banner"),
+    "addProductDialogAddButton": MessageLookupByLibrary.simpleMessage("Add"),
+    "addProductDialogCancelButton": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
+    "addProductDialogDescription": MessageLookupByLibrary.simpleMessage(
+      "Description",
+    ),
+    "addProductDialogDiscount": MessageLookupByLibrary.simpleMessage(
+      "Discount (%)",
+    ),
+    "addProductDialogName": MessageLookupByLibrary.simpleMessage(
+      "Product Name",
+    ),
+    "addProductDialogPickImageButton": MessageLookupByLibrary.simpleMessage(
+      "Pick Image",
+    ),
+    "addProductDialogPickImagesButton": MessageLookupByLibrary.simpleMessage(
+      "Pick Product Images",
+    ),
+    "addProductDialogPrice": MessageLookupByLibrary.simpleMessage("Price"),
+    "addProductDialogTitle": MessageLookupByLibrary.simpleMessage(
+      "Add Product",
+    ),
+    "addProductDiscountValidNumber": MessageLookupByLibrary.simpleMessage(
+      "Discount must be a valid number between 0 and 100.",
+    ),
+    "addProductDiscountValidation": MessageLookupByLibrary.simpleMessage(
+      "Discount must not be empty.",
+    ),
+    "addProductMainImageValidation": MessageLookupByLibrary.simpleMessage(
+      "Please select a main image.",
+    ),
+    "addProductNameValidation": MessageLookupByLibrary.simpleMessage(
+      "Product name must not be empty.",
+    ),
+    "addProductPricePositiveValidation": MessageLookupByLibrary.simpleMessage(
+      "Price must be a valid positive number.",
+    ),
+    "addProductPriceValidation": MessageLookupByLibrary.simpleMessage(
+      "Price must not be empty.",
+    ),
     "adminPanel": MessageLookupByLibrary.simpleMessage("Admin Panel"),
     "allBanners": MessageLookupByLibrary.simpleMessage("All Banners"),
     "allCategories": MessageLookupByLibrary.simpleMessage("All Categories"),
@@ -94,11 +135,53 @@ class MessageLookup extends MessageLookupByLibrary {
       "Banner Updated Successfully",
     ),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "categoryAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Category added successfully.",
+    ),
+    "categoryConfirmDeletion": MessageLookupByLibrary.simpleMessage(
+      "Confrm Deletion",
+    ),
     "categoryDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Category Deleted successfully",
     ),
+    "categoryDeletionCancelButton": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
+    "categoryDeletionDeleteButton": MessageLookupByLibrary.simpleMessage(
+      "Delete",
+    ),
+    "categoryDeletionText": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this category?,",
+    ),
+    "categoryDialogApplyButton": MessageLookupByLibrary.simpleMessage("Apply"),
+    "categoryDialogCancelButton": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
+    "categoryDialogCategoryName": MessageLookupByLibrary.simpleMessage(
+      "Category Name",
+    ),
+    "categoryDialogImageValidation": MessageLookupByLibrary.simpleMessage(
+      "Please select an image for the category.",
+    ),
+    "categoryDialogNameLengthValidation": MessageLookupByLibrary.simpleMessage(
+      "Category name must be at least 3 characters.",
+    ),
+    "categoryDialogNameValidation": MessageLookupByLibrary.simpleMessage(
+      "Category name must not be empty.",
+    ),
+    "categoryDialogPickImage": MessageLookupByLibrary.simpleMessage(
+      "Pick Category Image",
+    ),
+    "categoryDialogTitle": MessageLookupByLibrary.simpleMessage("Add Category"),
+    "categoryFailedToAdd": MessageLookupByLibrary.simpleMessage(
+      "Failed to add category. Try again.",
+    ),
     "categoryProducts": MessageLookupByLibrary.simpleMessage(
       "Category Products",
+    ),
+    "categoryProductsTitle": MessageLookupByLibrary.simpleMessage("Products"),
+    "categoryUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Category Updated Successfully",
     ),
     "codeVerifiedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Code Verified Successfully",
@@ -141,6 +224,81 @@ class MessageLookup extends MessageLookupByLibrary {
       "Start Date",
     ),
     "editBannerTitleText": MessageLookupByLibrary.simpleMessage("Title"),
+    "editCategoryAppBarTitle": MessageLookupByLibrary.simpleMessage(
+      "Edit Category",
+    ),
+    "editCategoryDiscardChangesButton": MessageLookupByLibrary.simpleMessage(
+      "Discard",
+    ),
+    "editCategoryEditImageButton": MessageLookupByLibrary.simpleMessage(
+      "Edit Image",
+    ),
+    "editCategoryName": MessageLookupByLibrary.simpleMessage("CategoryName"),
+    "editCategoryNameValidation": MessageLookupByLibrary.simpleMessage(
+      "Name must be at least 3 characters",
+    ),
+    "editCategorySaveChangesButton": MessageLookupByLibrary.simpleMessage(
+      "Save changes",
+    ),
+    "editProductAddImagesButton": MessageLookupByLibrary.simpleMessage(
+      "Add Images",
+    ),
+    "editProductAddImagesDialogApply": MessageLookupByLibrary.simpleMessage(
+      "Apply",
+    ),
+    "editProductAddImagesDialogCancel": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
+    "editProductAddImagesDialogPickProductImages":
+        MessageLookupByLibrary.simpleMessage("Pick Product Images"),
+    "editProductAddImagesDialogTitle": MessageLookupByLibrary.simpleMessage(
+      "Add Product Images",
+    ),
+    "editProductAppBarTitle": MessageLookupByLibrary.simpleMessage(
+      "Edit Product",
+    ),
+    "editProductDescription": MessageLookupByLibrary.simpleMessage(
+      "Description",
+    ),
+    "editProductDiscardChangesButton": MessageLookupByLibrary.simpleMessage(
+      "Discard",
+    ),
+    "editProductDiscount": MessageLookupByLibrary.simpleMessage("Discount"),
+    "editProductDiscountNumberValidation": MessageLookupByLibrary.simpleMessage(
+      "Discount must be a valid number between 0 and 100",
+    ),
+    "editProductDiscountValidation": MessageLookupByLibrary.simpleMessage(
+      "Discount must be not empty",
+    ),
+    "editProductEditMainImageApply": MessageLookupByLibrary.simpleMessage(
+      "Apply",
+    ),
+    "editProductEditMainImageButton": MessageLookupByLibrary.simpleMessage(
+      "Edit Main Image",
+    ),
+    "editProductEditMainImageCancel": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
+    "editProductEditMainImagePickImage": MessageLookupByLibrary.simpleMessage(
+      "Pick Main Image",
+    ),
+    "editProductEditMainImageTitle": MessageLookupByLibrary.simpleMessage(
+      "Set Main Product Image",
+    ),
+    "editProductName": MessageLookupByLibrary.simpleMessage("Name"),
+    "editProductNameValidation": MessageLookupByLibrary.simpleMessage(
+      "Name must be not empty",
+    ),
+    "editProductPrice": MessageLookupByLibrary.simpleMessage("Price"),
+    "editProductPricePositiveValidation": MessageLookupByLibrary.simpleMessage(
+      "Price must be a valid positive number",
+    ),
+    "editProductPriceValidation": MessageLookupByLibrary.simpleMessage(
+      "Price must be not empty",
+    ),
+    "editProductSaveChangesButton": MessageLookupByLibrary.simpleMessage(
+      "Save Changes",
+    ),
     "editUsersButton": MessageLookupByLibrary.simpleMessage("Edit Users"),
     "emailisnotconfirmedpleasecheckyouremail":
         MessageLookupByLibrary.simpleMessage(
@@ -254,6 +412,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCategoriesFound": MessageLookupByLibrary.simpleMessage(
       "No categories found",
     ),
+    "noCategoryDetailsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No Category details available.",
+    ),
     "noCategoryProductsFoundInThisCategory":
         MessageLookupByLibrary.simpleMessage(
           "No category products found in this category.",
@@ -267,8 +428,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "noNotificationsFound": MessageLookupByLibrary.simpleMessage(
       "No notifications found",
     ),
+    "noProductDetailsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No Product details available.",
+    ),
     "noProductsFound": MessageLookupByLibrary.simpleMessage(
       "No Products Found",
+    ),
+    "noProductsInThisCategory": MessageLookupByLibrary.simpleMessage(
+      "No Products Available for this Category",
     ),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
@@ -289,14 +456,49 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordValidationUpperCase": MessageLookupByLibrary.simpleMessage(
       "Must contain an uppercase letter (A-Z)",
     ),
+    "pickNewCategoryImage": MessageLookupByLibrary.simpleMessage("Pick Image"),
+    "pickNewCategoryImageApply": MessageLookupByLibrary.simpleMessage("Apply"),
+    "pickNewCategoryImageCancel": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
     "pleaseLoginFirst": MessageLookupByLibrary.simpleMessage(
       "Please login first",
+    ),
+    "productAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Product added successfully.",
+    ),
+    "productConfirmDeletion": MessageLookupByLibrary.simpleMessage(
+      "Confirm Deletion",
+    ),
+    "productConfirmDeletionText": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this Product?",
+    ),
+    "productDeletedError": MessageLookupByLibrary.simpleMessage(
+      "Error while Deleting Product, try again",
+    ),
+    "productDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Product Deleted Successfully",
+    ),
+    "productDeletionCancelButton": MessageLookupByLibrary.simpleMessage(
+      "Cancel",
+    ),
+    "productDeletionDeleteButton": MessageLookupByLibrary.simpleMessage(
+      "Delete",
     ),
     "productDetails": MessageLookupByLibrary.simpleMessage("Product Details"),
     "productDetailsDescription": MessageLookupByLibrary.simpleMessage(
       "Description:",
     ),
     "productDetailsPrice": MessageLookupByLibrary.simpleMessage("Price:"),
+    "productFailedToAdd": MessageLookupByLibrary.simpleMessage(
+      "Failed to add product. Try again.",
+    ),
+    "productUpdatedError": MessageLookupByLibrary.simpleMessage(
+      "Error while Updating Product, try again",
+    ),
+    "productUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Product Updated Successfully",
+    ),
     "profilePageAdminPanel": MessageLookupByLibrary.simpleMessage(
       "Admin Panel",
     ),
@@ -401,6 +603,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "setMainBannerImage": MessageLookupByLibrary.simpleMessage(
       "Set Main Banner Image",
     ),
+    "setNewCategoryImage": MessageLookupByLibrary.simpleMessage(
+      "Set New Category Image",
+    ),
     "signInButton": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Sign Out Successfully",
@@ -450,6 +655,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "thereIsNoBanners": MessageLookupByLibrary.simpleMessage(
       "There is no Banners",
+    ),
+    "thereIsNoCategories": MessageLookupByLibrary.simpleMessage(
+      "There is no Categories",
     ),
     "userEmailLabel": MessageLookupByLibrary.simpleMessage("User Email"),
     "userEmailValidation": MessageLookupByLibrary.simpleMessage(

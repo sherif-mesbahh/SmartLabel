@@ -352,6 +352,8 @@ class ForgotPasswordChangePasswordErrorState extends AppStates {
 
 class ChangeThemeState extends AppStates {}
 
+class ChangeLanguageState extends AppStates {}
+
 class ReceiveNotificationState extends AppStates {}
 
 class GetNotificationsLoadingState extends AppStates {}

@@ -31,6 +31,16 @@ class SharedPrefs {
     return _prefs.getBool(_keyDarkMode) ?? false;
   }
 
+  static Future<void> setLanguage(String langCode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('language_code', langCode);
+  }
+
+  static Future<String?> getLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('language_code');
+  }
+
   // Optionally: Clear all preferences (if needed)
   static Future<void> clearAll() async {
     await _prefs.clear();

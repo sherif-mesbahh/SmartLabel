@@ -23,6 +23,7 @@ void main() async {
   final isOnBoardingFinished = SharedPrefs.isOnBoardingFinished();
   final appCubit = AppCubit();
   await appCubit.loadTheme();
+  await appCubit.loadLanguage();
   await appCubit.checkLoginStatus();
 
   if (appCubit.isLogin) {
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         final appCubit = context.read<AppCubit>();
         return MaterialApp(
-          locale: Locale('ar'),
+          locale: appCubit.appLocale,
           localizationsDelegates: [
             S.delegate,
             GlobalMaterialLocalizations.delegate,

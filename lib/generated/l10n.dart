@@ -1879,6 +1879,766 @@ class S {
       args: [],
     );
   }
+
+  /// `There is no Categories`
+  String get thereIsNoCategories {
+    return Intl.message(
+      'There is no Categories',
+      name: 'thereIsNoCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confrm Deletion`
+  String get categoryConfirmDeletion {
+    return Intl.message(
+      'Confrm Deletion',
+      name: 'categoryConfirmDeletion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this category?,`
+  String get categoryDeletionText {
+    return Intl.message(
+      'Are you sure you want to delete this category?,',
+      name: 'categoryDeletionText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get categoryDeletionCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'categoryDeletionCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get categoryDeletionDeleteButton {
+    return Intl.message(
+      'Delete',
+      name: 'categoryDeletionDeleteButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category added successfully.`
+  String get categoryAddedSuccessfully {
+    return Intl.message(
+      'Category added successfully.',
+      name: 'categoryAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to add category. Try again.`
+  String get categoryFailedToAdd {
+    return Intl.message(
+      'Failed to add category. Try again.',
+      name: 'categoryFailedToAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Category`
+  String get categoryDialogTitle {
+    return Intl.message(
+      'Add Category',
+      name: 'categoryDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category Name`
+  String get categoryDialogCategoryName {
+    return Intl.message(
+      'Category Name',
+      name: 'categoryDialogCategoryName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Category Image`
+  String get categoryDialogPickImage {
+    return Intl.message(
+      'Pick Category Image',
+      name: 'categoryDialogPickImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get categoryDialogCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'categoryDialogCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get categoryDialogApplyButton {
+    return Intl.message(
+      'Apply',
+      name: 'categoryDialogApplyButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category name must not be empty.`
+  String get categoryDialogNameValidation {
+    return Intl.message(
+      'Category name must not be empty.',
+      name: 'categoryDialogNameValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category name must be at least 3 characters.`
+  String get categoryDialogNameLengthValidation {
+    return Intl.message(
+      'Category name must be at least 3 characters.',
+      name: 'categoryDialogNameLengthValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select an image for the category.`
+  String get categoryDialogImageValidation {
+    return Intl.message(
+      'Please select an image for the category.',
+      name: 'categoryDialogImageValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category Updated Successfully`
+  String get categoryUpdatedSuccessfully {
+    return Intl.message(
+      'Category Updated Successfully',
+      name: 'categoryUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Deleted Successfully`
+  String get productDeletedSuccessfully {
+    return Intl.message(
+      'Product Deleted Successfully',
+      name: 'productDeletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while Deleting Product, try again`
+  String get productDeletedError {
+    return Intl.message(
+      'Error while Deleting Product, try again',
+      name: 'productDeletedError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Category details available.`
+  String get noCategoryDetailsAvailable {
+    return Intl.message(
+      'No Category details available.',
+      name: 'noCategoryDetailsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Category`
+  String get editCategoryAppBarTitle {
+    return Intl.message(
+      'Edit Category',
+      name: 'editCategoryAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CategoryName`
+  String get editCategoryName {
+    return Intl.message(
+      'CategoryName',
+      name: 'editCategoryName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Image`
+  String get editCategoryEditImageButton {
+    return Intl.message(
+      'Edit Image',
+      name: 'editCategoryEditImageButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set New Category Image`
+  String get setNewCategoryImage {
+    return Intl.message(
+      'Set New Category Image',
+      name: 'setNewCategoryImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Image`
+  String get pickNewCategoryImage {
+    return Intl.message(
+      'Pick Image',
+      name: 'pickNewCategoryImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get pickNewCategoryImageCancel {
+    return Intl.message(
+      'Cancel',
+      name: 'pickNewCategoryImageCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get pickNewCategoryImageApply {
+    return Intl.message(
+      'Apply',
+      name: 'pickNewCategoryImageApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get editCategorySaveChangesButton {
+    return Intl.message(
+      'Save changes',
+      name: 'editCategorySaveChangesButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discard`
+  String get editCategoryDiscardChangesButton {
+    return Intl.message(
+      'Discard',
+      name: 'editCategoryDiscardChangesButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name must be at least 3 characters`
+  String get editCategoryNameValidation {
+    return Intl.message(
+      'Name must be at least 3 characters',
+      name: 'editCategoryNameValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Products`
+  String get categoryProductsTitle {
+    return Intl.message(
+      'Products',
+      name: 'categoryProductsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Products Available for this Category`
+  String get noProductsInThisCategory {
+    return Intl.message(
+      'No Products Available for this Category',
+      name: 'noProductsInThisCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Deletion`
+  String get productConfirmDeletion {
+    return Intl.message(
+      'Confirm Deletion',
+      name: 'productConfirmDeletion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this Product?`
+  String get productConfirmDeletionText {
+    return Intl.message(
+      'Are you sure you want to delete this Product?',
+      name: 'productConfirmDeletionText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get productDeletionCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'productDeletionCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get productDeletionDeleteButton {
+    return Intl.message(
+      'Delete',
+      name: 'productDeletionDeleteButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product added successfully.`
+  String get productAddedSuccessfully {
+    return Intl.message(
+      'Product added successfully.',
+      name: 'productAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to add product. Try again.`
+  String get productFailedToAdd {
+    return Intl.message(
+      'Failed to add product. Try again.',
+      name: 'productFailedToAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Product`
+  String get addProductDialogTitle {
+    return Intl.message(
+      'Add Product',
+      name: 'addProductDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Name`
+  String get addProductDialogName {
+    return Intl.message(
+      'Product Name',
+      name: 'addProductDialogName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get addProductDialogPrice {
+    return Intl.message(
+      'Price',
+      name: 'addProductDialogPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount (%)`
+  String get addProductDialogDiscount {
+    return Intl.message(
+      'Discount (%)',
+      name: 'addProductDialogDiscount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get addProductDialogDescription {
+    return Intl.message(
+      'Description',
+      name: 'addProductDialogDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Image`
+  String get addProductDialogPickImageButton {
+    return Intl.message(
+      'Pick Image',
+      name: 'addProductDialogPickImageButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Product Images`
+  String get addProductDialogPickImagesButton {
+    return Intl.message(
+      'Pick Product Images',
+      name: 'addProductDialogPickImagesButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get addProductDialogCancelButton {
+    return Intl.message(
+      'Cancel',
+      name: 'addProductDialogCancelButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get addProductDialogAddButton {
+    return Intl.message(
+      'Add',
+      name: 'addProductDialogAddButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product name must not be empty.`
+  String get addProductNameValidation {
+    return Intl.message(
+      'Product name must not be empty.',
+      name: 'addProductNameValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price must not be empty.`
+  String get addProductPriceValidation {
+    return Intl.message(
+      'Price must not be empty.',
+      name: 'addProductPriceValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price must be a valid positive number.`
+  String get addProductPricePositiveValidation {
+    return Intl.message(
+      'Price must be a valid positive number.',
+      name: 'addProductPricePositiveValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount must not be empty.`
+  String get addProductDiscountValidation {
+    return Intl.message(
+      'Discount must not be empty.',
+      name: 'addProductDiscountValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount must be a valid number between 0 and 100.`
+  String get addProductDiscountValidNumber {
+    return Intl.message(
+      'Discount must be a valid number between 0 and 100.',
+      name: 'addProductDiscountValidNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a main image.`
+  String get addProductMainImageValidation {
+    return Intl.message(
+      'Please select a main image.',
+      name: 'addProductMainImageValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Product`
+  String get editProductAppBarTitle {
+    return Intl.message(
+      'Edit Product',
+      name: 'editProductAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Updated Successfully`
+  String get productUpdatedSuccessfully {
+    return Intl.message(
+      'Product Updated Successfully',
+      name: 'productUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while Updating Product, try again`
+  String get productUpdatedError {
+    return Intl.message(
+      'Error while Updating Product, try again',
+      name: 'productUpdatedError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Product details available.`
+  String get noProductDetailsAvailable {
+    return Intl.message(
+      'No Product details available.',
+      name: 'noProductDetailsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Main Image`
+  String get editProductEditMainImageButton {
+    return Intl.message(
+      'Edit Main Image',
+      name: 'editProductEditMainImageButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Main Product Image`
+  String get editProductEditMainImageTitle {
+    return Intl.message(
+      'Set Main Product Image',
+      name: 'editProductEditMainImageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Main Image`
+  String get editProductEditMainImagePickImage {
+    return Intl.message(
+      'Pick Main Image',
+      name: 'editProductEditMainImagePickImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get editProductEditMainImageApply {
+    return Intl.message(
+      'Apply',
+      name: 'editProductEditMainImageApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get editProductEditMainImageCancel {
+    return Intl.message(
+      'Cancel',
+      name: 'editProductEditMainImageCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Images`
+  String get editProductAddImagesButton {
+    return Intl.message(
+      'Add Images',
+      name: 'editProductAddImagesButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Product Images`
+  String get editProductAddImagesDialogTitle {
+    return Intl.message(
+      'Add Product Images',
+      name: 'editProductAddImagesDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Product Images`
+  String get editProductAddImagesDialogPickProductImages {
+    return Intl.message(
+      'Pick Product Images',
+      name: 'editProductAddImagesDialogPickProductImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get editProductAddImagesDialogCancel {
+    return Intl.message(
+      'Cancel',
+      name: 'editProductAddImagesDialogCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get editProductAddImagesDialogApply {
+    return Intl.message(
+      'Apply',
+      name: 'editProductAddImagesDialogApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get editProductName {
+    return Intl.message('Name', name: 'editProductName', desc: '', args: []);
+  }
+
+  /// `Price`
+  String get editProductPrice {
+    return Intl.message('Price', name: 'editProductPrice', desc: '', args: []);
+  }
+
+  /// `Discount`
+  String get editProductDiscount {
+    return Intl.message(
+      'Discount',
+      name: 'editProductDiscount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get editProductDescription {
+    return Intl.message(
+      'Description',
+      name: 'editProductDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get editProductSaveChangesButton {
+    return Intl.message(
+      'Save Changes',
+      name: 'editProductSaveChangesButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discard`
+  String get editProductDiscardChangesButton {
+    return Intl.message(
+      'Discard',
+      name: 'editProductDiscardChangesButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name must be not empty`
+  String get editProductNameValidation {
+    return Intl.message(
+      'Name must be not empty',
+      name: 'editProductNameValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price must be not empty`
+  String get editProductPriceValidation {
+    return Intl.message(
+      'Price must be not empty',
+      name: 'editProductPriceValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price must be a valid positive number`
+  String get editProductPricePositiveValidation {
+    return Intl.message(
+      'Price must be a valid positive number',
+      name: 'editProductPricePositiveValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount must be not empty`
+  String get editProductDiscountValidation {
+    return Intl.message(
+      'Discount must be not empty',
+      name: 'editProductDiscountValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount must be a valid number between 0 and 100`
+  String get editProductDiscountNumberValidation {
+    return Intl.message(
+      'Discount must be a valid number between 0 and 100',
+      name: 'editProductDiscountNumberValidation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

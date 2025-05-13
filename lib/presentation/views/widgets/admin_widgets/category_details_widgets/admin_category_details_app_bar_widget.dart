@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 
 class AdminCategoryDetailsAppBarWidget extends StatelessWidget
@@ -30,7 +31,7 @@ class AdminCategoryDetailsAppBarWidget extends StatelessWidget
       ),
       centerTitle: true,
       title: Text(
-        'Edit Category',
+        S.of(context).editCategoryAppBarTitle,
         style: TextStyles.appBarTitle(context),
       ),
     );

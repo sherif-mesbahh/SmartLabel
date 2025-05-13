@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 
 class AdminCategoryDetailsNameTextFieldWidget extends StatelessWidget {
   const AdminCategoryDetailsNameTextFieldWidget({
@@ -16,7 +17,7 @@ class AdminCategoryDetailsNameTextFieldWidget extends StatelessWidget {
       keyboardType: TextInputType.text,
       controller: nameController,
       decoration: InputDecoration(
-        labelText: 'Category Name',
+        labelText: S.of(context).editCategoryName,
         labelStyle: TextStyles.smallText(context),
         hintStyle: TextStyles.smallText(context),
         border: OutlineInputBorder(

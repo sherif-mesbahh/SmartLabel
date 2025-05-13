@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -55,7 +56,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
       listener: (context, state) {
         if (state is AddProductSuccessState) {
           Fluttertoast.showToast(
-            msg: "Product added successfully.",
+            msg: S.of(context).productAddedSuccessfully,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.green,
@@ -66,7 +67,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
           AppCubit.get(context).getCategoryProducts(id: widget.categoryId);
         } else if (state is AddProductErrorState) {
           Fluttertoast.showToast(
-            msg: "Failed to add product. Try again.",
+            msg: S.of(context).productFailedToAdd,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.red,
@@ -78,7 +79,8 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
       builder: (context, state) {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          title: Text('Add Product', style: TextStyles.headline2(context)),
+          title: Text(S.of(context).addProductDialogTitle,
+              style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Padding(
@@ -89,7 +91,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                   // Product Name
                   _buildTextField(
                     controller: nameController,
-                    label: 'Product Name',
+                    label: S.of(context).addProductDialogName,
                     keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 10),
@@ -97,21 +99,21 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                   // Price
                   _buildTextField(
                       controller: priceController,
-                      label: 'Price',
+                      label: S.of(context).addProductDialogPrice,
                       keyboardType: TextInputType.number),
                   const SizedBox(height: 10),
 
                   // Discount
                   _buildTextField(
                       controller: discountController,
-                      label: 'Discount (%)',
+                      label: S.of(context).addProductDialogDiscount,
                       keyboardType: TextInputType.number),
                   const SizedBox(height: 10),
 
                   // Description
                   _buildTextField(
                     controller: descController,
-                    label: 'Description',
+                    label: S.of(context).addProductDialogDescription,
                     maxLines: 3,
                     keyboardType: TextInputType.text,
                   ),
@@ -122,7 +124,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                     onPressed: pickMainImage,
                     style:
                         ElevatedButton.styleFrom(backgroundColor: primaryColor),
-                    child: Text("Pick Image",
+                    child: Text(S.of(context).addProductDialogPickImageButton,
                         style: TextStyles.buttonText(context)
                             .copyWith(fontSize: 12)),
                   ),
@@ -135,7 +137,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                     onPressed: pickProductImages,
                     style:
                         ElevatedButton.styleFrom(backgroundColor: primaryColor),
-                    child: Text("Pick Product Images",
+                    child: Text(S.of(context).addProductDialogPickImagesButton,
                         style: TextStyles.buttonText(context)
                             .copyWith(fontSize: 12)),
                   ),
@@ -157,7 +159,8 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
           ),
           actions: [
             TextButton(
-              child: Text('Cancel', style: TextStyles.productTitle(context)),
+              child: Text(S.of(context).addProductDialogCancelButton,
+                  style: TextStyles.productTitle(context)),
               onPressed: () => Navigator.of(context).pop(),
             ),
             state is AddProductLoadingState
@@ -167,12 +170,13 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                     height: 100,
                   )
                 : TextButton(
-                    child: Text('Add', style: TextStyles.productTitle(context)),
+                    child: Text(S.of(context).addProductDialogAddButton,
+                        style: TextStyles.productTitle(context)),
                     onPressed: () {
                       // 1. Check if name is empty
                       if (nameController.text.isEmpty) {
                         Fluttertoast.showToast(
-                          msg: "Product name must not be empty.",
+                          msg: S.of(context).addProductNameValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -185,7 +189,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                       // 2. Check if price is empty or invalid
                       if (priceController.text.isEmpty) {
                         Fluttertoast.showToast(
-                          msg: "Price must not be empty.",
+                          msg: S.of(context).addProductPriceValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -198,7 +202,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                       final price = double.tryParse(priceController.text);
                       if (price == null || price <= 0) {
                         Fluttertoast.showToast(
-                          msg: "Price must be a valid positive number.",
+                          msg: S.of(context).addProductPricePositiveValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -211,7 +215,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                       // 3. Check if discount is empty or invalid
                       if (discountController.text.isEmpty) {
                         Fluttertoast.showToast(
-                          msg: "Discount must not be empty.",
+                          msg: S.of(context).addProductDiscountValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -227,8 +231,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                           discount < 0 ||
                           discount > 100) {
                         Fluttertoast.showToast(
-                          msg:
-                              "Discount must be a valid number between 0 and 100.",
+                          msg: S.of(context).addProductDiscountValidNumber,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -241,7 +244,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                       // 4. Check if main image is null
                       if (mainImage == null) {
                         Fluttertoast.showToast(
-                          msg: "Please select a main image.",
+                          msg: S.of(context).addProductMainImageValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,

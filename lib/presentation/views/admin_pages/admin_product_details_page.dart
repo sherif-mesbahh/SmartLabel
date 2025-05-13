@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/product_details_model/product_details_data_images_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -94,7 +95,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
         ),
         centerTitle: true,
         title: Text(
-          'Edit Product',
+          S.of(context).editProductAppBarTitle,
           style: TextStyles.appBarTitle(context),
         ),
       ),
@@ -106,7 +107,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
             listener: (context, state) {
               if (state is UpdateProductSuccessState) {
                 Fluttertoast.showToast(
-                  msg: 'Product Updated Successfully',
+                  msg: S.of(context).productUpdatedSuccessfully,
                   backgroundColor: Colors.green,
                   textColor: secondaryColor,
                   gravity: ToastGravity.BOTTOM,
@@ -123,7 +124,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
               }
               if (state is UpdateProductErrorState) {
                 Fluttertoast.showToast(
-                  msg: 'Error while Updating Product, try again',
+                  msg: S.of(context).productUpdatedError,
                   backgroundColor: Colors.red,
                   textColor: secondaryColor,
                   gravity: ToastGravity.BOTTOM,
@@ -144,9 +145,9 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                   [];
 
               if (product == null) {
-                return const Center(
+                return  Center(
                   child: Text(
-                    "No Product details available.",
+                    S.of(context).noProductDetailsAvailable,
                     style: TextStyle(
                       color: Colors.red,
                     ),
@@ -173,7 +174,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     keyboardType: TextInputType.text,
                     controller: nameController,
                     decoration: InputDecoration(
-                      labelText: 'Name',
+                      labelText: S.of(context).editProductName,
                       labelStyle: TextStyles.smallText(context),
                       hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(
@@ -197,7 +198,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     keyboardType: TextInputType.number,
                     controller: priceController,
                     decoration: InputDecoration(
-                      labelText: 'Price',
+                      labelText: S.of(context).editProductPrice,
                       labelStyle: TextStyles.smallText(context),
                       hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(
@@ -221,7 +222,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     keyboardType: TextInputType.number,
                     controller: discountController,
                     decoration: InputDecoration(
-                      labelText: 'Discount',
+                      labelText: S.of(context).editProductDiscount,
                       labelStyle: TextStyles.smallText(context),
                       hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(
@@ -246,7 +247,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     controller: descController,
                     maxLines: 3,
                     decoration: InputDecoration(
-                      labelText: 'Description',
+                      labelText: S.of(context).editProductDescription,
                       labelStyle: TextStyles.smallText(context),
                       hintStyle: TextStyles.smallText(context),
                       border: OutlineInputBorder(

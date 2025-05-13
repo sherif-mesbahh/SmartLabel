@@ -1395,6 +1395,19 @@ class AppCubit extends Cubit<AppStates> {
     themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
   }
 
+  Locale appLocale = const Locale('en');
+
+  void toggleLanguage(bool isArabic) {
+    appLocale = isArabic ? const Locale('ar') : const Locale('en');
+    SharedPrefs.setLanguage(isArabic ? 'ar' : 'en'); // Save user preference
+    emit(ChangeLanguageState());
+  }
+
+  Future<void> loadLanguage() async {
+    final langCode = await SharedPrefs.getLanguage();
+    appLocale = Locale(langCode ?? 'en');
+  }
+
   late HubConnection hubConnection;
 
   void startSignalR() async {

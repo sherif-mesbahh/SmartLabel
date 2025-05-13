@@ -45,7 +45,7 @@ class AdminCategoriesPage extends StatelessWidget {
         }
         if (state is DeleteCategorySuccessState) {
           Fluttertoast.showToast(
-            msg:S.of(context).categoryDeletedSuccessfully,
+            msg: S.of(context).categoryDeletedSuccessfully,
             backgroundColor: Colors.green,
             textColor: secondaryColor,
             gravity: ToastGravity.BOTTOM,
@@ -56,7 +56,7 @@ class AdminCategoriesPage extends StatelessWidget {
         }
         if (state is DeleteCategoryErrorState) {
           Fluttertoast.showToast(
-            msg:S.of(context).errorDeletingCategory,
+            msg: S.of(context).errorDeletingCategory,
             backgroundColor: Colors.red,
             textColor: secondaryColor,
             gravity: ToastGravity.BOTTOM,
@@ -170,7 +170,7 @@ class AdminCategoriesPage extends StatelessWidget {
                   AppCubit.get(context).categoryModel?.data?.isEmpty ?? false
                       ? Center(
                           child: Text(
-                            'There is no Categories',
+                            S.of(context).thereIsNoCategories,
                             style: TextStyles.productTitle(context),
                           ),
                         )

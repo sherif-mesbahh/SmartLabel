@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -39,7 +40,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
       listener: (context, state) {
         if (state is AddCategorySuccessState) {
           Fluttertoast.showToast(
-            msg: "Category added successfully.",
+            msg: S.of(context).categoryAddedSuccessfully,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.green,
@@ -50,7 +51,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
           AppCubit.get(context).getCategories();
         } else if (state is AddCategoryErrorState) {
           Fluttertoast.showToast(
-            msg: "Failed to add category. Try again.",
+            msg: S.of(context).categoryFailedToAdd,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.red,
@@ -62,7 +63,8 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
       builder: (context, state) {
         return AlertDialog(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          title: Text('Add Category', style: TextStyles.headline2(context)),
+          title: Text(S.of(context).categoryDialogTitle,
+              style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -72,7 +74,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                   keyboardType: TextInputType.name,
                   controller: nameController,
                   decoration: InputDecoration(
-                    labelText: 'Name',
+                    labelText: S.of(context).categoryDialogCategoryName,
                     labelStyle: TextStyles.smallText(context),
                     hintStyle: TextStyles.smallText(context),
                     border: OutlineInputBorder(
@@ -96,7 +98,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                     backgroundColor: primaryColor,
                   ),
                   child: Text(
-                    "Pick Category Image",
+                    S.of(context).categoryDialogPickImage,
                     style:
                         TextStyles.buttonText(context).copyWith(fontSize: 12),
                   ),
@@ -111,7 +113,8 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
           ),
           actions: [
             TextButton(
-              child: Text('Cancel', style: TextStyles.productTitle(context)),
+              child: Text(S.of(context).categoryDialogCancelButton,
+                  style: TextStyles.productTitle(context)),
               onPressed: () => Navigator.of(context).pop(),
             ),
             state is AddCategoryLoadingState
@@ -121,12 +124,12 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                     height: 100,
                   )
                 : TextButton(
-                    child:
-                        Text('Apply', style: TextStyles.productTitle(context)),
+                    child: Text(S.of(context).categoryDialogApplyButton,
+                        style: TextStyles.productTitle(context)),
                     onPressed: () {
                       if (nameController.text.isEmpty) {
                         Fluttertoast.showToast(
-                          msg: "Category name must not be empty.",
+                          msg: S.of(context).categoryDialogNameValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -139,7 +142,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                       // 2. Optional: check name length
                       if (nameController.text.length < 3) {
                         Fluttertoast.showToast(
-                          msg: "Category name must be at least 3 characters.",
+                          msg: S.of(context).categoryDialogNameLengthValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,
@@ -152,7 +155,7 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                       // 3. Check if image is picked
                       if (categoryImage == null) {
                         Fluttertoast.showToast(
-                          msg: "Please select an image for the category.",
+                          msg: S.of(context).categoryDialogImageValidation,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           backgroundColor: Colors.red,

@@ -51,6 +51,41 @@ class MessageLookup extends MessageLookupByLibrary {
       "العنوان",
     ),
     "addBannerDialogTitle": MessageLookupByLibrary.simpleMessage("إضافة بانر"),
+    "addProductDialogAddButton": MessageLookupByLibrary.simpleMessage("اضافة"),
+    "addProductDialogCancelButton": MessageLookupByLibrary.simpleMessage(
+      "اغلاق",
+    ),
+    "addProductDialogDescription": MessageLookupByLibrary.simpleMessage(
+      "الوصف",
+    ),
+    "addProductDialogDiscount": MessageLookupByLibrary.simpleMessage("الخصم"),
+    "addProductDialogName": MessageLookupByLibrary.simpleMessage("اسم المنتج"),
+    "addProductDialogPickImageButton": MessageLookupByLibrary.simpleMessage(
+      "اختر صورة المنتج",
+    ),
+    "addProductDialogPickImagesButton": MessageLookupByLibrary.simpleMessage(
+      "اختر صور المنتج",
+    ),
+    "addProductDialogPrice": MessageLookupByLibrary.simpleMessage("السعر"),
+    "addProductDialogTitle": MessageLookupByLibrary.simpleMessage("اضافة منتج"),
+    "addProductDiscountValidNumber": MessageLookupByLibrary.simpleMessage(
+      "الخصم يجب ان يكون رقما صحيحا بين 0 و 100.",
+    ),
+    "addProductDiscountValidation": MessageLookupByLibrary.simpleMessage(
+      "الخصم لا يمكن ان يكون فارغ.",
+    ),
+    "addProductMainImageValidation": MessageLookupByLibrary.simpleMessage(
+      "يرجى اختيار صورة رئيسية.",
+    ),
+    "addProductNameValidation": MessageLookupByLibrary.simpleMessage(
+      "اسم المنتج لا يمكن ان يكون فارغ.",
+    ),
+    "addProductPricePositiveValidation": MessageLookupByLibrary.simpleMessage(
+      "السعر يجب ان يكون رقما صحيحا.",
+    ),
+    "addProductPriceValidation": MessageLookupByLibrary.simpleMessage(
+      "السعر لا يمكن ان يكون فارغ.",
+    ),
     "adminPanel": MessageLookupByLibrary.simpleMessage("لوحة الإدارة"),
     "allBanners": MessageLookupByLibrary.simpleMessage("جميع البانرات"),
     "allCategories": MessageLookupByLibrary.simpleMessage("جميع الفئات"),
@@ -96,10 +131,48 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم تحديث البانر بنجاح",
     ),
     "cancelButton": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "categoryAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم اضافة الفئة بنجاح.",
+    ),
+    "categoryConfirmDeletion": MessageLookupByLibrary.simpleMessage(
+      "تأكيد الحذف",
+    ),
     "categoryDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم حذف الفئة بنجاح",
     ),
+    "categoryDeletionCancelButton": MessageLookupByLibrary.simpleMessage(
+      "اغلاق",
+    ),
+    "categoryDeletionDeleteButton": MessageLookupByLibrary.simpleMessage("حذف"),
+    "categoryDeletionText": MessageLookupByLibrary.simpleMessage(
+      "هل انت متاكد انك تريد حذف هذه الفئة؟",
+    ),
+    "categoryDialogApplyButton": MessageLookupByLibrary.simpleMessage("تطبيق"),
+    "categoryDialogCancelButton": MessageLookupByLibrary.simpleMessage("اغلاق"),
+    "categoryDialogCategoryName": MessageLookupByLibrary.simpleMessage(
+      "اسم الفئة",
+    ),
+    "categoryDialogImageValidation": MessageLookupByLibrary.simpleMessage(
+      "يرجى اختيار صورة للفئة.",
+    ),
+    "categoryDialogNameLengthValidation": MessageLookupByLibrary.simpleMessage(
+      "اسم الفئة يجب ان يكون على الاقل 3 حروف.",
+    ),
+    "categoryDialogNameValidation": MessageLookupByLibrary.simpleMessage(
+      "اسم الفئة لا يمكن ان يكون فارغ.",
+    ),
+    "categoryDialogPickImage": MessageLookupByLibrary.simpleMessage(
+      "اختر صورة الفئة",
+    ),
+    "categoryDialogTitle": MessageLookupByLibrary.simpleMessage("اضافة فئة"),
+    "categoryFailedToAdd": MessageLookupByLibrary.simpleMessage(
+      "حدث خطاء اثناء اضافة الفئة، يرجى المحاولة مرة اخرى.",
+    ),
     "categoryProducts": MessageLookupByLibrary.simpleMessage("منتجات الفئة"),
+    "categoryProductsTitle": MessageLookupByLibrary.simpleMessage("منتجات"),
+    "categoryUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث الفئة بنجاح.",
+    ),
     "codeVerifiedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم التحقق من الكود بنجاح",
     ),
@@ -141,6 +214,79 @@ class MessageLookup extends MessageLookupByLibrary {
       "تاريخ البدء",
     ),
     "editBannerTitleText": MessageLookupByLibrary.simpleMessage("العنوان"),
+    "editCategoryAppBarTitle": MessageLookupByLibrary.simpleMessage(
+      "تعديل الفئة",
+    ),
+    "editCategoryDiscardChangesButton": MessageLookupByLibrary.simpleMessage(
+      "تجاهل التغييرات",
+    ),
+    "editCategoryEditImageButton": MessageLookupByLibrary.simpleMessage(
+      "تعديل الصورة",
+    ),
+    "editCategoryName": MessageLookupByLibrary.simpleMessage("اسم الفئة"),
+    "editCategoryNameValidation": MessageLookupByLibrary.simpleMessage(
+      "اسم الفئة يجب ان يكون على الاقل 3 حروف.",
+    ),
+    "editCategorySaveChangesButton": MessageLookupByLibrary.simpleMessage(
+      "حفظ التغييرات",
+    ),
+    "editProductAddImagesButton": MessageLookupByLibrary.simpleMessage(
+      "اضافة صور",
+    ),
+    "editProductAddImagesDialogApply": MessageLookupByLibrary.simpleMessage(
+      "تطبيق",
+    ),
+    "editProductAddImagesDialogCancel": MessageLookupByLibrary.simpleMessage(
+      "اغلاق",
+    ),
+    "editProductAddImagesDialogPickProductImages":
+        MessageLookupByLibrary.simpleMessage("اختر صور المنتج"),
+    "editProductAddImagesDialogTitle": MessageLookupByLibrary.simpleMessage(
+      "اضافة صور للمنتج",
+    ),
+    "editProductAppBarTitle": MessageLookupByLibrary.simpleMessage(
+      "تعديل المنتج",
+    ),
+    "editProductDescription": MessageLookupByLibrary.simpleMessage("الوصف"),
+    "editProductDiscardChangesButton": MessageLookupByLibrary.simpleMessage(
+      "تجاهل التغييرات",
+    ),
+    "editProductDiscount": MessageLookupByLibrary.simpleMessage("الخصم"),
+    "editProductDiscountNumberValidation": MessageLookupByLibrary.simpleMessage(
+      "الخصم يجب ان يكون رقما صحيحا بين 0 و 100.",
+    ),
+    "editProductDiscountValidation": MessageLookupByLibrary.simpleMessage(
+      "الخصم لا يمكن ان يكون فارغ.",
+    ),
+    "editProductEditMainImageApply": MessageLookupByLibrary.simpleMessage(
+      "تطبيق",
+    ),
+    "editProductEditMainImageButton": MessageLookupByLibrary.simpleMessage(
+      "تعديل صورة رئيسية",
+    ),
+    "editProductEditMainImageCancel": MessageLookupByLibrary.simpleMessage(
+      "اغلاق",
+    ),
+    "editProductEditMainImagePickImage": MessageLookupByLibrary.simpleMessage(
+      "اختر صورة رئيسية",
+    ),
+    "editProductEditMainImageTitle": MessageLookupByLibrary.simpleMessage(
+      "تعيين صورة رئيسية للمنتج",
+    ),
+    "editProductName": MessageLookupByLibrary.simpleMessage("اسم"),
+    "editProductNameValidation": MessageLookupByLibrary.simpleMessage(
+      "اسم المنتج لا يمكن ان يكون فارغ.",
+    ),
+    "editProductPrice": MessageLookupByLibrary.simpleMessage("السعر"),
+    "editProductPricePositiveValidation": MessageLookupByLibrary.simpleMessage(
+      "السعر يجب ان يكون رقما صحيحا.",
+    ),
+    "editProductPriceValidation": MessageLookupByLibrary.simpleMessage(
+      "السعر لا يمكن ان يكون فارغ.",
+    ),
+    "editProductSaveChangesButton": MessageLookupByLibrary.simpleMessage(
+      "حفظ التغييرات",
+    ),
     "editUsersButton": MessageLookupByLibrary.simpleMessage("تعديل المستخدمين"),
     "emailisnotconfirmedpleasecheckyouremail":
         MessageLookupByLibrary.simpleMessage(
@@ -250,6 +396,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "navBarHome": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "navBarProfile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "noCategoriesFound": MessageLookupByLibrary.simpleMessage("لا يوجد فئات"),
+    "noCategoryDetailsAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا توجد تفاصيل للفئة.",
+    ),
     "noCategoryProductsFoundInThisCategory":
         MessageLookupByLibrary.simpleMessage("لا يوجد منتجات في هذه الفئة."),
     "noFavouritesFound": MessageLookupByLibrary.simpleMessage("لا يوجد مفضلات"),
@@ -259,7 +408,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "noNotificationsFound": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اشعارات",
     ),
+    "noProductDetailsAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا توجد تفاصيل للمنتج.",
+    ),
     "noProductsFound": MessageLookupByLibrary.simpleMessage("لا يوجد منتجات"),
+    "noProductsInThisCategory": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد منتجات في هذه الفئة.",
+    ),
     "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
     "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تغيير كلمة المرور بنجاح",
@@ -279,14 +434,47 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordValidationUpperCase": MessageLookupByLibrary.simpleMessage(
       "يجب أن تحتوي على حرف كبير (A-Z)",
     ),
+    "pickNewCategoryImage": MessageLookupByLibrary.simpleMessage(
+      "اختر صورة الفئة",
+    ),
+    "pickNewCategoryImageApply": MessageLookupByLibrary.simpleMessage("تطبيق"),
+    "pickNewCategoryImageCancel": MessageLookupByLibrary.simpleMessage("اغلاق"),
     "pleaseLoginFirst": MessageLookupByLibrary.simpleMessage(
       "يرجى تسجيل الدخول اولا",
     ),
+    "productAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم اضافة المنتج بنجاح.",
+    ),
+    "productConfirmDeletion": MessageLookupByLibrary.simpleMessage(
+      "تأكيد الحذف",
+    ),
+    "productConfirmDeletionText": MessageLookupByLibrary.simpleMessage(
+      "هل انت متاكد انك تريد حذف هذا المنتج؟",
+    ),
+    "productDeletedError": MessageLookupByLibrary.simpleMessage(
+      "حدث خطاء اثناء حذف المنتج، يرجى المحاولة مرة اخرى.",
+    ),
+    "productDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم حذف المنتج بنجاح.",
+    ),
+    "productDeletionCancelButton": MessageLookupByLibrary.simpleMessage(
+      "اغلاق",
+    ),
+    "productDeletionDeleteButton": MessageLookupByLibrary.simpleMessage("حذف"),
     "productDetails": MessageLookupByLibrary.simpleMessage("تفاصيل المنتج"),
     "productDetailsDescription": MessageLookupByLibrary.simpleMessage(
       "الوصف: ",
     ),
     "productDetailsPrice": MessageLookupByLibrary.simpleMessage("السعر: "),
+    "productFailedToAdd": MessageLookupByLibrary.simpleMessage(
+      "حدث خطاء اثناء اضافة المنتج، يرجى المحاولة مرة اخرى.",
+    ),
+    "productUpdatedError": MessageLookupByLibrary.simpleMessage(
+      "حدث خطاء اثناء تحديث المنتج، يرجى المحاولة مرة اخرى.",
+    ),
+    "productUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث المنتج بنجاح.",
+    ),
     "profilePageAdminPanel": MessageLookupByLibrary.simpleMessage(
       "لوحة الإدارة",
     ),
@@ -393,6 +581,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "setMainBannerImage": MessageLookupByLibrary.simpleMessage(
       "تعيين صورة البانر الرئيسية",
     ),
+    "setNewCategoryImage": MessageLookupByLibrary.simpleMessage(
+      "تعيين صورة الفئة",
+    ),
     "signInButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "signOutSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تسجيل الخروج بنجاح",
@@ -445,6 +636,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "يرجى ادخال كلمة المرور",
     ),
     "thereIsNoBanners": MessageLookupByLibrary.simpleMessage("لا يوجد بانرات"),
+    "thereIsNoCategories": MessageLookupByLibrary.simpleMessage("لا يوجد فئات"),
     "userEmailLabel": MessageLookupByLibrary.simpleMessage("بريد المستخدم"),
     "userEmailValidation": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال بريد المستخدم",

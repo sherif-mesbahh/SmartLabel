@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -35,8 +36,8 @@ class _AddMainProductImageDialogWidgetState
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title:
-          Text('Set Main Product Image', style: TextStyles.headline2(context)),
+      title: Text(S.of(context).editProductEditMainImageTitle,
+          style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -46,7 +47,7 @@ class _AddMainProductImageDialogWidgetState
               onPressed: pickMainImage,
               style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
               child: Text(
-                "Pick Main Image",
+                S.of(context).editProductEditMainImagePickImage,
                 style: TextStyles.buttonText(context).copyWith(fontSize: 12),
               ),
             ),
@@ -65,7 +66,8 @@ class _AddMainProductImageDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).editProductEditMainImageCancel,
+              style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -73,7 +75,8 @@ class _AddMainProductImageDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text('Apply', style: TextStyles.productTitle(context)),
+            child: Text(S.of(context).editProductEditMainImageApply,
+                style: TextStyles.productTitle(context)),
             onPressed: () {
               if (mainImage != null) {
                 AppCubit.get(context).mainproductImageToUpload = mainImage;

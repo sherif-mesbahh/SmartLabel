@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_product_details_page.dart';
@@ -104,13 +105,18 @@ class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
                     return BlocBuilder<AppCubit, AppStates>(
                       builder: (context, state) {
                         return AlertDialog(
-                          title: const Text('Confirm Deletion'),
-                          content: const Text(
-                              'Are you sure you want to delete this Product?'),
+                          title: Text(
+                            S.of(context).productConfirmDeletion,
+                          ),
+                          content: Text(
+                            S.of(context).productConfirmDeletionText,
+                          ),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(),
-                              child: const Text('Cancel'),
+                              child: Text(
+                                S.of(context).productDeletionCancelButton,
+                              ),
                             ),
                             TextButton(
                               onPressed: state is DeleteProductLoadingState
@@ -143,8 +149,8 @@ class AdminCategoryDetailsProductsGridViewItem extends StatelessWidget {
                                         height: 100,
                                       ),
                                     )
-                                  : const Text(
-                                      'Delete',
+                                  : Text(
+                                      S.of(context).productDeletionDeleteButton,
                                       style: TextStyle(color: Colors.red),
                                     ),
                             ),

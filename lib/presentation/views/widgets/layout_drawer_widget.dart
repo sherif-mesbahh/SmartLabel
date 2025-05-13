@@ -72,6 +72,7 @@ class LayoutDrawerWidget extends StatelessWidget {
                                 .of(context)
                                 .profilePageSideMenuChangeLanguageDialogEnglish),
                             onTap: () {
+                              context.read<AppCubit>().toggleLanguage(false);
                               Navigator.pop(context);
                             },
                           ),
@@ -80,6 +81,8 @@ class LayoutDrawerWidget extends StatelessWidget {
                                 .of(context)
                                 .profilePageSideMenuChangeLanguageDialogArabic),
                             onTap: () {
+                              context.read<AppCubit>().toggleLanguage(true);
+
                               Navigator.pop(context);
                             },
                           ),

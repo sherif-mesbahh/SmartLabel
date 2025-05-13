@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/category_products_model/category_products_data_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
@@ -39,8 +40,8 @@ class _AddMainBannerImageDialogWidgetState
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title:
-          Text('Set New Category Image', style: TextStyles.headline2(context)),
+      title: Text(S.of(context).setNewCategoryImage,
+          style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -50,7 +51,7 @@ class _AddMainBannerImageDialogWidgetState
               onPressed: pickCategoryImage,
               style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
               child: Text(
-                "Pick Image",
+                S.of(context).pickNewCategoryImage,
                 style: TextStyles.buttonText(context).copyWith(fontSize: 12),
               ),
             ),
@@ -69,7 +70,8 @@ class _AddMainBannerImageDialogWidgetState
       ),
       actions: [
         TextButton(
-          child: Text('Cancel', style: TextStyles.productTitle(context)),
+          child: Text(S.of(context).pickNewCategoryImageCancel,
+              style: TextStyles.productTitle(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -77,7 +79,8 @@ class _AddMainBannerImageDialogWidgetState
         BlocListener<AppCubit, AppStates>(
           listener: (context, state) {},
           child: TextButton(
-            child: Text('Apply', style: TextStyles.productTitle(context)),
+            child: Text(S.of(context).pickNewCategoryImageApply,
+                style: TextStyles.productTitle(context)),
             onPressed: () {
               if (categoryImage != null) {
                 AppCubit.get(context).mainCategoryImageToUpload = categoryImage;

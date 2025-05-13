@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/widgets/admin_widgets/category_details_widgets/add_new_product_dialog_widget.dart';
@@ -66,7 +67,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
         listener: (context, state) {
           if (state is UpdateCategorySuccessState) {
             Fluttertoast.showToast(
-              msg: 'Category Updated Successfully',
+              msg: S.of(context).categoryUpdatedSuccessfully,
               backgroundColor: Colors.green,
               textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,
@@ -93,7 +94,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
 
           if (state is DeleteProductSuccessState) {
             Fluttertoast.showToast(
-              msg: 'Product Deleted Successfully',
+              msg: S.of(context).productDeletedSuccessfully,
               backgroundColor: Colors.green,
               textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,
@@ -104,7 +105,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
           }
           if (state is DeleteProductErrorState) {
             Fluttertoast.showToast(
-              msg: 'Error while Deleting Product, try again',
+              msg: S.of(context).productDeletedError,
               backgroundColor: Colors.red,
               textColor: secondaryColor,
               gravity: ToastGravity.BOTTOM,
@@ -118,9 +119,9 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
           final category = cubit.categoryProductsModel?.data;
           final products = cubit.categoryProductsModel!.data!.products;
           if (category == null) {
-            return const Center(
+            return Center(
               child: Text(
-                "No Category details available.",
+                S.of(context).noCategoryDetailsAvailable,
                 style: TextStyle(color: Colors.red),
               ),
             );
@@ -131,6 +132,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 10),
                 // Category Name
                 AdminCategoryDetailsNameTextFieldWidget(
                     nameController: nameController),
@@ -154,7 +156,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
 
                 // Category Products
                 Text(
-                  '${widget.cubit.categoryProductsModel!.data?.name ?? ''} Products',
+                  '${widget.cubit.categoryProductsModel!.data?.name ?? ''} ${S.of(context).categoryProductsTitle}',
                   style: TextStyles.headline2(context),
                 ),
                 SizedBox(height: 10),
@@ -165,7 +167,7 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
                       )
                     : Center(
                         child: Text(
-                          'No Products Available for this Category',
+                          S.of(context).noProductsInThisCategory,
                           style: TextStyles.productTitle(context).copyWith(
                             color: Colors.red,
                           ),

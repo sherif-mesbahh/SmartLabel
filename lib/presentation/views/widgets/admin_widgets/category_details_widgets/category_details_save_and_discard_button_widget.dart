@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 import 'package:smart_label_software_engineering/presentation/views/admin_pages/admin_category_details_page.dart';
@@ -43,7 +44,7 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
                     )
                   : InkWell(
                       child: Text(
-                        'Save changes',
+                        S.of(context).editCategorySaveChangesButton,
                         style: TextStyles.productTitle(context)
                             .copyWith(color: primaryColor),
                       ),
@@ -60,7 +61,7 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
                           });
                         } else {
                           Fluttertoast.showToast(
-                            msg: 'Name must be at least 3 characters',
+                            msg:  S.of(context).editCategoryNameValidation,
                             backgroundColor: Colors.red,
                             textColor: secondaryColor,
                             gravity: ToastGravity.BOTTOM,
@@ -74,7 +75,7 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
               // Discard
               InkWell(
                 child: Text(
-                  'Discard',
+                   S.of(context).editCategoryDiscardChangesButton,
                   style: TextStyles.productTitle(context)
                       .copyWith(color: primaryColor),
                 ),

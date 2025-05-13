@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
+import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
 
@@ -50,14 +51,26 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                     )
                   : InkWell(
                       child: Text(
-                        'Save changes',
+                        S.of(context).editProductSaveChangesButton,
                         style: TextStyles.productTitle(context)
                             .copyWith(color: primaryColor),
                       ),
                       onTap: () {
                         if (nameController.text.isEmpty) {
                           Fluttertoast.showToast(
-                            msg: "Name must not be empty.",
+                            msg: S.of(context).editProductNameValidation,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+
+                        if (priceController.text.isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: S.of(context).editProductPriceValidation,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -72,7 +85,9 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                             price == null ||
                             price <= 0) {
                           Fluttertoast.showToast(
-                            msg: "Price must be a valid positive number.",
+                            msg: S
+                                .of(context)
+                                .editProductPricePositiveValidation,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -87,8 +102,7 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
 
                         if (discountText.isEmpty || discount == null) {
                           Fluttertoast.showToast(
-                            msg:
-                                "Discount must be a valid whole number (e.g., 10).",
+                            msg: S.of(context).editProductDiscountValidation,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -102,8 +116,9 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                             discount < 0 ||
                             discount > 100) {
                           Fluttertoast.showToast(
-                            msg:
-                                "Discount must be a valid whole number between 0 and 100.",
+                            msg: S
+                                .of(context)
+                                .editProductDiscountNumberValidation,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             backgroundColor: Colors.red,
@@ -133,7 +148,7 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
               // Discard
               InkWell(
                 child: Text(
-                  'Discard',
+                  S.of(context).editProductDiscardChangesButton,
                   style: TextStyles.productTitle(context)
                       .copyWith(color: primaryColor),
                 ),
