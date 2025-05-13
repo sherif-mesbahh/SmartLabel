@@ -8,5 +8,6 @@ public class Banner
 	public DateTime StartDate { get; set; }
 	public DateTime EndDate { get; set; }
 	public string? MainImage { get; set; }
+	public bool IsActive { get; set; }
 	public ICollection<BannerImage>? Images { get; set; }
 }

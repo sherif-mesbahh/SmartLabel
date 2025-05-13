@@ -27,7 +27,6 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 
 	public async Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync()
 	{
-		var currentTime = DateTime.UtcNow;
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -143,5 +142,25 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 	public async Task<bool> IsBannerExistAsync(int id)
 	{
 		return await context.Banners.AnyAsync(x => x.Id == id);
+	}
+
+	public async Task<IEnumerable<int>> GetBannersToActiveAsync()
+	{
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		               SELECT Id
+		               FROM Banners
+		               WHERE (GETUTCDATE() BETWEEN StartDate AND EndDate) AND (IsActive = @c)
+		               """;
+		var IDs = await connection.QueryAsync<int>(sqlQuery, new { c = 0 });
+		return IDs.ToList();
+	}
+	public async Task NotifiedBannersAsync(IEnumerable<int> ids)
+	{
+		await context.Banners
+			.Where(x => ids.Contains(x.Id))
+			.ExecuteUpdateAsync(setters => setters
+				.SetProperty(x => x.IsActive, true)
+			);
 	}
 }

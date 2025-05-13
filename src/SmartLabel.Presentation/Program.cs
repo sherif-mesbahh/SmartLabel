@@ -6,12 +6,14 @@ using SmartLabel.Application;
 using SmartLabel.Application.Enumeration;
 using SmartLabel.Infrastructure;
 using SmartLabel.Infrastructure.Hubs;
+using SmartLabel.Infrastructure.Services;
 using SmartLabel.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddHostedService<BannerActivationService>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ErrorHandlerMiddleware>();
 builder.Services
@@ -84,7 +86,7 @@ builder.Services.AddAuthorizationBuilder()
 var app = builder.Build();
 
 app.UseCors(x => x
-	.WithOrigins("http://localhost:5173", "http://localhost:5174")
+	.WithOrigins("http://localhost:5173", "http://localhost:5174", "https://smart-label-pink.vercel.app")
 	.AllowAnyMethod()
 	.AllowAnyHeader());
 
