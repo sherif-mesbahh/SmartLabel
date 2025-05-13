@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const API_URL = "http://smartlabel1.runasp.net";
-
 export const getUser = () => {
   const user = localStorage.getItem("user");
   const userinfo = localStorage.getItem("userInfo");
@@ -16,7 +14,7 @@ export const getUser = () => {
 };
 
 export const Login = (email, password) => {
-  return axios.post(`${API_URL}/api/Authentication/login`, { email, password });
+  return axios.post(`/api/Authentication/login`, { email, password });
 };
 
 export const register = (
@@ -26,7 +24,7 @@ export const register = (
   password,
   confirmPassword
 ) => {
-  return axios.post(`${API_URL}/api/Authentication/register`, {
+  return axios.post(`/api/Authentication/register`, {
     firstName,
     lastName,
     email,
@@ -40,41 +38,41 @@ export const Logout = () => {
 };
 
 export const refreshToken = (refreshToken) => {
-  return axios.post(`${API_URL}/api/Authentication/refresh-token`, {
+  return axios.post(`/api/Authentication/refresh-token`, {
     refreshToken,
   });
 };
 
 export const getAll = (searchTerm) => {
-  return axios.get(`${API_URL}/api/Users/admin${searchTerm ?? ""}`);
+  return axios.get(`/api/Users/admin${searchTerm ?? ""}`);
 };
 
 export const getById = (id) => {
-  return axios.get(`${API_URL}/api/Authorization/user-roles/${id}`);
+  return axios.get(`/api/Authorization/user-roles/${id}`);
 };
 
 export const editUser = (email, roleName) => {
-  return axios.put(`${API_URL}/api/Authorization/user-roles`, {
+  return axios.put(`/api/Authorization/user-roles`, {
     email,
     roleName,
   });
 };
 
 export const updateProfile = (updateuser) => {
-  return axios.put(`${API_URL}/api/Users/me`, updateuser);
+  return axios.put(`/api/Users/me`, updateuser);
 };
 
 export const changePassword = (passwords) => {
-  return axios.put(`${API_URL}/api/Users/me/password`, passwords);
+  return axios.put(`/api/Users/me/password`, passwords);
 };
 
 export const UserInfo = () => {
-  return axios.get(`${API_URL}/api/Users/me`);
+  return axios.get(`/api/Users/me`);
 };
 
 export const ForgetPassword = (email) => {
   return axios.post(
-    `${API_URL}/api/Authentication/forget-password`,
+    `/api/Authentication/forget-password`,
     { email },
     {
       headers: {
@@ -85,14 +83,14 @@ export const ForgetPassword = (email) => {
 };
 
 export const ResetCode = (email, code) => {
-  return axios.post(`${API_URL}/api/Authentication/reset-code`, {
+  return axios.post(`/api/Authentication/reset-code`, {
     email,
     code,
   });
 };
 
 export const ResetPassword = (email, password, confirmPassword) => {
-  return axios.post(`${API_URL}/api/Authentication/reset-password`, {
+  return axios.post(`/api/Authentication/reset-password`, {
     email,
     password,
     confirmPassword,
