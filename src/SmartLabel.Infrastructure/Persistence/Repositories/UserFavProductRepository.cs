@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SmartLabel.Application.Features.Products.Query.Results;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Persistence.Data;
 
 namespace SmartLabel.Infrastructure.Persistence.Repositories;
@@ -34,6 +34,18 @@ public class UserFavProductRepository(AppDbContext context, ISqlConnectionFactor
 			product.Favorite = true;
 		}
 		return productsList;
+	}
+
+	public async Task<IEnumerable<int>> GetUsersByProductId(int productId)
+	{
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		               SELECT UserId
+		               FROM UserFavProducts
+		               WHERE ProductId = @productID
+		               """;
+		var userIds = await connection.QueryAsync<int>(sqlQuery, new { productID = productId });
+		return userIds;
 	}
 
 	public async Task AddFavProductAsync(UserFavProduct userFavProduct)

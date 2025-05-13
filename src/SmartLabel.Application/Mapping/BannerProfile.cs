@@ -7,7 +7,10 @@ public class BannerProfile : Profile
 {
 	public BannerProfile()
 	{
+		var currentTime = DateTime.Now;
 		CreateMap<AddBannerCommand, Banner>();
+		//.ForMember(dest => dest.IsActive, src => src.MapFrom(x => (x.StartDate <= currentTime) && (currentTime <= x.EndDate)));
 		CreateMap<UpdateBannerCommand, Banner>();
+		//.ForMember(dest => dest.IsActive, src => src.MapFrom(x => (x.StartDate <= currentTime) && (currentTime <= x.EndDate)));
 	}
 }

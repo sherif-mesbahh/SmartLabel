@@ -30,19 +30,20 @@ public class ProductsController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(new GetProductByIdQuery(id)));
 	}
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpPost]
 	public async Task<IActionResult> AddProduct([FromForm] AddProductCommand product)
 	{
 		return NewResult(await sender.Send(product));
 	}
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpPut]
 	public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductCommand product)
 	{
 		return NewResult(await sender.Send(product));
+
 	}
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> DeleteProduct(int id)
 	{

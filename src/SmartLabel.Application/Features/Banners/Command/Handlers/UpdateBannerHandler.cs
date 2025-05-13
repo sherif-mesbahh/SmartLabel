@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Banners.Command.Models;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Services;
 
 namespace SmartLabel.Application.Features.Banners.Command.Handlers;
-public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IFileService fileService, IUnitOfWork unitOfWork)
+public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerRepository, IMemoryCache memoryCache,
+	IFileService fileService, IUnitOfWork unitOfWork)
 	: ResponseHandler, IRequestHandler<UpdateBannerCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(UpdateBannerCommand request, CancellationToken cancellationToken)
@@ -21,8 +22,8 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 		{
 
 			var mainImage = await bannerRepository.GetBannerImage(request.Id);
-			await fileService.DeleteImageAsync(mainImage);
-			if (!request.RemovedImageIds.IsNullOrEmpty())
+			if (request.MainImage is not null) await fileService.DeleteImageAsync(mainImage);
+			if (request.RemovedImageIds is not null)
 			{
 				var imageUrls = await bannerRepository.GetBannerImageUrlsByIdsAsync(request.RemovedImageIds);
 				foreach (var imageUrl in imageUrls)
@@ -31,9 +32,8 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 				}
 				await bannerRepository.DeleteBannerImagesAsync(request.RemovedImageIds);
 			}
-
 			var banner = mapper.Map<Banner>(request);
-			if (request.MainImage != null) banner.MainImage = await fileService.BuildImageAsync(request.MainImage);
+			if (request.MainImage is not null) banner.MainImage = await fileService.BuildImageAsync(request.MainImage);
 			if (request.ImagesFiles is not null)
 			{
 				var bannerImages = new List<BannerImage>();
@@ -50,8 +50,9 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 				}
 				await bannerRepository.AddBannerImagesAsync(bannerImages);
 			}
+			await bannerRepository.UpdateBannerAsync(banner.Id, banner, mainImage);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
-			await bannerRepository.UpdateBannerAsync(banner.Id, banner);
+			InvalidCache(banner.Id);
 			transaction.Commit();
 			return NoContent<string>();
 		}
@@ -60,5 +61,11 @@ public class UpdateBannerHandler(IMapper mapper, IBannerRepository bannerReposit
 			transaction.Rollback();
 			return InternalServerError<string>([ex.Message], "Updating banner temporarily unavailable");
 		}
+	}
+	private void InvalidCache(int id)
+	{
+		memoryCache.Remove($"Banners");
+		memoryCache.Remove($"ActiveBanners");
+		memoryCache.Remove($"Banner-{id}");
 	}
 }

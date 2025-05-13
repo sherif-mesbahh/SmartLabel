@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.UserFavProducts.Command.Models;
 using SmartLabel.Application.Repositories;
@@ -8,7 +9,8 @@ using SmartLabel.Domain.Helpers;
 using System.Security.Claims;
 
 namespace SmartLabel.Application.Features.UserFavProducts.Command.Handlers;
-public class AddUserFavProductHandler(IUserFavProductRepository userFavProductRepository, IProductRepository productRepository, IHttpContextAccessor httpContextAccessor) :
+public class AddUserFavProductHandler(IUserFavProductRepository userFavProductRepository, IProductRepository productRepository,
+	IMemoryCache memoryCache, IHttpContextAccessor httpContextAccessor) :
 	ResponseHandler, IRequestHandler<AddUserFavProductCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(AddUserFavProductCommand request, CancellationToken cancellationToken)
@@ -29,6 +31,13 @@ public class AddUserFavProductHandler(IUserFavProductRepository userFavProductRe
 			ProductId = request.ProductId
 		};
 		await userFavProductRepository.AddFavProductAsync(userFavProduct);
+		InvalidCached(userId, request.ProductId);
 		return Created<string>($"Product {request.ProductId} added to favorites");
+	}
+	private void InvalidCached(string userId, int productId)
+	{
+		memoryCache.Remove($"ProductsUserId-{userId}");
+		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
+		memoryCache.Remove($"ProductsFav-{userId}");
 	}
 }

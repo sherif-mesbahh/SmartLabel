@@ -8,7 +8,7 @@ public interface IProductRepository
 	Task<GetProductByIdDto?> GetProductByIdAsync(int id);
 	Task<GetProductByIdDto?> GetProductByIdUserAsync(int id, string? userId);
 	Task AddProductAsync(Product product);
-	Task UpdateProductAsync(int productId, Product product);
+	Task UpdateProductAsync(int productId, Product product, string? mainImage);
 	Task DeleteProductAsync(int productId);
 	Task AddProductImagesAsync(List<ProductImage> productImages);
 	Task DeleteProductImagesAsync(List<int> imageIds);
@@ -17,4 +17,5 @@ public interface IProductRepository
 	Task<bool> IsProductExistAsync(int id);
 	Task<bool> IsProductNameExistAsync(string name, CancellationToken cancellationToken);
 	Task<bool> IsProductNameAndIdExistAsync(int id, string name, CancellationToken cancellationToken);
+	Task<decimal> GetProductPriceAsync(int id);
 }

@@ -10,7 +10,6 @@ public class PagedList<T>(List<T>? items, int page, int pageSize, int totalCount
 
 	public static async Task<PagedList<T>> CreateAsync(IEnumerable<T> query, int totalCount, int page, int pageSize)
 	{
-		//var totalCount = await query.CountAsync();
 		var items = query;
 		return new(items.ToList(), page, pageSize, totalCount);
 	}

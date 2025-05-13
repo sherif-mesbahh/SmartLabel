@@ -7,7 +7,7 @@ using SmartLabel.Application.Features.Authorization.Query.Models;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
-[Authorize(Roles = nameof(Roles.Admin))]
+[Authorize(Roles = nameof(RolesEnum.Admin))]
 [Route("api/[controller]")]
 [ApiController]
 public class AuthorizationController(ISender sender) : AppControllerBase
@@ -33,10 +33,10 @@ public class AuthorizationController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[HttpDelete("roles/{name}")]
-	public async Task<IActionResult> DeleteRole(string name)
+	[HttpDelete("roles/{id}")]
+	public async Task<IActionResult> DeleteRole(int id)
 	{
-		var command = new DeleteRoleCommand { Name = name };
+		var command = new DeleteRoleCommand { RoleId = id };
 		return NewResult(await sender.Send(command));
 	}
 	[HttpPost("user-roles/remove")]

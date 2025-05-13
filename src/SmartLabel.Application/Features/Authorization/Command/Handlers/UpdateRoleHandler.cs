@@ -8,12 +8,16 @@ public class UpdateRoleHandler(IAuthorizationRepository authorizationRepository)
 {
 	public async Task<Response<string>> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
 	{
-		if (!await authorizationRepository.IsRoleExist(request.OldName))
-			return NotFound<string>([$"Role with name {request.OldName} not found"], "Role not exist");
+		if (!await authorizationRepository.IsRoleExistById(request.RoleId))
+			return BadRequest<string>([$"Role with id {request.RoleId} is not found"], "Role is not found");
+
+		var role = await authorizationRepository.GetRoleByName(request.NewName);
+		if (role is not null && role.Id != request.RoleId)
+			return BadRequest<string>(["Role already exists"], "Role Exists");
 
 		try
 		{
-			await authorizationRepository.UpdateRoleAsync(request.OldName, request.NewName);
+			await authorizationRepository.UpdateRoleAsync(request.RoleId, request.NewName);
 			return NoContent<string>("Role updated successfully");
 		}
 		catch (Exception ex)

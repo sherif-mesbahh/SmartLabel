@@ -9,6 +9,6 @@ public class AddBannerCommand : IRequest<Response<string>>
 	public string? Description { get; set; }
 	public DateTime StartDate { get; set; }
 	public DateTime EndDate { get; set; }
-	public IFormFile MainImage { get; set; }
+	public IFormFile? MainImage { get; set; }
 	public List<IFormFile>? ImagesFiles { get; set; }
 }

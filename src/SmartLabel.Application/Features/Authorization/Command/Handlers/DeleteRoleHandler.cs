@@ -10,9 +10,9 @@ public class DeleteRoleHandler(IAuthorizationRepository authorizationRepository)
 {
 	public async Task<Response<string>> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
 	{
-		if (!await authorizationRepository.IsRoleExist(request.Name))
-			return NotFound<string>([$"Role with name {request.Name} not found"], "Role not exist");
-		var result = await authorizationRepository.DeleteRoleAsync(request.Name);
+		if (!await authorizationRepository.IsRoleExistById(request.RoleId))
+			return NotFound<string>([$"Role with id {request.RoleId} not found"], "Role not exist");
+		var result = await authorizationRepository.DeleteRoleAsync(request.RoleId);
 		if (!result.Succeeded)
 		{
 			var errors = result.Errors
@@ -23,6 +23,6 @@ public class DeleteRoleHandler(IAuthorizationRepository authorizationRepository)
 				message: "Role deleting failed",
 				errors: errors);
 		}
-		return NoContent<string>($"Role {request.Name} deleted successfully");
+		return NoContent<string>($"Role Deleted successfully");
 	}
 }

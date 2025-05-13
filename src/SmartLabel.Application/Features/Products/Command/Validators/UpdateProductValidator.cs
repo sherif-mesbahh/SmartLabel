@@ -5,11 +5,12 @@ using SmartLabel.Application.Repositories;
 namespace SmartLabel.Application.Features.Products.Command.Validators;
 public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
 {
-	private readonly IProductRepository _repository;
-
-	public UpdateProductValidator(IProductRepository repository)
+	private readonly IProductRepository _productRepository;
+	private readonly ICategoryRepository _categoryRepository;
+	public UpdateProductValidator(IProductRepository repository, ICategoryRepository repo)
 	{
-		_repository = repository;
+		_productRepository = repository;
+		_categoryRepository = repo;
 		ApplyValidationRules();
 		AddCustomValidationRules();
 	}
@@ -23,18 +24,25 @@ public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
 		RuleFor(x => x.OldPrice)
 			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
 
+		RuleFor(x => x.Discount)
+			.LessThanOrEqualTo(100).WithMessage("{PropertyName} must be less than or equal to 100%");
 		RuleFor(x => x.CatId)
 			.GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
 
-		RuleFor(x => x.MainImage)
-			.NotEmpty().WithMessage("You should upload at least one Image");
+		//RuleFor(x => x.MainImage)
+		//	.NotEmpty().WithMessage("You should upload at least one Image")
+		//	.NotNull().WithMessage("You should upload at least one Image");
 	}
 
 	private void AddCustomValidationRules()
 	{
 		RuleFor(x => x.Name)
 			.MustAsync(async (productRequest, name, cancellationToken)
-				=> !await _repository.IsProductNameAndIdExistAsync(productRequest.Id, name, cancellationToken))
+				=> !await _productRepository.IsProductNameAndIdExistAsync(productRequest.Id, name, cancellationToken))
 			.WithMessage("{PropertyName} name already exists.");
+
+		RuleFor(x => x.CatId)
+			.MustAsync(async (id, cancellationToken) => await _categoryRepository.IsCategoryExistAsync(id, cancellationToken))
+			.WithMessage($"Category with this id is not found");
 	}
 }

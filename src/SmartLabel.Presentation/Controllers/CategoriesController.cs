@@ -29,19 +29,19 @@ public class CategoriesController(ISender sender) : AppControllerBase
 		var res = await sender.Send(new GetCategoryByIdQuery(id));
 		return NewResult(res);
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+	[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 	[HttpPost]
 	public async Task<IActionResult> AddCategory([FromForm] AddCategoryCommand category)
 	{
 		return NewResult(await sender.Send(category));
 	}
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpPut]
 	public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryCommand category)
 	{
 		return NewResult(await sender.Send(category));
 	}
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> DeleteCategory(int id)
 	{

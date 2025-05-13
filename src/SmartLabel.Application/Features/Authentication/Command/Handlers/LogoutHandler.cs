@@ -17,6 +17,7 @@ public class LogoutHandler(IAuthenticationRepository authRepository, IHttpContex
 		var user = await userManager.FindByIdAsync(userId!);
 		if (user is null)
 			return NotFound<string>([$"user ID: {userId} not found"], "user discontinued");
+
 		await authRepository.RevokeRefreshTokenAsync(user.Id);
 		return NoContent<string>("Logged out successfully.");
 	}

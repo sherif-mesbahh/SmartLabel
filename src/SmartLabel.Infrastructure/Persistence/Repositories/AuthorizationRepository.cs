@@ -14,17 +14,21 @@ public class AuthorizationRepository(AppDbContext context, UserManager<Applicati
 		return result;
 	}
 
-	public async Task UpdateRoleAsync(string oldName, string newName)
+	public async Task UpdateRoleAsync(int roleId, string newName)
 	{
 		await context.Roles
-			.Where(x => x.Name == oldName)
+			.Where(x => x.Id == roleId)
 			.ExecuteUpdateAsync(setters => setters
 				.SetProperty(x => x.Name, newName));
 	}
 
-	public async Task<IdentityResult> DeleteRoleAsync(string name)
+	public async Task<IdentityResult> DeleteRoleAsync(int roleId)
 	{
-		var result = await roleManager.DeleteAsync(new Role { Name = name });
+		var role = await roleManager.FindByIdAsync(roleId.ToString());
+		if (role == null)
+			return IdentityResult.Failed(new IdentityError { Description = "Role not found" });
+
+		var result = await roleManager.DeleteAsync(role);
 		return result;
 	}
 
@@ -45,6 +49,7 @@ public class AuthorizationRepository(AppDbContext context, UserManager<Applicati
 
 	public async Task<IdentityResult> AddUserToRoleAsync(ApplicationUser user, string roleName)
 	{
+
 		return await userManager.AddToRoleAsync(user, roleName);
 	}
 
@@ -63,8 +68,17 @@ public class AuthorizationRepository(AppDbContext context, UserManager<Applicati
 
 		await userManager.AddToRoleAsync(user, roleName);
 	}
-	public async Task<bool> IsRoleExist(string name)
+	public async Task<bool> IsRoleExistByName(string name)
 	{
 		return await roleManager.RoleExistsAsync(name);
+	}
+	public async Task<Role?> GetRoleByName(string name)
+	{
+		var role = await roleManager.FindByNameAsync(name);
+		return role;
+	}
+	public async Task<bool> IsRoleExistById(int roleId)
+	{
+		return await roleManager.FindByIdAsync(roleId.ToString()) is not null;
 	}
 }

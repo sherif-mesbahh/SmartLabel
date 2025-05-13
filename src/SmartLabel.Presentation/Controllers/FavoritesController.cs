@@ -10,7 +10,7 @@ using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
 
-[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 [Route("api")]
 [ApiController]
 public class FavoritesController(ISender sender) : AppControllerBase

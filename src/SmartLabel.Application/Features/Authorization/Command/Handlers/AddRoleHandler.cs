@@ -8,7 +8,7 @@ public class AddRoleHandler(IAuthorizationRepository authorizationRepository) : 
 {
 	public async Task<Response<string>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
 	{
-		if (await authorizationRepository.IsRoleExist(request.Name))
+		if (await authorizationRepository.IsRoleExistByName(request.Name))
 			return BadRequest<string>(["Role already exists"], "Role Exists");
 
 		var result = await authorizationRepository.AddRoleAsync(request.Name);

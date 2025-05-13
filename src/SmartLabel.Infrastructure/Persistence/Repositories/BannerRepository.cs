@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SmartLabel.Application.Features.Banners.Query.Results;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities;
-using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Persistence.Data;
 using GetBannerByIdDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannerByIdDto;
 using GetBannersDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannersDto;
@@ -27,7 +27,6 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 
 	public async Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync()
 	{
-		var currentTime = DateTime.UtcNow;
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
 		               SELECT 
@@ -35,7 +34,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		                   b.Title AS Title, 
 		                   b.MainImage AS MainImage
 		               FROM Banners b 
-		               WHERE GETUTCDATE() BETWEEN b.StartDate AND b.EndDate
+		               WHERE DATEADD(hour, 1, GETDATE()) BETWEEN b.StartDate AND b.EndDate
 		               """;
 		var banners = await connection.QueryAsync<GetBannersDto>(sqlQuery);
 		return banners.ToList();
@@ -88,7 +87,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		await context.Banners.AddAsync(banner);
 	}
 
-	public async Task UpdateBannerAsync(int bannerId, Banner banner)
+	public async Task UpdateBannerAsync(int bannerId, Banner banner, string mainImage)
 	{
 		await context.Banners
 			.Where(x => x.Id == bannerId)
@@ -97,7 +96,7 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 				.SetProperty(x => x.Description, banner.Description)
 				.SetProperty(x => x.StartDate, banner.StartDate)
 				.SetProperty(x => x.EndDate, banner.EndDate)
-				.SetProperty(x => x.MainImage, banner.MainImage)
+				.SetProperty(p => p.MainImage, banner.MainImage ?? mainImage)
 			);
 	}
 
@@ -143,5 +142,25 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 	public async Task<bool> IsBannerExistAsync(int id)
 	{
 		return await context.Banners.AnyAsync(x => x.Id == id);
+	}
+
+	public async Task<IEnumerable<int>> GetBannersToActiveAsync()
+	{
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		               SELECT Id
+		               FROM Banners
+		               WHERE (DATEADD(hour, 1, GETDATE()) BETWEEN StartDate AND EndDate) AND (IsActive = @c)
+		               """;
+		var IDs = await connection.QueryAsync<int>(sqlQuery, new { c = 0 });
+		return IDs.ToList();
+	}
+	public async Task NotifiedBannersAsync(IEnumerable<int> ids)
+	{
+		await context.Banners
+			.Where(x => ids.Contains(x.Id))
+			.ExecuteUpdateAsync(setters => setters
+				.SetProperty(x => x.IsActive, true)
+			);
 	}
 }

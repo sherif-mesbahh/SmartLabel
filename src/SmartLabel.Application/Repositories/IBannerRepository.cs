@@ -7,9 +7,11 @@ public interface IBannerRepository
 {
 	Task<IEnumerable<GetBannersDto?>> GetAllBannersAsync();
 	Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync();
+	Task<IEnumerable<int>> GetBannersToActiveAsync();
 	Task<GetBannerByIdDto?> GetBannerByIdAsync(int id);
 	Task AddBannerAsync(Banner banner);
-	Task UpdateBannerAsync(int bannerId, Banner banner);
+	Task UpdateBannerAsync(int bannerId, Banner banner, string mainImage);
+	Task NotifiedBannersAsync(IEnumerable<int> ids);
 	Task DeleteBannerAsync(int bannerId);
 	Task AddBannerImagesAsync(List<BannerImage> bannerImages);
 	Task<List<string?>> GetBannerImageUrlsByIdsAsync(List<int> imageIds);

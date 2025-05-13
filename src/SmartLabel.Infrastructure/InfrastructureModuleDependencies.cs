@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Repositories.StoredProceduresRepositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities.Identity;
 using SmartLabel.Domain.Helpers;
 using SmartLabel.Domain.Interfaces;
-using SmartLabel.Domain.Services;
 using SmartLabel.Infrastructure.Interfaces;
 using SmartLabel.Infrastructure.Persistence.Data;
 using SmartLabel.Infrastructure.Persistence.Repositories;
@@ -37,20 +37,17 @@ public static class InfrastructureModuleDependencies
 		services.AddTransient<IUsersRepository, UsersRepository>();
 		services.AddTransient<IUserFavProductRepository, UserFavProductRepository>();
 		services.AddTransient<ISqlConnectionFactory, SqlConnectionFactory>();
+		services.AddTransient<IEmailService, EmailService>();
+		services.AddTransient<INotifierService, NotifierService>();
+		services.AddTransient<INotificationRepository, NotificationRepository>();
 		services.AddIdentity<ApplicationUser, Role>(
 				options =>
 				{
-					options.Password.RequireDigit = true;
-					options.Password.RequireLowercase = true;
-					options.Password.RequireNonAlphanumeric = true;
-					options.Password.RequireUppercase = true;
-					options.Password.RequiredLength = 6;
-					options.Password.RequiredUniqueChars = 1;
-
 					// Lockout settings.
 					options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 					options.Lockout.MaxFailedAccessAttempts = 5;
 					options.Lockout.AllowedForNewUsers = true;
+					options.SignIn.RequireConfirmedAccount = true;
 					options.User.RequireUniqueEmail = true;
 				}
 			).AddEntityFrameworkStores<AppDbContext>()
@@ -58,6 +55,9 @@ public static class InfrastructureModuleDependencies
 		var jwtSettings = new JwtSettings();
 		configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
 		services.AddSingleton(jwtSettings);
+		var emailSettings = new EmailSettings();
+		configuration.GetSection(nameof(EmailSettings)).Bind(emailSettings);
+		services.AddSingleton(emailSettings);
 
 		services.AddAuthentication(
 				x =>
@@ -79,8 +79,22 @@ public static class InfrastructureModuleDependencies
 						ValidateIssuerSigningKey = jwtSettings.ValidateSigningKey,
 						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SigningKey))
 					};
-				}
-				);
+					options.Events = new JwtBearerEvents
+					{
+						OnMessageReceived = context =>
+						{
+							var accessToken = context.Request.Query["access_token"];
+							var path = context.HttpContext.Request.Path;
+							if (!string.IsNullOrEmpty(accessToken) &&
+								path.StartsWithSegments("/notificationHub"))
+							{
+								context.Token = accessToken;
+							}
+							return Task.CompletedTask;
+						}
+					};
+				});
+
 		return services;
 	}
 }

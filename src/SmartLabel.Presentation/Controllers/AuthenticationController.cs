@@ -27,10 +27,31 @@ public class AuthenticationController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+	[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 	[HttpPost("logout")]
 	public async Task<IActionResult> RefreshToken()
 	{
 		return NewResult(await sender.Send(new LogoutCommand()));
+	}
+
+	[HttpGet("confirm-email")]
+	public async Task<IActionResult> ConfirmEmail([FromQuery] EmailConfirmCommand command)
+	{
+		return NewResult(await sender.Send(command));
+	}
+	[HttpPost("forget-password")]
+	public async Task<IActionResult> ForgetPassword(ForgetPasswordCommand command)
+	{
+		return NewResult(await sender.Send(command));
+	}
+	[HttpPost("reset-code")]
+	public async Task<IActionResult> ResetCode(EnterCodeToResetCommand command)
+	{
+		return NewResult(await sender.Send(command));
+	}
+	[HttpPost("reset-password")]
+	public async Task<IActionResult> ForgetPassword([FromBody] ResetPasswordCommand command)
+	{
+		return NewResult(await sender.Send(command));
 	}
 }
