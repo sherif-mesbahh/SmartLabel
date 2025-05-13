@@ -1,33 +1,43 @@
 import axios from "axios";
 export const getAll = async () => {
-  const { data } = await axios.get("/api/Products");
+  const { data } = await axios.get(
+    "https://smartlabel1.runasp.net/api/Products"
+  );
 
   return data;
 };
 
 export const search = async (searchTerm) => {
   const { data } = await axios.get(
-    `/api/Products/paginated?Search=${searchTerm}`
+    `https://smartlabel1.runasp.net/api/Products/paginated?Search=${searchTerm}`
   );
   return data;
 };
 export const getAllCat = async () => {
-  const { data } = await axios.get("/api/Categories");
+  const { data } = await axios.get(
+    "https://smartlabel1.runasp.net/api/Categories"
+  );
 
   return data;
 };
 export const getAllByCat = async (id) => {
-  const { data } = await axios.get("/api/Categories/" + id);
+  const { data } = await axios.get(
+    "https://smartlabel1.runasp.net/api/Categories/" + id
+  );
 
   return data;
 };
 export const getById = async (foodid) => {
-  const { data } = await axios.get("/api/Products/" + foodid);
+  const { data } = await axios.get(
+    "https://smartlabel1.runasp.net/api/Products/" + foodid
+  );
   return data;
 };
 
 export const DeleteFoodId = async (id) => {
-  const { data } = await axios.delete(`/api/Products/${id}`);
+  const { data } = await axios.delete(
+    `https://smartlabel1.runasp.net/api/Products/${id}`
+  );
   return data;
 };
 
@@ -36,7 +46,7 @@ export const addCategory = async (Name, Image) => {
   formData.append("Name", Name);
   formData.append("Image", Image);
   const { data } = await axios.post(
-    "/api/Categories",
+    "https://smartlabel1.runasp.net/api/Categories",
     formData,
 
     {
@@ -74,7 +84,7 @@ export const addFood = async (
     }
   });
   const { data } = await axios.post(
-    "/api/Products",
+    "https://smartlabel1.runasp.net/api/Products",
     formData,
 
     {
@@ -91,7 +101,7 @@ export const updateCategory = async (Id, Name, Image) => {
   formData.append("Name", Name);
   formData.append("Image", Image);
   const { data } = await axios.put(
-    `/api/Categories`,
+    `https://smartlabel1.runasp.net/api/Categories`,
     formData,
 
     {
@@ -137,16 +147,20 @@ export const updateFood = async (
     }
   });
 
-  const { data } = await axios.put(`/api/Products`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const { data } = await axios.put(
+    `https://smartlabel1.runasp.net/api/Products`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
   return data;
 };
 
 export const getBanners = async () => {
-  const data = await axios.get("/api/Banners");
+  const data = await axios.get("https://smartlabel1.runasp.net/api/Banners");
   return data;
 };
 export const addBanner = async (
@@ -175,7 +189,7 @@ export const addBanner = async (
   });
 
   const { data } = await axios.post(
-    "/api/Banners",
+    "https://smartlabel1.runasp.net/api/Banners",
     formData,
 
     {
@@ -222,7 +236,7 @@ export const updateBanner = async (
   });
 
   const { data } = await axios.put(
-    "/api/Banners",
+    "https://smartlabel1.runasp.net/api/Banners",
     formData,
 
     {
@@ -234,40 +248,52 @@ export const updateBanner = async (
   return data;
 };
 export const DeleteBannerId = async (id) => {
-  const { data } = await axios.delete(`/api/Banners/${id}`);
+  const { data } = await axios.delete(
+    `https://smartlabel1.runasp.net/api/Banners/${id}`
+  );
   return data;
 };
 export const getBannerById = async (id) => {
-  const data = await axios.get(`/api/Banners/${id}`);
+  const data = await axios.get(
+    `https://smartlabel1.runasp.net/api/Banners/${id}`
+  );
   return data;
 };
 export const getFav = async () => {
-  const data = await axios.get("/api/me/favorites", {
-    skipGlobalLoading: true,
-  });
+  const data = await axios.get(
+    "https://smartlabel1.runasp.net/api/me/favorites",
+    { skipGlobalLoading: true }
+  );
   return data;
 };
 export const addFav = async (id) => {
-  const data = await axios.post("/api/me/favorites/" + id, null, {
-    skipGlobalLoading: true,
-  });
+  const data = await axios.post(
+    "https://smartlabel1.runasp.net/api/me/favorites/" + id,
+    null,
+    {
+      skipGlobalLoading: true,
+    }
+  );
   return data;
 };
 export const deleteFav = async (id) => {
-  const data = await axios.delete("/api/me/favorites/" + id, {
-    skipGlobalLoading: true,
-  });
+  const data = await axios.delete(
+    "https://smartlabel1.runasp.net/api/me/favorites/" + id,
+    { skipGlobalLoading: true }
+  );
   return data;
 };
 
 export const deleteCategory = async (id) => {
-  const data = axios.delete(`/api/Categories/${id}`);
+  const data = axios.delete(
+    `https://smartlabel1.runasp.net/api/Categories/${id}`
+  );
   return data;
 };
 
 export const getPaginatedProducts = async (pageNumber, pageSize) => {
   const { data } = await axios.get(
-    `/api/Products/paginated?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    `https://smartlabel1.runasp.net/api/Products/paginated?PageNumber=${pageNumber}&PageSize=${pageSize}`
   );
   return data;
 };
