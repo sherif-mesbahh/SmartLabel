@@ -1,5 +1,5 @@
 ﻿namespace SmartLabel.Application.Enumeration;
-public enum Roles
+public enum RolesEnum
 {
 	Admin,
 	User,

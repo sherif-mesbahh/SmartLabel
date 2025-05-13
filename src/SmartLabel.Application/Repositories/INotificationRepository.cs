@@ -3,6 +3,7 @@
 namespace SmartLabel.Application.Repositories;
 public interface INotificationRepository
 {
-	Task AddNotificationToUsers(string? message, IEnumerable<int> userIds);
-	Task<IEnumerable<NotificationDto>> GetNotificationsAsync(int userId);
+	Task AddNotificationToUsers(string? message, IEnumerable<int> userIds, int type, int typeId);
+	Task<IEnumerable<GetNotificationsDto>> GetNotificationsAsync(int userId);
+	Task<GetNotificationByIdDto?> GetNotificationByIdAsync(int id);
 }

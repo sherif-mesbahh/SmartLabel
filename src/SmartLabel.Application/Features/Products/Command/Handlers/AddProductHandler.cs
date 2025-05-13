@@ -44,7 +44,7 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-			InvalidCache(userId, product.Id);
+			InvalidCache(userId, product.Id, product.CatId);
 			transaction.Commit();
 			return Created<string>($"Product with {product.Id} is added successfully");
 		}
@@ -54,11 +54,14 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 			return InternalServerError<string>([ex.Message], "Adding product temporarily unavailable");
 		}
 	}
-	private void InvalidCache(string? userId, int productId)
+	private void InvalidCache(string? userId, int productId, int categoryId)
 	{
 		memoryCache.Remove($"ProductsUserId-");
 		memoryCache.Remove($"ProductsUserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-");
+		memoryCache.Remove($"ProductsFav-{userId}");
 	}
 }

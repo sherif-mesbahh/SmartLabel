@@ -38,5 +38,6 @@ public class AddUserFavProductHandler(IUserFavProductRepository userFavProductRe
 	{
 		memoryCache.Remove($"ProductsUserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
+		memoryCache.Remove($"ProductsFav-{userId}");
 	}
 }

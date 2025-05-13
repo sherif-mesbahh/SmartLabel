@@ -2,5 +2,5 @@
 public interface IEmailService
 {
 	public Task Send(string email, string subject, string body);
-
+	public string PrepareUrl(int userId, string code);
 }

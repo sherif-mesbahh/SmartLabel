@@ -16,6 +16,11 @@ namespace SmartLabel.Presentation.Controllers
 		{
 			return NewResult(await sender.Send(new GetNotificationsCommand()));
 		}
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetNotificationById(int id)
+		{
+			return NewResult(await sender.Send(new GetNotificationByIdCommand(id)));
+		}
 
 	}
 }

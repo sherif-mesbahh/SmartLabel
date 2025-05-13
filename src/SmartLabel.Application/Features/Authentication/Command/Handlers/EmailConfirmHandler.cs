@@ -16,7 +16,6 @@ public class EmailConfirmHandler(UserManager<ApplicationUser> userManager) : Res
 		var res = await userManager.ConfirmEmailAsync(user, request.Code);
 		if (!res.Succeeded)
 		{
-			// Include the actual errors in the response
 			var errors = res.Errors.Select(e => e.Description).ToList();
 			return BadRequest<string>(errors, "Email confirmation failed");
 		}

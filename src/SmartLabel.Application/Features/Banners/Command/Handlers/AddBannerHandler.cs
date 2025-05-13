@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
+using SmartLabel.Application.Enumeration;
 using SmartLabel.Application.Features.Banners.Command.Models;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Services;
@@ -42,7 +43,7 @@ public class AddBannerHandler(IMapper mapper, IBannerRepository bannerRepository
 			var message = "New banner has been added";
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			var userIds = await usersRepository.GetUserIdsAsync();
-			await notificationRepository.AddNotificationToUsers(message, userIds);
+			await notificationRepository.AddNotificationToUsers(message, userIds, (int)EntityEnum.Banner, banner.Id);
 			await notifierService.SendToAll(message);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			InvalidCache(banner.Id);

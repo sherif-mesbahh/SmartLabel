@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
+using SmartLabel.Application.Enumeration;
 using SmartLabel.Application.Features.Products.Command.Models;
 using SmartLabel.Application.Repositories;
 using SmartLabel.Application.Services;
@@ -67,11 +68,11 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 
 					await notifierService.SendToGroup($"user-{userId.ToString()}", message);
 				}
-				await notificationRepository.AddNotificationToUsers(message, userIds);
+				await notificationRepository.AddNotificationToUsers(message, userIds, (int)EntityEnum.Product, product.Id);
 			}
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			var userID = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-			InvalidCache(userID, product.Id);
+			InvalidCache(userID, product.Id, product.CatId);
 			transaction.Commit();
 			return NoContent<string>();
 		}
@@ -81,11 +82,14 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 			return InternalServerError<string>([ex.Message], "Updating product temporarily unavailable");
 		}
 	}
-	private void InvalidCache(string userId, int productId)
+	private void InvalidCache(string userId, int productId, int categoryId)
 	{
 		memoryCache.Remove($"ProductsUserId-");
 		memoryCache.Remove($"ProductsUserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-");
+		memoryCache.Remove($"ProductsFav-{userId}");
 	}
 }

@@ -27,7 +27,7 @@ public class AuthenticationController(ISender sender) : AppControllerBase
 	{
 		return NewResult(await sender.Send(command));
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+	[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 	[HttpPost("logout")]
 	public async Task<IActionResult> RefreshToken()
 	{

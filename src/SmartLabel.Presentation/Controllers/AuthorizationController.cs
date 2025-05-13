@@ -7,7 +7,7 @@ using SmartLabel.Application.Features.Authorization.Query.Models;
 using SmartLabel.Presentation.Base;
 
 namespace SmartLabel.Presentation.Controllers;
-[Authorize(Roles = nameof(Roles.Admin))]
+[Authorize(Roles = nameof(RolesEnum.Admin))]
 [Route("api/[controller]")]
 [ApiController]
 public class AuthorizationController(ISender sender) : AppControllerBase

@@ -8,7 +8,6 @@ using SmartLabel.Application.Features.Users.Command.Models;
 using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities.Identity;
 using SmartLabel.Domain.Interfaces;
-using System.Net;
 
 namespace SmartLabel.Application.Features.Users.Command.Handlers;
 
@@ -42,13 +41,9 @@ public class AddUserHandler(IMapper mapper, UserManager<ApplicationUser> userMan
 					message: "User creation failed",
 					errors: errors);
 			}
-			await userManager.AddToRoleAsync(user, Roles.User.ToString());
-			//To do "Send confirm Email"
-			var scheme = httpContextAccessor.HttpContext.Request.Scheme;
-			var host = httpContextAccessor.HttpContext.Request.Host;
+			await userManager.AddToRoleAsync(user, RolesEnum.User.ToString());
 			var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-			var encodedCode = WebUtility.UrlEncode(code); // or Uri.EscapeDataString(code)
-			var url = $"{scheme}://{host}/api/Authentication/confirm-email?UserId={user.Id}&Code={encodedCode}";
+			var url = emailService.PrepareUrl(user.Id, code);
 			await emailService.Send(user.Email, "Confirm your email",
 				$"Please confirm your account by <a href='{url}'>clicking here</a>");
 			transaction.Commit();

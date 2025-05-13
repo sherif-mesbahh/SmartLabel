@@ -40,19 +40,19 @@ public class BannersController(ISender sender) : AppControllerBase
 		return NewResult(await sender.Send(new GetBannerByIdQuery(id)));
 	}
 
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpPost]
 	public async Task<IActionResult> AddBanner([FromForm] AddBannerCommand banner)
 	{
 		return NewResult(await sender.Send(banner));
 	}
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpPut]
 	public async Task<IActionResult> UpdateBanner([FromForm] UpdateBannerCommand banner)
 	{
 		return NewResult(await sender.Send(banner));
 	}
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpDelete("{id:int}")]
 	public async Task<IActionResult> DeleteBanner(int id)
 	{

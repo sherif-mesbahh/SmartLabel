@@ -1,4 +1,4 @@
-﻿namespace SmartLabel.Application.Features.Email;
+﻿namespace SmartLabel.Application.Features.Authentication.Command.Results;
 
 public class CreateEmail
 {

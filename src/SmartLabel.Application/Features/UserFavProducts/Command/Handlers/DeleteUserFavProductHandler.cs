@@ -37,5 +37,6 @@ public class DeleteUserFavProductHandler(IUserFavProductRepository userFavProduc
 	{
 		memoryCache.Remove($"ProductsUserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
+		memoryCache.Remove($"ProductsFav-{userId}");
 	}
 }

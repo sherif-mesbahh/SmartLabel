@@ -30,7 +30,7 @@ public class DeleteProductHandler(IProductRepository repository, IFileService fi
 			}
 			await repository.DeleteProductAsync(request.Id);
 			var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-			InvalidCache(userId, product.Id);
+			InvalidCache(userId, product.Id, product.CategoryId);
 			return NoContent<string>();
 		}
 		catch (Exception ex)
@@ -39,11 +39,14 @@ public class DeleteProductHandler(IProductRepository repository, IFileService fi
 
 		}
 	}
-	private void InvalidCache(string userId, int productId)
+	private void InvalidCache(string userId, int productId, int categoryId)
 	{
 		memoryCache.Remove($"ProductsUserId-");
 		memoryCache.Remove($"ProductsUserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
+		memoryCache.Remove($"CategoryId-{categoryId}UserId-");
+		memoryCache.Remove($"ProductsFav-{userId}");
 	}
 }

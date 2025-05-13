@@ -13,9 +13,23 @@ public class NotificationRepository(AppDbContext context, ISqlConnectionFactory 
 		await context.Notifications.AddAsync(notification);
 	}
 
-	public async Task AddNotificationToUsers(string message, IEnumerable<int> userIds)
+	public async Task<IEnumerable<GetNotificationsDto>> GetNotificationsAsync(int userId)
 	{
-		var notification = new Notification { Id = 0, Message = message, CreatedAt = DateTime.UtcNow };
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		               SELECT n.Id AS Id, n.Message AS Message, n.CreatedAt AS CreatedAt
+		               FROM Notifications n
+		               INNER JOIN UserNotifications u
+		               ON n.Id = u.NotificationId
+		               WHERE u.UserId = @UserId
+		               """;
+		var notifications = await connection.QueryAsync<GetNotificationsDto>(sqlQuery, new { UserId = userId });
+		return notifications;
+	}
+
+	public async Task AddNotificationToUsers(string? message, IEnumerable<int> userIds, int type, int typeId)
+	{
+		var notification = new Notification { Id = 0, Message = message!, CreatedAt = DateTime.UtcNow, Type = type, TypeId = typeId };
 		await AddNotificationAsync(notification);
 		await context.SaveChangesAsync();
 		List<UserNotification> userNotifications = new();
@@ -28,17 +42,16 @@ public class NotificationRepository(AppDbContext context, ISqlConnectionFactory 
 		await context.AddRangeAsync(userNotifications);
 	}
 
-	public async Task<IEnumerable<NotificationDto>> GetNotificationsAsync(int userId)
+	public async Task<GetNotificationByIdDto?> GetNotificationByIdAsync(int id)
 	{
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
-		               SELECT n.Id AS Id, n.Message AS Message, n.CreatedAt AS CreatedAt
-		               FROM Notifications n
-		               INNER JOIN UserNotifications u
-		               ON n.Id = u.NotificationId
-		               WHERE u.UserId = @UserId
-		               """;
-		var notifications = await connection.QueryAsync<NotificationDto>(sqlQuery, new { UserId = userId });
-		return notifications;
+						SELECT Type, TypeId
+						FROM Notifications
+						WHERE Id = @NotificationId
+						""";
+
+		var notification = await connection.QueryAsync<GetNotificationByIdDto>(sqlQuery, new { NotificationId = id });
+		return notification.FirstOrDefault();
 	}
 }

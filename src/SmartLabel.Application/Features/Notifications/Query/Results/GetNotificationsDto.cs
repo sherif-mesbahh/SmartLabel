@@ -1,5 +1,5 @@
 ﻿namespace SmartLabel.Application.Features.Notifications.Query.Results;
-public class NotificationDto
+public class GetNotificationsDto
 {
 	public int Id { get; set; }
 	public string? Message { get; set; }

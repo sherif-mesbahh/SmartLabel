@@ -15,7 +15,8 @@ public class ResetPasswordHandle(UserManager<ApplicationUser> userManager) : Res
 			return BadRequest<string>(["Email is not found"], "Invalid data");
 
 		await userManager.RemovePasswordAsync(user);
-		await userManager.AddPasswordAsync(user, request.Password);
+		if (request.Password is not null)
+			await userManager.AddPasswordAsync(user, request.Password);
 		return Success("Your password is reseted successfully");
 	}
 }

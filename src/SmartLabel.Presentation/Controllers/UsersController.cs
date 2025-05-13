@@ -11,31 +11,31 @@ namespace SmartLabel.Presentation.Controllers;
 [ApiController]
 public class UsersController(ISender sender) : AppControllerBase
 {
-	[Authorize(Roles = nameof(Roles.Admin))]
+	[Authorize(Roles = nameof(RolesEnum.Admin))]
 	[HttpGet("admin")]
 	public async Task<IActionResult> GetAllUsers()
 	{
 		return NewResult(await sender.Send(new GetAllUsersQuery()));
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+	[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 	[HttpGet("me")]
 	public async Task<IActionResult> GetUser()
 	{
 		return NewResult(await sender.Send(new GetUserQuery()));
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+	[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 	[HttpPut("me")]
 	public async Task<IActionResult> UpdateUser(UpdateUserCommand user)
 	{
 		return NewResult(await sender.Send(user));
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+	[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 	[HttpPut("me/password")]
 	public async Task<IActionResult> ChangePassword(ChangePasswordCommand request)
 	{
 		return NewResult(await sender.Send(request));
 	}
-	[Authorize(Policy = nameof(Roles.UserOrAdmin))]
+	[Authorize(Policy = nameof(RolesEnum.UserOrAdmin))]
 	[HttpDelete("me")]
 	public async Task<IActionResult> DeleteUser()
 	{

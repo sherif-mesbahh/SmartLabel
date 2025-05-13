@@ -28,7 +28,17 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Smart Label", Version = "v1" });
+	c.SwaggerDoc("v1",
+		new OpenApiInfo
+		{
+			Title = "Smart Label API",
+			Version = "v1",
+			Contact = new OpenApiContact
+			{
+				Name = ": Support Team",
+				Email = "sherifmesbah4@gmail.com"
+			}
+		});
 
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
@@ -58,8 +68,8 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddSignalR();
 builder.Services.AddAuthorizationBuilder()
-	.AddPolicy(nameof(Roles.UserOrAdmin), policy =>
-		policy.RequireRole(Roles.User.ToString(), Roles.Admin.ToString()));
+	.AddPolicy(nameof(RolesEnum.UserOrAdmin), policy =>
+		policy.RequireRole(RolesEnum.User.ToString(), RolesEnum.Admin.ToString()));
 
 var app = builder.Build();
 
