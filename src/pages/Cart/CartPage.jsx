@@ -5,15 +5,14 @@ import { useFavorites } from "../../hooks/useCart";
 
 function FavoritesPage() {
   const { favorites, DeleteFavorite } = useFavorites();
-  console.log(favorites.items);
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4 sm:p-8">
       {favorites.items.length === 0 ? (
         <NotFound message={"Your favorites list is empty"} />
       ) : (
-        <div className="w-full max-w-3xl mx-auto bg-white/95 backdrop-blur-lg shadow-xl rounded-3xl overflow-hidden animate-fade-in">
+        <div className="w-full max-w-3xl mx-auto bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg shadow-xl rounded-3xl overflow-hidden animate-fade-in">
           {/* Header with decorative elements */}
-          <div className="relative bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-center">
+          <div className="relative bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-700 dark:to-indigo-800 p-6 text-center">
             <div className="absolute -top-4 -left-4 w-16 h-16 bg-yellow-400 rounded-full mix-blend-multiply opacity-20"></div>
             <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-pink-400 rounded-full mix-blend-multiply opacity-20"></div>
             <h2 className="relative z-10 text-3xl font-bold text-white tracking-wide">

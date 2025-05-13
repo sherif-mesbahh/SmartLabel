@@ -290,3 +290,10 @@ export const deleteCategory = async (id) => {
   );
   return data;
 };
+
+export const getPaginatedProducts = async (pageNumber, pageSize) => {
+  const { data } = await axios.get(
+    `http://smartlabel1.runasp.net/api/Products/paginated?PageNumber=${pageNumber}&PageSize=${pageSize}`
+  );
+  return data;
+};

@@ -63,7 +63,8 @@ function AuthProvider({ children }) {
 
   const logout = () => {
     userService.Logout();
-
+    setUser(null);
+    setUserInfo(null);
     toast.success("Logout Successful");
     navigate("/login");
   };
@@ -79,29 +80,29 @@ function AuthProvider({ children }) {
       );
     }
   };
+
   const ForgetPassword = async (email) => {
     try {
       await userService.ForgetPassword(email);
       toast.success("Code had Sent to you ");
-      console.log(email);
     } catch (error) {
       toast.error(error.response?.data?.errors?.[0]);
     }
   };
+
   const ResetCode = async (email, code) => {
     try {
       await userService.ResetCode(email, code);
-
       toast.success("Code is Correct");
     } catch (error) {
       toast.error(error.response?.data?.errors?.[0]);
       throw error;
     }
   };
+
   const ResetPassword = async (email, password, confirmPassword) => {
     try {
       await userService.ResetPassword(email, password, confirmPassword);
-
       toast.success("Password Changed Correctly");
     } catch (error) {
       toast.error(error.response?.data?.errors?.[0]);

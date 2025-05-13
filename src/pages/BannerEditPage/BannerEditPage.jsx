@@ -31,12 +31,12 @@ function BannerEditPage() {
       setMainImage(data.mainImage);
       setImagesFiles(data.images?.map((img) => img.imageUrl) || []);
       setRemovedImageIds(data.images?.map((img) => img.imageId) || []);
-      console.log(data.startDate);
     });
   }, [bannerId, isEditMode]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     if (isEditMode) {
       await updateBanner(
@@ -64,100 +64,142 @@ function BannerEditPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
-        <h2 className="text-2xl font-bold text-center mb-6 text-indigo-600">
-          {isEditMode ? "Edit Banner" : "Add Banner"}
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg p-2"
-            required
-          />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
+            {isEditMode ? "Edit Banner" : "Add Banner"}
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300">
+            {isEditMode ? "Update your banner information" : "Create a new banner"}
+          </p>
+        </div>
 
-          <input
-            type="text"
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg p-2"
-            required
-          />
-
-          <input
-            type="date"
-            value={startDate ? startDate.substring(0, 10) : ""}
-            onChange={(e) => setStartDate(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg p-2 text-gray-600"
-            required
-          />
-
-          <input
-            type="date"
-            value={endDate ? endDate.substring(0, 10) : ""}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg p-2 text-gray-600"
-            required
-          />
-
-          <label className="block text-sm font-medium text-gray-600">
-            Main Image:
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setMainImage(e.target.files[0])}
-            className="w-full border border-gray-300 rounded-lg p-2"
-          />
-          {mainImage && (
-            <img
-              src={
-                typeof mainImage === "string"
-                  ? `http://smartlabel1.runasp.net/Uploads/${mainImage}`
-                  : URL.createObjectURL(mainImage)
-              }
-              alt="Main Preview"
-              className="w-full h-48 object-cover rounded mt-2"
-            />
-          )}
-
-          <label className="block text-sm font-medium text-gray-600">
-            Extra Images:
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={(e) => setImagesFiles(Array.from(e.target.files))}
-            className="w-full border border-gray-300 rounded-lg p-2"
-          />
-          <div className="grid grid-cols-2 gap-2">
-            {imagesFiles &&
-              imagesFiles.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={
-                    typeof img === "string"
-                      ? `http://smartlabel1.runasp.net/Uploads/${img}`
-                      : URL.createObjectURL(img)
-                  }
-                  alt={`Preview ${idx}`}
-                  className="h-24 object-cover rounded"
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+          <div className="p-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter banner title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                  required
                 />
-              ))}
-          </div>
+              </div>
 
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-medium transition"
-          >
-            {isEditMode ? "Update" : "Add"} Banner
-          </button>
-        </form>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter banner description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Start Date
+                  </label>
+                  <input
+                    type="date"
+                    value={startDate ? startDate.substring(0, 10) : ""}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    End Date
+                  </label>
+                  <input
+                    type="date"
+                    value={endDate ? endDate.substring(0, 10) : ""}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Main Image
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setMainImage(e.target.files[0])}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 dark:file:bg-blue-900 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
+                />
+                {mainImage && (
+                  <div className="mt-4">
+                    <img
+                      src={
+                        typeof mainImage === "string"
+                          ? `http://smartlabel1.runasp.net/Uploads/${mainImage}`
+                          : URL.createObjectURL(mainImage)
+                      }
+                      alt="Main Preview"
+                      className="w-full h-48 object-cover rounded-lg shadow-md"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Extra Images
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => setImagesFiles(Array.from(e.target.files))}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 dark:file:bg-blue-900 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
+                />
+                {imagesFiles && imagesFiles.length > 0 && (
+                  <div className="mt-4 grid grid-cols-2 gap-4">
+                    {imagesFiles.map((img, idx) => (
+                      <div key={idx} className="relative">
+                        <img
+                          src={
+                            typeof img === "string"
+                              ? `http://smartlabel1.runasp.net/Uploads/${img}`
+                              : URL.createObjectURL(img)
+                          }
+                          alt={`Preview ${idx}`}
+                          className="w-full h-32 object-cover rounded-lg shadow-md"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-medium"
+                >
+                  {isEditMode ? "Update Banner" : "Add Banner"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

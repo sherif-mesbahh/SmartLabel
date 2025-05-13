@@ -33,7 +33,7 @@ function AppRoute() {
       <Route path="/login" element={<Loginpage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/banner/:id" element={<BannerPage />} />
-      <Route path="/allproduct" element={<AllProductPage />} />
+      <Route path="/allproducts" element={<AllProductPage />} />
 
       <Route path="/profile" element={<ProfilePage />} />
 

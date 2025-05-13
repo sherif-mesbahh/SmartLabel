@@ -5,6 +5,8 @@ import Loading from "./component/Loading";
 import SetLoadingInterceptors from "./interceptors/Loadinginterceptors";
 import { useLoading } from "./hooks/useLoading";
 import Footer from "./component/Footer";
+import ScrollToTop from "./component/ScrollToTop";
+import { ThemeProvider } from "./context/ThemeContext";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -15,13 +17,17 @@ function App() {
     SetLoadingInterceptors({ hideLoading, showLoading });
   }, []);
   return (
-    <>
-      <Loading />
-      <Header />
-
-      <AppRoute />
-      <Footer />
-    </>
+    <ThemeProvider>
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+        <ScrollToTop />
+        <Loading />
+        <Header />
+        <div className="pt-20">
+          <AppRoute />
+        </div>
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
 

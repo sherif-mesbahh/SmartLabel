@@ -29,74 +29,107 @@ function FoodPage() {
   if (!food?.name) return <NotFound message="Food not found" />;
 
   return (
-    <div className="container mx-auto py-10 text-[#0028FF]">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-        {/* Thumbnail Swiper */}
-        <div className="flex flex-col items-center">
-          <Swiper
-            direction="vertical"
-            slidesPerView={3}
-            spaceBetween={10}
-            navigation
-            modules={[Navigation]}
-            className="w-36 h-[450px]"
-          >
-            {images &&
-              images.map((img, index) => (
-                <SwiperSlide key={index}>
-                  <img
-                    src={`http://smartlabel1.runasp.net/Uploads/${img.imageUrl}`}
-                    alt={`Thumbnail ${index}`}
-                    className={`cursor-pointer w-32 h-32 object-cover border-2 ${
-                      mainImage === img.imageUrl
-                        ? "border-[#0028FF]"
-                        : "border-transparent"
-                    } rounded-lg`}
-                    onClick={() => {
-                      if (mainImage === img.imageUrl) return;
-                      const prevMain = mainImage;
-                      setMainImage(img.imageUrl);
-                      if (
-                        !images.some((image) => image.imageUrl === prevMain)
-                      ) {
-                        setFood((prev) => ({
-                          ...prev,
-                          images: [...images, { imageUrl: prevMain }],
-                        }));
-                      }
-                    }}
-                  />
-                </SwiperSlide>
-              ))}
-          </Swiper>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
+            Product Details
+          </h1>
         </div>
 
-        {/* Main Image */}
-        <div className="flex justify-center">
-          <img
-            src={`http://smartlabel1.runasp.net/Uploads/${mainImage}`}
-            alt="Main"
-            className="w-96 h-96 object-cover rounded-lg shadow-lg border-4 border-[#0028FF]"
-          />
-        </div>
+        {/* Product Details */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
+            {/* Image Section */}
+            <div className="relative">
+              <img
+                src={`http://smartlabel1.runasp.net/Uploads/${food.mainImage}`}
+                alt={food.name}
+                className="w-full h-96 object-cover rounded-xl"
+              />
+              {food.discount && (
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+                  {food.discount}% OFF
+                </div>
+              )}
+            </div>
 
-        {/* Info Section */}
-        <div className="space-y-5">
-          <h2 className="text-3xl font-bold">{food.name}</h2>
-          <p className="text-gray-600">{food.description}</p>
+            {/* Info Section */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  {food.name}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {food.description}
+                </p>
+              </div>
 
-          <div className="text-xl font-semibold space-x-2">
-            <span>{food.newPrice}$</span>
-            <del className="text-red-500">{food.oldPrice}$</del>
+              <div className="flex items-center space-x-4">
+                <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  ${food.newPrice}
+                </span>
+                {food.oldPrice && (
+                  <span className="text-lg text-gray-500 dark:text-gray-400 line-through">
+                    ${food.oldPrice}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => toggleFavorite(food)}
+                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-6 w-6 transition-all duration-300 ${
+                      favorites.items.some((fav) => fav.id === food.id)
+                        ? "fill-red-500 text-red-500"
+                        : "text-gray-400 dark:text-gray-500"
+                    }`}
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => addToCart(food)}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                >
+                  Add to Cart
+                </button>
+              </div>
+
+              {/* Additional Info */}
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Product Information
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600 dark:text-gray-400">Category</span>
+                    <span className="text-gray-900 dark:text-white font-medium">
+                      {food.category?.name}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600 dark:text-gray-400">Stock</span>
+                    <span className="text-gray-900 dark:text-white font-medium">
+                      {food.stock} units
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <button
-            onClick={() => toggleFavorite(food)}
-            className="px-5 py-2 rounded-lg bg-gradient-to-r from-[#10EAF0] to-[#24009C] text-white font-semibold hover:opacity-90 transition"
-          >
-            <i className="fa fa-heart mr-2"></i>
-            {isFavorite(food) ? "Remove from Favorites" : "Add to Favorites"}
-          </button>
         </div>
       </div>
     </div>

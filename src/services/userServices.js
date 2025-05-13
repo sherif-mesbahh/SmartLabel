@@ -46,7 +46,7 @@ export const refreshToken = (refreshToken) => {
 };
 
 export const getAll = (searchTerm) => {
-  return axios.get(`${API_URL}/api/admin${searchTerm ?? ""}`);
+  return axios.get(`${API_URL}/api/Users/admin${searchTerm ?? ""}`);
 };
 
 export const getById = (id) => {
@@ -61,16 +61,17 @@ export const editUser = (email, roleName) => {
 };
 
 export const updateProfile = (updateuser) => {
-  return axios.put(`${API_URL}/api/me`, updateuser);
+  return axios.put(`${API_URL}/api/Users/me`, updateuser);
 };
 
 export const changePassword = (passwords) => {
-  return axios.put(`${API_URL}/api/me/password`, passwords);
+  return axios.put(`${API_URL}/api/Users/me/password`, passwords);
 };
 
 export const UserInfo = () => {
-  return axios.get(`${API_URL}/api/me`);
+  return axios.get(`${API_URL}/api/Users/me`);
 };
+
 export const ForgetPassword = (email) => {
   return axios.post(
     `${API_URL}/api/Authentication/forget-password`,
@@ -82,12 +83,14 @@ export const ForgetPassword = (email) => {
     }
   );
 };
+
 export const ResetCode = (email, code) => {
   return axios.post(`${API_URL}/api/Authentication/reset-code`, {
     email,
     code,
   });
 };
+
 export const ResetPassword = (email, password, confirmPassword) => {
   return axios.post(`${API_URL}/api/Authentication/reset-password`, {
     email,

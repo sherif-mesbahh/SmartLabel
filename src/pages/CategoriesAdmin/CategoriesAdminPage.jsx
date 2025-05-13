@@ -24,66 +24,73 @@ function CategoriesAdminPage() {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Manage Categories
-        </h1>
-        <Link
-          to="/admin/addcategory"
-          className="bg-blue-600 text-white rounded-full px-5 py-2 text-sm font-medium shadow hover:bg-blue-800 transition duration-200"
-        >
-          + Add Category
-        </Link>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto">
+    {/* Header */}
+    <div className="text-center mb-12">
+      <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
+        Manage Categories
+      </h1>
+      <Link
+        to="/admin/addcategory"
+        className="px-5 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm font-medium shadow transition-colors"
+      >
+        + Add Category
+      </Link>
+    </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {/* Category Cards */}
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {foods &&
           foods.map((food) => (
             <div
               key={food.id}
-              className="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition duration-300"
+              className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden"
             >
               <div className="relative">
                 <Link to={`/category/${food.id}`}>
                   <img
                     src={`http://smartlabel1.runasp.net/Uploads/${food.imageUrl}`}
                     alt={food.name}
-                    className="w-full h-48 object-cover rounded-xl"
+                    className="w-full h-48 object-cover"
                   />
                 </Link>
               </div>
 
-              <div className="mt-3 text-center">
-                <h3 className="text-lg font-semibold text-gray-700">
+              <div className="p-4 text-center">
+                <h3 className="text-xl font-semibold text-white dark:text-white">
                   {food.name}
                 </h3>
-              </div>
 
-              <div className="flex justify-center space-x-4 mt-4">
-                <Link
-                  to={`/admin/addfood/${food.id}`}
-                  className="bg-blue-600 hover:bg-blue-800 text-white rounded-full px-5 py-2 font-medium transition duration-200"
-                >
-                  Add Food +
-                </Link>
-                <Link
-                  to={`/admin/editcategory/${food.id}`}
-                  className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm hover:bg-blue-800 transition"
-                >
-                  Edit
-                </Link>
-                <button
-                  onClick={() => DeleteFood(food)}
-                  className="bg-red-500 text-white px-4 py-1 rounded-full text-sm hover:bg-red-600 transition"
-                >
-                  Delete
-                </button>
+                <div className="flex justify-center space-x-3 mt-4">
+                  <Link
+                    to={`/admin/addfood/${food.id}`}
+                    className="px-4 py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm font-medium transition-colors"
+                  >
+                    Add Food +
+                  </Link>
+                  <Link
+                    to={`/admin/editcategory/${food.id}`}
+                    className="px-4 py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm transition-colors"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => DeleteFood(food)}
+                    className="px-4 py-1 bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white rounded-full text-sm transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           ))}
       </div>
     </div>
+  </div>
+</div>
+
   );
 }
 

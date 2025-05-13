@@ -9,33 +9,40 @@ import { BrowserRouter } from "react-router-dom";
 import CartProvider from "./hooks/useCart.jsx";
 import "./axiosconfig.js";
 import AuthProvider from "./hooks/useAuth.jsx";
+import { NotificationProvider } from "./hooks/useNotification";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LoadingProvider } from "./hooks/useLoading.jsx";
 import "./interceptors/authinterceptors";
+import { ThemeProvider } from "./context/ThemeContext";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+      <ThemeProvider>
       <LoadingProvider>
         <AuthProvider>
-          <CartProvider>
-            <App />
-            <ToastContainer
-              position="bottom-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
-          </CartProvider>
+          <NotificationProvider>
+            <CartProvider>
+              <App />
+              <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </CartProvider>
+          </NotificationProvider>
         </AuthProvider>
       </LoadingProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </StrictMode>
 );
