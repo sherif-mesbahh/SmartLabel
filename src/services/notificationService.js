@@ -9,11 +9,12 @@ class NotificationService {
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl(`${API_URL}/Notify`, {
         accessTokenFactory: () => this.getToken(),
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets,
         withCredentials: true,
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets
       })
-      .configureLogging(signalR.LogLevel.None)
+      .withAutomaticReconnect()
+      .configureLogging(signalR.LogLevel.Debug)
       .build();
 
     this.connection.on("ReceiveNotification", (message, notificationId) => {
@@ -26,7 +27,15 @@ class NotificationService {
   async startConnection() {
     try {
       await this.connection.start();
+      console.log("SignalR Connected Successfully");
     } catch (err) {
+      console.error("SignalR Connection Error:", err);
+      if (err.message) {
+        console.error("Error message:", err.message);
+      }
+      if (err.stack) {
+        console.error("Error stack:", err.stack);
+      }
       setTimeout(() => this.startConnection(), 5000);
     }
   }
@@ -53,15 +62,12 @@ class NotificationService {
       position: "right",
       backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
       onClick: () => {
-        // Handle notification click
         if (notificationId) {
-          // Navigate to specific notification
           window.open(
             `${API_URL}/api/Notifications/${notificationId}`,
             "_blank"
           );
         } else {
-          // Navigate to notifications list
           window.open(`${API_URL}/api/Notifications/me`, "_blank");
         }
       },

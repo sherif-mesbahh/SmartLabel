@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { search as searchFoods, getPaginatedProducts } from "../../services/foodServices";
+import {
+  search as searchFoods,
+  getPaginatedProducts,
+} from "../../services/foodServices";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Search from "../../component/Search";
 import { useLocation } from "react-router-dom";
@@ -47,7 +50,7 @@ function AllProductPage() {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
     navigate(`/allproducts?page=${newPage}`, { replace: true });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (isLoading) {
@@ -55,7 +58,9 @@ function AllProductPage() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
         <div className="flex flex-col items-center">
           <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="mt-4 text-lg font-medium text-gray-600 dark:text-gray-300">Loading products...</p>
+          <p className="mt-4 text-lg font-medium text-gray-600 dark:text-gray-300">
+            Loading products...
+          </p>
         </div>
       </div>
     );
@@ -84,7 +89,7 @@ function AllProductPage() {
           </p>
         </motion.div>
 
-        <Search  />
+        <Search placeholder={"search Product ..."} />
 
         {/* Product Grid */}
         <motion.div
@@ -93,19 +98,20 @@ function AllProductPage() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8"
         >
-          {foods && foods.map((food) => (
-            <motion.div
-              key={food.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <Link to={`/food/${food.id}`} className="block">
-                <ProductCard item={food} />
-              </Link>
-            </motion.div>
-          ))}
+          {foods &&
+            foods.map((food) => (
+              <motion.div
+                key={food.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <Link to={`/food/${food.id}`} className="block">
+                  <ProductCard item={food} />
+                </Link>
+              </motion.div>
+            ))}
         </motion.div>
 
         {/* Pagination */}
@@ -127,7 +133,7 @@ function AllProductPage() {
             >
               Previous
             </button>
-            
+
             <div className="flex items-center space-x-2">
               {[...Array(totalPages)].map((_, index) => (
                 <button
@@ -164,7 +170,9 @@ function AllProductPage() {
             animate={{ opacity: 1 }}
             className="text-center py-12"
           >
-            <p className="text-xl text-gray-600 dark:text-gray-300">No products found</p>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              No products found
+            </p>
           </motion.div>
         )}
       </div>

@@ -10,7 +10,7 @@ function Dashboard() {
   const [stats, setStats] = useState({
     totalProducts: 0,
     activeCategories: 0,
-    totalUsers: 0
+    totalUsers: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,13 +21,13 @@ function Dashboard() {
           const [usersData, foodsData, categoriesData] = await Promise.all([
             getAllUsers(),
             getAllFoods(),
-            getAllCat()
+            getAllCat(),
           ]);
 
           setStats({
             totalProducts: foodsData.data?.length || 0,
             activeCategories: categoriesData.data?.length || 0,
-            totalUsers: usersData.data.data?.length || 0
+            totalUsers: usersData.data.data?.length || 0,
           });
         }
       } catch (error) {
@@ -46,7 +46,7 @@ function Dashboard() {
       link: "profile",
       icon: "/icons/profile.png",
       bgColor: "from-blue-500 to-blue-600",
-      description: "Manage your personal information and settings"
+      description: "Manage your personal information and settings",
     },
     {
       label: "Categories",
@@ -54,15 +54,15 @@ function Dashboard() {
       forAdmin: true,
       icon: "/icons/category.png",
       bgColor: "from-teal-500 to-teal-600",
-      description: "Manage product categories and subcategories"
+      description: "Manage product categories and subcategories",
     },
     {
-      label: "Foods",
+      label: "Products",
       link: "admin/foods",
       forAdmin: true,
       icon: "/icons/fast-food.png",
       bgColor: "from-purple-500 to-purple-600",
-      description: "Add, edit, or remove products from your catalog"
+      description: "Add, edit, or remove products from your catalog",
     },
     {
       label: "Banners",
@@ -70,7 +70,7 @@ function Dashboard() {
       forAdmin: true,
       icon: "/icons/banner.png",
       bgColor: "from-orange-400 to-orange-500",
-      description: "Manage promotional banners and featured content"
+      description: "Manage promotional banners and featured content",
     },
     {
       label: "Admin Users",
@@ -78,7 +78,7 @@ function Dashboard() {
       forAdmin: true,
       icon: "/icons/users.png",
       bgColor: "from-red-400 to-red-500",
-      description: "Manage user roles and permissions"
+      description: "Manage user roles and permissions",
     },
   ];
 
@@ -87,9 +87,9 @@ function Dashboard() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -97,8 +97,8 @@ function Dashboard() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
@@ -127,7 +127,9 @@ function Dashboard() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {cards
-            .filter((card) => !card.forAdmin || userInfo?.data.roles[0] === "Admin")
+            .filter(
+              (card) => !card.forAdmin || userInfo?.data.roles[0] === "Admin"
+            )
             .map((card, index) => (
               <motion.div
                 key={index}
@@ -135,11 +137,10 @@ function Dashboard() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Link
-                  to={`/${card.link}`}
-                  className="block h-full"
-                >
-                  <div className={`h-full bg-gradient-to-br ${card.bgColor} rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl`}>
+                <Link to={`/${card.link}`} className="block h-full">
+                  <div
+                    className={`h-full bg-gradient-to-br ${card.bgColor} rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl`}
+                  >
                     <div className="p-6">
                       <div className="flex items-center space-x-4 mb-4">
                         <div className="bg-white/20 p-3 rounded-xl">
@@ -158,7 +159,9 @@ function Dashboard() {
                       </p>
                     </div>
                     <div className="bg-black/10 p-4 flex justify-between items-center">
-                      <span className="text-white/90 text-sm">Click to access</span>
+                      <span className="text-white/90 text-sm">
+                        Click to access
+                      </span>
                       <svg
                         className="w-5 h-5 text-white/90"
                         fill="none"
@@ -187,7 +190,9 @@ function Dashboard() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
           >
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Quick Stats</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+              Quick Stats
+            </h2>
             {isLoading ? (
               <div className="flex justify-center items-center py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
@@ -195,16 +200,28 @@ function Dashboard() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-4">
-                  <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400">Total Products</h3>
-                  <p className="text-3xl font-bold text-blue-800 dark:text-blue-300 mt-2">{stats.totalProducts}</p>
+                  <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                    Total Products
+                  </h3>
+                  <p className="text-3xl font-bold text-blue-800 dark:text-blue-300 mt-2">
+                    {stats.totalProducts}
+                  </p>
                 </div>
                 <div className="bg-green-50 dark:bg-green-900/30 rounded-xl p-4">
-                  <h3 className="text-lg font-semibold text-green-600 dark:text-green-400">Active Categories</h3>
-                  <p className="text-3xl font-bold text-green-800 dark:text-green-300 mt-2">{stats.activeCategories}</p>
+                  <h3 className="text-lg font-semibold text-green-600 dark:text-green-400">
+                    Active Categories
+                  </h3>
+                  <p className="text-3xl font-bold text-green-800 dark:text-green-300 mt-2">
+                    {stats.activeCategories}
+                  </p>
                 </div>
                 <div className="bg-purple-50 dark:bg-purple-900/30 rounded-xl p-4">
-                  <h3 className="text-lg font-semibold text-purple-600 dark:text-purple-400">Total Users</h3>
-                  <p className="text-3xl font-bold text-purple-800 dark:text-purple-300 mt-2">{stats.totalUsers}</p>
+                  <h3 className="text-lg font-semibold text-purple-600 dark:text-purple-400">
+                    Total Users
+                  </h3>
+                  <p className="text-3xl font-bold text-purple-800 dark:text-purple-300 mt-2">
+                    {stats.totalUsers}
+                  </p>
                 </div>
               </div>
             )}

@@ -51,7 +51,7 @@ function Section3({ banners }) {
                     
                     <Link
   to={`/banner/${banner.id}`}
-  className="inline-block bg-white text-blue-600 font-semibold px-8 py-4 rounded-full z-50 relative hover:bg-opacity-90 transition-all duration-300 shadow-lg"
+  className="inline-block bg-white text-blue-600 font-semibold px-4 py-4 rounded-full z-50 relative hover:bg-opacity-90 transition-all duration-300 shadow-lg"
   style={{ pointerEvents: 'auto' }}
 >
   Learn More

@@ -85,7 +85,7 @@ function FoodEditPage() {
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
-            {isEditMode ? "Edit Food" : "Add Food"}
+            {isEditMode ? "Edit Product" : "Add Product"}
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
             {isEditMode ? "Update your food information" : "Create a new food item"}
@@ -213,12 +213,12 @@ function FoodEditPage() {
               </div>
 
               <div className="flex justify-end">
-              <button
+                <button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={loading}
                   className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-medium disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 relative"
                 >
-                  {isLoading ? (
+                  {loading ? (
                     <div className="flex items-center">
                       <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -227,7 +227,7 @@ function FoodEditPage() {
                       {isEditMode ? "Updating..." : "Adding..."}
                     </div>
                   ) : (
-                    isEditMode ? "Update Banner" : "Add Banner"
+                    isEditMode ? "Update Prodct" : "Add Product"
                   )}
                 </button>
               </div>
