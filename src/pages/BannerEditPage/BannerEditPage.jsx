@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 function BannerEditPage() {
   const { bannerId } = useParams();
   const isEditMode = !!bannerId;
+  const [isLoading, setIsLoading] = useState(false);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -36,30 +37,35 @@ function BannerEditPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-
-    if (isEditMode) {
-      await updateBanner(
-        bannerId,
-        title,
-        description,
-        startDate,
-        endDate,
-        mainImage,
-        imagesFiles,
-        removedImageIds
-      );
-      toast.success(`Banner "${title}" updated successfully`);
-    } else {
-      await addBanner(
-        title,
-        description,
-        startDate,
-        endDate,
-        mainImage,
-        imagesFiles
-      );
-      toast.success(`Banner "${title}" added successfully`);
+    setIsLoading(true);
+    try {
+      if (isEditMode) {
+        await updateBanner(
+          bannerId,
+          title,
+          description,
+          startDate,
+          endDate,
+          mainImage,
+          imagesFiles,
+          removedImageIds
+        );
+        toast.success(`Banner "${title}" updated successfully`);
+      } else {
+        await addBanner(
+          title,
+          description,
+          startDate,
+          endDate,
+          mainImage,
+          imagesFiles
+        );
+        toast.success(`Banner "${title}" added successfully`);
+      }
+    } catch (error) {
+      toast.error(error.response.data.errors[0] || "something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -89,6 +95,7 @@ function BannerEditPage() {
                   onChange={(e) => setTitle(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
                   required
+                  disabled={isLoading}
                 />
               </div>
 
@@ -103,6 +110,7 @@ function BannerEditPage() {
                   onChange={(e) => setDescription(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
                   required
+                  disabled={isLoading}
                 />
               </div>
 
@@ -117,6 +125,7 @@ function BannerEditPage() {
                     onChange={(e) => setStartDate(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
                     required
+                    disabled={isLoading}
                   />
                 </div>
 
@@ -130,6 +139,7 @@ function BannerEditPage() {
                     onChange={(e) => setEndDate(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -143,6 +153,7 @@ function BannerEditPage() {
                   accept="image/*"
                   onChange={(e) => setMainImage(e.target.files[0])}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 dark:file:bg-blue-900 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
+                  disabled={isLoading}
                 />
                 {mainImage && (
                   <div className="mt-4">
@@ -169,6 +180,7 @@ function BannerEditPage() {
                   multiple
                   onChange={(e) => setImagesFiles(Array.from(e.target.files))}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 dark:file:bg-blue-900 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
+                  disabled={isLoading}
                 />
                 {imagesFiles && imagesFiles.length > 0 && (
                   <div className="mt-4 grid grid-cols-2 gap-4">
@@ -192,9 +204,20 @@ function BannerEditPage() {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-medium"
+                  disabled={isLoading}
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 font-medium disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 relative"
                 >
-                  {isEditMode ? "Update Banner" : "Add Banner"}
+                  {isLoading ? (
+                    <div className="flex items-center">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      {isEditMode ? "Updating..." : "Adding..."}
+                    </div>
+                  ) : (
+                    isEditMode ? "Update Banner" : "Add Banner"
+                  )}
                 </button>
               </div>
             </form>

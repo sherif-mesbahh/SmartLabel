@@ -4,27 +4,25 @@ import { getById } from "../../services/foodServices";
 import { useFavorites } from "../../hooks/useCart";
 import NotFound from "../../component/NotFound";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Thumbs } from "swiper/modules";
 import "swiper/css";
-import { Navigation } from "swiper/modules";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/thumbs";
 
 function FoodPage() {
   const [food, setFood] = useState({});
-  const [mainImage, setMainImage] = useState("");
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { id } = useParams();
   const { toggleFavorite, favorites } = useFavorites();
-
-  const isFavorite = (item) => {
-    return favorites.items.some((favItem) => favItem.id === item.id);
-  };
 
   useEffect(() => {
     getById(id).then((data) => {
       setFood(data.data);
-      setMainImage(data.data.mainImage);
     });
   }, [id]);
 
-  const images = food.images;
+  const images = food.images || [];
 
   if (!food?.name) return <NotFound message="Food not found" />;
 
@@ -42,17 +40,68 @@ function FoodPage() {
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
             {/* Image Section */}
-            <div className="relative">
-              <img
-                src={`http://smartlabel1.runasp.net/Uploads/${food.mainImage}`}
-                alt={food.name}
-                className="w-full h-96 object-cover rounded-xl"
-              />
-              {food.discount && (
-                <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-full text-sm font-bold">
-                  {food.discount}% OFF
-                </div>
-              )}
+            <div className="space-y-4">
+              <div className="relative w-full h-[400px]">
+                <Swiper
+                  spaceBetween={10}
+                  thumbs={{ swiper: thumbsSwiper }}
+                  modules={[  Thumbs]}
+                  className="w-full h-full rounded-xl"
+                >
+                  <SwiperSlide>
+                    <div className="relative w-full h-full">
+                      <img
+                        src={`http://smartlabel1.runasp.net/Uploads/${food.mainImage}`}
+                        alt={food.name}
+                        className="w-full h-full object-cover rounded-xl"
+                      />
+                      {food.discount && (
+                        <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+                          {food.discount}% OFF
+                        </div>
+                      )}
+                    </div>
+                  </SwiperSlide>
+                  {images.map((img, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={`http://smartlabel1.runasp.net/Uploads/${img.imageUrl}`}
+                        alt={`${food.name} - Image ${index + 1}`}
+                        className="w-full h-full object-cover rounded-xl"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+
+              {/* Thumbnails */}
+              <div className="h-24">
+                <Swiper
+                  onSwiper={setThumbsSwiper}
+                  spaceBetween={10}
+                  slidesPerView={4}
+                  watchSlidesProgress={true}
+                  modules={[Thumbs]}
+                  className="w-full h-full"
+                >
+                  <SwiperSlide>
+                    <img
+                      src={`http://smartlabel1.runasp.net/Uploads/${food.mainImage}`}
+                      alt="Main thumbnail"
+                      className="w-full h-full object-cover rounded-lg cursor-pointer opacity-40 transition-opacity duration-300 hover:opacity-60"
+                    />
+                  </SwiperSlide>
+                  {images.map((img, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={`http://smartlabel1.runasp.net/Uploads/${img.imageUrl}`}
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-full h-full object-cover rounded-lg cursor-pointer opacity-40 transition-opacity duration-300 hover:opacity-60"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
 
             {/* Info Section */}
@@ -77,61 +126,39 @@ function FoodPage() {
                 )}
               </div>
 
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => toggleFavorite(food)}
-                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`h-6 w-6 transition-all duration-300 ${
-                      favorites.items.some((fav) => fav.id === food.id)
-                        ? "fill-red-500 text-red-500"
-                        : "text-gray-400 dark:text-gray-500"
-                    }`}
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => addToCart(food)}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Add to Cart
-                </button>
-              </div>
-
-              {/* Additional Info */}
-              <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Product Information
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Category</span>
-                    <span className="text-gray-900 dark:text-white font-medium">
-                      {food.category?.name}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Stock</span>
-                    <span className="text-gray-900 dark:text-white font-medium">
-                      {food.stock} units
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <button
+                onClick={() => toggleFavorite(food)}
+                className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg transition-all duration-300 transform hover:scale-105"
+              >
+                {favorites.items.some((fav) => fav.id === food.id)
+                  ? "Remove from Favorites"
+                  : "Add to Favorites"}
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Swiper Navigation Styles */}
+      <style jsx global>{`
+        .swiper-button-next,
+        .swiper-button-prev {
+          @apply bg-black/50 text-white w-10 h-10 rounded-full;
+        }
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+          @apply text-xl;
+        }
+        .swiper-pagination-bullet {
+          @apply bg-white;
+        }
+        .swiper-pagination-bullet-active {
+          @apply bg-blue-500;
+        }
+        .swiper-slide-thumb-active img {
+          @apply opacity-100;
+        }
+      `}</style>
     </div>
   );
 }

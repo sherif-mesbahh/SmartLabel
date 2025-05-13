@@ -16,12 +16,12 @@ function Loading() {
   if (!isLoading || !showLoading) return;
 
   return (
-    <div className="fixed w-full h-full bg-white z-50 flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="flex flex-col items-center">
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-orange-500"></div>
-        </div>
-        <p className="text-lg font-medium mt-2">Loading...</p>
+        <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        <p className="mt-4 text-lg font-medium text-gray-600 dark:text-gray-300">
+          Loading...
+        </p>
       </div>
     </div>
   );

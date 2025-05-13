@@ -9,7 +9,6 @@ function Homepage() {
   const [food, setFood] = useState([]);
   const [cats, setCats] = useState([]);
   const [banners, setBanners] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,8 +23,6 @@ function Homepage() {
         setBanners(bannerData.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -38,9 +35,9 @@ function Homepage() {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
@@ -48,20 +45,9 @@ function Homepage() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-        <div className="flex flex-col items-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="mt-4 text-lg font-medium text-gray-600 dark:text-gray-300">Loading amazing content...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <motion.div
@@ -78,7 +64,10 @@ function Homepage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-12 space-y-16">
         {/* Categories and Featured Products Section */}
-        <motion.div variants={itemVariants} className="flex flex-col lg:flex-row gap-8">
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col lg:flex-row gap-8"
+        >
           {/* Categories Sidebar */}
           <div className="w-full lg:w-1/4">
             <motion.div

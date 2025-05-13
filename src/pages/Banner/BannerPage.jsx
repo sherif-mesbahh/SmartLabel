@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getBannerById } from "../../services/foodServices";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import { formatDate } from "../../EditData";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 
 function BannerPage() {
   const [banner, setBanner] = useState({});
@@ -38,7 +39,8 @@ function BannerPage() {
         {/* Banner Swiper */}
         <div className="mb-12">
           <Swiper
-            modules={[Pagination, Autoplay]}
+            modules={[Pagination, Autoplay, EffectFade]}
+            effect="fade"
             spaceBetween={30}
             slidesPerView={1}
             pagination={{ clickable: true }}
@@ -46,17 +48,37 @@ function BannerPage() {
               delay: 3000,
               disableOnInteraction: false,
             }}
-            className="rounded-2xl shadow-lg overflow-hidden"
+            className="rounded-2xl shadow-lg overflow-hidden [&_.swiper-pagination-bullet]:w-3 [&_.swiper-pagination-bullet]:h-3 [&_.swiper-pagination-bullet]:bg-white [&_.swiper-pagination-bullet]:opacity-50 [&_.swiper-pagination-bullet]:transition-all [&_.swiper-pagination-bullet]:duration-300 [&_.swiper-pagination-bullet-active]:opacity-100 [&_.swiper-pagination-bullet-active]:scale-120"
           >
+            {mainImage && (
+              <SwiperSlide>
+                <div className="relative h-[400px] group">
+                  <div className="absolute inset-0 transform group-hover:scale-105 transition-transform duration-700">
+                    <img
+                      src={`http://smartlabel1.runasp.net/Uploads/${mainImage}`}
+                      alt="Main Banner"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-all duration-500"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-2xl font-bold text-white mb-2">{banner.title}</h3>
+                    <p className="text-gray-200">{banner.description}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            )}
             {images.map((img, index) => (
               <SwiperSlide key={index}>
-                <div className="relative h-[400px]">
-                  <img
-                    src={`http://smartlabel1.runasp.net/Uploads/${img.imageUrl}`}
-                    alt={`Banner ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="relative h-[400px] group">
+                  <div className="absolute inset-0 transform group-hover:scale-105 transition-transform duration-700">
+                    <img
+                      src={`http://smartlabel1.runasp.net/Uploads/${img.imageUrl}`}
+                      alt={`Banner ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-all duration-500"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="text-2xl font-bold text-white mb-2">{banner.title}</h3>
                     <p className="text-gray-200">{banner.description}</p>

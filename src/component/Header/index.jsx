@@ -43,13 +43,7 @@ function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <motion.img
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              src={logo}
-              alt="Logo"
-              className="h-10 w-auto"
-            />
+        
             <span className={`text-xl font-bold ${
               isScrolled ? "text-gray-800 dark:text-white" : "text-white"
             }`}>
