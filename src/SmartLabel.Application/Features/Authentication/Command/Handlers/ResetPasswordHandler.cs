@@ -12,7 +12,7 @@ public class ResetPasswordHandle(UserManager<ApplicationUser> userManager) : Res
 	{
 		var user = await userManager.FindByEmailAsync(request.Email);
 		if (user is null)
-			return BadRequest<string>(["Email is not found"], "Invalid data");
+			return NotFound<string>(["Email is not found"], "Invalid data");
 
 		await userManager.RemovePasswordAsync(user);
 		if (request.Password is not null)

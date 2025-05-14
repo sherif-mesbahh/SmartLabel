@@ -25,9 +25,7 @@ public class AddUserToRoleHandler(UserManager<ApplicationUser> userManager, IAut
 		var result = await authorizationRepository.AddUserToRoleAsync(existingUser, request.RoleName);
 		if (!result.Succeeded)
 		{
-			var errors = result.Errors
-				.Select(e => e.Description)
-				.ToList();
+			var errors = result.Errors.Select(e => e.Description).ToList();
 
 			return BadRequest<string>(
 				message: "Add user to this role failed",

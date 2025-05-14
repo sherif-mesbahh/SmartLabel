@@ -11,7 +11,7 @@ public class EnterCodeToResetHandler(UserManager<ApplicationUser> userManager) :
 	{
 		var user = await userManager.FindByEmailAsync(request.Email);
 		if (user is null)
-			return BadRequest<string>(["Email is not found"], "Invalid data");
+			return NotFound<string>(["Email is not found"], "Invalid data");
 
 		if (user.Code != request.Code)
 		{

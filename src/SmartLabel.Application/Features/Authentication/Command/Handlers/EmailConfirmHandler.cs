@@ -11,7 +11,7 @@ public class EmailConfirmHandler(UserManager<ApplicationUser> userManager) : Res
 	{
 		var user = await userManager.FindByIdAsync(request.UserId.ToString());
 		if (user is null)
-			return BadRequest<string>(["user is not found"], "Invalid data");
+			return NotFound<string>(["user is not found"], "Invalid data");
 
 		var res = await userManager.ConfirmEmailAsync(user, request.Code);
 		if (!res.Succeeded)

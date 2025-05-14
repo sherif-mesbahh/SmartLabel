@@ -14,7 +14,7 @@ public class SignInHandler(UserManager<ApplicationUser> userManager, IAuthentica
 	{
 		var user = await userManager.FindByEmailAsync(request.Email);
 		if (user is null || !await userManager.CheckPasswordAsync(user, request.Password))
-			return BadRequest<GetTokensDto>(["Email or password incorrect"], "Invalid request data");
+			return NotFound<GetTokensDto>(["Email or password incorrect"], "Invalid request data");
 		if (!user.EmailConfirmed)
 		{
 			var code = await userManager.GenerateEmailConfirmationTokenAsync(user);

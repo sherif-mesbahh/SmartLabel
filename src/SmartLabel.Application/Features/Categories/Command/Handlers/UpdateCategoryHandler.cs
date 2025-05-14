@@ -29,7 +29,7 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 			if (request.Image is not null) category.ImageUrl = await fileService.BuildImageAsync(request.Image);
 			await categoryRepository.UpdateCategoryAsync(category.Id, category, imageUrl);
 			var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-			NewMethod(category.Id, userId);
+			InvalidCache(category.Id, userId);
 			return NoContent<string>();
 		}
 		catch (Exception ex)
@@ -37,7 +37,7 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 			return InternalServerError<string>([ex.Message], "Updating category temporarily unavailable");
 		}
 	}
-	private void NewMethod(int categoryId, string? userId)
+	private void InvalidCache(int categoryId, string? userId)
 	{
 		memoryCache.Remove($"Categories");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
