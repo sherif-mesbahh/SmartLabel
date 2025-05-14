@@ -9,7 +9,7 @@ public class UpdateRoleHandler(IAuthorizationRepository authorizationRepository)
 	public async Task<Response<string>> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
 	{
 		if (!await authorizationRepository.IsRoleExistById(request.RoleId))
-			return BadRequest<string>([$"Role with id {request.RoleId} is not found"], "Role is not found");
+			return NotFound<string>([$"Role with id {request.RoleId} is not found"], "Role is not found");
 
 		var role = await authorizationRepository.GetRoleByName(request.NewName);
 		if (role is not null && role.Id != request.RoleId)

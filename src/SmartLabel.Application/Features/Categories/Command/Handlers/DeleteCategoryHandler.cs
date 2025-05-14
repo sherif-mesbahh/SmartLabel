@@ -24,7 +24,7 @@ public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFile
 			if (categoryImage is not null) await fileService.DeleteImageAsync(categoryImage);
 			await categoryRepository.DeleteCategoryAsync(request.Id);
 			var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-			NewMethod(request.Id, userId);
+			InvalidCache(request.Id, userId);
 			return NoContent<string>();
 		}
 		catch (Exception ex)
@@ -32,7 +32,7 @@ public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFile
 			return InternalServerError<string>([ex.Message], "Deleting category temporarily unavailable");
 		}
 	}
-	private void NewMethod(int categoryId, string? userId)
+	private void InvalidCache(int categoryId, string? userId)
 	{
 		memoryCache.Remove($"Categories");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");

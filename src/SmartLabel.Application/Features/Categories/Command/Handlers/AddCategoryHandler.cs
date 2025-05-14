@@ -27,7 +27,7 @@ public class AddCategoryHandler(IMapper mapper, ICategoryRepository categoryRepo
 			await categoryRepository.AddCategoryAsync(category);
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-			NewMethod(category.Id, userId);
+			InvalidCache(category.Id, userId);
 			return Created<string>($"Category {category.Id} created successfully");
 		}
 		catch (Exception ex)
@@ -36,7 +36,7 @@ public class AddCategoryHandler(IMapper mapper, ICategoryRepository categoryRepo
 		}
 	}
 
-	private void NewMethod(int categoryId, string? userId)
+	private void InvalidCache(int categoryId, string? userId)
 	{
 		memoryCache.Remove($"Categories");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
