@@ -72,6 +72,9 @@ class ProfilePage extends StatelessWidget {
               ],
             );
           }
+          if (AppCubit.get(context).userInfoModel == null) {
+            return NotLoginWidget();
+          }
 
           return SingleChildScrollView(
             child: Padding(
@@ -88,6 +91,7 @@ class ProfilePage extends StatelessWidget {
                   // User Details
                   UserInformationWidget(),
                   SizedBox(height: 0),
+
                   ChangePasswordAndDeleleAccountWidget(),
                   if (AppCubit.get(context)
                       .userInfoModel!

@@ -47,6 +47,13 @@ class BannerDetailsStartDateTextField extends StatelessWidget {
               final pickedTime = await showTimePicker(
                 context: context,
                 initialTime: TimeOfDay.now(),
+                builder: (context, child) {
+                  return MediaQuery(
+                    data: MediaQuery.of(context)
+                        .copyWith(alwaysUse24HourFormat: false),
+                    child: child!,
+                  );
+                },
               );
 
               if (pickedTime != null) {
@@ -54,16 +61,16 @@ class BannerDetailsStartDateTextField extends StatelessWidget {
                   pickedDate.year,
                   pickedDate.month,
                   pickedDate.day,
-                  pickedTime.hourOfPeriod +
-                      (pickedTime.period == DayPeriod.pm
-                          ? 12
-                          : 0), // Handle AM/PM conversion
+                  pickedTime.hour, // ✅ Use correct 24-hour format
                   pickedTime.minute,
                 );
 
                 final formatted = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                    .format(combinedDateTime);
+                    .format(
+                        combinedDateTime); // ✅ Convert to UTC before using 'Z'
+
                 startDateController.text = formatted;
+                print("Formatted UTC Start Date: $formatted");
               }
             }
           },

@@ -43,6 +43,12 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
       final TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+            child: child!,
+          );
+        },
       );
 
       if (time != null) {
@@ -50,9 +56,11 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
           date.year,
           date.month,
           date.day,
-          time.hourOfPeriod,
+          time.hour, // ✅ Already 24-hour format
           time.minute,
         );
+
+        print("Picked start date and time: $combined");
 
         setState(() {
           startDate = combined;
@@ -73,6 +81,12 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
       final TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+            child: child!,
+          );
+        },
       );
 
       if (time != null) {
@@ -80,9 +94,11 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
           date.year,
           date.month,
           date.day,
-          time.hourOfPeriod,
+          time.hour, // ✅ Already in 24-hour format
           time.minute,
         );
+
+        print("Picked end date and time: $combined");
 
         setState(() {
           endDate = combined;
@@ -369,20 +385,6 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                         }
                         print(startDate);
                         print(DateTime.now());
-
-                        if (startDate == null ||
-                            startDate!.isBefore(DateTime.now())) {
-                          Fluttertoast.showToast(
-                            msg:
-                                S.of(context).bannerStartDateMustNotBeBeforeNow,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
-                          );
-                          return;
-                        }
 
                         // 3. Validate main image
                         if (mainImage == null) {

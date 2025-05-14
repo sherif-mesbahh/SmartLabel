@@ -73,7 +73,9 @@ class AdminCategoriesPage extends StatelessWidget {
             backgroundColor: primaryColor,
             leading: IconButton(
               onPressed: () {
-                navigatorAndRemove(context, Layout(), scaleTransition);
+                AppCubit.get(context).getUserInfo().then((_) {
+                  navigatorAndRemove(context, Layout(), scaleTransition);
+                });
               },
               icon: const Icon(
                 Icons.arrow_back_outlined,

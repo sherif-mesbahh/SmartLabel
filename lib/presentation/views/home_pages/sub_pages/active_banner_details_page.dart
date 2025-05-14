@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -50,6 +51,18 @@ class ActiveBannerDetailsPage extends StatelessWidget {
               children: [
                 if (bannerImages.isNotEmpty)
                   ActiveBannerDetailsImageSlider(bannerImages: bannerImages),
+                if (bannerImages.isEmpty)
+                  Container(
+                    height: screenHeight(context) * .3,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Icon(Icons.image_not_supported, size: 40),
+                    ),
+                  ),
                 const SizedBox(height: 16.0),
                 Text(S.of(context).bannerDetailsTitle,
                     style: TextStyles.productTitle(context)),

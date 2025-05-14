@@ -526,7 +526,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "profilePageSideMenuAboutUsDialogButton":
         MessageLookupByLibrary.simpleMessage("موافق"),
     "profilePageSideMenuAboutUsDialogText": MessageLookupByLibrary.simpleMessage(
-      "سمارت ليبل هي منصة الجيل القادم لتسعير وإدارة المخزون لتجار التجزئة.\n\nالإصدار: 1.0.0\n© 2025 شركة سمارت ليبل.",
+      "Smart Label هي منصة الجيل القادم لتسعير وإدارة المخزون لتجار التجزئة.\n\nالإصدار: 1.0.0\n© 2025 شركة Smart Label.",
     ),
     "profilePageSideMenuAboutUsDialogTitle":
         MessageLookupByLibrary.simpleMessage("من نحن"),

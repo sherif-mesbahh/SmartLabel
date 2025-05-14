@@ -75,15 +75,7 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
 
                         final nowLocal = DateTime.now(); // local time
                         print(nowLocal);
-                        if (parsedStartDate.isBefore(nowLocal)) {
-                          Fluttertoast.showToast(
-                            msg:
-                                S.of(context).bannerStartDateMustNotBeBeforeNow,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                          );
-                          return;
-                        }
+
                         print(fixedStart);
                         print(fixedEnd);
                         cubit
