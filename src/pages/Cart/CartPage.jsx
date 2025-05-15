@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NotFound from "../../component/NotFound";
 import { useFavorites } from "../../hooks/useCart";
 
 function FavoritesPage() {
-  const { favorites, DeleteFavorite } = useFavorites();
+  const { favorites, DeleteFavorite, isLoading, refreshFavorites } = useFavorites();
+
+  // Refresh favorites when the page loads
+  useEffect(() => {
+    refreshFavorites();
+  }, [refreshFavorites]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4 sm:p-8">
       {favorites.items.length === 0 ? (
@@ -55,17 +69,16 @@ function FavoritesPage() {
 
                   <button
                     type="button"
-                    onClick={() => {
-                      DeleteFavorite(item);
-                    }}
+                    onClick={() => DeleteFavorite(item)}
                     className="p-2 rounded-full hover:bg-red-50 transition-colors duration-200 group"
+                    disabled={isLoading}
                   >
                     <span className="relative">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className={`h-6 w-6 transition-all duration-300 
                fill-[#24009C] scale-110
-              
+               ${isLoading ? 'opacity-50' : ''}
           `}
                         viewBox="0 0 24 24"
                         stroke="currentColor"

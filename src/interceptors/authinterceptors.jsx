@@ -1,5 +1,5 @@
 import axios from "axios";
-import { refreshToken } from "../services/userServices";
+import { getUser, refreshToken } from "../services/userServices";
 
 // Create axios instance
 const axiosInstance = axios.create();
@@ -8,9 +8,11 @@ const axiosInstance = axios.create();
 let isRefreshing = false;
 // Store pending requests
 let failedQueue = [];
+// Timer for periodic refresh
+let refreshTimer = null;
 
 const processQueue = (error, token = null) => {
-  failedQueue.forEach(prom => {
+  failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
     } else {
@@ -20,75 +22,115 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-// Add request interceptor
-axios.interceptors.request.use(
-  (req) => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      const token = parsedUser?.data?.accessToken;
-      if (token) {
-        req.headers["Authorization"] = `Bearer ${token}`;
-      }
+const refreshTokenAndUpdate = async () => {
+  try {
+    const userData = getUser();
+    if (!userData?.user?.data?.refreshToken) {
+      throw new Error("No refresh token available");
     }
-    return req;
+
+    const response = await refreshToken(userData.user.data.refreshToken);
+    
+    if (response?.data?.data) {
+      const { accessToken, refreshToken: newRefreshToken } = response.data.data;
+      
+      // Update localStorage with new tokens
+      const updatedUser = {
+        ...userData.user,
+        data: {
+          ...userData.user.data,
+          accessToken,
+          refreshToken: newRefreshToken
+        }
+      };
+      
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      
+      return accessToken;
+    }
+    throw new Error("Invalid refresh token response");
+  } catch (error) {
+  
+    throw error;
+  }
+};
+
+const scheduleNextRefresh = () => {
+  if (refreshTimer) {
+    clearTimeout(refreshTimer);
+  }
+  
+  // Schedule next refresh in 19 minutes
+  refreshTimer = setTimeout(async () => {
+    try {
+      await refreshTokenAndUpdate();
+      scheduleNextRefresh(); // Schedule next refresh after successful refresh
+    } catch (error) {
+      // If refresh fails, try again in 1 minute
+      refreshTimer = setTimeout(scheduleNextRefresh, 60000);
+    }
+  }, 19 * 60 * 1000);
+  
+};
+
+// Initialize refresh timer if user is logged in
+const initializeRefreshTimer = () => {
+  const userData = getUser();
+  if (userData?.user?.data?.accessToken) {
+    scheduleNextRefresh();
+  } else {
+  }
+};
+
+// Initialize on module load
+initializeRefreshTimer();
+
+// Request interceptor
+axios.interceptors.request.use(
+  (config) => {
+    const userData = getUser();
+    if (userData?.user?.data?.accessToken) {
+      config.headers.Authorization = `Bearer ${userData.user.data.accessToken}`;
+    } else {
+    }
+    return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    return Promise.reject(error);
+  }
 );
 
-// Add response interceptor to handle token refresh
+// Response interceptor
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    const user = localStorage.getItem("user");
 
-    // If the error is 401 and we haven't retried yet
-    if (error.response?.status === 401 && !originalRequest._retry && user) {
-      // If we're already refreshing, queue this request
+    if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
         })
-          .then(token => {
-            originalRequest.headers["Authorization"] = `Bearer ${token}`;
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
             return axios(originalRequest);
           })
-          .catch(err => Promise.reject(err));
+          .catch((err) => Promise.reject(err));
       }
 
       originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        const parsedUser = JSON.parse(user);
-        const refreshTokenValue = parsedUser.data.refreshToken;
-
-        // Call refresh token service
-        const response = await refreshToken(refreshTokenValue);
-
-        // Update stored tokens
-        parsedUser.data.accessToken = response.data.accessToken;
-        parsedUser.data.refreshToken = response.data.refreshToken;
-        localStorage.setItem("user", JSON.stringify(parsedUser));
-
-        // Update Authorization header
-        originalRequest.headers["Authorization"] = `Bearer ${response.data.accessToken}`;
-
-        // Process queued requests
-        processQueue(null, response.data.accessToken);
-
-        // Retry the original request
+        const newToken = await refreshTokenAndUpdate();
+        isRefreshing = false;
+        processQueue(null, newToken);
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return axios(originalRequest);
       } catch (refreshError) {
-        processQueue(refreshError, null);
-        // If refresh fails, clear user data and redirect to login
-        localStorage.removeItem("user");
-        localStorage.removeItem("userInfo");
-        window.location.href = "/login";
-        return Promise.reject(refreshError);
-      } finally {
         isRefreshing = false;
+        processQueue(refreshError, null);
+        return Promise.reject(refreshError);
       }
     }
 

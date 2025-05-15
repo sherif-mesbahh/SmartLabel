@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useFavorites } from "../../hooks/useCart";
 
 const ProductCard = React.memo(({ item }) => {
-  const { toggleFavorite, favorites } = useFavorites();
+  const { toggleFavorite, favorites, updateFavoriteItem, isLoading } = useFavorites();
   const isFavorite = favorites.items.some((favItem) => favItem.id === item.id);
+
+  // Update favorite item when the product data changes
+  useEffect(() => {
+    if (isFavorite) {
+      updateFavoriteItem(item);
+    }
+  }, [item, isFavorite, updateFavoriteItem]);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
@@ -17,15 +24,16 @@ const ProductCard = React.memo(({ item }) => {
         <div className="absolute top-2 right-2">
           <button
             onClick={() => toggleFavorite(item)}
+            disabled={isLoading}
             className="p-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-700 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className={`h-6 w-6 transition-all duration-300 ${
-                favorites.items.some((fav) => fav.id === item.id)
+                isFavorite
                   ? "fill-red-500 text-red-500"
                   : "text-gray-400 dark:text-gray-500"
-              }`}
+              } ${isLoading ? 'opacity-50' : ''}`}
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth="2"

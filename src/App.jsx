@@ -22,7 +22,7 @@ function App() {
         <ScrollToTop />
         <Loading />
         <Header />
-        <div className="pt-20">
+        <div>
           <AppRoute />
         </div>
         <Footer />

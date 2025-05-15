@@ -19,6 +19,7 @@
     "@paypal/react-paypal-js": "^8.7.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "flowbite": "^2.5.1",
     "flowbite-react": "^0.10.1",

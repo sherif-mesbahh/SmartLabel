@@ -3,14 +3,30 @@ import axios from "axios";
 const API_URL = "https://smartlabel1.runasp.net";
 
 export const getUser = () => {
-  const user = localStorage.getItem("user");
-  const userinfo = localStorage.getItem("userInfo");
-  if (!user || user === "undefined") return null;
-
   try {
-    return JSON.parse(user), JSON.parse(userinfo);
+    const user = localStorage.getItem("user");
+    const userinfo = localStorage.getItem("userInfo");
+    
+    if (!user || user === "undefined") {
+      console.log("No user data found in localStorage");
+      return null;
+    }
+
+    const parsedUser = JSON.parse(user);
+    const parsedUserInfo = userinfo ? JSON.parse(userinfo) : null;
+
+    if (!parsedUser?.data?.accessToken) {
+      console.log("No access token found in user data");
+      return null;
+    }
+
+    // Return both user and userInfo in a consistent structure
+    return {
+      user: parsedUser,
+      userInfo: parsedUserInfo
+    };
   } catch (err) {
-    console.error("Invalid user JSON:", err);
+    console.error("Error parsing user data:", err);
     return null;
   }
 };
@@ -37,12 +53,25 @@ export const register = (
 
 export const Logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("userInfo");
 };
 
-export const refreshToken = (refreshToken) => {
-  return axios.post(`${API_URL}/api/Authentication/refresh-token`, {
-    refreshToken,
-  });
+export const refreshToken = async (refreshTokenValue) => {
+  try {
+    console.log("Attempting to refresh token with value:", refreshTokenValue);
+    const response = await axios.post(`${API_URL}/api/Authentication/refresh-token`, {
+      refreshToken: refreshTokenValue
+    });
+    console.log("Token refresh successful:", response.data);
+    return response;
+  } catch (error) {
+    console.error("Token refresh failed:", {
+      status: error.response?.status,
+      data: error.response?.data,
+      message: error.message
+    });
+    throw error;
+  }
 };
 
 export const getAll = (searchTerm) => {

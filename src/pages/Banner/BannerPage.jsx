@@ -45,8 +45,8 @@ function BannerPage() {
             slidesPerView={1}
             pagination={{ clickable: true }}
             autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
+              delay: 1000,
+              disableOnInteraction: true,
             }}
             className="rounded-2xl shadow-lg overflow-hidden [&_.swiper-pagination-bullet]:w-3 [&_.swiper-pagination-bullet]:h-3 [&_.swiper-pagination-bullet]:bg-white [&_.swiper-pagination-bullet]:opacity-50 [&_.swiper-pagination-bullet]:transition-all [&_.swiper-pagination-bullet]:duration-300 [&_.swiper-pagination-bullet-active]:opacity-100 [&_.swiper-pagination-bullet-active]:scale-120"
           >
@@ -62,7 +62,9 @@ function BannerPage() {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-all duration-500"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-2xl font-bold text-white mb-2">{banner.title}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {banner.title}
+                    </h3>
                     <p className="text-gray-200">{banner.description}</p>
                   </div>
                 </div>
@@ -80,7 +82,9 @@ function BannerPage() {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-all duration-500"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-2xl font-bold text-white mb-2">{banner.title}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {banner.title}
+                    </h3>
                     <p className="text-gray-200">{banner.description}</p>
                   </div>
                 </div>
@@ -92,22 +96,30 @@ function BannerPage() {
         {/* Banner Info */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-white">{banner.title}</h2>
-            <span className={`px-4 py-2 rounded-full text-sm font-medium ${
-              banner.isActive 
-                ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-            }`}>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
+              {banner.title}
+            </h2>
+            <span
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                banner.isActive
+                  ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                  : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+              }`}
+            >
               {banner.isActive ? "Active" : "Inactive"}
             </span>
           </div>
-          
-          <p className="text-gray-600 dark:text-gray-300">{banner.description}</p>
+
+          <p className="text-gray-600 dark:text-gray-300">
+            {banner.description}
+          </p>
 
           <div className="bg-gradient-to-r from-[#10EAF0] to-[#24009C] text-white p-6 rounded-xl shadow-md space-y-3">
             <div className="flex items-center space-x-2">
               <span className="font-semibold">Start Date:</span>
-              <span>{banner.startDate ? formatDate(banner.startDate) : "N/A"}</span>
+              <span>
+                {banner.startDate ? formatDate(banner.startDate) : "N/A"}
+              </span>
             </div>
             <div className="flex items-center space-x-2">
               <span className="font-semibold">End Date:</span>

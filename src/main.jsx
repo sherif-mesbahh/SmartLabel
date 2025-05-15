@@ -16,32 +16,31 @@ import { LoadingProvider } from "./hooks/useLoading.jsx";
 import "./interceptors/authinterceptors";
 import { ThemeProvider } from "./context/ThemeContext";
 
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-      <LoadingProvider>
-        <AuthProvider>
-          <NotificationProvider>
-            <CartProvider>
-              <App />
-              <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-              />
-            </CartProvider>
-          </NotificationProvider>
-        </AuthProvider>
-      </LoadingProvider>
+        <CartProvider>
+          <LoadingProvider>
+            <AuthProvider>
+              <NotificationProvider>
+                <App />
+                <ToastContainer
+                  position="bottom-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+              </NotificationProvider>
+            </AuthProvider>
+          </LoadingProvider>
+        </CartProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>

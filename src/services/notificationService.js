@@ -27,9 +27,7 @@ class NotificationService {
   async startConnection() {
     try {
       await this.connection.start();
-      console.log("SignalR Connected Successfully");
     } catch (err) {
-      console.error("SignalR Connection Error:", err);
       if (err.message) {
         console.error("Error message:", err.message);
       }

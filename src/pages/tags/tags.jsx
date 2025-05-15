@@ -39,7 +39,7 @@ function Tags() {
     <div className="flex">
       <Sidebar cats={cats} />
       <div className="flex-1 p-4">
-        <Search defaultRoute="/category/" />
+        <Search defaultRoute="/category/"  />
         <ProductGrid food={food} />
       </div>
     </div>

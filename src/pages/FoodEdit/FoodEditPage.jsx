@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 function FoodEditPage() {
   const { foodId, categoryId } = useParams();
   const isEditMode = !!foodId;
-
+  
   const [images, setImages] = useState();
   const [MainImage, setMainImage] = useState();
   const [RemovedImageIds, setRemovedImageId] = useState([]);

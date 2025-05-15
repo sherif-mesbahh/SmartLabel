@@ -14,7 +14,7 @@ function Section3({ banners }) {
         modules={[Pagination, Autoplay, EffectFade]}
         effect="fade"
         loop={true}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={{ delay: 1500, disableOnInteraction: true }}
         spaceBetween={0}
         slidesPerView={1}
         className="w-full [&_.swiper-pagination-bullet]:w-3 [&_.swiper-pagination-bullet]:h-3 [&_.swiper-pagination-bullet]:bg-white [&_.swiper-pagination-bullet]:opacity-50 [&_.swiper-pagination-bullet]:transition-all [&_.swiper-pagination-bullet]:duration-300 [&_.swiper-pagination-bullet-active]:opacity-100 [&_.swiper-pagination-bullet-active]:scale-120"
@@ -22,9 +22,7 @@ function Section3({ banners }) {
         {banners?.map((banner) => (
           <SwiperSlide key={banner.id}>
             <div className="relative w-full ">
-              <div
-                className="block w-full h-[60vh] md:h-[80vh] relative group"
-              >
+              <div className="block w-full h-[60vh] md:h-[80vh] relative group">
                 <div className="absolute inset-0 transform group-hover:scale-105 transition-transform duration-700">
                   <img
                     src={`http://smartlabel1.runasp.net/Uploads/${banner.mainImage}`}
@@ -48,16 +46,14 @@ function Section3({ banners }) {
                     <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 max-w-2xl mx-auto">
                       {banner.description || "Discover the best deals today!"}
                     </p>
-                    
-                    <Link
-  to={`/banner/${banner.id}`}
-  className="inline-block bg-white text-blue-600 font-semibold px-4 py-4 rounded-full z-50 relative hover:bg-opacity-90 transition-all duration-300 shadow-lg"
-  style={{ pointerEvents: 'auto' }}
->
-  Learn More
-</Link>
 
-                    
+                    <Link
+                      to={`/banner/${banner.id}`}
+                      className="inline-block bg-white text-blue-600 font-semibold px-4 py-4 rounded-full z-50 relative hover:bg-opacity-90 transition-all duration-300 shadow-lg"
+                      style={{ pointerEvents: "auto" }}
+                    >
+                      Learn More
+                    </Link>
                   </motion.div>
                 </div>
 
@@ -71,8 +67,6 @@ function Section3({ banners }) {
           </SwiperSlide>
         ))}
       </Swiper>
-
-     
     </div>
   );
 }
