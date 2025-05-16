@@ -36,7 +36,10 @@ void main() async {
       enabled: !kReleaseMode, // Only enable in debug or profile mode
       builder: (context) => MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => appCubit..getProducts()),
+          BlocProvider(
+              create: (context) => appCubit
+                ..getProducts()
+                ..getCategories()),
         ],
         child: MyApp(showOnBoarding: !isOnBoardingFinished),
       ),

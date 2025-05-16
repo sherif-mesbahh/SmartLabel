@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
-import 'package:smart_label_software_engineering/core/utils/constants.dart';
+import 'package:smart_label_software_engineering/core/themes/themes.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/category_model/category_datum.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/categories_products_page.dart';
 
 class CategoriesListViewItem extends StatelessWidget {
-  final CategoryDatum model;
+  final List<CategoryDatum> model;
   const CategoriesListViewItem({
     super.key,
     required this.model,
@@ -17,51 +16,70 @@ class CategoriesListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            radius: 42,
-            backgroundColor: primaryColor,
-            child: CircleAvatar(
-              onBackgroundImageError: (exception, stackTrace) =>
-                  Icon(Icons.error),
-              radius: 40,
-              backgroundImage: CachedNetworkImageProvider(
-                'http://smartlabel1.runasp.net/Uploads/${model.imageUrl}',
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              model.name ?? 'No Name',
-              style: TextStyles.productTitle(context),
-              maxLines: 2,
-              softWrap: true,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
+      padding: const EdgeInsets.all(12.0),
+      child: GridView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: model.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, // 2 or 3 depending on screen width
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.8, // Adjusts card height
+        ),
+        itemBuilder: (context, index) {
+          final category = model[index];
+          return InkWell(
+            onTap: () {
               AppCubit.get(context)
-                  .getCategoryProducts(id: model.id!)
-                  .then((onValue) {
+                  .getCategoryProducts(id: category.id!)
+                  .then((_) {
                 pushNavigator(
-                    context,
-                    CategoriesProductsPage(
-                      categoryId: model.id!,
-                    ),
-                    slideRightToLeft);
+                  context,
+                  CategoriesProductsPage(categoryId: category.id!),
+                  slideRightToLeft,
+                );
               });
             },
-            icon: Icon(
-              Icons.arrow_forward_rounded,
-              color: primaryColor,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      'http://smartlabel1.runasp.net/Uploads/${category.imageUrl}',
+                      height: 70,
+                      width: 70,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => const Icon(Icons.error),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    category.name ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: TextStyles.productTitle(context)
+                        .copyWith(fontSize: 12, color: primaryColor),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

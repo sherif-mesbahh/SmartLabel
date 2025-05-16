@@ -30,15 +30,15 @@ class CustomNavBar extends StatelessWidget {
             _buildNavItem(
               context,
               index: 1,
-              iconPath: 'assets/images/category_white.png',
-              label: S.of(context).navBarCategories,
+              iconPath: 'assets/images/favorite_white.png',
+              label: S.of(context).navBarFav,
               isSelected: cubit.navBarCurrentIndex == 1,
             ),
             _buildNavItem(
               context,
               index: 2,
-              iconPath: 'assets/images/favorite_white.png',
-              label: S.of(context).navBarFav,
+              iconPath: 'assets/images/shopping-cart.png',
+              label: S.of(context).navBarCart,
               isSelected: cubit.navBarCurrentIndex == 2,
             ),
             _buildNavItem(

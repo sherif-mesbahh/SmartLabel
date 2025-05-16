@@ -53,6 +53,8 @@
     "navBarFav": "المفضلة",
     "navBarProfile": "الملف الشخصي",
     "homePageNewProducts": "منتجات جديدة",
+    "homePageNewCategories": "الفئات",
+    "seeAllButton": "اظهار الكل",
     "profilePageTitle": "الملف الشخصي",
     "profilePageSettings": "الإعدادات",
     "profilePageSignInButton": "تسجيل الدخول",
@@ -273,5 +275,10 @@
     "bannerDetailsNotFound": "تفاصيل البانر غير موجودة",
     "productDetailsNotFound": "تفاصيل المنتج غير موجودة",
     "invalidNotificationDetails": "تفاصيل الاشعار غير صحيحة",
-    "invalidNotification": "اشعار غير صحيح"
+    "invalidNotification": "اشعار غير صحيح",
+    "categoriesAppBarr": "الفئات",
+    "navBarCart": "سلة التسوق",
+    "browseProducts": "تصفح المنتجات",
+    "failedToLoadBanners": " فشل تحميل البانرات",
+    "productsAppBarTitle": "المنتجات"
 }

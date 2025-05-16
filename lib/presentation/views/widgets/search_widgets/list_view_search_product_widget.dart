@@ -40,7 +40,7 @@ class ListViewSearchProductWidget extends StatelessWidget {
           pushNavigator(
               context,
               ProductDetailsPage(
-                isSearchProduct: isPrloduct,
+                isSearchProduct: true,
                 searchOrder: searchOrder,
                 searchSort: searchSort,
               ),

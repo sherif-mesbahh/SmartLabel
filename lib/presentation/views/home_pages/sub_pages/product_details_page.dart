@@ -17,8 +17,8 @@ class ProductDetailsPage extends StatelessWidget {
   final String searchOrder;
   ProductDetailsPage({
     super.key,
-    this.categoryId = 1,
-    this.isSearchProduct = true,
+    this.categoryId = 0,
+    this.isSearchProduct = false,
     this.searchSort = 'asc',
     this.searchOrder = 'id',
   });
@@ -37,27 +37,13 @@ class ProductDetailsPage extends StatelessWidget {
               onPressed: () {
                 if (AppCubit.get(context).navBarCurrentIndex == 0) {
                   AppCubit.get(context).getProducts();
-                  AppCubit.get(context).getActiveBanners();
+                  AppCubit.get(context).getCategoryProducts(id: categoryId);
+
                   popNavigator(context);
                 }
-                if (AppCubit.get(context).navBarCurrentIndex == 1) {
-                  popNavigator(context);
-                }
-                if (AppCubit.get(context).navBarCurrentIndex == 2) {
-                  AppCubit.get(context).getFav();
-                  popNavigator(context);
-                }
-                if (AppCubit.get(context).navBarCurrentIndex == 3) {
-                  popNavigator(context);
-                }
+
                 if (isSearchProduct) {
                   AppCubit.get(context).getProductSearch(
-                    name: '',
-                    orderType: searchOrder,
-                    sortType: searchSort,
-                  );
-                } else {
-                  AppCubit.get(context).getCategorySearch(
                     name: '',
                     orderType: searchOrder,
                     sortType: searchSort,

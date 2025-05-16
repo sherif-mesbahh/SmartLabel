@@ -140,7 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "bannerUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Banner Updated Successfully",
     ),
+    "browseProducts": MessageLookupByLibrary.simpleMessage("Browse Products"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "categoriesAppBarr": MessageLookupByLibrary.simpleMessage("Categories"),
     "categoryAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Category added successfully.",
     ),
@@ -322,6 +324,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadBannerDetails": MessageLookupByLibrary.simpleMessage(
       "Failed to load banner details",
     ),
+    "failedToLoadBanners": MessageLookupByLibrary.simpleMessage(
+      "Failed to load Banners",
+    ),
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Failed to load categories",
     ),
@@ -384,7 +389,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "Forgot Password",
     ),
-    "homePageNewProducts": MessageLookupByLibrary.simpleMessage("New Products"),
+    "homePageNewCategories": MessageLookupByLibrary.simpleMessage(
+      " Categories",
+    ),
+    "homePageNewProducts": MessageLookupByLibrary.simpleMessage(
+      "Featured Products",
+    ),
     "invalidNotification": MessageLookupByLibrary.simpleMessage(
       "Invalid notification",
     ),
@@ -417,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "manageAdminText": MessageLookupByLibrary.simpleMessage(
       "Enter the user\'s email to add or remove admin access.",
     ),
+    "navBarCart": MessageLookupByLibrary.simpleMessage("Cart"),
     "navBarCategories": MessageLookupByLibrary.simpleMessage("Categories"),
     "navBarFav": MessageLookupByLibrary.simpleMessage("Favourites"),
     "navBarHome": MessageLookupByLibrary.simpleMessage("Home"),
@@ -514,6 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "productUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Product Updated Successfully",
     ),
+    "productsAppBarTitle": MessageLookupByLibrary.simpleMessage("Products"),
     "profilePageAdminPanel": MessageLookupByLibrary.simpleMessage(
       "Admin Panel",
     ),
@@ -615,6 +627,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchValidation": MessageLookupByLibrary.simpleMessage(
       "Please enter a search term",
     ),
+    "seeAllButton": MessageLookupByLibrary.simpleMessage("See All"),
     "setMainBannerImage": MessageLookupByLibrary.simpleMessage(
       "Set Main Banner Image",
     ),

@@ -18,9 +18,8 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           if (AppCubit.get(context).navBarCurrentIndex == 0) {
             AppCubit.get(context).getProducts();
-            AppCubit.get(context).getActiveBanners();
           }
-          if (AppCubit.get(context).navBarCurrentIndex == 2) {
+          if (AppCubit.get(context).navBarCurrentIndex == 1) {
             AppCubit.get(context).getFav();
           }
           popNavigator(context);

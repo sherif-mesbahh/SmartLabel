@@ -52,7 +52,9 @@
     "navBarCategories": "Categories",
     "navBarFav": "Favourites",
     "navBarProfile": "Profile",
-    "homePageNewProducts": "New Products",
+    "homePageNewProducts": "Featured Products",
+    "homePageNewCategories": " Categories",
+    "seeAllButton": "See All",
     "profilePageTitle": "Profile",
     "profilePageSettings": "Settings",
     "profilePageSignInButton": "Sign In",
@@ -273,5 +275,10 @@
     "bannerDetailsNotFound": "Banner details not found",
     "productDetailsNotFound": "Product details not found",
     "invalidNotificationDetails": "Invalid notification details",
-    "invalidNotification": "Invalid notification"
+    "invalidNotification": "Invalid notification",
+    "categoriesAppBarr": "Categories",
+    "navBarCart": "Cart",
+    "browseProducts": "Browse Products",
+    "failedToLoadBanners": "Failed to load Banners",
+    "productsAppBarTitle":"Products"
 }

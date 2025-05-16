@@ -33,9 +33,9 @@ import 'package:smart_label_software_engineering/models/product_search_model/pro
 import 'package:smart_label_software_engineering/models/register_model/register_model.dart';
 import 'package:smart_label_software_engineering/models/user_info_model/user_info_model.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/categories_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/cart_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/fav_page.dart';
-import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/products_page.dart';
+import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/home_page.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/pages/profile_page.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -43,9 +43,9 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
   List<Widget> screens = [
-    ProductsPage(),
-    CategoriesPage(),
+    HomePage(),
     FavPage(),
+    CartPage(),
     ProfilePage(),
   ];
   int navBarCurrentIndex = 0;
@@ -58,15 +58,17 @@ class AppCubit extends Cubit<AppStates> {
 
     if (index == 0) {
       getProducts();
+      getCategories();
       getActiveBanners();
     }
 
-    if (index == 1) getCategories();
-    if (index == 2) {
+    if (index == 1) {
       if (isLogin) {
         getFav();
       }
     }
+
+    if (index == 2) {}
 
     if (index == 3) {
       if (isLogin) {
@@ -477,6 +479,7 @@ class AppCubit extends Cubit<AppStates> {
           headers: {'Authorization': 'Bearer $accessToken'});
       if (response.statusCode == 200 || response.statusCode == 201) {
         model.favorite = !(model.favorite ?? false);
+        getFav();
         emit(RemoveFromFavSuccessState());
       } else {
         emit(RemoveFromFavErrorState(

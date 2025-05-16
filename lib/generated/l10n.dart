@@ -550,14 +550,29 @@ class S {
     return Intl.message('Profile', name: 'navBarProfile', desc: '', args: []);
   }
 
-  /// `New Products`
+  /// `Featured Products`
   String get homePageNewProducts {
     return Intl.message(
-      'New Products',
+      'Featured Products',
       name: 'homePageNewProducts',
       desc: '',
       args: [],
     );
+  }
+
+  /// ` Categories`
+  String get homePageNewCategories {
+    return Intl.message(
+      ' Categories',
+      name: 'homePageNewCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See All`
+  String get seeAllButton {
+    return Intl.message('See All', name: 'seeAllButton', desc: '', args: []);
   }
 
   /// `Profile`
@@ -2695,6 +2710,51 @@ class S {
     return Intl.message(
       'Invalid notification',
       name: 'invalidNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get categoriesAppBarr {
+    return Intl.message(
+      'Categories',
+      name: 'categoriesAppBarr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cart`
+  String get navBarCart {
+    return Intl.message('Cart', name: 'navBarCart', desc: '', args: []);
+  }
+
+  /// `Browse Products`
+  String get browseProducts {
+    return Intl.message(
+      'Browse Products',
+      name: 'browseProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load Banners`
+  String get failedToLoadBanners {
+    return Intl.message(
+      'Failed to load Banners',
+      name: 'failedToLoadBanners',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Products`
+  String get productsAppBarTitle {
+    return Intl.message(
+      'Products',
+      name: 'productsAppBarTitle',
       desc: '',
       args: [],
     );

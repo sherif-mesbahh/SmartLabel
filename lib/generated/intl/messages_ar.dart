@@ -136,7 +136,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "bannerUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تحديث البانر بنجاح",
     ),
+    "browseProducts": MessageLookupByLibrary.simpleMessage("تصفح المنتجات"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "categoriesAppBarr": MessageLookupByLibrary.simpleMessage("الفئات"),
     "categoryAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم اضافة الفئة بنجاح.",
     ),
@@ -310,6 +312,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadBannerDetails": MessageLookupByLibrary.simpleMessage(
       "فشل تحميل تفاصيل البنر",
     ),
+    "failedToLoadBanners": MessageLookupByLibrary.simpleMessage(
+      " فشل تحميل البانرات",
+    ),
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "فشل تحميل الفئات",
     ),
@@ -370,6 +375,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور",
     ),
+    "homePageNewCategories": MessageLookupByLibrary.simpleMessage("الفئات"),
     "homePageNewProducts": MessageLookupByLibrary.simpleMessage("منتجات جديدة"),
     "invalidNotification": MessageLookupByLibrary.simpleMessage(
       "اشعار غير صحيح",
@@ -403,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "manageAdminText": MessageLookupByLibrary.simpleMessage(
       "أدخل بريد المستخدم لإضافة أو إزالة صلاحيات المدير.",
     ),
+    "navBarCart": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
     "navBarCategories": MessageLookupByLibrary.simpleMessage("الفئات"),
     "navBarFav": MessageLookupByLibrary.simpleMessage("المفضلة"),
     "navBarHome": MessageLookupByLibrary.simpleMessage("الرئيسية"),
@@ -490,6 +497,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "productUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تحديث المنتج بنجاح.",
     ),
+    "productsAppBarTitle": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profilePageAdminPanel": MessageLookupByLibrary.simpleMessage(
       "لوحة الإدارة",
     ),
@@ -593,6 +601,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchSortProductsByName": MessageLookupByLibrary.simpleMessage("الاسم"),
     "searchSortProductsByPrice": MessageLookupByLibrary.simpleMessage("السعر"),
     "searchValidation": MessageLookupByLibrary.simpleMessage("يرجى ادخال بحث"),
+    "seeAllButton": MessageLookupByLibrary.simpleMessage("اظهار الكل"),
     "setMainBannerImage": MessageLookupByLibrary.simpleMessage(
       "تعيين صورة البانر الرئيسية",
     ),
