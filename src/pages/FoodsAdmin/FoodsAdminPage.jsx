@@ -43,7 +43,10 @@ function FoodsAdminPage() {
             Manage Products
           </h1>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Search defaultRoute="/admin/products/" placeholder="Search Products" />
+            <Search
+              defaultRoute="/admin/products/"
+              placeholder="Search Products"
+            />
           </div>
         </div>
 
@@ -56,7 +59,7 @@ function FoodsAdminPage() {
                 className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden"
               >
                 <div className="relative">
-                  <Link to={`/food/${food.id}`}>
+                  <Link to={`/product/${food.id}`}>
                     <img
                       src={`http://smartlabel1.runasp.net/Uploads/${food.mainImage}`}
                       alt={food.name}
@@ -102,7 +105,6 @@ function FoodsAdminPage() {
         </div>
       </div>
       {/* Footer */}
-    
     </div>
   );
 }
