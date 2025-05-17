@@ -59,6 +59,7 @@ function FoodEditPage() {
         RemovedImageIds
       );
       toast.success(`Food ${Name} updated successfully`);
+      window.location.reload();
     } else {
       const newFood = await addFood(
         Name,

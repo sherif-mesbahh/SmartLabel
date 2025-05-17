@@ -28,7 +28,7 @@ function AppRoute() {
       <Route path="/Search/:searchTerm" element={<Homepage />} />
 
       <Route path="/category/:id?" element={<Tags />} />
-      <Route path="/food/:id" element={<FoodPage />} />
+      <Route path="/product/:id" element={<FoodPage />} />
       <Route path="/fav" element={<CartPage />} />
       <Route path="/login" element={<Loginpage />} />
       <Route path="/register" element={<RegisterPage />} />
@@ -39,7 +39,7 @@ function AppRoute() {
 
       <Route path="/dashboard" element={<Dashboard />} />
       <Route
-        path="/admin/foods/:searchTerm?"
+        path="/admin/products/:searchTerm?"
         element={
           <AdminRouteExport>
             <FoodsAdminPage />

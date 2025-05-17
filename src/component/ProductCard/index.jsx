@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useFavorites } from "../../hooks/useCart";
+import { useFavorites } from "../../hooks/useFavorites";
 
 const ProductCard = React.memo(({ item }) => {
   const { toggleFavorite, favorites, updateFavoriteItem, isLoading } = useFavorites();

@@ -40,10 +40,10 @@ function FoodsAdminPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl p-2 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
-            Manage Foods
+            Manage Products
           </h1>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Search defaultRoute="/admin/foods/" />
+            <Search defaultRoute="/admin/products/" placeholder="Search Products" />
           </div>
         </div>
 

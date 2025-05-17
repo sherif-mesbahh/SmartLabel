@@ -5,125 +5,111 @@ import React, {
   useState,
   useCallback,
 } from "react";
-import { addFav, deleteFav, getFav } from "../services/foodServices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const favoriteContext = createContext(null);
+const cartContext = createContext(null);
 
-function FavoriteProvider({ children }) {
-  const [favoriteItems, setFavoriteItems] = useState([]);
+function CartProvider({ children }) {
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const totalCount = favoriteItems.length;
+  const totalCount = cartItems.length;
 
-  const fetchFavorites = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const response = await getFav();
-      const items = response.data.data || [];
-      setFavoriteItems(items);
-    } catch (error) {
-      console.error("Failed to fetch favorites:", error);
-      toast.error(" you are not logged in");
-      navigate("/login");
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  // Calculate total price
+  const totalPrice = cartItems.reduce((total, item) => {
+    return total + (item.price * item.quantity);
+  }, 0);
 
-  // Update a specific favorite item
-  const updateFavoriteItem = useCallback((updatedFood) => {
-    setFavoriteItems(prev => 
-      prev.map(item => 
-        item.id === updatedFood.id ? { ...item, ...updatedFood } : item
-      )
-    );
-  }, []);
-
-  useEffect(() => {
-    fetchFavorites();
-  }, [fetchFavorites]);
-
-  const addFavorite = useCallback(
-    async (food) => {
+  const addToCart = useCallback(
+    async (product) => {
       try {
         setIsLoading(true);
-        // Optimistic update
-        setFavoriteItems((prev) => [...prev, food]);
-        
-        // API call
-        await addFav(food.id);
-        
-        // Refresh from server to ensure consistency
-        await fetchFavorites();
-        
-        toast.success("Added to favorites");
+        setCartItems((prev) => {
+          const existingItem = prev.find((item) => item.id === product.id);
+          if (existingItem) {
+            return prev.map((item) =>
+              item.id === product.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            );
+          }
+          return [...prev, { ...product, quantity: 1 }];
+        });
+        toast.success("Added to cart");
       } catch (error) {
-        // Rollback on error
-        setFavoriteItems((prev) => prev.filter((item) => item.id !== food.id));
-        console.error("Failed to add favorite:", error);
-        toast.error("you are not logged in");
-        navigate("/login");
+        console.error("Failed to add to cart:", error);
+        toast.error("Failed to add to cart");
       } finally {
         setIsLoading(false);
       }
     },
-    [fetchFavorites]
+    []
   );
 
-  const DeleteFavorite = useCallback(
-    async (food) => {
+  const removeFromCart = useCallback(
+    async (productId) => {
       try {
         setIsLoading(true);
-        // Optimistic update
-        setFavoriteItems((prev) => prev.filter((item) => item.id !== food.id));
-        
-        // API call
-        await deleteFav(food.id);
-        
-        // Refresh from server to ensure consistency
-        await fetchFavorites();
-        
-        toast.success("Removed from favorites");
+        setCartItems((prev) => prev.filter((item) => item.id !== productId));
+        toast.success("Removed from cart");
       } catch (error) {
-        // Rollback on error
-        await fetchFavorites();
-        console.error("Failed to delete favorite:", error);
-        
+        console.error("Failed to remove from cart:", error);
+        toast.error("Failed to remove from cart");
       } finally {
         setIsLoading(false);
       }
     },
-    [fetchFavorites]
+    []
   );
 
-  const toggleFavorite = useCallback(
-    async (food) => {
-      const isFavorite = favoriteItems.some((item) => item.id === food.id);
-      if (isFavorite) {
-        await DeleteFavorite(food);
-      } else {
-        await addFavorite(food);
+  const updateQuantity = useCallback(
+    async (productId, quantity) => {
+      try {
+        setIsLoading(true);
+        if (quantity < 1) {
+          await removeFromCart(productId);
+          return;
+        }
+        setCartItems((prev) =>
+          prev.map((item) =>
+            item.id === productId ? { ...item, quantity } : item
+          )
+        );
+      } catch (error) {
+        console.error("Failed to update quantity:", error);
+        toast.error("Failed to update quantity");
+      } finally {
+        setIsLoading(false);
       }
     },
-    [favoriteItems, DeleteFavorite, addFavorite]
+    [removeFromCart]
   );
+
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+    toast.success("Cart cleared");
+  }, []);
 
   return (
-    <favoriteContext.Provider
+    <cartContext.Provider
       value={{
-        favorites: { items: favoriteItems, totalCount, isLoading },
-        toggleFavorite,
-        DeleteFavorite,
-        refreshFavorites: fetchFavorites,
-        updateFavoriteItem,
+        cart: {
+          items: cartItems,
+          totalCount,
+          totalPrice,
+          isLoading,
+        },
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
       }}
     >
       {children}
-    </favoriteContext.Provider>
+    </cartContext.Provider>
   );
 }
 
-export default FavoriteProvider;
-export const useFavorites = () => useContext(favoriteContext);
+export default CartProvider;
+export const useCart = () => useContext(cartContext);

@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../../hooks/useAuth.jsx";
-import NotFound from "../NotFound/index.jsx";
-import { UserInfo } from "../../services/userServices.js";
-function AdminRoute({ children }) {
-  const { userInfo } = useAuth();
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
-  return userInfo.data.roles[0] == "Admin" ? (
-    <div>{children}</div>
-  ) : (
-    <NotFound message={"this page is only for Admins"} />
-  );
-}
+const AdminRoute = ({ children }) => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-function AdminRouteExport({ children }) {
-  return <AdminRoute>{children}</AdminRoute>;
-}
-export default AdminRouteExport;
+    // Check if userInfo exists and has admin role
+    if (!userInfo || !userInfo.data || userInfo.data.roles[0] !== 'Admin') {
+        return <Navigate to="/login" replace />;
+    }
+
+    return children;
+};
+
+export default AdminRoute;
+

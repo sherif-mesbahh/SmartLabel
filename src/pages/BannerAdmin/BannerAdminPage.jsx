@@ -13,6 +13,7 @@ function BannerAdminPage() {
   const loadBanners = async () => {
     const response = await getBanners();
     setBanners(response.data.data);
+    console.log(response.data.data);
   };
 
   const deleteBanner = async (banner) => {
@@ -77,15 +78,7 @@ function BannerAdminPage() {
                     </div>
                     <div className="p-4">
                       <div className="flex justify-between items-center">
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm ${
-                            banner.isActive
-                              ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                              : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-                          }`}
-                        >
-                          {banner.isActive ? "Active" : "Inactive"}
-                        </span>
+                       
                         <div className="flex space-x-2">
                           <Link
                             to={`/admin/editbanner/${banner.id}`}

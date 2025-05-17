@@ -268,18 +268,26 @@ export const getFav = async () => {
 };
 export const addFav = async (id) => {
   const data = await axios.post(
-    "https://smartlabel1.runasp.net/api/me/favorites/" + id,
+    `https://smartlabel1.runasp.net/api/me/favorites/${id}`,
     null,
     {
       skipGlobalLoading: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
   );
   return data;
 };
 export const deleteFav = async (id) => {
   const data = await axios.delete(
-    "https://smartlabel1.runasp.net/api/me/favorites/" + id,
-    { skipGlobalLoading: true }
+    `https://smartlabel1.runasp.net/api/me/favorites/${id}`,
+    { 
+      skipGlobalLoading: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
   );
   return data;
 };

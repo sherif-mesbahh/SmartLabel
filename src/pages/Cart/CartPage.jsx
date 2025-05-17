@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NotFound from "../../component/NotFound";
-import { useFavorites } from "../../hooks/useCart";
+import { useFavorites } from "../../hooks/useFavorites";
 
 function FavoritesPage() {
-  const { favorites, DeleteFavorite, isLoading, refreshFavorites } = useFavorites();
+  const { favorites, DeleteFavorite, isLoading, refreshFavorites } =
+    useFavorites();
 
   // Refresh favorites when the page loads
   useEffect(() => {
@@ -77,8 +78,8 @@ function FavoritesPage() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className={`h-6 w-6 transition-all duration-300 
-               fill-[#24009C] scale-110
-               ${isLoading ? 'opacity-50' : ''}
+                fill-red-500 scale-110
+               ${isLoading ? "opacity-50" : ""}
           `}
                         viewBox="0 0 24 24"
                         stroke="currentColor"

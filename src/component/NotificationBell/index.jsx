@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNotification } from '../../hooks/useNotification';
-import { useNavigate } from 'react-router-dom';
 
 function NotificationBell() {
-    const { notifications, unreadCount, markAsRead } = useNotification();
-    const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-        if (!isOpen) {
-            markAsRead();
-        }
-    };
-
-    const handleNotificationClick = (notification) => {
-        if (notification.type === 'panner') {
-            navigate('/panner');
-            setIsOpen(false);
-        }
-    };
+    const {
+        notifications,
+        unreadCount,
+        isOpen,
+        toggleDropdown,
+        handleNotificationClick
+    } = useNotification();
 
     return (
         <div className="relative">
@@ -63,14 +52,27 @@ function NotificationBell() {
                                 <div
                                     key={notification.id}
                                     onClick={() => handleNotificationClick(notification)}
-                                    className={`p-4 border-b hover:bg-gray-50 cursor-pointer ${
-                                        !notification.read ? 'bg-blue-50' : ''
-                                    }`}
+                                    className="p-4 border-b hover:bg-gray-50 cursor-pointer transition-colors duration-200"
                                 >
-                                    <p className="text-sm text-gray-800">{notification.message}</p>
-                                    <p className="text-xs text-gray-500 mt-1">
-                                        {new Date(notification.id).toLocaleString()}
-                                    </p>
+                                    <div className="flex items-start gap-3">
+                                        {notification.image && (
+                                            <div className="flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden">
+                                                <img 
+                                                    src={`http://smartlabel1.runasp.net/Uploads/${notification.image}`}
+                                                    alt="Notification" 
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        )}
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-sm font-medium text-gray-900 mb-1">
+                                                {notification.message}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                                {new Date(notification.createdAt).toLocaleString()}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             ))
                         )}

@@ -18,10 +18,14 @@ function BannerPage() {
       const result = data.data.data;
       setBanner(result);
       setMainImage(result.mainImage);
+      console.log(result);
     });
   }, [id]);
 
   const images = banner.images || [];
+
+  // Check if banner is active based on start date
+  const isActive = banner.startDate ? new Date(banner.startDate) <= new Date() : false;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
@@ -101,12 +105,12 @@ function BannerPage() {
             </h2>
             <span
               className={`px-4 py-2 rounded-full text-sm font-medium ${
-                banner.isActive
+                isActive
                   ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                   : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
               }`}
             >
-              {banner.isActive ? "Active" : "Inactive"}
+              {isActive ? "Active" : "Inactive"}
             </span>
           </div>
 

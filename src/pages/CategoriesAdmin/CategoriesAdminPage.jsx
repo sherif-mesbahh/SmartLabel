@@ -68,7 +68,7 @@ function CategoriesAdminPage() {
                     to={`/admin/addfood/${food.id}`}
                     className="px-4 py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm font-medium transition-colors"
                   >
-                    Add Food +
+                    Add Product +
                   </Link>
                   <Link
                     to={`/admin/editcategory/${food.id}`}

@@ -58,7 +58,7 @@ function Dashboard() {
     },
     {
       label: "Products",
-      link: "admin/foods",
+      link: "admin/products",
       forAdmin: true,
       icon: "/icons/fast-food.png",
       bgColor: "from-purple-500 to-purple-600",
@@ -158,23 +158,11 @@ function Dashboard() {
                         {card.description}
                       </p>
                     </div>
-                    <div className="bg-black/10 p-4 flex justify-between items-center">
+                    <div className="bg-black/10 p-4 botto flex justify-between items-center">
                       <span className="text-white/90 text-sm">
                         Click to access
                       </span>
-                      <svg
-                        className="w-5 h-5 text-white/90"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
+                     
                     </div>
                   </div>
                 </Link>

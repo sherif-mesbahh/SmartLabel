@@ -9,21 +9,21 @@ import { BrowserRouter } from "react-router-dom";
 import CartProvider from "./hooks/useCart.jsx";
 import "./axiosconfig.js";
 import AuthProvider from "./hooks/useAuth.jsx";
-import { NotificationProvider } from "./hooks/useNotification";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LoadingProvider } from "./hooks/useLoading.jsx";
 import "./interceptors/authinterceptors";
 import { ThemeProvider } from "./context/ThemeContext";
+import FavoritesProvider from "./hooks/useFavorites.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
         <CartProvider>
-          <LoadingProvider>
-            <AuthProvider>
-              <NotificationProvider>
+          <FavoritesProvider>
+            <LoadingProvider>
+              <AuthProvider>
                 <App />
                 <ToastContainer
                   position="bottom-right"
@@ -37,9 +37,9 @@ createRoot(document.getElementById("root")).render(
                   pauseOnHover
                   theme="light"
                 />
-              </NotificationProvider>
-            </AuthProvider>
-          </LoadingProvider>
+              </AuthProvider>
+            </LoadingProvider>
+          </FavoritesProvider>
         </CartProvider>
       </ThemeProvider>
     </BrowserRouter>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getById } from "../../services/foodServices";
-import { useFavorites } from "../../hooks/useCart";
+import { useFavorites } from "../../hooks/useFavorites";
 import NotFound from "../../component/NotFound";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
