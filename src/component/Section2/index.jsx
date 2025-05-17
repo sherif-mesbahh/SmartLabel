@@ -3,10 +3,17 @@ import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
 import ProductCard from "../ProductCard";
-import { Pagination, Autoplay, Navigation } from "swiper/modules";
+import { Pagination, Autoplay, Navigation, EffectFade } from "swiper/modules";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 const NewProducts = ({ food }) => {
+  const swiperRef = useRef(null);
+
+  if (!food?.length) {
+    return null;
+  }
+
   return (
     <div className="mb-16">
       {/* Title Section */}
@@ -32,16 +39,18 @@ const NewProducts = ({ food }) => {
       {/* Products Swiper */}
       <div className="relative">
         <Swiper
+          ref={swiperRef}
           modules={[Pagination, Autoplay, Navigation]}
+          effect="fade"
           loop={true}
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          speed={800}
           spaceBetween={30}
           slidesPerView={1}
           breakpoints={{
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          navigation
           pagination={{ clickable: true }}
           className="mySwiper pb-12"
         >
