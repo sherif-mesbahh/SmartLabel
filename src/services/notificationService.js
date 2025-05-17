@@ -94,13 +94,14 @@ class NotificationService {
         // Show toast notification
         this.showToastNotification(message, notificationId);
 
-        // Emit event for NotificationProvider
+        // Emit event for NotificationProvider with current timestamp
         const event = new CustomEvent('newNotification', {
             detail: {
                 id: notificationId,
                 message,
                 createdAt: new Date().toISOString(),
-                read: false
+                read: false,
+                timestamp: Date.now() // Add timestamp for sorting
             }
         });
         window.dispatchEvent(event);
@@ -131,10 +132,13 @@ class NotificationService {
             });
             const data = await response.json();
             if (data.success) {
-                return data.data.map(notification => ({
-                    ...notification,
-                    read: false
-                }));
+                // Sort notifications by date in descending order (newest first)
+                return data.data
+                    .map(notification => ({
+                        ...notification,
+                        read: false
+                    }))
+                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             }
             return [];
         } catch (error) {

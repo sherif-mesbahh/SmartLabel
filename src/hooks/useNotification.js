@@ -70,7 +70,15 @@ export const useNotification = () => {
 
       // Only show if not viewed before
       if (!isNotificationViewed(newNotification.id)) {
-        setNotifications((prev) => [newNotification, ...prev]);
+        // Add new notification at the beginning of the array
+        setNotifications((prev) => {
+          const updatedNotifications = [newNotification, ...prev];
+          // Sort by timestamp to ensure newest first
+          return updatedNotifications.sort((a, b) => 
+            (b.timestamp || new Date(b.createdAt).getTime()) - 
+            (a.timestamp || new Date(a.createdAt).getTime())
+          );
+        });
         setUnreadCount((prev) => prev + 1);
       }
     },
