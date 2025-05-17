@@ -9,46 +9,33 @@ class CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = AppCubit.get(context);
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.circular(30),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(
-              context,
-              index: 0,
-              iconPath: 'assets/images/home_white.png',
-              label: S.of(context).navBarHome,
-              isSelected: cubit.navBarCurrentIndex == 0,
-            ),
-            _buildNavItem(
-              context,
-              index: 1,
-              iconPath: 'assets/images/favorite_white.png',
-              label: S.of(context).navBarFav,
-              isSelected: cubit.navBarCurrentIndex == 1,
-            ),
-            _buildNavItem(
-              context,
-              index: 2,
-              iconPath: 'assets/images/shopping-cart.png',
-              label: S.of(context).navBarCart,
-              isSelected: cubit.navBarCurrentIndex == 2,
-            ),
-            _buildNavItem(
-              context,
-              index: 3,
-              iconPath: 'assets/images/profile_white.png',
-              label: S.of(context).navBarProfile,
-              isSelected: cubit.navBarCurrentIndex == 3,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+              offset: Offset(0, 4),
             ),
           ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(4, (index) {
+            return _buildNavItem(
+              context,
+              index: index,
+              iconPath: _navIconPath(index),
+              label: _navLabel(context, index),
+              isSelected: cubit.navBarCurrentIndex == index,
+            );
+          }),
         ),
       ),
     );
@@ -62,29 +49,88 @@ class CustomNavBar extends StatelessWidget {
     required bool isSelected,
   }) {
     final cubit = AppCubit.get(context);
-    return InkWell(
-      onTap: () {
-        cubit.changeNavBarCurrentIndex(index: index);
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ImageIcon(
-            AssetImage(iconPath),
-            color: isSelected ? secondaryColor : darkColor,
-            size: 24,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
+
+    return GestureDetector(
+      onTap: () => cubit.changeNavBarCurrentIndex(index: index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color:
+              isSelected ? secondaryColor.withOpacity(0.2) : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            ImageIcon(
+              AssetImage(iconPath),
               color: isSelected ? secondaryColor : darkColor,
-              fontWeight: FontWeight.w500,
+              size: 24,
             ),
-          ),
-        ],
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: isSelected
+                  ? Row(
+                      children: [
+                        const SizedBox(width: 6),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          transitionBuilder: (child, animation) =>
+                              FadeTransition(
+                            opacity: animation,
+                            child: SizeTransition(
+                              sizeFactor: animation,
+                              axis: Axis.horizontal,
+                              child: child,
+                            ),
+                          ),
+                          child: Text(
+                            label,
+                            key: ValueKey(label),
+                            style: TextStyle(
+                              color: secondaryColor,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  String _navIconPath(int index) {
+    switch (index) {
+      case 0:
+        return 'assets/images/home_white.png';
+      case 1:
+        return 'assets/images/favorite_white.png';
+      case 2:
+        return 'assets/images/shopping-cart.png';
+      case 3:
+      default:
+        return 'assets/images/profile_white.png';
+    }
+  }
+
+  String _navLabel(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        return S.of(context).navBarHome;
+      case 1:
+        return S.of(context).navBarFav;
+      case 2:
+        return S.of(context).navBarCart;
+      case 3:
+      default:
+        return S.of(context).navBarProfile;
+    }
   }
 }

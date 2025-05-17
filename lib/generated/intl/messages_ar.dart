@@ -112,7 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تاريخ النهاية: ",
     ),
     "bannerDetailsNotFound": MessageLookupByLibrary.simpleMessage(
-      "تفاصيل البانر غير موجودة",
+      "تم حذف هذا البانر",
     ),
     "bannerDetailsStartDate": MessageLookupByLibrary.simpleMessage(
       "تاريخ البدء: ",
@@ -336,6 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadUserInfo": MessageLookupByLibrary.simpleMessage(
       "فشل تحميل معلومات المستخدم",
     ),
+    "failedtoload": MessageLookupByLibrary.simpleMessage(" فشل التحميل"),
     "forgotPasswordCodeHint": MessageLookupByLibrary.simpleMessage(
       "أدخل الرمز الخاص بك",
     ),
@@ -485,7 +486,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الوصف: ",
     ),
     "productDetailsNotFound": MessageLookupByLibrary.simpleMessage(
-      "تفاصيل المنتج غير موجودة",
+      "تم حذف هذا المنتج",
     ),
     "productDetailsPrice": MessageLookupByLibrary.simpleMessage("السعر: "),
     "productFailedToAdd": MessageLookupByLibrary.simpleMessage(
@@ -508,6 +509,16 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
     "profilePageChangePasswordCurrentPasswordLabel":
         MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
+    "profilePageChangePasswordDialogConfirmPasswordValidation":
+        MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور مطلوبة"),
+    "profilePageChangePasswordDialogCurrentPasswordValidation":
+        MessageLookupByLibrary.simpleMessage(" كلمة المرور الحالية مطلوبة"),
+    "profilePageChangePasswordDialogNewPasswordDontMatchConfirmValidation":
+        MessageLookupByLibrary.simpleMessage(
+          "كلمة المرور الجديدة وتأكيد كلمة المرور غير متطابقين",
+        ),
+    "profilePageChangePasswordDialogNewPasswordValidation":
+        MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة مطلوبة"),
     "profilePageChangePasswordNewPasswordLabel":
         MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
     "profilePageChangePasswordTitle": MessageLookupByLibrary.simpleMessage(
@@ -524,12 +535,17 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profilePageEditProfileFirstNameLabel":
         MessageLookupByLibrary.simpleMessage("الاسم الأول"),
+    "profilePageEditProfileLastNameError": MessageLookupByLibrary.simpleMessage(
+      "اسم العائلة مطلوب",
+    ),
     "profilePageEditProfileLastNameLabel": MessageLookupByLibrary.simpleMessage(
       "اسم العائلة",
     ),
     "profilePageEditProfileTitle": MessageLookupByLibrary.simpleMessage(
       "تعديل الملف الشخصي",
     ),
+    "profilePageEditProfilefirstNameError":
+        MessageLookupByLibrary.simpleMessage("اسم المستخدم مطلوب"),
     "profilePageSettings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "profilePageSideMenuAboutUsDialogButton":
         MessageLookupByLibrary.simpleMessage("موافق"),
@@ -582,6 +598,7 @@ class MessageLookup extends MessageLookupByLibrary {
           "تم التسجيل بنجاح, لقد ارسلنا اليك رسالة تأكيد علي بريدك الالكتروني",
         ),
     "removeAdmin": MessageLookupByLibrary.simpleMessage("إزالة من المدير"),
+    "retry": MessageLookupByLibrary.simpleMessage("اعادة المحاولة"),
     "saveButton": MessageLookupByLibrary.simpleMessage("حفظ"),
     "search": MessageLookupByLibrary.simpleMessage("البحث"),
     "searchCategoriesLabel": MessageLookupByLibrary.simpleMessage("الفئات"),

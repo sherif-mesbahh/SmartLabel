@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smart_label_software_engineering/core/themes/themes.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
@@ -39,30 +39,23 @@ class ProductsPage extends StatelessWidget {
           final products = cubit.productModel?.data;
 
           if (state is GetProductsLoadingState) {
-            return Center(
-              child: Lottie.asset(
-                'assets/lottie/loading_indicator.json',
-                width: 100,
-                height: 100,
-              ),
-            );
+            return _buildShimmerGrid();
           }
 
           if (products == null) {
-            return Center(
-              child: Text(
-                S.of(context).failedToLoadProducts,
-                style: const TextStyle(color: Colors.red),
-              ),
+            return _buildMessageView(
+              context: context,
+              message: S.of(context).failedToLoadProducts,
+              icon: Icons.cloud_off,
+              onRetry: () => cubit.getProducts(),
             );
           }
 
           if (products.isEmpty) {
-            return Center(
-              child: Text(
-                S.of(context).noProductsFound,
-                style: const TextStyle(color: Colors.red),
-              ),
+            return _buildMessageView(
+              context: context,
+              message: S.of(context).noProductsFound,
+              icon: Icons.inventory_2_outlined,
             );
           }
 
@@ -91,6 +84,68 @@ class ProductsPage extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildMessageView({
+    required String message,
+    required IconData icon,
+    required BuildContext context,
+    VoidCallback? onRetry,
+  }) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.grey, size: 60),
+            const SizedBox(height: 16),
+            Text(
+              message,
+              style: TextStyles.description(context).copyWith(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+            if (onRetry != null) ...[
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: onRetry,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  foregroundColor: Colors.white,
+                ),
+                icon: const Icon(Icons.refresh),
+                label: Text(S.of(context).retry),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildShimmerGrid() {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: 6,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 0.7,
+      ),
+      itemBuilder: (context, index) => Shimmer.fromColors(
+        baseColor: Colors.grey.shade800,
+        highlightColor: Colors.grey.shade500,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
       ),
     );
   }

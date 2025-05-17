@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
-import 'package:smart_label_software_engineering/core/utils/shimmer_widget.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -23,23 +22,6 @@ class CategoriesSecion extends StatelessWidget {
     return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
         final category = cubit.categoryModel?.data;
-        if (state is GetCategoriesLoadingState) {
-          return GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 6,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1,
-            ),
-            itemCount: 6, // placeholder count
-            itemBuilder: (context, index) => ShimmerBox(
-              height: screenHeight(context) * .1,
-              width: 50,
-            ),
-          );
-        }
 
         if (category == null) {
           return Column(
@@ -171,4 +153,3 @@ class CategoriesSecion extends StatelessWidget {
     );
   }
 }
-

@@ -35,63 +35,107 @@ class ActiveBannerDetailsPage extends StatelessWidget {
                   .where((url) => url.isNotEmpty)
                   .toList() ??
               [];
+
           if (banner == null) {
             return Center(
-              child: Text(
-                S.of(context).failedToLoadBannerDetails,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    'assets/images/failed_icon.png',
+                    height: 100,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    S.of(context).failedToLoadBannerDetails,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
               ),
             );
           }
 
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (bannerImages.isNotEmpty)
-                  ActiveBannerDetailsImageSlider(bannerImages: bannerImages),
-                if (bannerImages.isEmpty)
-                  Container(
-                    height: screenHeight(context) * .3,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Icon(Icons.image_not_supported, size: 40),
+                // Image Section
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: bannerImages.isNotEmpty
+                      ? ActiveBannerDetailsImageSlider(
+                          bannerImages: bannerImages)
+                      : Container(
+                          height: screenHeight(context) * .3,
+                          width: double.infinity,
+                          color: Colors.grey.shade200,
+                          child: const Center(
+                            child: Icon(Icons.image_not_supported, size: 48),
+                          ),
+                        ),
+                ),
+                const SizedBox(height: 20),
+
+                // Info Card
+                Center(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                    elevation: 3,
+                    margin: EdgeInsets.zero,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _infoItem(
+                            context,
+                            title: S.of(context).bannerDetailsTitle,
+                            value: banner.title ?? "No title provided",
+                          ),
+                          _infoItem(
+                            context,
+                            title: S.of(context).bannerDetailsStartDate,
+                            value: _formatDate(banner.startDate),
+                          ),
+                          _infoItem(
+                            context,
+                            title: S.of(context).bannerDetailsEndDate,
+                            value: _formatDate(banner.endDate),
+                          ),
+                          _infoItem(
+                            context,
+                            title: S.of(context).bannerDetailsDescription,
+                            value: (banner.description?.trim().isEmpty ?? true)
+                                ? "No description provided"
+                                : banner.description!,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                const SizedBox(height: 16.0),
-                Text(S.of(context).bannerDetailsTitle,
-                    style: TextStyles.productTitle(context)),
-                Text(banner.title ?? "No title provided",
-                    style: TextStyles.description(context)),
-                const SizedBox(height: 12.0),
-                Text(S.of(context).bannerDetailsStartDate,
-                    style: TextStyles.productTitle(context)),
-                Text(_formatDate(banner.startDate),
-                    style: TextStyles.description(context)),
-                const SizedBox(height: 12.0),
-                Text(S.of(context).bannerDetailsEndDate,
-                    style: TextStyles.productTitle(context)),
-                Text(_formatDate(banner.endDate),
-                    style: TextStyles.description(context)),
-                const SizedBox(height: 12.0),
-                Text(S.of(context).bannerDetailsDescription,
-                    style: TextStyles.productTitle(context)),
-                Text(
-                  banner.description?.toString().trim().isEmpty == true
-                      ? "No description provided"
-                      : banner.description.toString(),
-                  style: TextStyles.description(context),
                 ),
-                const SizedBox(height: 20.0),
               ],
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _infoItem(BuildContext context,
+      {required String title, required String value}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: TextStyles.productTitle(context)),
+          const SizedBox(height: 4),
+          Text(value, style: TextStyles.description(context)),
+        ],
       ),
     );
   }

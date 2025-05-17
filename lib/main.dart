@@ -33,7 +33,7 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode, // Only enable in debug or profile mode
+      enabled: !kReleaseMode,
       builder: (context) => MultiBlocProvider(
         providers: [
           BlocProvider(

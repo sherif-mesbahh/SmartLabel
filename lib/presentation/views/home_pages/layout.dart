@@ -17,18 +17,24 @@ class Layout extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       key: _scaffoldKey,
+      appBar: const CustomAppBar(),
       endDrawer: LayoutDrawerWidget(),
-      appBar: CustomAppBar(),
       body: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
           final cubit = AppCubit.get(context);
 
-          return Column(
+          return Stack(
             children: [
-              Expanded(
+              Positioned.fill(
                 child: cubit.screens[cubit.navBarCurrentIndex],
               ),
-              CustomNavBar(),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Align(
+                    alignment: Alignment.bottomCenter, child: CustomNavBar()),
+              ),
             ],
           );
         },

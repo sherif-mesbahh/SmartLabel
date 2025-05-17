@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -241,42 +240,34 @@ class _SearchPageState extends State<SearchPage> {
                       return null;
                     },
                     onFieldSubmitted: (value) async {
-                      // Show loading dialog
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (_) => Center(
-                          child: Lottie.asset(
-                            'assets/lottie/loading_indicator.json',
-                            width: 100,
-                            height: 100,
-                          ),
-                        ),
-                      );
-
-                      try {
-                        // Await the search operation
-                        if (selectedType == 'Products') {
-                          await cubit.getProductSearch(
-                            name: searchController.text,
-                            sortType: selectedSort == 'default'
-                                ? 'id'
-                                : selectedSort == 'price'
-                                    ? 'new-price'
-                                    : selectedSort,
-                            orderType: selectedOrder,
-                          );
-                        } else if (selectedType == 'Categories') {
-                          await cubit.getCategorySearch(
-                            name: searchController.text,
-                            sortType:
-                                selectedSort == 'default' ? 'id' : selectedSort,
-                            orderType: selectedOrder,
-                          );
-                        }
-                      } finally {
-                        // Always close the dialog
-                        if (context.mounted) Navigator.of(context).pop();
+                      // No more dialog — rely on shimmer via Bloc state
+                      if (selectedType == 'Products') {
+                        await cubit.getProductSearch(
+                          name: searchController.text,
+                          sortType: selectedSort ==
+                                  S.of(context).searchSortProductsByDefault
+                              ? 'id'
+                              : selectedSort ==
+                                      S.of(context).searchSortProductsByPrice
+                                  ? 'new-price'
+                                  : 'name',
+                          orderType:
+                              selectedOrder == S.of(context).searchOrderByAsc
+                                  ? 'asc'
+                                  : 'desc',
+                        );
+                      } else if (selectedType == 'Categories') {
+                        await cubit.getCategorySearch(
+                          name: searchController.text,
+                          sortType: selectedSort ==
+                                  S.of(context).searchSortCategoriesByDefault
+                              ? 'id'
+                              : 'name',
+                          orderType:
+                              selectedOrder == S.of(context).searchOrderByAsc
+                                  ? 'asc'
+                                  : 'desc',
+                        );
                       }
                     },
                   ),

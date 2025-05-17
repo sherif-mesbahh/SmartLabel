@@ -116,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bannerDetailsEndDate": MessageLookupByLibrary.simpleMessage("End Date:"),
     "bannerDetailsNotFound": MessageLookupByLibrary.simpleMessage(
-      "Banner details not found",
+      "This Banner has been deleted",
     ),
     "bannerDetailsStartDate": MessageLookupByLibrary.simpleMessage(
       "Start Date:",
@@ -348,6 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadUserInfo": MessageLookupByLibrary.simpleMessage(
       "Failed to load user info",
     ),
+    "failedtoload": MessageLookupByLibrary.simpleMessage("failedtoload"),
     "forgotPasswordCodeHint": MessageLookupByLibrary.simpleMessage(
       "Enter your code",
     ),
@@ -513,7 +514,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Description:",
     ),
     "productDetailsNotFound": MessageLookupByLibrary.simpleMessage(
-      "Product details not found",
+      "Product has been deleted",
     ),
     "productDetailsPrice": MessageLookupByLibrary.simpleMessage("Price:"),
     "productFailedToAdd": MessageLookupByLibrary.simpleMessage(
@@ -536,6 +537,16 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "profilePageChangePasswordCurrentPasswordLabel":
         MessageLookupByLibrary.simpleMessage("Current Password"),
+    "profilePageChangePasswordDialogConfirmPasswordValidation":
+        MessageLookupByLibrary.simpleMessage("Confirm Password is required"),
+    "profilePageChangePasswordDialogCurrentPasswordValidation":
+        MessageLookupByLibrary.simpleMessage("Current Password is required"),
+    "profilePageChangePasswordDialogNewPasswordDontMatchConfirmValidation":
+        MessageLookupByLibrary.simpleMessage(
+          "Confirm Password do not match New Password",
+        ),
+    "profilePageChangePasswordDialogNewPasswordValidation":
+        MessageLookupByLibrary.simpleMessage("New Password is required"),
     "profilePageChangePasswordNewPasswordLabel":
         MessageLookupByLibrary.simpleMessage("New Password"),
     "profilePageChangePasswordTitle": MessageLookupByLibrary.simpleMessage(
@@ -552,12 +563,17 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profilePageEditProfileFirstNameLabel":
         MessageLookupByLibrary.simpleMessage("First Name"),
+    "profilePageEditProfileLastNameError": MessageLookupByLibrary.simpleMessage(
+      "Last name is required",
+    ),
     "profilePageEditProfileLastNameLabel": MessageLookupByLibrary.simpleMessage(
       "Last Name",
     ),
     "profilePageEditProfileTitle": MessageLookupByLibrary.simpleMessage(
       "Edit Profile",
     ),
+    "profilePageEditProfilefirstNameError":
+        MessageLookupByLibrary.simpleMessage("First name is required"),
     "profilePageSettings": MessageLookupByLibrary.simpleMessage("Settings"),
     "profilePageSideMenuAboutUsDialogButton":
         MessageLookupByLibrary.simpleMessage("OK"),
@@ -604,6 +620,7 @@ class MessageLookup extends MessageLookupByLibrary {
           "Registration successful! We have sent a confirmation email to your address.",
         ),
     "removeAdmin": MessageLookupByLibrary.simpleMessage("Remove Admin"),
+    "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
     "search": MessageLookupByLibrary.simpleMessage("Search"),
     "searchCategoriesLabel": MessageLookupByLibrary.simpleMessage("Categories"),

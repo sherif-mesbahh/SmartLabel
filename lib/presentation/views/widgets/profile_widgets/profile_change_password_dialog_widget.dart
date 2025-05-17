@@ -21,6 +21,7 @@ class _ChangePasswordDialogWidgetState
   late TextEditingController currentPasswordController;
   late TextEditingController newPasswordController;
   late TextEditingController confirmPasswordController;
+  final formKey = GlobalKey<FormState>();
 
   String newPassword = '';
   bool hasUpper = false;
@@ -67,116 +68,150 @@ class _ChangePasswordDialogWidgetState
           style: TextStyles.headline2(context)),
       content: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Current Password
-            TextField(
-              keyboardType: TextInputType.visiblePassword,
-              controller: currentPasswordController,
-              decoration: InputDecoration(
-                labelText:
-                    S.of(context).profilePageChangePasswordCurrentPasswordLabel,
-                labelStyle: TextStyles.smallText(context),
-                hintStyle: TextStyles.smallText(context),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: primaryColor),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-
-            // New Password
-            TextField(
-              keyboardType: TextInputType.visiblePassword,
-              controller: newPasswordController,
-              onChanged: validatePassword,
-              decoration: InputDecoration(
-                labelText:
-                    S.of(context).profilePageChangePasswordNewPasswordLabel,
-                labelStyle: TextStyles.smallText(context),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: primaryColor),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Current Password
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return S
+                        .of(context)
+                        .profilePageChangePasswordDialogCurrentPasswordValidation;
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.visiblePassword,
+                controller: currentPasswordController,
+                decoration: InputDecoration(
+                  labelText: S
+                      .of(context)
+                      .profilePageChangePasswordCurrentPasswordLabel,
+                  labelStyle: TextStyles.smallText(context),
+                  hintStyle: TextStyles.smallText(context),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: greyColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: primaryColor),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: greyColor),
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(height: 12),
 
-            const SizedBox(height: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                Wrap(
-                  runSpacing: 6,
-                  children: [
-                    _buildRequirementText(
-                      S.of(context).passwordValidationMinLength,
-                      hasMinLength,
-                    ),
-                    _buildRequirementText(
-                      S.of(context).passwordValidationUpperCase,
-                      hasUpper,
-                    ),
-                    _buildRequirementText(
-                      S.of(context).passwordValidationLowerCase,
-                      hasLower,
-                    ),
-                    _buildRequirementText(
-                      S.of(context).passwordValidationNumber,
-                      hasNumber,
-                    ),
-                    _buildRequirementText(
-                        S.of(context).passwordValidationSpecialChar,
-                        hasSpecialChar),
-                  ],
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 12),
-
-            // Confirm Password
-            TextField(
-              keyboardType: TextInputType.visiblePassword,
-              controller: confirmPasswordController,
-              decoration: InputDecoration(
-                labelText:
-                    S.of(context).profilePageChangePasswordConfirmPasswordLabel,
-                labelStyle: TextStyles.smallText(context),
-                hintStyle: TextStyles.smallText(context),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: primaryColor),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: greyColor),
+              // New Password
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return S
+                        .of(context)
+                        .profilePageChangePasswordDialogNewPasswordValidation;
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.visiblePassword,
+                controller: newPasswordController,
+                onChanged: validatePassword,
+                decoration: InputDecoration(
+                  labelText:
+                      S.of(context).profilePageChangePasswordNewPasswordLabel,
+                  labelStyle: TextStyles.smallText(context),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: greyColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: primaryColor),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: greyColor),
+                  ),
                 ),
               ),
-            ),
-          ],
+
+              const SizedBox(height: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
+                  Wrap(
+                    runSpacing: 6,
+                    children: [
+                      _buildRequirementText(
+                        S.of(context).passwordValidationMinLength,
+                        hasMinLength,
+                      ),
+                      _buildRequirementText(
+                        S.of(context).passwordValidationUpperCase,
+                        hasUpper,
+                      ),
+                      _buildRequirementText(
+                        S.of(context).passwordValidationLowerCase,
+                        hasLower,
+                      ),
+                      _buildRequirementText(
+                        S.of(context).passwordValidationNumber,
+                        hasNumber,
+                      ),
+                      _buildRequirementText(
+                          S.of(context).passwordValidationSpecialChar,
+                          hasSpecialChar),
+                    ],
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 12),
+
+              // Confirm Password
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return S
+                        .of(context)
+                        .profilePageChangePasswordDialogConfirmPasswordValidation;
+                  }
+                  if (value != newPasswordController.text) {
+                    return S
+                        .of(context)
+                        .profilePageChangePasswordDialogNewPasswordDontMatchConfirmValidation;
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.visiblePassword,
+                controller: confirmPasswordController,
+                decoration: InputDecoration(
+                  labelText: S
+                      .of(context)
+                      .profilePageChangePasswordConfirmPasswordLabel,
+                  labelStyle: TextStyles.smallText(context),
+                  hintStyle: TextStyles.smallText(context),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: greyColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: primaryColor),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: greyColor),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       actions: [
@@ -222,13 +257,15 @@ class _ChangePasswordDialogWidgetState
                 : TextButton(
                     onPressed: canSubmit
                         ? () {
-                            AppCubit.get(context).changePassword(
-                              currentPassword:
-                                  currentPasswordController.text.trim(),
-                              newPassword: newPasswordController.text.trim(),
-                              confirmPassword:
-                                  confirmPasswordController.text.trim(),
-                            );
+                            if (formKey.currentState!.validate()) {
+                              AppCubit.get(context).changePassword(
+                                currentPassword:
+                                    currentPasswordController.text.trim(),
+                                newPassword: newPasswordController.text.trim(),
+                                confirmPassword:
+                                    confirmPasswordController.text.trim(),
+                              );
+                            }
                           }
                         : null,
                     child: Text(S.of(context).saveButton,

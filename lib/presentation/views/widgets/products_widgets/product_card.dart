@@ -37,28 +37,16 @@ class ProductCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () async {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => Center(
-              child: Lottie.asset(
-                'assets/lottie/loading_indicator.json',
-                width: 100,
-                height: 100,
-              ),
+        onTap: () {
+          AppCubit.get(context).getProductDetails(id: product.id ?? 0);
+          pushNavigator(
+            context,
+            ProductDetailsPage(
+              categoryId: product.categoryId ?? 0,
+              isSearchProduct: false,
             ),
+            slideRightToLeft,
           );
-
-          await AppCubit.get(context).getProductDetails(id: product.id ?? 0);
-
-          if (context.mounted) {
-            Navigator.of(context).pop();
-          }
-
-          if (context.mounted) {
-            pushNavigator(context, ProductDetailsPage(), slideRightToLeft);
-          }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

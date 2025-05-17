@@ -2675,20 +2675,20 @@ class S {
     );
   }
 
-  /// `Banner details not found`
+  /// `This Banner has been deleted`
   String get bannerDetailsNotFound {
     return Intl.message(
-      'Banner details not found',
+      'This Banner has been deleted',
       name: 'bannerDetailsNotFound',
       desc: '',
       args: [],
     );
   }
 
-  /// `Product details not found`
+  /// `Product has been deleted`
   String get productDetailsNotFound {
     return Intl.message(
-      'Product details not found',
+      'Product has been deleted',
       name: 'productDetailsNotFound',
       desc: '',
       args: [],
@@ -2755,6 +2755,83 @@ class S {
     return Intl.message(
       'Products',
       name: 'productsAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `failedtoload`
+  String get failedtoload {
+    return Intl.message(
+      'failedtoload',
+      name: 'failedtoload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First name is required`
+  String get profilePageEditProfilefirstNameError {
+    return Intl.message(
+      'First name is required',
+      name: 'profilePageEditProfilefirstNameError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last name is required`
+  String get profilePageEditProfileLastNameError {
+    return Intl.message(
+      'Last name is required',
+      name: 'profilePageEditProfileLastNameError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Password is required`
+  String get profilePageChangePasswordDialogCurrentPasswordValidation {
+    return Intl.message(
+      'Current Password is required',
+      name: 'profilePageChangePasswordDialogCurrentPasswordValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password is required`
+  String get profilePageChangePasswordDialogNewPasswordValidation {
+    return Intl.message(
+      'New Password is required',
+      name: 'profilePageChangePasswordDialogNewPasswordValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password is required`
+  String get profilePageChangePasswordDialogConfirmPasswordValidation {
+    return Intl.message(
+      'Confirm Password is required',
+      name: 'profilePageChangePasswordDialogConfirmPasswordValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password do not match New Password`
+  String
+  get profilePageChangePasswordDialogNewPasswordDontMatchConfirmValidation {
+    return Intl.message(
+      'Confirm Password do not match New Password',
+      name:
+          'profilePageChangePasswordDialogNewPasswordDontMatchConfirmValidation',
       desc: '',
       args: [],
     );

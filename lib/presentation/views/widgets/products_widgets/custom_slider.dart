@@ -7,7 +7,7 @@ import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/views/home_pages/sub_pages/active_banner_details_page.dart';
 
-class CustomSlider extends StatelessWidget {
+class CustomSlider extends StatefulWidget {
   final List<dynamic> banners;
 
   const CustomSlider({
@@ -16,78 +16,173 @@ class CustomSlider extends StatelessWidget {
   });
 
   @override
+  State<CustomSlider> createState() => _CustomSliderState();
+}
+
+class _CustomSliderState extends State<CustomSlider> {
+  int _currentIndex = 0;
+  bool _isLoading = false;
+  final CarouselSliderController _controller = CarouselSliderController();
+
+  @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: screenHeight(context) * .25,
-        autoPlay: true,
-        enlargeCenterPage: true,
-        viewportFraction: 0.8,
-        aspectRatio: 2.0,
-        initialPage: 0,
-        enableInfiniteScroll: true,
-      ),
-      items: banners.map((banner) {
-        return Builder(
-          builder: (BuildContext context) {
-            return InkWell(
-              onTap: () async {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (context) => Center(
-                    child: Lottie.asset(
-                      'assets/lottie/loading_indicator.json',
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                );
+    if (widget.banners.isEmpty) {
+      return SizedBox(
+        height: screenHeight(context) * 0.25,
+        child: Center(
+          child: Text(
+            'No banners available',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ),
+      );
+    }
 
-                await AppCubit.get(context)
-                    .getActiveBannerDetails(id: banner.id ?? 1);
+    return Column(
+      children: [
+        CarouselSlider.builder(
+          carouselController: _controller, // <-- add controller here
 
-                if (context.mounted) {
-                  Navigator.of(context).pop();
-                }
+          itemCount: widget.banners.length,
+          itemBuilder: (context, index, realIndex) {
+            final banner = widget.banners[index];
+            return GestureDetector(
+              onTap: _isLoading
+                  ? null
+                  : () async {
+                      setState(() => _isLoading = true);
 
-                if (context.mounted) {
-                  pushNavigator(
-                    context,
-                    ActiveBannerDetailsPage(id: banner.id ?? 1),
-                    slideRightToLeft,
-                  );
-                }
-              },
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => Center(
+                          child: Container(
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.9),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Lottie.asset(
+                              'assets/lottie/loading_indicator.json',
+                              width: 80,
+                              height: 80,
+                            ),
+                          ),
+                        ),
+                      );
+
+                      await AppCubit.get(context)
+                          .getActiveBannerDetails(id: banner.id ?? 1);
+
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
+
+                      if (context.mounted) {
+                        pushNavigator(
+                          context,
+                          ActiveBannerDetailsPage(id: banner.id ?? 1),
+                          slideRightToLeft,
+                        );
+                      }
+
+                      setState(() => _isLoading = false);
+                    },
               child: Container(
-                width: screenWidth(context),
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6),
                 decoration: BoxDecoration(
                   color: secondaryColor,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(14),
                   child: CachedNetworkImage(
                     imageUrl:
                         "http://smartlabel1.runasp.net/Uploads/${banner.mainImage}",
                     fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 500),
                     placeholder: (context, url) => Center(
                       child: Lottie.asset(
                         'assets/lottie/loading_indicator.json',
-                        width: 100,
-                        height: 100,
+                        width: 70,
+                        height: 70,
                       ),
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.broken_image),
+                    errorWidget: (context, url, error) => Container(
+                      color: Colors.grey.shade200,
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Icon(Icons.broken_image,
+                                size: 40, color: Colors.grey),
+                            SizedBox(height: 8),
+                            Text(
+                              'Image not available',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    imageBuilder: (context, imageProvider) => Semantics(
+                      label: 'Banner Image',
+                      child: Image(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                    ),
                   ),
                 ),
               ),
             );
           },
-        );
-      }).toList(),
+          options: CarouselOptions(
+            height: screenHeight(context) * 0.25,
+            autoPlay: true,
+            enlargeCenterPage: true,
+            viewportFraction: 0.85,
+            aspectRatio: 16 / 9,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            onPageChanged: (index, reason) {
+              setState(() => _currentIndex = index);
+            },
+          ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: widget.banners.asMap().entries.map((entry) {
+            return GestureDetector(
+              onTap: () => _controller
+                  .animateToPage(entry.key), // <-- use controller here
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.symmetric(horizontal: 6),
+                width: _currentIndex == entry.key ? 14 : 10,
+                height: _currentIndex == entry.key ? 14 : 10,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _currentIndex == entry.key
+                      ? primaryColor
+                      : Colors.grey.shade400,
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 }

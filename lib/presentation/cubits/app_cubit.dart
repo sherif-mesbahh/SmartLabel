@@ -1420,10 +1420,9 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   late HubConnection hubConnection;
-
+  String notificatinIconPath = 'assets/images/notification.png';
   void startSignalR() async {
     final serverUrl = ApiEndpoints.notifications;
-
     hubConnection = HubConnectionBuilder()
         .withUrl(
           serverUrl,
@@ -1438,6 +1437,8 @@ class AppCubit extends Cubit<AppStates> {
         .build();
 
     hubConnection.on("ReceiveNotification", (messege) {
+      notificatinIconPath = 'assets/images/notification (1).png';
+
       final body = messege != null && messege.isNotEmpty
           ? messege[0].toString()
           : "You have a new message";
@@ -1496,6 +1497,33 @@ class AppCubit extends Cubit<AppStates> {
       }
     } catch (e) {
       emit(GetNotificationDetailsErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
+
+  Future<void> seenNotification({required int id}) async {
+    try {
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().put(
+        ApiEndpoints.seenNotificationById(id),
+        {
+          'id': id,
+        },
+        headers: {
+          'Authorization': 'Bearer $accessToken',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(SeenNotificationSuccessState());
+        getNotifications();
+      } else {
+        emit(SeenNotificationErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(SeenNotificationErrorState(e.toString()));
       log('Failed with status: ${e.toString()}');
     }
   }

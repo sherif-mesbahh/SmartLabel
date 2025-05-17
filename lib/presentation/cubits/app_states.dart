@@ -375,3 +375,11 @@ class GetNotificationDetailsErrorState extends AppStates {
 
   GetNotificationDetailsErrorState(this.error);
 }
+
+class SeenNotificationSuccessState extends AppStates {}
+
+class SeenNotificationErrorState extends AppStates {
+  String error;
+
+  SeenNotificationErrorState(this.error);
+}
