@@ -101,6 +101,8 @@ function FoodsAdminPage() {
           </div>
         </div>
       </div>
+      {/* Footer */}
+    
     </div>
   );
 }

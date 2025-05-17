@@ -12,7 +12,8 @@ function Footer() {
               About Us
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Your trusted source for quality products and exceptional service.
+            Smart Label is a next-gen pricing and
+            inventory platform for retailers.
             </p>
           </div>
 
@@ -102,6 +103,8 @@ function Footer() {
 
         <div className=" mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
           <p className="text-center text-gray-600 dark:text-gray-400">
+            Version 1.0.0
+            <br />
             © {new Date().getFullYear()} SmartLabel. All rights reserved.
           </p>
         </div>

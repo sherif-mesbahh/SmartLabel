@@ -50,27 +50,29 @@ function Section3({ banners }) {
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-80 group-hover:opacity-95 transition-all duration-500"></div>
 
-              <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-16 md:pb-24">
+              <div className="absolute inset-0 flex flex-col items-start justify-end text-left px-8 md:px-16 pb-16 md:pb-24">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
-                  className="max-w-4xl mx-auto"
+                  className="max-w-2xl"
                 >
                   <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6 drop-shadow-lg transform hover:scale-105 transition-transform duration-300">
                     {banner.title}
                   </h1>
-                  <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 max-w-2xl mx-auto">
+                  <p className="text-lg md:text-2xl text-white/90 font-medium mb-8">
                     {banner.description || "Discover the best deals today!"}
                   </p>
 
-                  <Link
-                    to={`/banner/${banner.id}`}
-                    className="inline-block bg-white text-blue-600 font-semibold px-4 py-2 rounded-full z-50 relative hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                    style={{ pointerEvents: "auto" }}
-                  >
-                    Learn More
-                  </Link>
+                  <div className="flex items-center gap-4">
+                    <Link
+                      to={`/banner/${banner.id}`}
+                      className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-full hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      Shop Now
+                    </Link>
+                   
+                  </div>
                 </motion.div>
               </div>
 

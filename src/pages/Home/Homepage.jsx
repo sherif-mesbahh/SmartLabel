@@ -57,8 +57,12 @@ function Homepage() {
       className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
       {/* Hero Section with Banner */}
-      <motion.div variants={itemVariants} className="w-full">
-        <Section3 banners={banners} />
+      <motion.div variants={itemVariants} className="w-full py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl overflow-hidden shadow-xl">
+            <Section3 banners={banners} />
+          </div>
+        </div>
       </motion.div>
 
       {/* Main Content */}
