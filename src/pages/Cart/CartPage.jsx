@@ -61,7 +61,7 @@ function FavoritesPage() {
                       </div>
                     </div>
                     <Link
-                      to={`/food/${item.id}`}
+                      to={`/product/${item.id}`}
                       className="text-lg font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-200"
                     >
                       {item.name}
