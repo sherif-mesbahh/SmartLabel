@@ -96,6 +96,68 @@ class AdminCategoriesPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Stats Section
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceEvenly,
+                      spacing: 16,
+                      runSpacing: 16,
+                      children: [
+                        _buildStatCard(
+                          context,
+                          title: S.of(context).banners,
+                          count: AppCubit.get(context)
+                                  .bannersModel
+                                  ?.data
+                                  ?.length ??
+                              0,
+                          color: Colors.blue,
+                        ),
+                        _buildStatCard(
+                          context,
+                          title: S.of(context).activeBanners,
+                          count: AppCubit.get(context)
+                                  .activeBannersModel
+                                  ?.data
+                                  ?.length ??
+                              0,
+                          color: Colors.green,
+                        ),
+                        _buildStatCard(
+                          context,
+                          title: S.of(context).categories,
+                          count: AppCubit.get(context)
+                                  .categoryModel
+                                  ?.data
+                                  ?.length ??
+                              0,
+                          color: Colors.orange,
+                        ),
+                        _buildStatCard(
+                          context,
+                          title: S.of(context).products,
+                          count: AppCubit.get(context)
+                                  .productModel
+                                  ?.data
+                                  ?.length ??
+                              0,
+                          color: Colors.purple,
+                        ),
+                        _buildStatCard(
+                          context,
+                          title: S.of(context).users,
+                          count: AppCubit.get(context)
+                                  .allUsersModel
+                                  ?.data
+                                  ?.length ??
+                              0,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
+                  ),
+
                   // Banners
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -197,6 +259,44 @@ class AdminCategoriesPage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildStatCard(
+    BuildContext context, {
+    required String title,
+    required int count,
+    required Color color,
+  }) {
+    return Container(
+      width: MediaQuery.of(context).size.width / 2.2,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.4)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyles.productTitle(context).copyWith(
+              color: color,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            count.toString(),
+            style: TextStyles.headline2(context).copyWith(
+              fontSize: 24,
+              color: color,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -33,6 +33,7 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
   final TextEditingController descController = TextEditingController();
   final TextEditingController startDateController = TextEditingController();
   final TextEditingController endDateController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool hasTextFieldChanged = false;
 
   @override
@@ -134,47 +135,54 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(8.0),
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Main image
-                BannerDetailsMainImageRowWidget(cubit: cubit, banner: banner),
-                const SizedBox(height: 12),
-                // Banner images
-                if (bannerImages.isNotEmpty)
-                  BannerDetailsBannerImaegsWidget(
-                      banner: banner, bannerImages: bannerImages),
-                // Add images
-                BannerDetailsAddImagesWidget(cubit: cubit, banner: banner),
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Main image
+                  BannerDetailsMainImageRowWidget(cubit: cubit, banner: banner),
+                  const SizedBox(height: 12),
+                  // Banner images
+                  if (bannerImages.isNotEmpty)
+                    BannerDetailsBannerImaegsWidget(
+                        banner: banner, bannerImages: bannerImages),
+                  // Add images
+                  BannerDetailsAddImagesWidget(cubit: cubit, banner: banner),
 
-                const SizedBox(height: 12.0),
-                // Title
-                BannerDetailsTitleTextField(titleController: titleController),
-                const SizedBox(height: 12.0),
-                // Start Date
-                BannerDetailsStartDateTextField(
-                    startDateController: startDateController),
-                const SizedBox(height: 12.0),
-                // End Date
-                BannerDetailsEndDateTextField(
-                    endDateController: endDateController),
-                const SizedBox(height: 12.0),
-                // Description
-                BannerDetailsDescriptionTextField(
-                    descController: descController),
-                if (hasTextFieldChanged ||
-                    cubit.bannerDetailsImagesToUpload.isNotEmpty ||
-                    cubit.bannerDetailsImagesToDelete.isNotEmpty ||
-                    cubit.mainBannerImageToUpload != null)
-                  BannerDetailsSaveAndDiscardButtonsWidget(
-                    cubit: cubit,
-                    widget: widget,
+                  const SizedBox(height: 12.0),
+                  // Title
+                  BannerDetailsTitleTextField(
                     titleController: titleController,
-                    descController: descController,
-                    startDateController: startDateController,
-                    endDateController: endDateController,
+                    formKey: formKey,
                   ),
-              ],
+                  const SizedBox(height: 12.0),
+                  // Start Date
+                  BannerDetailsStartDateTextField(
+                      startDateController: startDateController),
+                  const SizedBox(height: 12.0),
+                  // End Date
+                  BannerDetailsEndDateTextField(
+                      endDateController: endDateController),
+                  const SizedBox(height: 12.0),
+                  // Description
+                  BannerDetailsDescriptionTextField(
+                      descController: descController),
+                  if (hasTextFieldChanged ||
+                      cubit.bannerDetailsImagesToUpload.isNotEmpty ||
+                      cubit.bannerDetailsImagesToDelete.isNotEmpty ||
+                      cubit.mainBannerImageToUpload != null)
+                    BannerDetailsSaveAndDiscardButtonsWidget(
+                      cubit: cubit,
+                      widget: widget,
+                      titleController: titleController,
+                      descController: descController,
+                      startDateController: startDateController,
+                      endDateController: endDateController,
+                      formKey: formKey,
+                    ),
+                ],
+              ),
             ),
           );
         },

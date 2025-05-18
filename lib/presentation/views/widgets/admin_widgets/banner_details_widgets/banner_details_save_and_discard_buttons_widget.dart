@@ -19,6 +19,7 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
     required this.descController,
     required this.startDateController,
     required this.endDateController,
+    required this.formKey,
   });
 
   final AppCubit cubit;
@@ -27,6 +28,7 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
   final TextEditingController descController;
   final TextEditingController startDateController;
   final TextEditingController endDateController;
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,9 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                         final parsedStartDate =
                             DateTime.tryParse(fixedStart)?.toLocal();
 
+                        final parsedEndDate =
+                            DateTime.tryParse(fixedEnd)?.toLocal();
+
                         if (parsedStartDate == null) {
                           Fluttertoast.showToast(
                             msg: "Invalid start date format",
@@ -74,24 +79,46 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                         }
 
                         final nowLocal = DateTime.now(); // local time
-                        print(nowLocal);
+                        print("Time now: $nowLocal");
 
-                        print(fixedStart);
-                        print(fixedEnd);
-                        cubit
-                            .updateBanner(
-                          id: widget.bannerId,
-                          title: titleController.text,
-                          description: descController.text,
-                          startDate: fixedStart,
-                          endDate: fixedEnd,
-                          mainImage: cubit.mainBannerImageToUpload,
-                          imageFiles: cubit.bannerDetailsImagesToUpload,
-                          imagesToDelete: cubit.bannerDetailsImagesToDelete,
-                        )
-                            .then((_) {
-                          cubit.getBannerDetails(id: widget.bannerId);
-                        });
+                        print("start Time: $fixedStart");
+                        print("end Time: $fixedEnd");
+                        if (parsedStartDate.isBefore(nowLocal)) {
+                          Fluttertoast.showToast(
+                            msg:
+                                S.of(context).bannerStartDateMustNotBeBeforeNow,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
+                          return;
+                        }
+
+                        if (!parsedStartDate.isBefore(parsedEndDate!)) {
+                          Fluttertoast.showToast(
+                            msg: S
+                                .of(context)
+                                .bannerStartDateMustBeBeforeEndDate,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
+                          return;
+                        }
+                        if (formKey.currentState!.validate()) {
+                          cubit
+                              .updateBanner(
+                            id: widget.bannerId,
+                            title: titleController.text,
+                            description: descController.text,
+                            startDate: fixedStart,
+                            endDate: fixedEnd,
+                            mainImage: cubit.mainBannerImageToUpload,
+                            imageFiles: cubit.bannerDetailsImagesToUpload,
+                            imagesToDelete: cubit.bannerDetailsImagesToDelete,
+                          )
+                              .then((_) {
+                            cubit.getBannerDetails(id: widget.bannerId);
+                          });
+                        }
                       },
                     ),
               // Discard

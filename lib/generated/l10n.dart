@@ -1925,10 +1925,10 @@ class S {
     );
   }
 
-  /// `Are you sure you want to delete this category?,`
+  /// `Are you sure you want to delete this category? All products in this category will also be deleted,`
   String get categoryDeletionText {
     return Intl.message(
-      'Are you sure you want to delete this category?,',
+      'Are you sure you want to delete this category? All products in this category will also be deleted,',
       name: 'categoryDeletionText',
       desc: '',
       args: [],
@@ -2835,6 +2835,101 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Edit Users`
+  String get editUsers {
+    return Intl.message('Edit Users', name: 'editUsers', desc: '', args: []);
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message('Email', name: 'email', desc: '', args: []);
+  }
+
+  /// `Please enter an email`
+  String get pleaseEnterEmail {
+    return Intl.message(
+      'Please enter an email',
+      name: 'pleaseEnterEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message('Success', name: 'success', desc: '', args: []);
+  }
+
+  /// `No users found`
+  String get noUsersFound {
+    return Intl.message(
+      'No users found',
+      name: 'noUsersFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Users`
+  String get allUsers {
+    return Intl.message('All Users', name: 'allUsers', desc: '', args: []);
+  }
+
+  /// `Promote to Admin`
+  String get promoteToAdmin {
+    return Intl.message(
+      'Promote to Admin',
+      name: 'promoteToAdmin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Demote to User`
+  String get demoteToUser {
+    return Intl.message(
+      'Demote to User',
+      name: 'demoteToUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message('Error', name: 'error', desc: '', args: []);
+  }
+
+  /// `Banners`
+  String get banners {
+    return Intl.message('Banners', name: 'banners', desc: '', args: []);
+  }
+
+  /// `Active Banners`
+  String get activeBanners {
+    return Intl.message(
+      'Active Banners',
+      name: 'activeBanners',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get categories {
+    return Intl.message('Categories', name: 'categories', desc: '', args: []);
+  }
+
+  /// `Products`
+  String get products {
+    return Intl.message('Products', name: 'products', desc: '', args: []);
+  }
+
+  /// `Users`
+  String get users {
+    return Intl.message('Users', name: 'users', desc: '', args: []);
   }
 }
 

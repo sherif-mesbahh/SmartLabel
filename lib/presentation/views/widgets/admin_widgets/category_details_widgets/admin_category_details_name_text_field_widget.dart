@@ -7,13 +7,23 @@ class AdminCategoryDetailsNameTextFieldWidget extends StatelessWidget {
   const AdminCategoryDetailsNameTextFieldWidget({
     super.key,
     required this.nameController,
+    required this.formKey,
   });
 
   final TextEditingController nameController;
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return S.of(context).categoryDialogNameValidation;
+        } else if (value.length < 3) {
+          return S.of(context).categoryDialogNameLengthValidation;
+        }
+        return null;
+      },
       keyboardType: TextInputType.text,
       controller: nameController,
       decoration: InputDecoration(

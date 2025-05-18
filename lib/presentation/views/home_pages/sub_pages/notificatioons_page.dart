@@ -98,12 +98,12 @@ class _NotificatioonsPageState extends State<NotificatioonsPage> {
               itemBuilder: (context, index) {
                 final n = notifications[index];
                 return NotificationItem(
-                  id: n.id,
-                  message: n.message,
-                  createdAt: n.createdAt,
-                  image: n.image,
-                  isRead: n.isRead // ✅ image support if provided
-                );
+                    id: n.id,
+                    message: n.message,
+                    createdAt: n.createdAt,
+                    image: n.image,
+                    isRead: n.isRead // ✅ image support if provided
+                    );
               },
             ),
           );

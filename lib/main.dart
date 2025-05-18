@@ -37,9 +37,11 @@ void main() async {
       builder: (context) => MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => appCubit
-                ..getProducts()
-                ..getCategories()),
+            create: (context) => appCubit
+              ..getProducts()
+              ..getCategories()
+              ..getNotifications(),
+          ),
         ],
         child: MyApp(showOnBoarding: !isOnBoardingFinished),
       ),

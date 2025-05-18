@@ -34,6 +34,7 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController discountController = TextEditingController();
   final TextEditingController descController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool hasTextFieldChanged = false;
   @override
   void initState() {
@@ -155,129 +156,165 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                 );
               }
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Main image
-                  ProductDetailsMainImageWidget(cubit: widget.cubit),
-                  SizedBox(height: 10),
-                  // Product images
-                  if (productImages.isNotEmpty)
-                    ProductDetailsImagesWidget(
-                        product: product, productImages: productImages),
-                  SizedBox(height: 10),
-                  // Add product images
-                  ProductDetailsAddImagesWidget(
-                      cubit: widget.cubit, product: product),
-                  // Name
-                  TextField(
-                    keyboardType: TextInputType.text,
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).editProductName,
-                      labelStyle: TextStyles.smallText(context),
-                      hintStyle: TextStyles.smallText(context),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
+              return Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Main image
+                    ProductDetailsMainImageWidget(cubit: widget.cubit),
+                    SizedBox(height: 10),
+                    // Product images
+                    if (productImages.isNotEmpty)
+                      ProductDetailsImagesWidget(
+                          product: product, productImages: productImages),
+                    SizedBox(height: 10),
+                    // Add product images
+                    ProductDetailsAddImagesWidget(
+                        cubit: widget.cubit, product: product),
+                    // Name
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return S.of(context).editProductNameValidation;
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text,
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        labelText: S.of(context).editProductName,
+                        labelStyle: TextStyles.smallText(context),
+                        hintStyle: TextStyles.smallText(context),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                  // price
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    controller: priceController,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).editProductPrice,
-                      labelStyle: TextStyles.smallText(context),
-                      hintStyle: TextStyles.smallText(context),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
+                    // price
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return S.of(context).editProductPriceValidation;
+                        }
+                        if (double.tryParse(value) == null ||
+                            double.tryParse(value)! <= 0) {
+                          return S
+                              .of(context)
+                              .editProductPricePositiveValidation;
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.number,
+                      controller: priceController,
+                      decoration: InputDecoration(
+                        labelText: S.of(context).editProductPrice,
+                        labelStyle: TextStyles.smallText(context),
+                        hintStyle: TextStyles.smallText(context),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                  // Discount
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    controller: discountController,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).editProductDiscount,
-                      labelStyle: TextStyles.smallText(context),
-                      hintStyle: TextStyles.smallText(context),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
+                    // Discount
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return S.of(context).editProductDiscountValidation;
+                        }
+                        if (double.tryParse(value) == null ||
+                            double.tryParse(value)! < 0 ||
+                            double.tryParse(value)! > 100 ||
+                            double.tryParse(value)! % 1 != 0) {
+                          return S
+                              .of(context)
+                              .editProductDiscountNumberValidation;
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.number,
+                      controller: discountController,
+                      decoration: InputDecoration(
+                        labelText: S.of(context).editProductDiscount,
+                        labelStyle: TextStyles.smallText(context),
+                        hintStyle: TextStyles.smallText(context),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                  // Description
-                  TextField(
-                    keyboardType: TextInputType.text,
-                    controller: descController,
-                    maxLines: 3,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).editProductDescription,
-                      labelStyle: TextStyles.smallText(context),
-                      hintStyle: TextStyles.smallText(context),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: primaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: greyColor),
+                    // Description
+                    TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: descController,
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        labelText: S.of(context).editProductDescription,
+                        labelStyle: TextStyles.smallText(context),
+                        hintStyle: TextStyles.smallText(context),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: greyColor),
+                        ),
                       ),
                     ),
-                  ),
-                  if (hasTextFieldChanged ||
-                      cubit.productImagesToDelete.isNotEmpty ||
-                      cubit.productImagesToUpload.isNotEmpty ||
-                      cubit.mainproductImageToUpload != null)
-                    ProductDetailsSaveAndDiscardButtonsWidget(
-                      cubit: cubit,
-                      categoryId: widget.categoryId,
-                      productId: widget.productId,
-                      nameController: nameController,
-                      descController: descController,
-                      discountController: discountController,
-                      priceController: priceController,
-                    ),
-                ],
+                    if (hasTextFieldChanged ||
+                        cubit.productImagesToDelete.isNotEmpty ||
+                        cubit.productImagesToUpload.isNotEmpty ||
+                        cubit.mainproductImageToUpload != null)
+                      ProductDetailsSaveAndDiscardButtonsWidget(
+                        cubit: cubit,
+                        categoryId: widget.categoryId,
+                        productId: widget.productId,
+                        nameController: nameController,
+                        descController: descController,
+                        discountController: discountController,
+                        priceController: priceController,
+                        formKey: formKey,
+                      ),
+                  ],
+                ),
               );
             },
           ),

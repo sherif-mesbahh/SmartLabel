@@ -14,7 +14,6 @@ class TextStyles {
         color: Theme.of(context).colorScheme.onSurface,
       );
 
-
   static TextStyle productTitle(BuildContext context) => GoogleFonts.poppins(
         fontSize: 14,
         fontWeight: FontWeight.w600,

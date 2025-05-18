@@ -30,6 +30,7 @@ class AdminCategoryDetailsPage extends StatefulWidget {
 
 class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
   final TextEditingController nameController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool hasTextFieldChanged = false;
 
   @override
@@ -129,51 +130,57 @@ class _AdminCategoryDetailsPageState extends State<AdminCategoryDetailsPage> {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(8.0),
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10),
-                // Category Name
-                AdminCategoryDetailsNameTextFieldWidget(
-                    nameController: nameController),
-                SizedBox(height: 10),
-
-                // Category Image
-                AdminCategoryDetailsEditImageWidget(
-                  cubit: cubit,
-                  category: category,
-                ),
-                // Save and Discard
-                SizedBox(height: 10),
-                if (hasTextFieldChanged ||
-                    cubit.mainCategoryImageToUpload != null)
-                  CategoryDetailsSaveAndDiscardButtonWidget(
-                    cubit: cubit,
-                    widget: widget,
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  // Category Name
+                  AdminCategoryDetailsNameTextFieldWidget(
                     nameController: nameController,
+                    formKey: formKey,
                   ),
-                SizedBox(height: 10),
+                  SizedBox(height: 10),
 
-                // Category Products
-                Text(
-                  '${widget.cubit.categoryProductsModel!.data?.name ?? ''} ${S.of(context).categoryProductsTitle}',
-                  style: TextStyles.headline2(context),
-                ),
-                SizedBox(height: 10),
-                products != null && products.isNotEmpty
-                    ? AdminCategoryDetailsProductsGridViewWidget(
-                        cubit: cubit,
-                        categoryId: category.id!,
-                      )
-                    : Center(
-                        child: Text(
-                          S.of(context).noProductsInThisCategory,
-                          style: TextStyles.productTitle(context).copyWith(
-                            color: Colors.red,
+                  // Category Image
+                  AdminCategoryDetailsEditImageWidget(
+                    cubit: cubit,
+                    category: category,
+                  ),
+                  // Save and Discard
+                  SizedBox(height: 10),
+                  if (hasTextFieldChanged ||
+                      cubit.mainCategoryImageToUpload != null)
+                    CategoryDetailsSaveAndDiscardButtonWidget(
+                      cubit: cubit,
+                      widget: widget,
+                      nameController: nameController,
+                      formKey: formKey,
+                    ),
+                  SizedBox(height: 10),
+
+                  // Category Products
+                  Text(
+                    '${widget.cubit.categoryProductsModel!.data?.name ?? ''} ${S.of(context).categoryProductsTitle}',
+                    style: TextStyles.headline2(context),
+                  ),
+                  SizedBox(height: 10),
+                  products != null && products.isNotEmpty
+                      ? AdminCategoryDetailsProductsGridViewWidget(
+                          cubit: cubit,
+                          categoryId: category.id!,
+                        )
+                      : Center(
+                          child: Text(
+                            S.of(context).noProductsInThisCategory,
+                            style: TextStyles.productTitle(context).copyWith(
+                              color: Colors.red,
+                            ),
                           ),
                         ),
-                      ),
-              ],
+                ],
+              ),
             ),
           );
         },

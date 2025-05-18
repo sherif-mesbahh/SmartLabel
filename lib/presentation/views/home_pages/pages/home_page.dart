@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
             state is GetActiveBannersLoadingState;
 
         if (isLoading) {
-          return const HomePageShimmer(); 
+          return const HomePageShimmer();
         }
         return RefreshIndicator(
           onRefresh: () async {

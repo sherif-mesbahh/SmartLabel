@@ -34,6 +34,7 @@ class AdminPanelWidget extends StatelessWidget {
                   cubit.isAdminPanelLoading = true;
                   await cubit.getBanners();
                   await cubit.getCategories();
+                  await cubit.getAllUsers();
                   cubit.isAdminPanelLoading = false;
 
                   if (navigator.mounted) {

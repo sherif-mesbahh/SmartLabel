@@ -239,8 +239,37 @@ class _SearchPageState extends State<SearchPage> {
                       }
                       return null;
                     },
+                    onChanged: (value) async {
+                      if (selectedType == 'Products') {
+                        await cubit.getProductSearch(
+                          name: searchController.text,
+                          sortType: selectedSort ==
+                                  S.of(context).searchSortProductsByDefault
+                              ? 'id'
+                              : selectedSort ==
+                                      S.of(context).searchSortProductsByPrice
+                                  ? 'new-price'
+                                  : 'name',
+                          orderType:
+                              selectedOrder == S.of(context).searchOrderByAsc
+                                  ? 'asc'
+                                  : 'desc',
+                        );
+                      } else if (selectedType == 'Categories') {
+                        await cubit.getCategorySearch(
+                          name: searchController.text,
+                          sortType: selectedSort ==
+                                  S.of(context).searchSortCategoriesByDefault
+                              ? 'id'
+                              : 'name',
+                          orderType:
+                              selectedOrder == S.of(context).searchOrderByAsc
+                                  ? 'asc'
+                                  : 'desc',
+                        );
+                      }
+                    },
                     onFieldSubmitted: (value) async {
-                      // No more dialog — rely on shimmer via Bloc state
                       if (selectedType == 'Products') {
                         await cubit.getProductSearch(
                           name: searchController.text,

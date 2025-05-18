@@ -383,3 +383,13 @@ class SeenNotificationErrorState extends AppStates {
 
   SeenNotificationErrorState(this.error);
 }
+
+class GetAllUsersLoadingState extends AppStates {}
+
+class GetAllUsersSuccessState extends AppStates {}
+
+class GetAllUsersErrorState extends AppStates {
+  String error;
+
+  GetAllUsersErrorState(this.error);
+}

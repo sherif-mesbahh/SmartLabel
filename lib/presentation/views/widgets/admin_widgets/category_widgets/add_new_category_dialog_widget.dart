@@ -20,6 +20,7 @@ class AddNewCategoryDialog extends StatefulWidget {
 
 class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
   final nameController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   final picker = ImagePicker();
   File? categoryImage;
 
@@ -67,48 +68,59 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
               style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  keyboardType: TextInputType.name,
-                  controller: nameController,
-                  decoration: InputDecoration(
-                    labelText: S.of(context).categoryDialogCategoryName,
-                    labelStyle: TextStyles.smallText(context),
-                    hintStyle: TextStyles.smallText(context),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: greyColor),
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return S.of(context).categoryDialogNameValidation;
+                      } else if (value.length < 3) {
+                        return S.of(context).categoryDialogNameLengthValidation;
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.name,
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      labelText: S.of(context).categoryDialogCategoryName,
+                      labelStyle: TextStyles.smallText(context),
+                      hintStyle: TextStyles.smallText(context),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: greyColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: greyColor),
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: primaryColor),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: pickCategoryImage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: greyColor),
+                    child: Text(
+                      S.of(context).categoryDialogPickImage,
+                      style:
+                          TextStyles.buttonText(context).copyWith(fontSize: 12),
                     ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: pickCategoryImage,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                  ),
-                  child: Text(
-                    S.of(context).categoryDialogPickImage,
-                    style:
-                        TextStyles.buttonText(context).copyWith(fontSize: 12),
-                  ),
-                ),
-                if (categoryImage != null)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Image.file(categoryImage!, height: 100),
-                  ),
-              ],
+                  if (categoryImage != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Image.file(categoryImage!, height: 100),
+                    ),
+                ],
+              ),
             ),
           ),
           actions: [
@@ -127,32 +139,6 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                     child: Text(S.of(context).categoryDialogApplyButton,
                         style: TextStyles.productTitle(context)),
                     onPressed: () {
-                      if (nameController.text.isEmpty) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).categoryDialogNameValidation,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        return;
-                      }
-
-                      // 2. Optional: check name length
-                      if (nameController.text.length < 3) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).categoryDialogNameLengthValidation,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        return;
-                      }
-
-                      // 3. Check if image is picked
                       if (categoryImage == null) {
                         Fluttertoast.showToast(
                           msg: S.of(context).categoryDialogImageValidation,
@@ -164,10 +150,12 @@ class _AddCategoryDialogWidgetState extends State<AddNewCategoryDialog> {
                         );
                         return;
                       }
-                      AppCubit.get(context).addCategory(
-                        name: nameController.text,
-                        image: categoryImage!,
-                      );
+                      if (formKey.currentState!.validate()) {
+                        AppCubit.get(context).addCategory(
+                          name: nameController.text,
+                          image: categoryImage!,
+                        );
+                      }
                     },
                   ),
           ],

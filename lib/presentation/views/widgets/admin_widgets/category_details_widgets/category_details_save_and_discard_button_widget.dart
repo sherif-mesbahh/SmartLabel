@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -16,11 +15,13 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
     required this.cubit,
     required this.widget,
     required this.nameController,
+    required this.formKey,
   });
 
   final AppCubit cubit;
   final AdminCategoryDetailsPage widget;
   final TextEditingController nameController;
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
                             .copyWith(color: primaryColor),
                       ),
                       onTap: () {
-                        if (nameController.text.length >= 3) {
+                        if (formKey.currentState!.validate()) {
                           cubit
                               .updateCategory(
                             id: widget.categoryId,
@@ -59,16 +60,6 @@ class CategoryDetailsSaveAndDiscardButtonWidget extends StatelessWidget {
                               .then((_) {
                             cubit.getCategoryProducts(id: widget.categoryId);
                           });
-                        } else {
-                          Fluttertoast.showToast(
-                            msg: S.of(context).editCategoryNameValidation,
-                            backgroundColor: Colors.red,
-                            textColor: secondaryColor,
-                            gravity: ToastGravity.BOTTOM,
-                            toastLength: Toast.LENGTH_LONG,
-                            timeInSecForIosWeb: 1,
-                            fontSize: 16,
-                          );
                         }
                       },
                     ),

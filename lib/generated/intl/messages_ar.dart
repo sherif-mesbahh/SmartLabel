@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم حذف الحساب بنجاح",
     ),
+    "activeBanners": MessageLookupByLibrary.simpleMessage("البانرات النشطة"),
     "addBannerButton": MessageLookupByLibrary.simpleMessage("إضافة بانر"),
     "addBannerDialogBannerApply": MessageLookupByLibrary.simpleMessage("تطبيق"),
     "addBannerDialogBannerCancel": MessageLookupByLibrary.simpleMessage(
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "adminPanel": MessageLookupByLibrary.simpleMessage("لوحة الإدارة"),
     "allBanners": MessageLookupByLibrary.simpleMessage("جميع البانرات"),
     "allCategories": MessageLookupByLibrary.simpleMessage("جميع الفئات"),
+    "allUsers": MessageLookupByLibrary.simpleMessage("جميع المستخدمين"),
     "areYouSureYouWantToDeleteThisBanner": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد حذف هذا البانر؟",
     ),
@@ -136,8 +138,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "bannerUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تحديث البانر بنجاح",
     ),
+    "banners": MessageLookupByLibrary.simpleMessage("البانرات"),
     "browseProducts": MessageLookupByLibrary.simpleMessage("تصفح المنتجات"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
     "categoriesAppBarr": MessageLookupByLibrary.simpleMessage("الفئات"),
     "categoryAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم اضافة الفئة بنجاح.",
@@ -153,7 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "categoryDeletionDeleteButton": MessageLookupByLibrary.simpleMessage("حذف"),
     "categoryDeletionText": MessageLookupByLibrary.simpleMessage(
-      "هل انت متاكد انك تريد حذف هذه الفئة؟",
+      "هل تريد حذف هذه الفئة؟ سيتم حذف جميع المنتجات الموجوده في هذه الفئة ايضا,",
     ),
     "categoryDialogApplyButton": MessageLookupByLibrary.simpleMessage("تطبيق"),
     "categoryDialogCancelButton": MessageLookupByLibrary.simpleMessage("اغلاق"),
@@ -188,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم ارسال الكود بنجاح، يرجى التحقق من بريدك الألكتروني",
     ),
     "deleteButton": MessageLookupByLibrary.simpleMessage("حذف"),
+    "demoteToUser": MessageLookupByLibrary.simpleMessage("إرجاع إلى مستخدم"),
     "editBannerAddImagesButton": MessageLookupByLibrary.simpleMessage(
       "إضافة صور",
     ),
@@ -295,11 +300,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "editProductSaveChangesButton": MessageLookupByLibrary.simpleMessage(
       "حفظ التغييرات",
     ),
+    "editUsers": MessageLookupByLibrary.simpleMessage("تعديل المستخدمين"),
     "editUsersButton": MessageLookupByLibrary.simpleMessage("تعديل المستخدمين"),
+    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "emailisnotconfirmedpleasecheckyouremail":
         MessageLookupByLibrary.simpleMessage(
           "البريد الألكتروني غير موثق، يرجى التحقق من بريدك الألكتروني",
         ),
+    "error": MessageLookupByLibrary.simpleMessage("خطأ"),
     "errorAddingBanner": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ أثناء إضافة البانر، يرجى المحاولة مرة أخرى.",
     ),
@@ -435,6 +443,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noProductsInThisCategory": MessageLookupByLibrary.simpleMessage(
       "لا يوجد منتجات في هذه الفئة.",
     ),
+    "noUsersFound": MessageLookupByLibrary.simpleMessage("لا يوجد مستخدمون"),
     "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
     "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تغيير كلمة المرور بنجاح",
@@ -459,6 +468,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "pickNewCategoryImageApply": MessageLookupByLibrary.simpleMessage("تطبيق"),
     "pickNewCategoryImageCancel": MessageLookupByLibrary.simpleMessage("اغلاق"),
+    "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال البريد الإلكتروني",
+    ),
     "pleaseLoginFirst": MessageLookupByLibrary.simpleMessage(
       "يرجى تسجيل الدخول اولا",
     ),
@@ -498,6 +510,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "productUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تحديث المنتج بنجاح.",
     ),
+    "products": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "productsAppBarTitle": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "profilePageAdminPanel": MessageLookupByLibrary.simpleMessage(
       "لوحة الإدارة",
@@ -593,6 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تحديث الملف الشخصي بنجاح",
     ),
+    "promoteToAdmin": MessageLookupByLibrary.simpleMessage("ترقية إلى مشرف"),
     "registrationsuccessfulWehavesentaconfirmationemailtoyouraddress":
         MessageLookupByLibrary.simpleMessage(
           "تم التسجيل بنجاح, لقد ارسلنا اليك رسالة تأكيد علي بريدك الالكتروني",
@@ -676,6 +690,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signupPasswordValidation": MessageLookupByLibrary.simpleMessage(
       "يرجى ادخال كلمة المرور",
     ),
+    "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
     "thereIsNoBanners": MessageLookupByLibrary.simpleMessage("لا يوجد بانرات"),
     "thereIsNoCategories": MessageLookupByLibrary.simpleMessage("لا يوجد فئات"),
     "unknownNotificationTybe": MessageLookupByLibrary.simpleMessage(
@@ -685,6 +700,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userEmailValidation": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال بريد المستخدم",
     ),
+    "users": MessageLookupByLibrary.simpleMessage("المستخدمين"),
     "youMustBeLoggedIn": MessageLookupByLibrary.simpleMessage(
       "يجب عليك تسجيل الدخول.",
     ),

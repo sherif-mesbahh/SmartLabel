@@ -22,6 +22,7 @@ class AddBannersDialogWidget extends StatefulWidget {
 class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
   final titleController = TextEditingController();
   final descController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   DateTime? startDate;
   DateTime? endDate;
@@ -149,155 +150,164 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
               style: TextStyles.headline2(context)),
           content: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 8),
-                // Title
-                TextField(
-                  keyboardType: TextInputType.text,
-                  controller: titleController,
-                  decoration: InputDecoration(
-                    labelText: S.of(context).addBannerDialogBannerTitle,
-                    labelStyle: TextStyles.smallText(context),
-                    hintStyle: TextStyles.smallText(context),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: greyColor),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: greyColor),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // Description
-                TextField(
-                  keyboardType: TextInputType.text,
-                  controller: descController,
-                  maxLines: 3,
-                  decoration: InputDecoration(
-                    labelText: S.of(context).addBannerDialogBannerDescription,
-                    labelStyle: TextStyles.smallText(context),
-                    hintStyle: TextStyles.smallText(context),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: greyColor),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: primaryColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: greyColor),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // Dates
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            S.of(context).addBannerDialogBannerStartDate,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          ElevatedButton(
-                            onPressed: pickStartDate,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                            ),
-                            child: Text(
-                              formatDateTimeForDisplay(startDate),
-                              style: TextStyles.buttonText(context).copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 8),
+                  // Title
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return S.of(context).bannerTitleValidation;
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.text,
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      labelText: S.of(context).addBannerDialogBannerTitle,
+                      labelStyle: TextStyles.smallText(context),
+                      hintStyle: TextStyles.smallText(context),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: greyColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: greyColor),
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            S.of(context).addBannerDialogBannerEndDate,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          ElevatedButton(
-                            onPressed: pickEndDate,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                            ),
-                            child: Text(
-                              formatDateTimeForDisplay(endDate),
-                              style: TextStyles.buttonText(context).copyWith(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
+                  ),
+                  const SizedBox(height: 10),
+                  // Description
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    controller: descController,
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      labelText: S.of(context).addBannerDialogBannerDescription,
+                      labelStyle: TextStyles.smallText(context),
+                      hintStyle: TextStyles.smallText(context),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: greyColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: greyColor),
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                // Main Image
-                ElevatedButton(
-                  onPressed: pickMainImage,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
                   ),
-                  child: Text(
-                    S.of(context).addBannerDialogBannerPickMainImage,
-                    style: TextStyles.buttonText(context).copyWith(
-                      fontSize: 12,
+                  const SizedBox(height: 10),
+                  // Dates
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              S.of(context).addBannerDialogBannerStartDate,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            ElevatedButton(
+                              onPressed: pickStartDate,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor,
+                              ),
+                              child: Text(
+                                formatDateTimeForDisplay(startDate),
+                                style: TextStyles.buttonText(context).copyWith(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              S.of(context).addBannerDialogBannerEndDate,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            ElevatedButton(
+                              onPressed: pickEndDate,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor,
+                              ),
+                              child: Text(
+                                formatDateTimeForDisplay(endDate),
+                                style: TextStyles.buttonText(context).copyWith(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  // Main Image
+                  ElevatedButton(
+                    onPressed: pickMainImage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                    ),
+                    child: Text(
+                      S.of(context).addBannerDialogBannerPickMainImage,
+                      style: TextStyles.buttonText(context).copyWith(
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                ),
-                if (mainImage != null)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Image.file(mainImage!, height: 100),
-                  ),
-                // Banner Images
-                ElevatedButton(
-                  onPressed: pickBannerImages,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                  ),
-                  child: Text(
-                    S.of(context).addBannerDialogBannerPickBannerImages,
-                    style: TextStyles.buttonText(context).copyWith(
-                      fontSize: 12,
+                  if (mainImage != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Image.file(mainImage!, height: 100),
+                    ),
+                  // Banner Images
+                  ElevatedButton(
+                    onPressed: pickBannerImages,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                    ),
+                    child: Text(
+                      S.of(context).addBannerDialogBannerPickBannerImages,
+                      style: TextStyles.buttonText(context).copyWith(
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                ),
-                if (bannerImages.isNotEmpty)
-                  Wrap(
-                    spacing: 8,
-                    children: bannerImages
-                        .map((img) => Image.file(File(img.path), height: 50))
-                        .toList(),
-                  ),
-              ],
+                  if (bannerImages.isNotEmpty)
+                    Wrap(
+                      spacing: 8,
+                      children: bannerImages
+                          .map((img) => Image.file(File(img.path), height: 50))
+                          .toList(),
+                    ),
+                ],
+              ),
             ),
           ),
           actions: [
@@ -344,19 +354,6 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                       child: Text(S.of(context).addBannerDialogBannerApply,
                           style: TextStyles.productTitle(context)),
                       onPressed: () {
-                        // 1. Validate title
-                        if (titleController.text.trim().isEmpty) {
-                          Fluttertoast.showToast(
-                            msg: S.of(context).bannerTitleValidation,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
-                          );
-                          return;
-                        }
-
                         // 2. Validate dates
                         if (startDate == null || endDate == null) {
                           Fluttertoast.showToast(
@@ -383,6 +380,19 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                           );
                           return;
                         }
+
+                        if (startDate!.isBefore(DateTime.now())) {
+                          Fluttertoast.showToast(
+                            msg:
+                                S.of(context).bannerStartDateMustNotBeBeforeNow,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
                         print(startDate);
                         print(DateTime.now());
 
@@ -398,29 +408,21 @@ class _AddBannersDialogWidgetState extends State<AddBannersDialogWidget> {
                           );
                           return;
                         }
-                        if (bannerImages.isEmpty) {
-                          Fluttertoast.showToast(
-                            msg: S.of(context).bannerBannerImagesValidation,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
-                          );
-                          return;
-                        }
+
                         final formattedStart =
                             formatDateTimeForRequest(startDate);
                         final formattedEnd = formatDateTimeForRequest(endDate);
                         print(formattedStart);
-                        AppCubit.get(context).addBanner(
-                          title: titleController.text,
-                          description: descController.text,
-                          startDate: formattedStart,
-                          endDate: formattedEnd,
-                          mainImage: mainImage!,
-                          imageFiles: bannerImages,
-                        );
+                        if (formKey.currentState!.validate()) {
+                          AppCubit.get(context).addBanner(
+                            title: titleController.text,
+                            description: descController.text,
+                            startDate: formattedStart,
+                            endDate: formattedEnd,
+                            mainImage: mainImage!,
+                            imageFiles: bannerImages,
+                          );
+                        }
                       },
                     ),
             ),

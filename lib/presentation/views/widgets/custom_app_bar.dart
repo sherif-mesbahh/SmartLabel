@@ -38,22 +38,46 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             size: 30,
           ),
         ),
-        BlocBuilder<AppCubit, AppStates>(
-          builder: (context, state) {
-            return IconButton(
+        Stack(
+          alignment: Alignment.topRight,
+          children: [
+            IconButton(
               onPressed: () {
                 pushNavigator(context, NotificatioonsPage(), slideBottomToTop);
-                AppCubit.get(context).notificatinIconPath =
-                    'assets/images/notification.png';
               },
               icon: Image(
                 height: 30,
                 image: AssetImage(
-                  AppCubit.get(context).notificatinIconPath,
+                  'assets/images/notification.png',
                 ),
               ),
-            );
-          },
+            ),
+            BlocBuilder<AppCubit, AppStates>(
+              builder: (context, state) {
+                final unread =
+                    context.watch<AppCubit>().unreadNotificationCount;
+
+                if (unread == 0) return const SizedBox.shrink();
+
+                return Positioned(
+                  top: 6,
+                  right: 6,
+                  child: CircleAvatar(
+                    radius: 8,
+                    backgroundColor: Colors.red,
+                    child: Text(
+                      '$unread',
+                      style: const TextStyle(
+                        fontSize: 10,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ],
     );

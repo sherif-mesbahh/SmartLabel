@@ -7,13 +7,22 @@ class BannerDetailsTitleTextField extends StatelessWidget {
   const BannerDetailsTitleTextField({
     super.key,
     required this.titleController,
+    required this.formKey,
   });
 
   final TextEditingController titleController;
 
+  final GlobalKey<FormState> formKey;
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return S.of(context).bannerTitleValidation;
+        }
+        return null;
+      },
       keyboardType: TextInputType.text,
       controller: titleController,
       decoration: InputDecoration(

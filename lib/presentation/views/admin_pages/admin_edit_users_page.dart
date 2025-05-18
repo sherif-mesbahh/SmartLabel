@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_states.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/login_widgets/custom_text_form_field_widget.dart';
-import 'package:smart_label_software_engineering/presentation/views/widgets/sign_widgets/custom_button_widget.dart';
 
 class AdminEditUsersPage extends StatefulWidget {
   const AdminEditUsersPage({super.key});
@@ -19,18 +18,66 @@ class AdminEditUsersPage extends StatefulWidget {
 
 class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
   final TextEditingController emailController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
-  void dispose() {
-    emailController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppCubit.get(context).getAllUsers();
+    });
+  }
+
+  Widget _buildShimmer() {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: 6,
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
+      itemBuilder: (context, index) => Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: ListTile(
+          isThreeLine: false,
+          title: Shimmer.fromColors(
+            baseColor: Colors.grey[800]!,
+            highlightColor: Colors.grey[500]!,
+            child: Container(
+              width: double.infinity,
+              height: 14,
+              color: Colors.white,
+            ),
+          ),
+          subtitle: Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Container(
+              width: double.infinity,
+              height: 12,
+              margin: const EdgeInsets.only(top: 8),
+              color: Colors.white,
+            ),
+          ),
+          trailing: Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Container(
+              width: 80,
+              height: 36,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(6),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: primaryColor,
         leading: IconButton(
@@ -47,191 +94,123 @@ class _AdminEditUsersPageState extends State<AdminEditUsersPage> {
           style: TextStyles.appBarTitle(context),
         ),
       ),
-      body: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                // Admin Icon
-                Icon(Icons.admin_panel_settings,
-                    size: 100, color: primaryColor),
-                const SizedBox(height: 16),
-                // Manage Admin Roles
-                Text(
-                  S.of(context).manageAdminRules,
-                  style: TextStyles.headline2(context).copyWith(fontSize: 24),
-                  textAlign: TextAlign.center,
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: BlocConsumer<AppCubit, AppStates>(
+          listener: (context, state) {
+            if (state is MakeAdminSuccessState ||
+                state is DeleteAdminSuccessState) {
+              AppCubit.get(context).getAllUsers();
+              Fluttertoast.showToast(
+                msg: S.of(context).success,
+                backgroundColor: Colors.green,
+                textColor: secondaryColor,
+                gravity: ToastGravity.BOTTOM,
+                toastLength: Toast.LENGTH_LONG,
+                timeInSecForIosWeb: 1,
+                fontSize: 16,
+              );
+            }
+            if (state is MakeAdminErrorState ||
+                state is DeleteAdminErrorState) {
+              Fluttertoast.showToast(
+                msg: S.of(context).error,
+                backgroundColor: Colors.red,
+                textColor: secondaryColor,
+                gravity: ToastGravity.BOTTOM,
+                toastLength: Toast.LENGTH_LONG,
+                timeInSecForIosWeb: 1,
+                fontSize: 16,
+              );
+            }
+          },
+          builder: (context, state) {
+            final cubit = AppCubit.get(context);
+            final users = cubit.allUsersModel?.data ?? [];
 
-                const SizedBox(height: 8),
-                // Enter the user's email to add or remove admin access
-                Text(
-                  S.of(context).manageAdminText,
-                  style: TextStyles.cartItemTitle(context).copyWith(
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
+            if (state is GetAllUsersLoadingState) {
+              return _buildShimmer();
+            } else if (users.isEmpty) {
+              return Center(
+                child: Text(
+                  S.of(context).noUsersFound,
+                  style: TextStyles.headline1(context),
                 ),
-                const SizedBox(height: 30),
-                // Card
-                Card(
-                  elevation: 5,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  semanticContainer: true,
-                  shadowColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    side: BorderSide(
-                      color: primaryColor,
-                      width: 2,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        // User Email
-                        CustomTextFormFieldWidget(
-                          controller: emailController,
-                          hintText: 'example@yahoo.com',
-                          labelText: S.of(context).userEmailLabel,
-                          obscureText: false,
-                          suffixIconOnPressed: () {},
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return S.of(context).userEmailValidation;
-                            }
-                            return null;
-                          },
+              );
+            }
+
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(S.of(context).allUsers,
+                      style: TextStyles.headline1(context)),
+                  const SizedBox(height: 16),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: users.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 8),
+                    itemBuilder: (context, index) {
+                      final user = users[index];
+                      final fullName =
+                          '${user.firstName ?? ''} ${user.lastName ?? ''}';
+                      final roles = user.roles ?? [];
+                      final isAdmin =
+                          roles.contains('admin') || roles.contains('Admin');
+
+                      return Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        child: ListTile(
+                          isThreeLine: false,
+                          title: Text(
+                            fullName,
+                            style: TextStyles.smallText(context),
+                          ),
+                          subtitle: Text(
+                            user.email ?? '',
+                            style: TextStyles.smallText(context),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          trailing: SizedBox(
+                            height: 36,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    isAdmin ? Colors.red : primaryColor,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
+                                minimumSize: Size.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: () {
+                                if (isAdmin) {
+                                  cubit.deleteAdmin(email: user.email!);
+                                } else {
+                                  cubit.makeAdmin(email: user.email!);
+                                }
+                              },
+                              child: Text(
+                                isAdmin
+                                    ? S.of(context).demoteToUser
+                                    : S.of(context).promoteToAdmin,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
                         ),
-                        const SizedBox(height: 24),
-                        BlocConsumer<AppCubit, AppStates>(
-                          listener: (context, state) {
-                            if (state is MakeAdminSuccessState) {
-                              Fluttertoast.showToast(
-                                msg:
-                                    '${emailController.text} ${S.of(context).isAdminNow}',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 2,
-                                backgroundColor: Colors.green,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                              emailController.clear();
-                            }
-
-                            if (state is MakeAdminErrorState) {
-                              Fluttertoast.showToast(
-                                msg: state.error,
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 2,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                            }
-                            if (state is DeleteAdminSuccessState) {
-                              Fluttertoast.showToast(
-                                msg:
-                                    '${emailController.text} ${S.of(context).isNoLongerAdmin}',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 2,
-                                backgroundColor: Colors.green,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                              emailController.clear();
-                            }
-
-                            if (state is DeleteAdminErrorState) {
-                              Fluttertoast.showToast(
-                                msg: state.error,
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 2,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                            }
-                          },
-                          builder: (context, state) {
-                            return Row(
-                              children: [
-                                // Make Admin
-                                Expanded(
-                                  child: CustomButtonWidget(
-                                    onTap: () {
-                                      if (formKey.currentState!.validate()) {
-                                        AppCubit.get(context).makeAdmin(
-                                          email: emailController.text,
-                                        );
-                                      }
-                                    },
-                                    color: primaryColor,
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: state is MakeAdminLoadingState
-                                          ? CircularProgressIndicator(
-                                              color: secondaryColor)
-                                          : FittedBox(
-                                              fit: BoxFit.scaleDown,
-                                              child: Text(
-                                                S.of(context).makeAdmin,
-                                                style: TextStyles.buttonText(
-                                                    context),
-                                              ),
-                                            ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                // Remove Admin
-                                Expanded(
-                                  child: CustomButtonWidget(
-                                    onTap: () {
-                                      if (formKey.currentState!.validate()) {
-                                        if (formKey.currentState!.validate()) {
-                                          AppCubit.get(context).deleteAdmin(
-                                            email: emailController.text,
-                                          );
-                                        }
-                                      }
-                                    },
-                                    color: Colors.red,
-                                    child: state is DeleteAdminLoadingState
-                                        ? CircularProgressIndicator(
-                                            color: secondaryColor)
-                                        : FittedBox(
-                                            fit: BoxFit.scaleDown,
-                                            child: Text(
-                                              S.of(context).removeAdmin,
-                                              style: TextStyles.buttonText(
-                                                  context),
-                                            ),
-                                          ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

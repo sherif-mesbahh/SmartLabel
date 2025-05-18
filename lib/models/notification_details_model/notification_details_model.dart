@@ -23,7 +23,8 @@ class NotificationDetailsModel {
       errors: json['errors'] as dynamic,
       data: json['data'] == null
           ? null
-          : NotificationDetailsDataModel.fromJson(json['data'] as Map<String, dynamic>),
+          : NotificationDetailsDataModel.fromJson(
+              json['data'] as Map<String, dynamic>),
     );
   }
 

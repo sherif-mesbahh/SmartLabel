@@ -24,6 +24,7 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
   final priceController = TextEditingController();
   final discountController = TextEditingController();
   final descController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   File? mainImage;
   final picker = ImagePicker();
@@ -85,75 +86,94 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
             physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Product Name
-                  _buildTextField(
-                    controller: nameController,
-                    label: S.of(context).addProductDialogName,
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(height: 10),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Product Name
+                    _buildTextField(
+                      controller: nameController,
+                      label: S.of(context).addProductDialogName,
+                      keyboardType: TextInputType.text,
+                      formKey: formKey,
+                      validationMessage: S.of(context).addProductNameValidation,
+                    ),
+                    const SizedBox(height: 10),
 
-                  // Price
-                  _buildTextField(
+                    // Price
+                    _buildTextField(
                       controller: priceController,
                       label: S.of(context).addProductDialogPrice,
-                      keyboardType: TextInputType.number),
-                  const SizedBox(height: 10),
+                      keyboardType: TextInputType.number,
+                      formKey: formKey,
+                      validationMessage:
+                          S.of(context).addProductPriceValidation,
+                      price: true,
+                    ),
+                    const SizedBox(height: 10),
 
-                  // Discount
-                  _buildTextField(
+                    // Discount
+                    _buildTextField(
                       controller: discountController,
                       label: S.of(context).addProductDialogDiscount,
-                      keyboardType: TextInputType.number),
-                  const SizedBox(height: 10),
-
-                  // Description
-                  _buildTextField(
-                    controller: descController,
-                    label: S.of(context).addProductDialogDescription,
-                    maxLines: 3,
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(height: 10),
-
-                  // Main Image
-                  ElevatedButton(
-                    onPressed: pickMainImage,
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: primaryColor),
-                    child: Text(S.of(context).addProductDialogPickImageButton,
-                        style: TextStyles.buttonText(context)
-                            .copyWith(fontSize: 12)),
-                  ),
-                  if (mainImage != null)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Image.file(mainImage!, height: 100),
+                      keyboardType: TextInputType.number,
+                      formKey: formKey,
+                      validationMessage:
+                          S.of(context).addProductDiscountValidation,
+                      discount: true,
                     ),
-                  ElevatedButton(
-                    onPressed: pickProductImages,
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: primaryColor),
-                    child: Text(S.of(context).addProductDialogPickImagesButton,
-                        style: TextStyles.buttonText(context)
-                            .copyWith(fontSize: 12)),
-                  ),
-                  if (productImages.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: productImages
-                            .map(
-                                (img) => Image.file(File(img.path), height: 50))
-                            .toList(),
+                    const SizedBox(height: 10),
+
+                    // Description
+                    _buildTextField(
+                      controller: descController,
+                      label: S.of(context).addProductDialogDescription,
+                      maxLines: 3,
+                      keyboardType: TextInputType.text,
+                      formKey: formKey,
+                      validationMessage: "",
+                      validation: false,
+                    ),
+                    const SizedBox(height: 10),
+
+                    // Main Image
+                    ElevatedButton(
+                      onPressed: pickMainImage,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryColor),
+                      child: Text(S.of(context).addProductDialogPickImageButton,
+                          style: TextStyles.buttonText(context)
+                              .copyWith(fontSize: 12)),
+                    ),
+                    if (mainImage != null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Image.file(mainImage!, height: 100),
                       ),
+                    ElevatedButton(
+                      onPressed: pickProductImages,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryColor),
+                      child: Text(
+                          S.of(context).addProductDialogPickImagesButton,
+                          style: TextStyles.buttonText(context)
+                              .copyWith(fontSize: 12)),
                     ),
-                ],
+                    if (productImages.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: productImages
+                              .map((img) =>
+                                  Image.file(File(img.path), height: 50))
+                              .toList(),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -173,96 +193,29 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
                     child: Text(S.of(context).addProductDialogAddButton,
                         style: TextStyles.productTitle(context)),
                     onPressed: () {
-                      // 1. Check if name is empty
-                      if (nameController.text.isEmpty) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).addProductNameValidation,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
+                      if (formKey.currentState!.validate()) {
+                        // 4. Check if main image is null
+                        if (mainImage == null) {
+                          Fluttertoast.showToast(
+                            msg: S.of(context).addProductMainImageValidation,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          return;
+                        }
+                        AppCubit.get(context).addProduct(
+                          categoryId: widget.categoryId,
+                          name: nameController.text,
+                          oldPrice: priceController.text,
+                          discount: discountController.text,
+                          description: descController.text,
+                          mainImage: mainImage!,
+                          imageFiles: productImages,
                         );
-                        return;
                       }
-
-                      // 2. Check if price is empty or invalid
-                      if (priceController.text.isEmpty) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).addProductPriceValidation,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        return;
-                      }
-
-                      final price = double.tryParse(priceController.text);
-                      if (price == null || price <= 0) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).addProductPricePositiveValidation,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        return;
-                      }
-
-                      // 3. Check if discount is empty or invalid
-                      if (discountController.text.isEmpty) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).addProductDiscountValidation,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        return;
-                      }
-
-                      final discount = double.tryParse(discountController.text);
-                      if (discount == null ||
-                          discount % 1 != 0 ||
-                          discount < 0 ||
-                          discount > 100) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).addProductDiscountValidNumber,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        return;
-                      }
-
-                      // 4. Check if main image is null
-                      if (mainImage == null) {
-                        Fluttertoast.showToast(
-                          msg: S.of(context).addProductMainImageValidation,
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        return;
-                      }
-
-                      AppCubit.get(context).addProduct(
-                        categoryId: widget.categoryId,
-                        name: nameController.text,
-                        oldPrice: priceController.text,
-                        discount: discountController.text,
-                        description: descController.text,
-                        mainImage: mainImage!,
-                        imageFiles: productImages,
-                      );
                     },
                   ),
           ],
@@ -274,10 +227,36 @@ class _AddProductDialogWidgetState extends State<AddProductDialogWidget> {
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
+    required GlobalKey<FormState> formKey,
+    bool validation = true,
+    bool price = false,
+    bool discount = false,
+    required String validationMessage,
     TextInputType keyboardType = TextInputType.text,
     int maxLines = 1,
   }) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return validation ? validationMessage : null;
+        }
+        if (price) {
+          final price = double.tryParse(value);
+          if (price == null || price <= 0) {
+            return S.of(context).addProductPricePositiveValidation;
+          }
+        }
+        if (discount) {
+          final discount = double.tryParse(value);
+          if (discount == null ||
+              discount % 1 != 0 ||
+              discount < 0 ||
+              discount > 100) {
+            return S.of(context).addProductDiscountValidNumber;
+          }
+        }
+        return null;
+      },
       controller: controller,
       maxLines: maxLines,
       keyboardType: keyboardType,

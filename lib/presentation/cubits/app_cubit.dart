@@ -18,6 +18,7 @@ import 'package:smart_label_software_engineering/core/utils/secure_token_storage
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
 import 'package:smart_label_software_engineering/models/acitve_banners_model/acitve_banners_model.dart';
 import 'package:smart_label_software_engineering/models/active_banner_details_model/active_banner_details_model.dart';
+import 'package:smart_label_software_engineering/models/all_users_model/all_users_model.dart';
 import 'package:smart_label_software_engineering/models/banner_details_model/banner_details_model.dart';
 import 'package:smart_label_software_engineering/models/banners_model/banners_model.dart';
 import 'package:smart_label_software_engineering/models/category_model/category_model.dart';
@@ -1420,7 +1421,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   late HubConnection hubConnection;
-  String notificatinIconPath = 'assets/images/notification.png';
   void startSignalR() async {
     final serverUrl = ApiEndpoints.notifications;
     hubConnection = HubConnectionBuilder()
@@ -1437,14 +1437,12 @@ class AppCubit extends Cubit<AppStates> {
         .build();
 
     hubConnection.on("ReceiveNotification", (messege) {
-      notificatinIconPath = 'assets/images/notification (1).png';
-
       final body = messege != null && messege.isNotEmpty
           ? messege[0].toString()
           : "You have a new message";
       NotificationHelper.showNotification(body);
       print("📢 Notification: $body");
-
+      getNotifications();
       emit(ReceiveNotificationState());
     });
 
@@ -1459,7 +1457,6 @@ class AppCubit extends Cubit<AppStates> {
   bool isAdminPanelLoading = false;
 
   NotificationsModel? notificationsModel;
-
   Future<void> getNotifications() async {
     emit(GetNotificationsLoadingState());
     try {
@@ -1528,5 +1525,31 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
+  int get unreadNotificationCount {
+    if (notificationsModel?.data == null) return 0;
+    return notificationsModel!.data!
+        .where((notification) => notification.isRead == false)
+        .length;
+  }
+
   GlobalKey<ScaffoldState>? scaffoldKey;
+
+  AllUsersModel? allUsersModel;
+  Future<void> getAllUsers() async {
+    emit(GetAllUsersLoadingState());
+    try {
+      final response = await ApiService().get(ApiEndpoints.allUsers);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        allUsersModel = AllUsersModel.fromJson(response.data);
+        emit(GetAllUsersSuccessState());
+      } else {
+        emit(GetAllUsersErrorState(
+            'Failed with status: ${response.statusCode}'));
+        log('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      emit(GetAllUsersErrorState(e.toString()));
+      log('Failed with status: ${e.toString()}');
+    }
+  }
 }
