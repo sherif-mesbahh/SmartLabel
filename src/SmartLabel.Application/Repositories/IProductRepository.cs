@@ -7,6 +7,7 @@ public interface IProductRepository
 	Task<IEnumerable<GetAllProductsDto?>> GetAllProductsAsync(string? userId);
 	Task<GetProductByIdDto?> GetProductByIdAsync(int id);
 	Task<GetProductByIdDto?> GetProductByIdUserAsync(int id, string? userId);
+	Task<int> GetCatIdByProductId(int id);
 	Task AddProductAsync(Product product);
 	Task UpdateProductAsync(int productId, Product product, string? mainImage);
 	Task DeleteProductAsync(int productId);

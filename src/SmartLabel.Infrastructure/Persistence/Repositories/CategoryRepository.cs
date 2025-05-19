@@ -43,7 +43,6 @@ public class CategoryRepository(AppDbContext context, IUserFavProductRepository 
 		                   p.OldPrice AS OldPrice, 
 		                   p.NewPrice AS NewPrice, 
 		                   p.MainImage AS MainImage,
-		                   p.CatId AS CategoryName,
 		                   p.Favorite AS Favorite
 		               FROM Categories c 
 		               LEFT JOIN Products p ON c.Id = p.CatId 

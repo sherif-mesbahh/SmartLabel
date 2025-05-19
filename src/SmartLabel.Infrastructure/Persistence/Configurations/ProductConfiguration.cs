@@ -13,11 +13,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 		builder.Property(x => x.OldPrice).HasPrecision(18, 2);
 		builder.Property(x => x.NewPrice).HasPrecision(18, 2);
 		builder.Property(x => x.Discount).HasColumnType("INT");
-		builder.Property(x => x.Favorite)
-			.HasDefaultValue(false);
-		builder.HasOne(x => x.Category)
-			.WithMany(x => x.Products)
-			.HasForeignKey(x => x.CatId);
+		builder.Property(x => x.Favorite).HasDefaultValue(false);
+		builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CatId);
 		builder.Property(x => x.MainImage).HasMaxLength(200);
 	}
 }

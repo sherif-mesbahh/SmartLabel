@@ -9,5 +9,6 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 	{
 		builder.HasKey(x => x.Id);
 		builder.Property(x => x.Message).HasMaxLength(1000);
+		builder.Property(x => x.Image).HasMaxLength(200);
 	}
 }

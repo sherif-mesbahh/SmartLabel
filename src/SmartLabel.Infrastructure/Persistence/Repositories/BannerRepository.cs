@@ -144,16 +144,16 @@ public class BannerRepository(AppDbContext context, ISqlConnectionFactory sqlCon
 		return await context.Banners.AnyAsync(x => x.Id == id);
 	}
 
-	public async Task<IEnumerable<int>> GetBannersToActiveAsync()
+	public async Task<IEnumerable<GetBannersToActiveDTO>> GetBannersToActiveAsync()
 	{
 		using var connection = sqlConnectionFactory.Create();
 		var sqlQuery = """
-		               SELECT Id
+		               SELECT Id, MainImage AS Image
 		               FROM Banners
 		               WHERE (DATEADD(hour, 1, GETDATE()) BETWEEN StartDate AND EndDate) AND (IsActive = @c)
 		               """;
-		var IDs = await connection.QueryAsync<int>(sqlQuery, new { c = 0 });
-		return IDs.ToList();
+		var banners = await connection.QueryAsync<GetBannersToActiveDTO>(sqlQuery, new { c = 0 });
+		return banners.ToList();
 	}
 	public async Task NotifiedBannersAsync(IEnumerable<int> ids)
 	{

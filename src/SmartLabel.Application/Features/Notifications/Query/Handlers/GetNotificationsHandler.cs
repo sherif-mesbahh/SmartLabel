@@ -9,9 +9,9 @@ using System.Security.Claims;
 
 namespace SmartLabel.Application.Features.Notifications.Query.Handlers;
 public class GetNotificationsHandler(INotificationRepository notificationRepository, IHttpContextAccessor httpContextAccessor) : ResponseHandler,
-	IRequestHandler<GetNotificationsCommand, Response<IEnumerable<GetNotificationsDto>>>
+	IRequestHandler<GetNotificationsQuery, Response<IEnumerable<GetNotificationsDto>>>
 {
-	public async Task<Response<IEnumerable<GetNotificationsDto>>> Handle(GetNotificationsCommand request, CancellationToken cancellationToken)
+	public async Task<Response<IEnumerable<GetNotificationsDto>>> Handle(GetNotificationsQuery request, CancellationToken cancellationToken)
 	{
 		var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
 		if (userId is null)

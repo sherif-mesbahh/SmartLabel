@@ -5,9 +5,9 @@ using SmartLabel.Application.Features.Notifications.Query.Results;
 using SmartLabel.Application.Repositories;
 
 namespace SmartLabel.Application.Features.Notifications.Query.Handlers;
-public class GetNotficationByIdHandler(INotificationRepository notificationRepository) : ResponseHandler, IRequestHandler<GetNotificationByIdCommand, Response<GetNotificationByIdDto>>
+public class GetNotficationByIdHandler(INotificationRepository notificationRepository) : ResponseHandler, IRequestHandler<GetNotificationByIdQuery, Response<GetNotificationByIdDto>>
 {
-	public async Task<Response<GetNotificationByIdDto>> Handle(GetNotificationByIdCommand request, CancellationToken cancellationToken)
+	public async Task<Response<GetNotificationByIdDto>> Handle(GetNotificationByIdQuery request, CancellationToken cancellationToken)
 	{
 		var notfication = await notificationRepository.GetNotificationByIdAsync(request.Id);
 		if (notfication == null)

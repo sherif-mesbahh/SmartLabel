@@ -68,11 +68,11 @@ public class UpdateProductHandler(IMapper mapper, IProductRepository productRepo
 
 					await notifierService.SendToGroup($"user-{userId.ToString()}", message);
 				}
-				await notificationRepository.AddNotificationToUsers(message, userIds, (int)EntityEnum.Product, product.Id);
+				await notificationRepository.AddNotificationToUsers(message, userIds, (int)EntityEnum.Product, product.Id, product.MainImage ?? mainImage);
 			}
 			await unitOfWork.SaveChangesAsync(cancellationToken);
 			var userID = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-			InvalidCache(userID, product.Id, product.CatId);
+			InvalidCache(userID!, product.Id, product.CatId);
 			transaction.Commit();
 			return NoContent<string>();
 		}

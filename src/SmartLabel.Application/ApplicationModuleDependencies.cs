@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SmartLabel.Application.Behaviors;
 using System.Reflection;
@@ -12,6 +13,7 @@ public static class ApplicationModuleDependencies
 		services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 		services.AddAutoMapper(Assembly.GetExecutingAssembly());
 		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+		services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenLifespan = TimeSpan.FromMinutes(20));
 		services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 		return services;
 	}

@@ -35,7 +35,7 @@ builder.Services.AddRateLimiter(RateLimiterOptions =>
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
-	options.SuppressModelStateInvalidFilter = true; // Disable the default validation behavior
+	options.SuppressModelStateInvalidFilter = true;
 });
 
 builder.Services.AddSwaggerGen(c =>
@@ -86,7 +86,7 @@ builder.Services.AddAuthorizationBuilder()
 var app = builder.Build();
 
 app.UseCors(x => x
-	.WithOrigins("http://localhost:5173", "http://localhost:5174", "https://smartlabell.netlify.app")
+	.WithOrigins("http://localhost:5173", "http://localhost:5174", "https://smartlabel-nine.vercel.app")
 	.AllowAnyMethod()
 	.AllowAnyHeader());
 

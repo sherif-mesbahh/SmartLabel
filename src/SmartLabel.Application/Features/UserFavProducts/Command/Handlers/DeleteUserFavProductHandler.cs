@@ -25,7 +25,8 @@ public class DeleteUserFavProductHandler(IUserFavProductRepository userFavProduc
 		try
 		{
 			await userFavProductRepository.DeleteFavProductAsync(userFavProduct.Id);
-			InvalidCached(userId, request.ProductId);
+			var catId = await productRepository.GetCatIdByProductId(request.ProductId);
+			InvalidCached(userId, request.ProductId, catId);
 			return NoContent<string>();
 		}
 		catch (Exception ex)
@@ -33,10 +34,11 @@ public class DeleteUserFavProductHandler(IUserFavProductRepository userFavProduc
 			return InternalServerError<string>([ex.Message], "Failed to remove favorite");
 		}
 	}
-	private void InvalidCached(string userId, int productId)
+	private void InvalidCached(string userId, int productId, int catId)
 	{
 		memoryCache.Remove($"ProductsUserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
 		memoryCache.Remove($"ProductsFav-{userId}");
+		memoryCache.Remove($"CategoryId-{catId}UserId-{userId}");
 	}
 }
