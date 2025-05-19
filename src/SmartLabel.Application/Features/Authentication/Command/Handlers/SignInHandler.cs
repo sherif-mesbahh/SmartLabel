@@ -19,8 +19,7 @@ public class SignInHandler(UserManager<ApplicationUser> userManager, IAuthentica
 		{
 			var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 			var url = emailService.PrepareUrl(user.Id, code);
-			await emailService.Send(user.Email, "Confirm your email - Required for Login",
-				$"Please confirm your account by <a href='{url}'>clicking here</a>.");
+			await emailService.Send(user.Email, "Confirm your email - Required for Login", url, "email-confirmed.html");
 			return BadRequest<GetTokensDto>(["Email is not confirmed"], "You must confirm your email to log in." +
 				" A new confirmation link has been sent to your email address.");
 		}

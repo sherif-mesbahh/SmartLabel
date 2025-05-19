@@ -31,13 +31,14 @@ public class AddUserFavProductHandler(IUserFavProductRepository userFavProductRe
 			ProductId = request.ProductId
 		};
 		await userFavProductRepository.AddFavProductAsync(userFavProduct);
-		InvalidCached(userId, request.ProductId);
+		InvalidCached(userId, request.ProductId, await productRepository.GetCatIdByProductId(request.ProductId));
 		return Created<string>($"Product {request.ProductId} added to favorites");
 	}
-	private void InvalidCached(string userId, int productId)
+	private void InvalidCached(string userId, int productId, int catId)
 	{
 		memoryCache.Remove($"ProductsUserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
 		memoryCache.Remove($"ProductsFav-{userId}");
+		memoryCache.Remove($"CategoryId-{catId}UserId-{userId}");
 	}
 }

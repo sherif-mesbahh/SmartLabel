@@ -1,26 +1,17 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Authentication.Command.Models;
 using SmartLabel.Domain.Entities.Identity;
 
 namespace SmartLabel.Application.Features.Authentication.Command.Handlers;
-public class EmailConfirmHandler(UserManager<ApplicationUser> userManager) : ResponseHandler, IRequestHandler<EmailConfirmCommand, Response<string>>
+public class EmailConfirmHandler(UserManager<ApplicationUser> userManager) : IRequestHandler<EmailConfirmCommand, bool>
 {
-	public async Task<Response<string>> Handle(EmailConfirmCommand request, CancellationToken cancellationToken)
+	public async Task<bool> Handle(EmailConfirmCommand request, CancellationToken cancellationToken)
 	{
 		var user = await userManager.FindByIdAsync(request.UserId.ToString());
-		if (user is null)
-			return NotFound<string>(["user is not found"], "Invalid data");
-
+		if (user is null) return false;
 		var res = await userManager.ConfirmEmailAsync(user, request.Code);
-		if (!res.Succeeded)
-		{
-			var errors = res.Errors.Select(e => e.Description).ToList();
-			return BadRequest<string>(errors, "Email confirmation failed");
-		}
-
-		return Success<string>("Email confirmed successfully");
-
+		if (!res.Succeeded) return false;
+		return true;
 	}
 }

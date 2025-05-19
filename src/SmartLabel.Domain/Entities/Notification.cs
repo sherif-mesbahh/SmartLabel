@@ -5,6 +5,7 @@ public class Notification
 	public string Message { get; set; }
 	public int Type { get; set; }
 	public int TypeId { get; set; }
+	public string? Image { get; set; }
 	public DateTime CreatedAt { get; set; }
 	public ICollection<UserNotification> UserNotifications { get; set; }
 }

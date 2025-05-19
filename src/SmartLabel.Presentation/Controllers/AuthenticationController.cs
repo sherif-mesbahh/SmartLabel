@@ -37,7 +37,13 @@ public class AuthenticationController(ISender sender) : AppControllerBase
 	[HttpGet("confirm-email")]
 	public async Task<IActionResult> ConfirmEmail([FromQuery] EmailConfirmCommand command)
 	{
-		return NewResult(await sender.Send(command));
+		var isValid = await sender.Send(command);
+		if (isValid)
+		{
+			return Redirect("/Uploads/email-confirmed-success.html");
+		}
+		else
+			return Redirect("/Uploads/email-confirmed-failed.html");
 	}
 	[HttpPost("forget-password")]
 	public async Task<IActionResult> ForgetPassword(ForgetPasswordCommand command)

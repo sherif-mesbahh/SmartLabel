@@ -1,4 +1,5 @@
-﻿using SmartLabel.Domain.Entities;
+﻿using SmartLabel.Application.Features.Banners.Query.Results;
+using SmartLabel.Domain.Entities;
 using GetBannerByIdDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannerByIdDto;
 using GetBannersDto = SmartLabel.Application.Features.Banners.Query.Results.GetBannersDto;
 
@@ -7,7 +8,7 @@ public interface IBannerRepository
 {
 	Task<IEnumerable<GetBannersDto?>> GetAllBannersAsync();
 	Task<IEnumerable<GetBannersDto?>> GetActiveBannersAsync();
-	Task<IEnumerable<int>> GetBannersToActiveAsync();
+	Task<IEnumerable<GetBannersToActiveDTO>> GetBannersToActiveAsync();
 	Task<GetBannerByIdDto?> GetBannerByIdAsync(int id);
 	Task AddBannerAsync(Banner banner);
 	Task UpdateBannerAsync(int bannerId, Banner banner, string mainImage);

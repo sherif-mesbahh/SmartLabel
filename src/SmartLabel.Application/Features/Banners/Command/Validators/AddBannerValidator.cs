@@ -23,7 +23,7 @@ public class AddBannerValidator : AbstractValidator<AddBannerCommand>
 			.NotNull().WithMessage("You should upload at least one Image");
 		RuleFor(x => x.StartDate)
 			.GreaterThanOrEqualTo(currentTime)
-			.WithMessage("You should add active banner (start date >= current date");
+			.WithMessage($"You should add active banner (start date >= current date");
 	}
 	private void AddCustomValidationRules()
 	{

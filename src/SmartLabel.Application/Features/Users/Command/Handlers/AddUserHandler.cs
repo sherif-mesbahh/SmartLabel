@@ -44,8 +44,7 @@ public class AddUserHandler(IMapper mapper, UserManager<ApplicationUser> userMan
 			await userManager.AddToRoleAsync(user, RolesEnum.User.ToString());
 			var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 			var url = emailService.PrepareUrl(user.Id, code);
-			await emailService.Send(user.Email, "Confirm your email",
-				$"Please confirm your account by <a href='{url}'>clicking here</a>");
+			await emailService.Send(user.Email, "Confirm your email", url, "email-confirmed.html");
 			transaction.Commit();
 			return Created<string>("User registered successfully");
 		}

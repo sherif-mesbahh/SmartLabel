@@ -15,9 +15,7 @@ public class EnterCodeToResetHandler(UserManager<ApplicationUser> userManager) :
 
 		if (user.Code != request.Code)
 		{
-			return BadRequest<string>(
-				message: "Invalid data",
-				errors: ["Code is wrong"]);
+			return BadRequest<string>(message: "Invalid data", errors: ["Code is wrong"]);
 		}
 		return Success("Code is correct");
 	}

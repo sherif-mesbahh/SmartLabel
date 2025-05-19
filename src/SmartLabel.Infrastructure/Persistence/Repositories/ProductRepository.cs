@@ -160,7 +160,7 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 
 		await context.ProductImages.AddRangeAsync(productImages);
 	}
-	public async Task UpdateProductAsync(int productId, Product product, string mainImage)
+	public async Task UpdateProductAsync(int productId, Product product, string? mainImage)
 	{
 		await context.Products
 			.Where(x => x.Id == productId)
@@ -232,5 +232,16 @@ public class ProductRepository(AppDbContext context, IUserFavProductRepository u
 		               """;
 		var price = await connection.QueryAsync<decimal>(sqlQuery, new { productId = id });
 		return price.First();
+	}
+	public async Task<int> GetCatIdByProductId(int id)
+	{
+		using var connection = sqlConnectionFactory.Create();
+		var sqlQuery = """
+		               SELECT CatId
+		               FROM Products
+		               WHERE Id = @productId;
+		               """;
+		var catId = await connection.QueryAsync<int>(sqlQuery, new { productId = id });
+		return catId.First();
 	}
 }
