@@ -8,7 +8,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-lg text-balance max-w-[55ch] font-semibold text-gray-900 dark:text-white">
               About Us
             </h3>
             <p className="text-gray-600 dark:text-gray-400">

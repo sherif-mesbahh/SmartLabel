@@ -5,13 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
       animation: {
         fadeIn: "fadeIn 0.5s ease-in-out",
         slideInUp: "slideInUp 0.5s ease-out",
         slideInUpDelay: "slideInUp 0.5s ease-out 0.1s",
+      },
+      screens: {
+        xs: { min: "500px" },
       },
       keyframes: {
         fadeIn: {

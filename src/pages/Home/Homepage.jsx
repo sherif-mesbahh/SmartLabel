@@ -54,10 +54,10 @@ function Homepage() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+      className="min-h-[100dvh] sm:min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
       {/* Hero Section with Banner */}
-      <motion.div variants={itemVariants} className="w-full py-8">
+      <motion.div variants={itemVariants} className="w-full py-8  ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl overflow-hidden shadow-xl">
             <Section3 banners={banners} />
@@ -77,7 +77,7 @@ function Homepage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.35, delay: 0.2 }}
               className="sticky top-24"
             >
               <Section1 cats={cats} />

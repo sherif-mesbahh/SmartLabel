@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Section1({ cats }) {
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
+    <div className=" max-h-[450px] min-h-[450px] overflow-y-scroll bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 relative pb-2">
           Categories
@@ -16,14 +16,14 @@ function Section1({ cats }) {
           <li key={item.id}>
             <Link
               to={`/category/${item.id}`}
-              className="flex items-center space-x-4 p-4 rounded-lg transition-all duration-300 
+              className="flex items-center space-x-4 p-4 rounded-lg border-2 border-transparent transition-all duration-200 
                         hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 dark:hover:from-gray-700 dark:hover:to-gray-800
-                        hover:shadow-lg hover:-translate-y-0.5 hover:border hover:border-blue-400 dark:hover:border-blue-500
-                        group bg-white dark:bg-gray-800"
+                        hover:shadow-xl hover:scale-[1.05]  hover:border-blue-400 dark:hover:border-blue-500
+                        group bg-white dark:bg-gray-800 shadow-lg max-w-[768px] mx-auto "
             >
               <div className="relative">
                 <img
-                  className="w-14 h-14 rounded-full object-cover border-2 border-white dark:border-gray-700 shadow-md group-hover:border-blue-400 dark:group-hover:border-blue-500 transition-all duration-300"
+                  className="w-14 h-14 rounded-full object-cover border-2 border-indigo-600 dark:border-gray-700 shadow-md group-hover:border-blue-400 dark:group-hover:border-blue-500 transition-all duration-300"
                   src={`http://smartlabel1.runasp.net/Uploads/${item.imageUrl}`}
                   alt={item.name}
                 />

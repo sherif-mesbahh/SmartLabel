@@ -21,7 +21,7 @@ function FavoritesPage() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4 sm:p-8">
+    <div className="flex justify-center items-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-8 sm:p-16">
       {favorites.items.length === 0 ? (
         <NotFound message={"Your favorites list is empty"} />
       ) : (

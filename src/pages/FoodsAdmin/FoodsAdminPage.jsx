@@ -56,7 +56,7 @@ function FoodsAdminPage() {
             {foods.map((food) => (
               <div
                 key={food.id}
-                className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden"
+                className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-[6px_6px_10px_0px_rgba(0,0,0,0.6)]"
               >
                 <div className="relative">
                   <Link to={`/product/${food.id}`}>
@@ -72,7 +72,7 @@ function FoodsAdminPage() {
                 </div>
 
                 <div className="p-4 text-center">
-                  <h3 className="text-xl font-semibold text-white dark:text-white mb-1">
+                  <h3 className="text-xl font-semibold text-black dark:text-white mb-1">
                     {food.name}
                   </h3>
                   <div className="text-gray-700 dark:text-gray-300 text-base font-medium">

@@ -6,7 +6,7 @@ function Sidebar({ cats = [] }) {
   const currentId = location.pathname.split("/").pop();
 
   return (
-    <aside className="w-64 p-6 bg-gradient-to-br from-blue-600 to-indigo-800 dark:from-gray-900 dark:to-gray-800 text-white rounded-r-xl shadow-lg min-h-screen">
+    <aside className="w-[85%] mx-auto xs:w-60 p-6 my-4 xs:sticky top-[80px] max-h-[450px] overflow-y-scroll xs:ml-4 bg-gradient-to-br from-blue-600 to-indigo-800 dark:from-gray-900 dark:to-gray-800 text-white rounded-3xl shadow-lg min-h-[50vh]">
       <div className="mb-8">
         <h2 className="text-2xl font-bold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100">
           CATEGORIES
@@ -20,10 +20,10 @@ function Sidebar({ cats = [] }) {
             <li key={cat.id}>
               <Link
                 to={`/category/${cat.id}`}
-                className={`block px-4 py-3 rounded-lg transition-all duration-300 font-medium ${
+                className={`block px-4 py-3 rounded-lg transition-all duration-300 font-medium shadow-md ${
                   currentId === String(cat.id)
                     ? "bg-white text-indigo-600 dark:bg-gray-800 dark:text-indigo-400 shadow-lg transform scale-105"
-                    : "hover:bg-white/10 hover:shadow-md hover:transform hover:scale-105"
+                    : "hover:bg-white/10 hover:shadow-lg hover:transform hover:scale-105"
                 }`}
               >
                 <div className="flex items-center">

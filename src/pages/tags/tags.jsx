@@ -36,7 +36,7 @@ function Tags() {
   }, [id, searchTerm]);
 
   return (
-    <div className="flex">
+    <div className="flex flex-col xs:flex-row">
       <Sidebar cats={cats} />
       <div className="flex-1 p-4">
         <Search defaultRoute="/category/" placeholder={"Search Product ..."} />

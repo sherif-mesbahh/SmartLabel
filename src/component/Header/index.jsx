@@ -14,6 +14,8 @@ function Header() {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogMenuOpen, setIsLogMenuOpen] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,15 +34,15 @@ function Header() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.2 }}
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300  ${
         isScrolled
           ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg"
           : "bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-gray-900 dark:to-gray-800"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-4 py-1 xs:py-0 sm:px-6 lg:px-8 ">
+        <div className="flex items-center justify-between h-16 scale-90 flex-col xs:flex-row xs:scale-100">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <span
@@ -56,7 +58,7 @@ function Header() {
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-md font-medium transition-colors duration-200 ${
                 isScrolled
                   ? "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                   : "text-white/90 hover:text-white"
@@ -66,7 +68,7 @@ function Header() {
             </Link>
             <Link
               to="/allproducts"
-              className={`text-sm font-medium transition-colors duration-200 ${
+              className={`text-md font-medium transition-colors duration-200 ${
                 isScrolled
                   ? "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                   : "text-white/90 hover:text-white"
@@ -77,7 +79,7 @@ function Header() {
             {user && (
               <Link
                 to="/dashboard"
-                className={`text-sm font-medium transition-colors duration-200 ${
+                className={`text-md font-medium transition-colors duration-200 ${
                   isScrolled
                     ? "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                     : "text-white/90 hover:text-white"
@@ -164,7 +166,7 @@ function Header() {
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full"
+                      className="absolute -top-1 -right-2  w-4 h-4 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full"
                     >
                       {favorites.totalCount}
                     </motion.span>
@@ -192,7 +194,7 @@ function Header() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  onClick={() => setIsLogMenuOpen(!isLogMenuOpen)}
                   className={`flex items-center space-x-2 p-2 rounded-full transition-colors duration-200 ${
                     isScrolled
                       ? "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -207,6 +209,7 @@ function Header() {
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                     style={{margin:'0'}}
                   >
                     <path
                       strokeLinecap="round"
@@ -217,23 +220,23 @@ function Header() {
                   </svg>
                 </motion.button>
 
-                {isMenuOpen && (
+                {isLogMenuOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50"
+                    className="absolute right-[-75px] xs:right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-50"
                   >
                     <Link
                       to="/profile"
                       className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => setIsLogMenuOpen(false)}
                     >
                       Profile
                     </Link>
                     <button
                       onClick={() => {
                         handleLogout();
-                        setIsMenuOpen(false);
+                        setIsLogMenuOpen(false);
                       }}
                       className="block w-full text-left px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
@@ -286,7 +289,7 @@ function Header() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white dark:bg-gray-800 shadow-lg"
+          className="md:hidden bg-white dark:bg-gray-800 shadow-lg fixed w-full z-[-1]"
         >
           <div className="px-4 py-2 space-y-1">
             <Link
@@ -304,14 +307,14 @@ function Header() {
             {user && (
               <>
                 <Link
-                  to="/admin/dashboard"
+                  to="/dashboard"
                   className="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/fav"
-                  className="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg flex items-center justify-between"
+                  className=" px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg flex items-center justify-between"
                 >
                   <span>Favorites</span>
                   {favorites.totalCount > 0 && (
@@ -321,7 +324,7 @@ function Header() {
                   )}
                 </Link>
               </>
-            )}
+            )} 
           </div>
         </motion.div>
       )}

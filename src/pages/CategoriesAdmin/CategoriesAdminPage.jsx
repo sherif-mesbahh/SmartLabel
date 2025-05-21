@@ -28,7 +28,7 @@ function CategoriesAdminPage() {
   <div className="max-w-7xl mx-auto">
     {/* Header */}
     <div className="text-center mb-12">
-      <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
+      <h1 className="text-4xl p-4 md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
         Manage Categories
       </h1>
       <Link
@@ -46,7 +46,7 @@ function CategoriesAdminPage() {
           foods.map((food) => (
             <div
               key={food.id}
-              className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden"
+              className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-[6px_6px_10px_0px_rgba(0,0,0,0.6)]"
             >
               <div className="relative">
                 <Link to={`/category/${food.id}`}>
@@ -58,27 +58,27 @@ function CategoriesAdminPage() {
                 </Link>
               </div>
 
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold text-white dark:text-white">
+              <div className="p-4 text-center ">
+                <h3 className="text-xl font-semibold text-black dark:text-white ">
                   {food.name}
                 </h3>
 
                 <div className="flex justify-center space-x-3 mt-4">
                   <Link
                     to={`/admin/addfood/${food.id}`}
-                    className="px-4 py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm font-medium transition-colors"
+                    className="px-[0.84em]  py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm font-medium transition-colors"
                   >
                     Add Product +
                   </Link>
                   <Link
                     to={`/admin/editcategory/${food.id}`}
-                    className="px-4 py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm transition-colors"
+                    className="px-[0.84em]  py-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full text-sm transition-colors"
                   >
                     Edit
                   </Link>
                   <button
                     onClick={() => DeleteFood(food)}
-                    className="px-4 py-1 bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white rounded-full text-sm transition-colors"
+                    className="px-[0.84em]  py-1 bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white rounded-full text-sm transition-colors"
                   >
                     Delete
                   </button>

@@ -27,7 +27,7 @@ function Search({ defaultRoute, placeholder }) {
   }, [searchTerm, location.search]);
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md mx-auto w-[min(450px,90%)]">
       <div className="relative">
         <input
           type="text"

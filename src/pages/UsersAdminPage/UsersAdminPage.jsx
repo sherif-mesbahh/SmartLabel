@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { editUser, getAll } from "../../services/userServices";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
@@ -10,10 +10,13 @@ function UsersAdminPage() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
- 
+  const hasLoaded = useRef(false);
 
   useEffect(() => {
-    loadUsers();
+    if (!hasLoaded.current){
+      hasLoaded.current = true;
+      loadUsers();
+    }
   }, []);
 
   const loadUsers = async () => {
@@ -77,7 +80,7 @@ function UsersAdminPage() {
       >
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
+          <h1 className="text-4xl py-2 md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-400 dark:to-indigo-600 mb-4">
             User Management
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -87,7 +90,7 @@ function UsersAdminPage() {
 
         {/* Search Bar */}
         <div className="mb-8">
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto w-[min(450px,90%)]">
             <div className="relative">
               <input
                 type="text"
@@ -139,6 +142,7 @@ function UsersAdminPage() {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        style={{margin:'0'}}
                       >
                         <path
                           strokeLinecap="round"

@@ -37,9 +37,9 @@ function Section3({ banners }) {
     >
       {banners.map((banner) => (
         <SwiperSlide key={banner.id}>
-          <div className="relative w-full">
-            <div className="block w-full h-[60vh] md:h-[80vh] relative group">
-              <div className="absolute inset-0 transform group-hover:scale-105 transition-transform duration-700">
+          <div className="w-full">
+            <div className="block w-full text-4xl h-[80vh] relative group">
+              <div className="absolute inset-0 h-[80vh] transform group-hover:scale-105 transition-transform duration-700">
                 <img
                   src={`http://smartlabel1.runasp.net/Uploads/${banner.mainImage}`}
                   alt={banner.title}
@@ -67,7 +67,7 @@ function Section3({ banners }) {
                   <div className="flex items-center gap-4">
                     <Link
                       to={`/banner/${banner.id}`}
-                      className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-full hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                      className="inline-block bg-gradient-to-r to-indigo-600 from-blue-600 text-2xl text-white font-semibold px-[2em] py-[0.35em] rounded-full hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
                     >
                       Shop Now
                     </Link>

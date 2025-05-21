@@ -26,7 +26,7 @@ function BannerAdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+    <div className=" bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
@@ -58,7 +58,7 @@ function BannerAdminPage() {
                 Banners.map((banner) => (
                   <div
                     key={banner.id}
-                    className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden"
+                    className="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-[6px_6px_10px_0px_rgba(0,0,0,0.6)]"
                   >
                     <div className="relative">
                       <img

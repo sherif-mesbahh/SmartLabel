@@ -10,7 +10,6 @@ import { ThemeProvider } from "./context/ThemeContext";
 import "swiper/css";
 import "swiper/css/pagination";
 
-// import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const { hideLoading, showLoading } = useLoading();
   useEffect(() => {
@@ -18,7 +17,7 @@ function App() {
   }, []);
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      <div className=" bg-white dark:bg-gray-900 transition-colors duration-200">
         <ScrollToTop />
         <Loading />
         <Header />
@@ -32,3 +31,8 @@ function App() {
 }
 
 export default App;
+
+
+//  Mobile menu Dashboard link goes to User Mange; 
+// Prices must be integers
+

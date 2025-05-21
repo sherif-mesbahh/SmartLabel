@@ -14,14 +14,14 @@ const ProductCard = React.memo(({ item }) => {
   }, [item, isFavorite, updateFavoriteItem]);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+    <div className="bg-white max-h-[350px] min-h-[350px] dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
       <div className="relative">
         <img
           src={`http://smartlabel1.runasp.net/Uploads/${item.mainImage}`}
           alt={item.name}
           className="w-full h-48 object-cover"
         />
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 shadow-xl rounded-full">
           <button
             onClick={() => toggleFavorite(item)}
             disabled={isLoading}
@@ -48,13 +48,13 @@ const ProductCard = React.memo(({ item }) => {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 max-w-[55ch] truncate">
           {item.name}
         </h3>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
           {item.description}
         </p>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-col gap-2 ">
           <div className="flex items-center space-x-2">
             <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
               ${item.newPrice}
@@ -67,7 +67,7 @@ const ProductCard = React.memo(({ item }) => {
           </div>
           <Link
             to={`/product/${item.id}`}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-lg transition-colors"
+            className="px-2 py-2  w-3/4 mx-auto text-center bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-lg transition-colors"
           >
             View Details
           </Link>

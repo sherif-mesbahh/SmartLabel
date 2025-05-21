@@ -41,9 +41,9 @@ const NewProducts = ({ food }) => {
         <Swiper
           ref={swiperRef}
           modules={[Pagination, Autoplay, Navigation]}
-          effect="fade"
+          effect="fade" 
           loop={true}
-          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          autoplay={{ delay: 2000, disableOnInteraction: true }}
           speed={800}
           spaceBetween={30}
           slidesPerView={1}
@@ -59,8 +59,8 @@ const NewProducts = ({ food }) => {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.35 }}
+                whileHover={{ scale: 1.05 }}
                 className="h-full"
               >
                 <ProductCard item={item} />

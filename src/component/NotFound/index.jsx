@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Lottie from 'lottie-react';
+import emptyAnim from '../../assets/empty.json';
+
 function NotFound({ message }) {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100 mt-5 w-full">
+    <div className="flex items-end py-24   relative min-h-[60vh] xs:min-h-[75vh] justify-center shadow-xl  bg-gray-100  w-full">
       <div className="text-center">
-        <h1 className="text-6xl font-bold text-gray-800 mb-8">{message} </h1>
+  <Lottie animationData={emptyAnim} loop autoplay className="w-[100%] absolute mx-auto mb-[150px]  inset-0"/>
+
+        <h1 className="sm:text-5xl text-4xl font-bold text-gray-800 mb-8">{message} </h1>
 
         <Link
           to="/"
@@ -16,5 +21,4 @@ function NotFound({ message }) {
     </div>
   );
 }
-
 export default NotFound;

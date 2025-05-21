@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 function FoodEditPage() {
   const { foodId, categoryId } = useParams();
   const isEditMode = !!foodId;
-  
+
   const [images, setImages] = useState();
   const [MainImage, setMainImage] = useState();
   const [RemovedImageIds, setRemovedImageId] = useState([]);
+  const [existingImages, setExistingImages] = useState([]);
   const [Name, setName] = useState("");
   const [OLdPrice, setOldPrice] = useState("");
   const [CategoryId, setCategoryId] = useState();
@@ -17,14 +18,13 @@ function FoodEditPage() {
   const [Description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   const navigate = useNavigate();
   useEffect(() => {
     if (!isEditMode) {
       setCategoryId(categoryId);
       return;
     }
-  
+
     setLoading(true);
     getById(foodId)
       .then((food) => {
@@ -35,50 +35,56 @@ function FoodEditPage() {
         setDescription(data.description);
         setdiscount(data.discount);
         setMainImage(data.mainImage);
-        setImages(data.images?.map((img) => img.imageUrl) || [null]);
-        setRemovedImageId(data.images?.map((img) => img.imageId));
+        setImages([]);
+        setExistingImages(data.images || []);
+        setRemovedImageId([]);
       })
       .finally(() => setLoading(false));
   }, [foodId, isEditMode, categoryId]);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
- 
-      try {   if (isEditMode) {
-            await updateFood(
-        foodId,
-        Name,
-        OLdPrice,
-        Discount,
-        Description,
-        CategoryId,
-        MainImage,
-        images,
-        RemovedImageIds
-      );
-      toast.success(`Food ${Name} updated successfully`);
-      window.location.reload();
-    } else {
-      const newFood = await addFood(
-        Name,
-        OLdPrice,
-        Discount,
-        Description,
-        CategoryId,
-        MainImage,
-        images
-      );
-      toast.success(`Food ${Name} added successfully`);
-      navigate(`/food/${newFood.id}`, { replace: true });
-    }
-      } catch (error) {
-        toast.error(error.response.data.errors[0] || "something went wrong");
-      } finally {
-        setLoading(false);  
+    try {
+      if (isEditMode) {
+        const finalImages = [
+          ...existingImages.filter(
+            (img) => !RemovedImageIds.includes(img.imageId)
+          ),
+          ...(images || []),
+        ];
+
+        await updateFood(
+          foodId,
+          Name,
+          OLdPrice,
+          Discount,
+          Description,
+          CategoryId,
+          MainImage,
+          finalImages,
+          RemovedImageIds
+        );
+        toast.success(`Food ${Name} updated successfully`);
+        window.location.reload();
+      } else {
+        await addFood(
+          Name,
+          OLdPrice,
+          Discount,
+          Description,
+          CategoryId,
+          MainImage,
+          images
+        );
+        toast.success(`Food ${Name} added successfully`);
       }
-  
+    } catch (error) {
+      toast.error(error.response.data.errors[0] || "something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,7 +95,9 @@ function FoodEditPage() {
             {isEditMode ? "Edit Product" : "Add Product"}
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            {isEditMode ? "Update your food information" : "Create a new food item"}
+            {isEditMode
+              ? "Update your food information"
+              : "Create a new food item"}
           </p>
         </div>
 
@@ -207,6 +215,68 @@ function FoodEditPage() {
                           alt={`Preview ${idx}`}
                           className="w-full h-32 object-cover rounded-lg shadow-md"
                         />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setImages(images.filter((_, i) => i !== idx));
+                          }}
+                          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {existingImages.length > 0 && (
+                  <div className="mt-4 grid grid-cols-2 gap-4">
+                    {existingImages.map((img) => (
+                      <div key={img.imageId} className="relative">
+                        <img
+                          src={`http://smartlabel1.runasp.net/Uploads/${img.imageUrl}`}
+                          alt="Existing image"
+                          className="w-full h-32 object-cover rounded-lg shadow-md"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setRemovedImageId([
+                              ...RemovedImageIds,
+                              img.imageId,
+                            ]);
+                            setExistingImages(
+                              existingImages.filter(
+                                (i) => i.imageId !== img.imageId
+                              )
+                            );
+                          }}
+                          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -221,14 +291,32 @@ function FoodEditPage() {
                 >
                   {loading ? (
                     <div className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       {isEditMode ? "Updating..." : "Adding..."}
                     </div>
+                  ) : isEditMode ? (
+                    "Update Prodct"
                   ) : (
-                    isEditMode ? "Update Prodct" : "Add Product"
+                    "Add Product"
                   )}
                 </button>
               </div>
