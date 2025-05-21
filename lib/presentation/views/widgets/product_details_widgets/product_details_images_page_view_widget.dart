@@ -38,13 +38,15 @@ class ProductImagesPageView extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (_) => FullScreenImagePage(
-                    imageUrl: "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                    imageUrl: Uri.encodeFull(
+                        'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(imageUrl)}'),
                   ),
                 ),
               );
             },
             child: CachedNetworkImage(
-              imageUrl: 'http://smartlabel1.runasp.net/Uploads/$imageUrl',
+              imageUrl: Uri.encodeFull(
+                  'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(imageUrl)}'),
               fit: BoxFit.cover,
               placeholder: (context, url) => Center(
                 child: Lottie.asset(

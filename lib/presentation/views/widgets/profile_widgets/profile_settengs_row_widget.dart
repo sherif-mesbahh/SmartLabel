@@ -11,27 +11,24 @@ class SettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Row(
-        children: [
-          Text(
-            S.of(context).profilePageSettings,
-            style: TextStyles.cartItemTitle(context),
+    return Row(
+      children: [
+        Text(
+          S.of(context).profilePageSettings,
+          style: TextStyles.cartItemTitle(context),
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: () {
+            AppCubit.get(context).scaffoldKey?.currentState?.openDrawer();
+          },
+          icon: Icon(
+            Icons.settings,
+            color: primaryColor,
+            size: 30,
           ),
-          const Spacer(),
-          IconButton(
-            onPressed: () {
-              AppCubit.get(context).scaffoldKey?.currentState?.openEndDrawer();
-            },
-            icon: Icon(
-              Icons.settings,
-              color: primaryColor,
-              size: 30,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

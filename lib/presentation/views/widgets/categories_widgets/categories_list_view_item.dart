@@ -59,7 +59,8 @@ class CategoriesListViewItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      'http://smartlabel1.runasp.net/Uploads/${category.imageUrl}',
+                      Uri.encodeFull(
+                          'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(category.imageUrl ?? '')}'),
                       height: 70,
                       width: 70,
                       fit: BoxFit.cover,

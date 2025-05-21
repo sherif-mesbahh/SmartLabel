@@ -73,11 +73,6 @@ class BannerDetailsAddImagesWidget extends StatelessWidget {
                 ),
               const SizedBox(height: 12.0),
               TextButton(
-                child: Text(
-                  S.of(context).editBannerAddImagesButton,
-                  style: TextStyles.productTitle(context)
-                      .copyWith(color: primaryColor),
-                ),
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -87,6 +82,39 @@ class BannerDetailsAddImagesWidget extends StatelessWidget {
                     ),
                   );
                 },
+                style: ButtonStyle(
+                  backgroundColor:
+                      WidgetStateProperty.all(primaryColor.withOpacity(0.25)),
+                  foregroundColor: WidgetStateProperty.all(primaryColor),
+                  padding: WidgetStateProperty.all(
+                      const EdgeInsets.symmetric(vertical: 16)),
+                  minimumSize:
+                      WidgetStateProperty.all(const Size.fromHeight(48)),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(color: primaryColor.withOpacity(0.4)),
+                    ),
+                  ),
+                  overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.pressed)) {
+                        return primaryColor.withOpacity(0.2);
+                      }
+                      if (states.contains(WidgetState.hovered)) {
+                        return primaryColor.withOpacity(0.15);
+                      }
+                      return null;
+                    },
+                  ),
+                  textStyle: WidgetStateProperty.all(
+                    TextStyles.productTitle(context).copyWith(
+                      fontWeight: FontWeight.w600,
+                      inherit: true, // ✅ Ensures compatibility
+                    ),
+                  ),
+                ),
+                child: Text(S.of(context).editBannerAddImagesButton),
               ),
             ],
           ),

@@ -18,53 +18,77 @@ class ListViewSearchCategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final category = cubit.categorySearchModel?.data?[index];
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            radius: 42,
-            backgroundColor: primaryColor,
-            child: CircleAvatar(
-              onBackgroundImageError: (exception, stackTrace) =>
-                  Icon(Icons.error),
-              radius: 40,
-              backgroundImage: CachedNetworkImageProvider(
-                'http://smartlabel1.runasp.net/Uploads/${cubit.categorySearchModel?.data?[index].imageUrl}',
-              ),
+      padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12),
+      child: Card(
+        elevation: 3,
+        shadowColor: Colors.black26,
+        color: Colors.grey[300],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            AppCubit.get(context)
+                .getCategoryProducts(id: category?.id ?? 0)
+                .then((_) {
+              pushNavigator(
+                  context, CategoriesProductsPage(), slideRightToLeft);
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+            child: Row(
+              children: [
+                // Non-circular image with rounded corners
+                Container(
+                  width: 84,
+                  height: 84,
+                  decoration: BoxDecoration(
+                    color: primaryColor.withOpacity(
+                        0.1), // subtle background for icon placeholder
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: category?.imageUrl != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: CachedNetworkImage(
+                            imageUrl: Uri.encodeFull(
+                              'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(category!.imageUrl ?? '')}',
+                            ),
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) => Icon(
+                              Icons.broken_image,
+                              size: 40,
+                              color: primaryColor.withOpacity(0.5),
+                            ),
+                          ),
+                        )
+                      : Icon(
+                          Icons.category_outlined,
+                          size: 40,
+                          color: primaryColor.withOpacity(0.5),
+                        ),
+                ),
+
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    category?.name ?? 'No Name',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.productTitle(context).copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            flex: 10,
-            child: Text(
-              cubit.categorySearchModel?.data?[index].name ?? 'No Name',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              softWrap: true,
-              style: TextStyles.productTitle(context),
-            ),
-          ),
-          Spacer(),
-          IconButton(
-            onPressed: () {
-              AppCubit.get(context)
-                  .getCategoryProducts(
-                      id: cubit.categorySearchModel?.data?[index].id ?? 0)
-                  .then((onValue) {
-                pushNavigator(
-                    context, CategoriesProductsPage(), slideRightToLeft);
-              });
-            },
-            icon: Icon(
-              Icons.arrow_forward_rounded,
-              color: primaryColor,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

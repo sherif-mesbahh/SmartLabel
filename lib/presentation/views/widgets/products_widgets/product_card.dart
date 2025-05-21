@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
@@ -58,10 +59,15 @@ class ProductCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(16)),
-                    child: Image.network(
-                      "http://smartlabel1.runasp.net/Uploads/${product.mainImage}",
+                    child: CachedNetworkImage(
+                      imageUrl: Uri.encodeFull(
+                        'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(product.mainImage ?? '')}',
+                      ),
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) =>
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      errorWidget: (context, url, error) =>
                           const Icon(Icons.broken_image),
                     ),
                   ),
@@ -98,15 +104,15 @@ class ProductCard extends StatelessWidget {
                     child: isFavorite
                         ? Lottie.asset(
                             'assets/lottie/inFavAnimation.json',
-                            width: 40,
-                            height: 40,
+                            width: 60,
+                            height: 60,
                             repeat: false,
                             fit: BoxFit.fill,
                           )
                         : Lottie.asset(
                             'assets/lottie/notFavAnimation.json',
-                            width: 40,
-                            height: 40,
+                            width: 60,
+                            height: 60,
                             repeat: false,
                           ),
                   ),

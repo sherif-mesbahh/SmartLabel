@@ -18,7 +18,7 @@ class Layout extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       key: _scaffoldKey,
       appBar: const CustomAppBar(),
-      endDrawer: LayoutDrawerWidget(),
+      drawer: LayoutDrawerWidget(),
       body: BlocBuilder<AppCubit, AppStates>(
         builder: (context, state) {
           final cubit = AppCubit.get(context);

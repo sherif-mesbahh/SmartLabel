@@ -18,7 +18,7 @@ class ActiveBannerDetailsImageSlider extends StatelessWidget {
     return CarouselSlider(
       options: CarouselOptions(
         height: screenHeight(context) * .3,
-        autoPlay: true,
+        autoPlay: bannerImages.length > 1,
         enlargeCenterPage: true,
         viewportFraction: 0.8,
         aspectRatio: 2.0,
@@ -34,8 +34,8 @@ class ActiveBannerDetailsImageSlider extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (_) => FullScreenImagePage(
-                      imageUrl:
-                          "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                      imageUrl: Uri.encodeFull(
+                          'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(imageUrl)}'),
                     ),
                   ),
                 );
@@ -51,8 +51,8 @@ class ActiveBannerDetailsImageSlider extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: imageUrl.isNotEmpty
                       ? CachedNetworkImage(
-                          imageUrl:
-                              "http://smartlabel1.runasp.net/Uploads/$imageUrl",
+                          imageUrl: Uri.encodeFull(
+                              'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(imageUrl)}'),
                           fit: BoxFit.cover,
                           placeholder: (context, url) => Center(
                             child: Lottie.asset(

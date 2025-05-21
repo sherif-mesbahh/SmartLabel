@@ -7,12 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signalr_netcore/http_connection_options.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_dio.dart';
 import 'package:smart_label_software_engineering/core/services/api_services/api_endpoints.dart';
+import 'package:smart_label_software_engineering/core/services/api_services/token_refresher.dart';
 import 'package:smart_label_software_engineering/core/utils/flutter_local_notifications.dart';
 import 'package:smart_label_software_engineering/core/utils/secure_token_storage_helper.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
@@ -58,6 +60,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeNavBarCurrentIndexState());
 
     if (index == 0) {
+      log('asdfsadfdsafasdfadsf');
       getProducts();
       getCategories();
       getActiveBanners();
@@ -113,10 +116,20 @@ class AppCubit extends Cubit<AppStates> {
     emit(GetProductsLoadingState());
 
     try {
-      final response = await ApiService().get(ApiEndpoints.product);
+      final accessToken = await SecureTokenStorage.getAccessToken();
+      final response = await ApiService().get(
+        ApiEndpoints.product,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+      );
 
-      if (response.statusCode == 200) {
-        productModel = ProdcutModel.fromJson(response.data);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        productModel = ProdcutModel.fromJson(
+          response.data,
+        );
+        log(' Length: ${productModel!.data!.length}');
         emit(GetProductsSuccessState());
       } else {
         emit(GetProductsErrorState(
@@ -201,7 +214,9 @@ class AppCubit extends Cubit<AppStates> {
         ApiEndpoints.favProduct,
       );
       if (response.statusCode == 200) {
-        favModel = FavModel.fromJson(response.data);
+        favModel = FavModel.fromJson(
+          response.data,
+        );
         emit(GetFavProductsSuccessState());
       } else {
         emit(GetFavProductsErrorState(
@@ -357,14 +372,16 @@ class AppCubit extends Cubit<AppStates> {
       final refreshToken = loginModel?.data?.refreshToken;
 
       if (accessToken != null && refreshToken != null) {
+        await SecureTokenStorage.clearTokens();
         await SecureTokenStorage.saveTokens(accessToken, refreshToken);
         isLogin = true;
 
         // Call initial data fetch
+        TokenRefresher.start();
         startSignalR();
-
         getProducts();
         getActiveBanners();
+        getNotifications();
 
         emit(LoginSuccessState());
       } else {
@@ -397,13 +414,50 @@ class AppCubit extends Cubit<AppStates> {
     final accessToken = await SecureTokenStorage.getAccessToken();
     final refreshToken = await SecureTokenStorage.getRefreshToken();
 
-    isLogin = accessToken != null && refreshToken != null;
+    final isAccessValid =
+        accessToken != null && !JwtDecoder.isExpired(accessToken);
+    final isRefreshAvailable = refreshToken != null;
+
+    isLogin = isAccessValid && isRefreshAvailable;
 
     if (isLogin) {
-      getUserInfo();
+      await getUserInfo();
       emit(LoginSuccessState());
     } else {
-      getUserInfo();
+      // Optional: Try refreshing here to recover session if access token expired but refresh is valid
+      if (refreshToken != null) {
+        final success = await tryRefreshToken(refreshToken);
+        isLogin = success;
+
+        if (success) {
+          await getUserInfo();
+          emit(LoginSuccessState());
+          return;
+        }
+      }
+
+      emit(LoginErrorState('Session expired. Please login again.'));
+    }
+  }
+
+  Future<bool> tryRefreshToken(String refreshToken) async {
+    try {
+      final response = await Dio().post(
+        ApiEndpoints.refreshToken,
+        data: {'refreshToken': refreshToken},
+        options: Options(headers: {'Content-Type': 'application/json'}),
+      );
+
+      final newAccessToken = response.data['data']['accessToken'];
+      final newRefreshToken = response.data['data']['refreshToken'];
+
+      await SecureTokenStorage.saveTokens(newAccessToken, newRefreshToken);
+      TokenRefresher.start(); // Restart refresher
+      return true;
+    } catch (e) {
+      print('[Auth] Refresh token failed: $e');
+      await SecureTokenStorage.clearTokens();
+      return false;
     }
   }
 
@@ -434,6 +488,7 @@ class AppCubit extends Cubit<AppStates> {
     try {
       final response = await ApiService().post(ApiEndpoints.logout, {});
       log('Logout response with status: ${response.statusCode}');
+      TokenRefresher.stop();
       await SecureTokenStorage.clearTokens();
       isLogin = false;
       navBarCurrentIndex = 0;
@@ -733,14 +788,16 @@ class AppCubit extends Cubit<AppStates> {
 
   Future<void> deleteCategory({required int id}) async {
     emit(DeleteCategoryLoadingState());
-
+    print("Deleting category with id: $id");
     try {
       final accessToken = await SecureTokenStorage.getAccessToken();
+
       final response = await ApiService().delete(
           ApiEndpoints.deleteCategoryById(id),
           headers: {'Authorization': 'Bearer $accessToken'});
       if (response.statusCode == 200) {
         getCategories();
+        getProducts();
         emit(DeleteCategorySuccessState());
       } else {
         emit(DeleteCategoryErrorState(
@@ -838,6 +895,7 @@ class AppCubit extends Cubit<AppStates> {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        print(accessToken);
         emit(UpdateCategorySuccessState());
       } else {
         emit(UpdateCategoryErrorState(
@@ -1440,10 +1498,18 @@ class AppCubit extends Cubit<AppStates> {
       final body = messege != null && messege.isNotEmpty
           ? messege[0].toString()
           : "You have a new message";
-      NotificationHelper.showNotification(body);
-      print("📢 Notification: $body");
-      getNotifications();
-      emit(ReceiveNotificationState());
+      if (body == "User role updated. Re-login required to apply changes.") {
+        NotificationHelper.showNotification(body).then((_) {
+          print("📢 Notification: $body");
+          emit(ReceiveNotificationState());
+          logout();
+        });
+      } else {
+        NotificationHelper.showNotification(body);
+        print("📢 Notification: $body");
+        getNotifications();
+        emit(ReceiveNotificationState());
+      }
     });
 
     try {
@@ -1538,7 +1604,12 @@ class AppCubit extends Cubit<AppStates> {
   Future<void> getAllUsers() async {
     emit(GetAllUsersLoadingState());
     try {
-      final response = await ApiService().get(ApiEndpoints.allUsers);
+      final accessToken = await SecureTokenStorage.getAccessToken();
+
+      final response = await ApiService().get(ApiEndpoints.allUsers, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      });
       if (response.statusCode == 200 || response.statusCode == 201) {
         allUsersModel = AllUsersModel.fromJson(response.data);
         emit(GetAllUsersSuccessState());

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
+import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
 import 'package:smart_label_software_engineering/models/fav_model/fav_datum.dart';
@@ -45,8 +46,9 @@ class FavCardItem extends StatelessWidget {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(15)),
                   child: CachedNetworkImage(
-                    imageUrl: 'http://smartlabel1.runasp.net/Uploads/$imageUrl',
-                    height: 150,
+                    imageUrl: Uri.encodeFull(
+                        'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(imageUrl)}'),
+                    height: screenHeight(context) * .25,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Center(
@@ -78,19 +80,37 @@ class FavCardItem extends StatelessWidget {
                     child: favModel.favorite!
                         ? Lottie.asset(
                             'assets/lottie/inFavAnimation.json',
-                            width: 40,
-                            height: 40,
+                            width: 60,
+                            height: 60,
                             repeat: false,
                             fit: BoxFit.fill,
                           )
                         : Lottie.asset(
                             'assets/lottie/notFavAnimation.json',
-                            width: 40,
-                            height: 40,
+                            width: 60,
+                            height: 60,
                             repeat: false,
                           ),
                   ),
-                )
+                ),
+                if (favModel.newPrice != favModel.oldPrice)
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    margin: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      '${favModel.discount}% ${S.of(context).off}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
               ],
             ),
             Padding(

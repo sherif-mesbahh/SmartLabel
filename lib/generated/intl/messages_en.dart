@@ -201,8 +201,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "codesentsuccessfullycheckyouremail": MessageLookupByLibrary.simpleMessage(
       "Code sent successfully, check your email",
     ),
+    "comingSoon": MessageLookupByLibrary.simpleMessage("Coming Soon"),
     "deleteButton": MessageLookupByLibrary.simpleMessage("Delete"),
     "demoteToUser": MessageLookupByLibrary.simpleMessage("Demote to User"),
+    "discount": MessageLookupByLibrary.simpleMessage("Discount"),
     "editBannerAddImagesButton": MessageLookupByLibrary.simpleMessage(
       "Add Images",
     ),
@@ -398,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "Forgot Password",
     ),
+    "goToAdminPanel": MessageLookupByLibrary.simpleMessage("Go to Admin Panel"),
     "homePageNewCategories": MessageLookupByLibrary.simpleMessage(
       " Categories",
     ),
@@ -438,7 +441,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "navBarCart": MessageLookupByLibrary.simpleMessage("Cart"),
     "navBarCategories": MessageLookupByLibrary.simpleMessage("Categories"),
-    "navBarFav": MessageLookupByLibrary.simpleMessage("Favourites"),
+    "navBarFav": MessageLookupByLibrary.simpleMessage("WishList"),
     "navBarHome": MessageLookupByLibrary.simpleMessage("Home"),
     "navBarProfile": MessageLookupByLibrary.simpleMessage("Profile"),
     "noCategoriesFound": MessageLookupByLibrary.simpleMessage(
@@ -449,7 +452,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noCategoryProductsFoundInThisCategory":
         MessageLookupByLibrary.simpleMessage(
-          "No category products found in this category.",
+          "No Products added yet in this category",
         ),
     "noFavouritesFound": MessageLookupByLibrary.simpleMessage(
       "No favorites found",
@@ -471,6 +474,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noUsersFound": MessageLookupByLibrary.simpleMessage("No users found"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "off": MessageLookupByLibrary.simpleMessage("Off"),
     "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Password Changed Successfully",
     ),

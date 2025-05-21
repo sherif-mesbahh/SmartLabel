@@ -42,11 +42,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^9.2.4
+  flutter_vector_icons: ^2.0.0
   fluttertoast: ^8.2.12
   google_fonts: ^6.2.1
   image_picker: ^1.1.2
   internet_connection_checker: ^3.0.1
   intl: 0.19.0
+  jwt_decoder: ^2.0.1
   lottie: ^3.3.1
   path_provider: ^2.1.5
   photo_view: ^0.15.0

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
@@ -123,13 +124,8 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
                   .toList() ??
               [];
 
-          if (banner == null) {
-            return Center(
-              child: Text(
-                S.of(context).failedToLoadBannerDetails,
-                style: TextStyle(color: Colors.red),
-              ),
-            );
+          if (state is GetBannerDetailsLoadingState || banner == null) {
+            return const BannerDetailsShimmerWidget();
           }
 
           return SingleChildScrollView(
@@ -147,6 +143,8 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
                   if (bannerImages.isNotEmpty)
                     BannerDetailsBannerImaegsWidget(
                         banner: banner, bannerImages: bannerImages),
+                  const SizedBox(height: 12.0),
+
                   // Add images
                   BannerDetailsAddImagesWidget(cubit: cubit, banner: banner),
 
@@ -186,6 +184,36 @@ class _AdminBannerDetailsPageState extends State<AdminBannerDetailsPage> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class BannerDetailsShimmerWidget extends StatelessWidget {
+  const BannerDetailsShimmerWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: List.generate(6, (index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey.shade800,
+              highlightColor: Colors.grey.shade500,
+              child: Container(
+                width: double.infinity,
+                height: index == 0 ? 180 : 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

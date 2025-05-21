@@ -302,5 +302,9 @@
     "activeBanners": "البانرات النشطة",
     "categories": "الفئات",
     "products": "المنتجات",
-    "users": "المستخدمين"
+    "users": "المستخدمين",
+    "discount": "الخصم",
+    "comingSoon": "قريبا",
+    "goToAdminPanel": "الذهاب الى لوحة التحكم",
+    "off": "خصم"
 }

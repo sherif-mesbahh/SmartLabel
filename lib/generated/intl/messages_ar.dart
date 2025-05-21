@@ -191,8 +191,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "codesentsuccessfullycheckyouremail": MessageLookupByLibrary.simpleMessage(
       "تم ارسال الكود بنجاح، يرجى التحقق من بريدك الألكتروني",
     ),
+    "comingSoon": MessageLookupByLibrary.simpleMessage("قريبا"),
     "deleteButton": MessageLookupByLibrary.simpleMessage("حذف"),
     "demoteToUser": MessageLookupByLibrary.simpleMessage("إرجاع إلى مستخدم"),
+    "discount": MessageLookupByLibrary.simpleMessage("الخصم"),
     "editBannerAddImagesButton": MessageLookupByLibrary.simpleMessage(
       "إضافة صور",
     ),
@@ -384,6 +386,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور",
     ),
+    "goToAdminPanel": MessageLookupByLibrary.simpleMessage(
+      "الذهاب الى لوحة التحكم",
+    ),
     "homePageNewCategories": MessageLookupByLibrary.simpleMessage("الفئات"),
     "homePageNewProducts": MessageLookupByLibrary.simpleMessage("منتجات جديدة"),
     "invalidNotification": MessageLookupByLibrary.simpleMessage(
@@ -445,6 +450,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noUsersFound": MessageLookupByLibrary.simpleMessage("لا يوجد مستخدمون"),
     "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
+    "off": MessageLookupByLibrary.simpleMessage("خصم"),
     "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تغيير كلمة المرور بنجاح",
     ),

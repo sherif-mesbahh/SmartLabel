@@ -72,157 +72,171 @@ class _SearchPageState extends State<SearchPage> {
               child: Column(
                 children: [
                   // Use Row for ChoiceChips only when needed
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ChoiceChip(
-                        label: Text(S.of(context).searchProductsLabel),
-                        selected: selectedType == 'Products',
-                        selectedColor: primaryColor,
-                        onSelected: (selected) {
-                          if (selected) {
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeOut,
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                    child: Row(
+                      key: ValueKey<String>(selectedType),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildChoiceChip(
+                          context,
+                          label: S.of(context).searchProductsLabel,
+                          icon: Icons.shopping_bag,
+                          isSelected: selectedType == 'Products',
+                          onSelected: () {
                             setState(() {
                               selectedType = 'Products';
                               selectedSort =
                                   S.of(context).searchSortProductsByDefault;
                               selectedOrder = S.of(context).searchOrderByAsc;
                             });
-                          }
-                        },
-                      ),
-                      const SizedBox(width: 10),
-                      ChoiceChip(
-                        label: Text(S.of(context).searchCategoriesLabel),
-                        selected: selectedType == 'Categories',
-                        selectedColor: primaryColor,
-                        onSelected: (selected) {
-                          if (selected) {
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        _buildChoiceChip(
+                          context,
+                          label: S.of(context).searchCategoriesLabel,
+                          icon: Icons.category,
+                          isSelected: selectedType == 'Categories',
+                          onSelected: () {
                             setState(() {
                               selectedType = 'Categories';
                               selectedSort =
                                   S.of(context).searchSortCategoriesByDefault;
                               selectedOrder = S.of(context).searchOrderByAsc;
                             });
-                          }
-                        },
-                      ),
-                    ],
+                          },
+                        ),
+                      ],
+                    ),
                   ),
 
-                  SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DropdownButton<String>(
-                        value: selectedSort,
-                        items: (selectedType == 'Products'
-                                ? [
-                                    S.of(context).searchSortProductsByDefault,
-                                    S.of(context).searchSortProductsByName,
-                                    S.of(context).searchSortProductsByPrice,
-                                    // 'default',
-                                    // 'name',
-                                    // 'price',
-                                  ]
-                                : [
-                                    S.of(context).searchSortCategoriesByDefault,
-                                    S.of(context).searchSortCategoriesByName,
-                                    // 'default',
-                                    // 'name',
-                                  ])
-                            .map((sortOption) => DropdownMenuItem(
-                                  value: sortOption,
-                                  child: Text(
-                                    sortOption[0].toUpperCase() +
-                                        sortOption.substring(
-                                            1), // Capitalize first letter
-                                  ),
-                                ))
-                            .toList(),
-                        onChanged: (newValue) async {
-                          setState(() {
-                            selectedSort = newValue!;
-                          });
-                          final isDefault = selectedSort ==
-                                  S.of(context).searchSortProductsByDefault ||
-                              selectedSort ==
-                                  S.of(context).searchSortCategoriesByDefault;
-                          final isPrice = selectedSort ==
-                              S.of(context).searchSortProductsByPrice;
-                          final sortKey = isDefault
-                              ? 'id'
-                              : (isPrice ? 'new-price' : 'name');
-
-                          if (selectedType == 'Products') {
-                            await cubit.getProductSearch(
-                              name: searchController.text,
-                              sortType: sortKey,
-                              orderType: selectedOrder ==
-                                      S.of(context).searchOrderByAsc
-                                  ? 'asc'
-                                  : 'desc',
-                            );
-                          } else {
-                            await cubit.getCategorySearch(
-                              name: searchController.text,
-                              sortType: sortKey,
-                              orderType: selectedOrder ==
-                                      S.of(context).searchOrderByAsc
-                                  ? 'asc'
-                                  : 'desc',
-                            );
-                          }
-                        },
-                      ),
-                      const SizedBox(width: 10),
-                      DropdownButton<String>(
-                        value: selectedOrder,
-                        items: [
-                          S.of(context).searchOrderByAsc,
-                          S.of(context).searchOrderByDesc,
-                          // 'asc',
-                          // 'desc',
-                        ]
-                            .map((orderOption) => DropdownMenuItem(
-                                  value: orderOption,
-                                  child: Text(orderOption),
-                                ))
-                            .toList(),
-                        onChanged: (newValue) async {
-                          setState(() {
-                            selectedOrder = newValue!;
-                          });
-                          final isDefault = selectedSort ==
-                                  S.of(context).searchSortProductsByDefault ||
-                              selectedSort ==
-                                  S.of(context).searchSortCategoriesByDefault;
-                          final isPrice = selectedSort ==
-                              S.of(context).searchSortProductsByPrice;
-
-                          final sortKey = isDefault
-                              ? 'id'
-                              : (isPrice ? 'new-price' : 'name');
-                          final orderKey =
-                              selectedOrder == S.of(context).searchOrderByAsc
-                                  ? 'asc'
-                                  : 'desc';
-                          if (selectedType == 'Products') {
-                            await cubit.getProductSearch(
-                              name: searchController.text,
-                              sortType: sortKey,
-                              orderType: orderKey,
-                            );
-                          } else {
-                            await cubit.getCategorySearch(
-                              name: searchController.text,
-                              sortType: sortKey,
-                              orderType: orderKey,
-                            );
-                          }
-                        },
-                      ),
-                    ],
+                  SizedBox(height: 10),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeOut,
+                    transitionBuilder: (child, animation) => FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                    child: Row(
+                      key: ValueKey('$selectedSort$selectedOrder'),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildStyledDropdown<String>(
+                          context: context,
+                          value: selectedSort,
+                          items: (selectedType == 'Products'
+                                  ? [
+                                      S.of(context).searchSortProductsByDefault,
+                                      S.of(context).searchSortProductsByName,
+                                      S.of(context).searchSortProductsByPrice,
+                                    ]
+                                  : [
+                                      S
+                                          .of(context)
+                                          .searchSortCategoriesByDefault,
+                                      S.of(context).searchSortCategoriesByName,
+                                    ])
+                              .map((sortOption) => DropdownMenuItem(
+                                    value: sortOption,
+                                    child: Text(
+                                      sortOption[0].toUpperCase() +
+                                          sortOption.substring(1),
+                                      style: const TextStyle(fontSize: 14),
+                                    ),
+                                  ))
+                              .toList(),
+                          onChanged: (newValue) async {
+                            setState(() => selectedSort = newValue!);
+                            final isDefault = selectedSort ==
+                                    S.of(context).searchSortProductsByDefault ||
+                                selectedSort ==
+                                    S.of(context).searchSortCategoriesByDefault;
+                            final isPrice = selectedSort ==
+                                S.of(context).searchSortProductsByPrice;
+                            final sortKey = isDefault
+                                ? 'id'
+                                : (isPrice ? 'new-price' : 'name');
+                            if (selectedType == 'Products') {
+                              await cubit.getProductSearch(
+                                name: searchController.text,
+                                sortType: sortKey,
+                                orderType: selectedOrder ==
+                                        S.of(context).searchOrderByAsc
+                                    ? 'asc'
+                                    : 'desc',
+                              );
+                            } else {
+                              await cubit.getCategorySearch(
+                                name: searchController.text,
+                                sortType: sortKey,
+                                orderType: selectedOrder ==
+                                        S.of(context).searchOrderByAsc
+                                    ? 'asc'
+                                    : 'desc',
+                              );
+                            }
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        _buildStyledDropdown<String>(
+                          context: context,
+                          value: selectedOrder,
+                          items: [
+                            S.of(context).searchOrderByAsc,
+                            S.of(context).searchOrderByDesc,
+                          ]
+                              .map((orderOption) => DropdownMenuItem(
+                                    value: orderOption,
+                                    child: Text(orderOption,
+                                        style: const TextStyle(fontSize: 14)),
+                                  ))
+                              .toList(),
+                          onChanged: (newValue) async {
+                            setState(() => selectedOrder = newValue!);
+                            final isDefault = selectedSort ==
+                                    S.of(context).searchSortProductsByDefault ||
+                                selectedSort ==
+                                    S.of(context).searchSortCategoriesByDefault;
+                            final isPrice = selectedSort ==
+                                S.of(context).searchSortProductsByPrice;
+                            final sortKey = isDefault
+                                ? 'id'
+                                : (isPrice ? 'new-price' : 'name');
+                            final orderKey =
+                                selectedOrder == S.of(context).searchOrderByAsc
+                                    ? 'asc'
+                                    : 'desc';
+                            if (selectedType == 'Products') {
+                              await cubit.getProductSearch(
+                                name: searchController.text,
+                                sortType: sortKey,
+                                orderType: orderKey,
+                              );
+                            } else {
+                              await cubit.getCategorySearch(
+                                name: searchController.text,
+                                sortType: sortKey,
+                                orderType: orderKey,
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
+
                   const SizedBox(height: 10),
 
                   // Wrap the search field in a const to prevent unnecessary rebuilds
@@ -314,6 +328,79 @@ class _SearchPageState extends State<SearchPage> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildChoiceChip(
+    BuildContext context, {
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+    required VoidCallback onSelected,
+  }) {
+    return ChoiceChip(
+      showCheckmark: false,
+      label: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? Colors.white : primaryColor,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+      avatar: Icon(
+        icon,
+        color: isSelected ? Colors.white : primaryColor,
+        size: 18,
+      ),
+      selected: isSelected,
+      selectedColor: primaryColor,
+      backgroundColor: Colors.transparent,
+      shape: StadiumBorder(
+        side: BorderSide(color: primaryColor),
+      ),
+      onSelected: (_) => onSelected(),
+      /// A styled [DropdownButton] widget with a white background, primary color
+      /// border, and a 24px rounded rectangle shape.
+      ///
+      /// [value] is the currently selected item.
+      ///
+      /// [items] are the items to be displayed in the dropdown.
+      ///
+      /// [onChanged] is called when the user selects an item.
+      ///
+    );
+  }
+
+  Widget _buildStyledDropdown<T>({
+    required BuildContext context,
+    required T value,
+    required List<DropdownMenuItem<T>> items,
+    required ValueChanged<T?> onChanged,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Theme.of(context).primaryColor),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<T>(
+          value: value,
+          items: items,
+          onChanged: onChanged,
+          style: const TextStyle(
+            fontSize: 14,
+            color: primaryColor,
+          ),
+          icon: const Icon(Icons.arrow_drop_down),
+          dropdownColor: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
       ),
     );
   }

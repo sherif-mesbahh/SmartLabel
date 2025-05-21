@@ -20,7 +20,6 @@ class EditInfoButtonWidget extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(40),
             ),
             child: Image.asset(

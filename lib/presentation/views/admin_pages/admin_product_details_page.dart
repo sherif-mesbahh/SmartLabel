@@ -173,6 +173,8 @@ class _AdminProductDetailsPageState extends State<AdminProductDetailsPage> {
                     ProductDetailsAddImagesWidget(
                         cubit: widget.cubit, product: product),
                     // Name
+                    SizedBox(height: 10),
+
                     TextFormField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {

@@ -50,7 +50,7 @@
     "signupGoBackButton": "Go Back",
     "navBarHome": "Home",
     "navBarCategories": "Categories",
-    "navBarFav": "Favourites",
+    "navBarFav": "WishList",
     "navBarProfile": "Profile",
     "homePageNewProducts": "Featured Products",
     "homePageNewCategories": " Categories",
@@ -116,7 +116,7 @@
     "productDetailsDescription": "Description:",
     "categoryProducts": "Category Products",
     "failedToLoadCategoryProducts": "Failed to load category products.",
-    "noCategoryProductsFoundInThisCategory": "No category products found in this category.",
+    "noCategoryProductsFoundInThisCategory": "No Products added yet in this category",
     "profileUpdatedSuccessfully": "Profile Updated Successfully",
     "accountDeletedSuccessfully": "Account Deleted Successfully",
     "search": "Search",
@@ -302,5 +302,9 @@
     "activeBanners": "Active Banners",
     "categories": "Categories",
     "products": "Products",
-    "users": "Users"
+    "users": "Users",
+    "discount":"Discount",
+    "comingSoon":"Coming Soon",
+    "goToAdminPanel":"Go to Admin Panel",
+    "off" : "Off"
 }

@@ -8,6 +8,7 @@ import 'package:smart_label_software_engineering/core/themes/themes.dart';
 import 'package:smart_label_software_engineering/core/utils/bloc_observer.dart';
 import 'package:smart_label_software_engineering/core/utils/flutter_local_notifications.dart';
 import 'package:smart_label_software_engineering/core/utils/internet_monitor.dart';
+import 'package:smart_label_software_engineering/core/utils/lifecycle_watcher.dart';
 import 'package:smart_label_software_engineering/core/utils/shared_preferences.dart';
 import 'package:smart_label_software_engineering/features/splashScreen/presentation/views/splash_screen_page.dart';
 import 'package:smart_label_software_engineering/generated/l10n.dart';
@@ -43,7 +44,11 @@ void main() async {
               ..getNotifications(),
           ),
         ],
-        child: MyApp(showOnBoarding: !isOnBoardingFinished),
+        child: LifecycleWatcher(
+          child: MyApp(
+            showOnBoarding: !isOnBoardingFinished,
+          ),
+        ),
       ),
     ),
   );
@@ -52,7 +57,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   final bool showOnBoarding;
 
-  const MyApp({super.key, required this.showOnBoarding});
+  const MyApp({
+    super.key,
+    required this.showOnBoarding,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
 import 'package:smart_label_software_engineering/core/utils/constants.dart';
@@ -59,106 +60,139 @@ class AdminCategoriesGridViewItem extends StatelessWidget {
             }
           },
           child: Stack(
-            alignment: Alignment.topRight,
             clipBehavior: Clip.none,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // image
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'http://smartlabel1.runasp.net/Uploads/${categoryModel?.data?[index].imageUrl}',
-                      height: screenHeight(context) * .15,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Center(
-                        child: Lottie.asset(
-                          'assets/lottie/loading_indicator.json',
-                          width: 100,
-                          height: 100,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  // name
-                  Text(
-                    categoryModel?.data?[index].name ?? '',
-                    style: TextStyles.productTitle(context),
-                    maxLines: 1,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Image
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: Uri.encodeFull(
+                            'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(categoryModel?.data?[index].imageUrl ?? '')}'),
+                        height: screenHeight(context) * 0.15,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Center(
+                          child: Lottie.asset(
+                            'assets/lottie/loading_indicator.json',
+                            width: 100,
+                            height: 100,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        categoryModel?.data?[index].name ?? '',
+                        style: TextStyles.productTitle(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              // delete button
+
+              // Delete button
               Positioned(
-                top: -10,
-                right: -10,
-                child: IconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return BlocBuilder<AppCubit, AppStates>(
-                          builder: (context, state) {
-                            return AlertDialog(
-                              title:
-                                  Text(S.of(context).categoryConfirmDeletion),
-                              content: Text(
-                                S.of(context).categoryDeletionText,
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text(S
-                                      .of(context)
-                                      .categoryDeletionCancelButton),
+                top: 8,
+                right: 8,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Octicons.trash, color: Colors.red),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return BlocBuilder<AppCubit, AppStates>(
+                            builder: (context, state) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                TextButton(
-                                  onPressed: state is DeleteCategoryLoadingState
-                                      ? null
-                                      : () {
-                                          cubit
-                                              .deleteCategory(
-                                                  id: categoryModel
-                                                          ?.data![index].id ??
-                                                      1)
-                                              .then((_) {
-                                            Navigator.of(context).pop();
-                                          });
-                                        },
-                                  child: state is DeleteCategoryLoadingState
-                                      ? SizedBox(
-                                          height: 20,
-                                          width: 20,
-                                          child: Lottie.asset(
-                                            'assets/lottie/loading_indicator.json',
-                                            width: 100,
-                                            height: 100,
+                                title: Text(
+                                  S.of(context).categoryConfirmDeletion,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                content:
+                                    Text(S.of(context).categoryDeletionText),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                    child: Text(S
+                                        .of(context)
+                                        .categoryDeletionCancelButton),
+                                  ),
+                                  TextButton(
+                                    onPressed:
+                                        state is DeleteCategoryLoadingState
+                                            ? null
+                                            : () {
+                                                cubit
+                                                    .deleteCategory(
+                                                        id: categoryModel
+                                                                ?.data?[index]
+                                                                .id ??
+                                                            1)
+                                                    .then((_) =>
+                                                        Navigator.of(context)
+                                                            .pop());
+                                              },
+                                    child: state is DeleteCategoryLoadingState
+                                        ? SizedBox(
+                                            height: 20,
+                                            width: 20,
+                                            child: Lottie.asset(
+                                              'assets/lottie/loading_indicator.json',
+                                            ),
+                                          )
+                                        : Text(
+                                            S
+                                                .of(context)
+                                                .categoryDeletionDeleteButton,
+                                            style: const TextStyle(
+                                                color: Colors.red),
                                           ),
-                                        )
-                                      : Text(
-                                          S
-                                              .of(context)
-                                              .categoryDeletionDeleteButton,
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
-                  icon: Icon(
-                    Icons.delete,
-                    color: Colors.red,
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               ),

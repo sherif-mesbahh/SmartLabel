@@ -33,10 +33,37 @@ class ProductsSection extends StatelessWidget {
               pushNavigator(context, const ProductsPage(), slideRightToLeft);
               cubit.getProducts();
             },
+            style: ButtonStyle(
+              backgroundColor:
+                  WidgetStateProperty.all(primaryColor.withOpacity(0.25)),
+              foregroundColor: WidgetStateProperty.all(primaryColor),
+              padding: WidgetStateProperty.all(
+                const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+              ),
+              shape: WidgetStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(color: primaryColor.withOpacity(0.4)),
+                ),
+              ),
+              overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.pressed)) {
+                    return primaryColor.withOpacity(0.2);
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return primaryColor.withOpacity(0.15);
+                  }
+                  return null;
+                },
+              ),
+              textStyle: WidgetStateProperty.all(
+                TextStyles.productTitle(context)
+                    .copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
             child: Text(
               S.of(context).seeAllButton,
-              style: TextStyles.buttonText(context)
-                  .copyWith(fontSize: 14, color: primaryColor),
             ),
           ),
         ],
@@ -148,11 +175,12 @@ class ProductsSection extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: products.length > 10 ? 10 : products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  childAspectRatio: 1,
+                  childAspectRatio:
+                      screenWidth(context) / (screenHeight(context) * 0.5),
                 ),
                 itemBuilder: (context, index) {
                   return Container(

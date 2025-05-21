@@ -68,15 +68,15 @@ class _AdminProductDetailsImagesWidgetState
                                     context,
                                     MaterialPageRoute(
                                       builder: (_) => FullScreenImagePage(
-                                        imageUrl:
-                                            "http://smartlabel1.runasp.net/Uploads/${image.imageUrl}",
+                                        imageUrl: Uri.encodeFull(
+                                            'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(image.imageUrl ?? '')}'),
                                       ),
                                     ),
                                   );
                                 },
                                 child: CachedNetworkImage(
-                                  imageUrl:
-                                      "http://smartlabel1.runasp.net/Uploads/${image.imageUrl}",
+                                  imageUrl: Uri.encodeFull(
+                                      'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(image.imageUrl ?? '')}'),
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) => Center(
                                     child: Lottie.asset(

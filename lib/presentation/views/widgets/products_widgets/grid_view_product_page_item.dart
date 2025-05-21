@@ -65,8 +65,8 @@ class GridViewProductPageItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            'http://smartlabel1.runasp.net/Uploads/${model.mainImage}',
+                        imageUrl: Uri.encodeFull(
+                            'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(model.mainImage ?? '')}'),
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Center(
                           child: Lottie.asset(
@@ -80,11 +80,21 @@ class GridViewProductPageItem extends StatelessWidget {
                     ),
                   ),
                   if (model.newPrice != model.oldPrice)
-                    Image(
-                      height: screenHeight(context) * .06,
-                      width: screenWidth(context) * .1,
-                      image: AssetImage(
-                        'assets/images/discount_image.png',
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
+                      margin: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        '${model.discount}% ${S.of(context).off}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                 ],
@@ -119,7 +129,7 @@ class GridViewProductPageItem extends StatelessWidget {
                 top: -5,
                 right: -5,
                 child: model.favorite!
-                    ? InkWell(
+                    ? GestureDetector(
                         onTap: () {
                           if (AppCubit.get(context).isLogin) {
                             AppCubit.get(context).removeFromFav(model: model);
@@ -137,15 +147,15 @@ class GridViewProductPageItem extends StatelessWidget {
                         },
                         child: Lottie.asset(
                           'assets/lottie/inFavAnimation.json',
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
+                          width: 65,
+                          height: 65,
+                          fit: BoxFit.fill,
                           repeat: false,
                           reverse: false,
                           animate: true,
                         ),
                       )
-                    : InkWell(
+                    : GestureDetector(
                         onTap: () {
                           if (AppCubit.get(context).isLogin) {
                             AppCubit.get(context).addToFav(
@@ -168,8 +178,9 @@ class GridViewProductPageItem extends StatelessWidget {
                               horizontal: 5, vertical: 5),
                           child: Lottie.asset(
                             'assets/lottie/notFavAnimation.json',
-                            width: 40,
-                            height: 40,
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.fill,
                             repeat: false,
                             reverse: false,
                             animate: true,

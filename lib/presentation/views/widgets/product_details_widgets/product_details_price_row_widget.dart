@@ -45,7 +45,7 @@ class ProductDetailsPriceRow extends StatelessWidget {
           builder: (context, state) {
             final isFav = model.favorite ?? false;
             return isFav
-                ? InkWell(
+                ? GestureDetector(
                     onTap: () {
                       if (AppCubit.get(context).isLogin) {
                         AppCubit.get(context).removeFromFav(model: model);
@@ -71,7 +71,7 @@ class ProductDetailsPriceRow extends StatelessWidget {
                       animate: true,
                     ),
                   )
-                : InkWell(
+                : GestureDetector(
                     onTap: () {
                       if (AppCubit.get(context).isLogin) {
                         AppCubit.get(context).addToFav(model: model);
@@ -92,8 +92,8 @@ class ProductDetailsPriceRow extends StatelessWidget {
                           horizontal: 5, vertical: 5),
                       child: Lottie.asset(
                         'assets/lottie/notFavAnimation.json',
-                        width: 40,
-                        height: 40,
+                        width: 60,
+                        height: 60,
                         repeat: false,
                         reverse: false,
                         animate: true,

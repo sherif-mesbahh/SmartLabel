@@ -105,8 +105,8 @@ class _CustomSliderState extends State<CustomSlider> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(14),
                   child: CachedNetworkImage(
-                    imageUrl:
-                        "http://smartlabel1.runasp.net/Uploads/${banner.mainImage}",
+                    imageUrl: Uri.encodeFull(
+                        'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(banner.mainImage)}'),
                     fit: BoxFit.cover,
                     fadeInDuration: const Duration(milliseconds: 500),
                     placeholder: (context, url) => Center(
@@ -149,7 +149,7 @@ class _CustomSliderState extends State<CustomSlider> {
           },
           options: CarouselOptions(
             height: screenHeight(context) * 0.25,
-            autoPlay: true,
+            autoPlay: widget.banners.length > 1,
             enlargeCenterPage: true,
             viewportFraction: 0.85,
             aspectRatio: 16 / 9,

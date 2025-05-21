@@ -50,46 +50,103 @@ class ProductDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                       width: 50,
                       height: 50,
                     )
-                  : InkWell(
-                      child: Text(
-                        S.of(context).editProductSaveChangesButton,
-                        style: TextStyles.productTitle(context)
-                            .copyWith(color: primaryColor),
+                  : IntrinsicWidth(
+                      child: TextButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            cubit
+                                .updateProduct(
+                              productId: productId,
+                              categoryId: categoryId,
+                              name: nameController.text,
+                              description: descController.text,
+                              mainImage: cubit.mainproductImageToUpload,
+                              imageFiles: cubit.productImagesToUpload,
+                              imagesToDelete: cubit.productImagesToDelete,
+                              discount: discountController.text,
+                              price: priceController.text,
+                            )
+                                .then((_) async {
+                              await cubit.getCategoryProducts(id: categoryId);
+                              await cubit.getProductDetails(id: productId);
+                            });
+                          }
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all(
+                              primaryColor.withOpacity(0.25)),
+                          foregroundColor:
+                              WidgetStateProperty.all(primaryColor),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 20),
+                          ),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              side: BorderSide(
+                                  color: primaryColor.withOpacity(0.4)),
+                            ),
+                          ),
+                          overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                            (states) {
+                              if (states.contains(WidgetState.pressed)) {
+                                return primaryColor.withOpacity(0.2);
+                              }
+                              if (states.contains(WidgetState.hovered)) {
+                                return primaryColor.withOpacity(0.15);
+                              }
+                              return null;
+                            },
+                          ),
+                          textStyle: WidgetStateProperty.all(
+                            TextStyles.productTitle(context)
+                                .copyWith(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        child: Text(S.of(context).editProductSaveChangesButton),
                       ),
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          cubit
-                              .updateProduct(
-                            productId: productId,
-                            categoryId: categoryId,
-                            name: nameController.text,
-                            description: descController.text,
-                            mainImage: cubit.mainproductImageToUpload,
-                            imageFiles: cubit.productImagesToUpload,
-                            imagesToDelete: cubit.productImagesToDelete,
-                            discount: discountController.text,
-                            price: priceController.text,
-                          )
-                              .then((_) async {
-                            await cubit.getCategoryProducts(id: categoryId);
-                            await cubit.getProductDetails(id: productId);
-                          });
-                        }
-                      },
                     ),
-              // Discard
-              InkWell(
-                child: Text(
-                  S.of(context).editProductDiscardChangesButton,
-                  style: TextStyles.productTitle(context)
-                      .copyWith(color: primaryColor),
-                ),
-                onTap: () {
+              TextButton(
+                onPressed: () {
                   cubit.productImagesToUpload = [];
                   cubit.productImagesToDelete = [];
                   cubit.mainproductImageToUpload = null;
                   popNavigator(context);
                 },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(
+                    Colors.red.withOpacity(0.15),
+                  ),
+                  foregroundColor: WidgetStateProperty.all(Colors.red),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  ),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(color: Colors.red.withOpacity(0.4)),
+                    ),
+                  ),
+                  overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.pressed)) {
+                        return Colors.red.withOpacity(0.2);
+                      }
+                      if (states.contains(WidgetState.hovered)) {
+                        return Colors.red.withOpacity(0.15);
+                      }
+                      return null;
+                    },
+                  ),
+                  textStyle: WidgetStateProperty.all(
+                    TextStyles.productTitle(context).copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+                child: Text(S.of(context).editProductDiscardChangesButton),
               ),
             ],
           );

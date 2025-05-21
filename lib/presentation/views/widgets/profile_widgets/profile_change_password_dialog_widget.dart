@@ -144,30 +144,25 @@ class _ChangePasswordDialogWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 8),
-                  Wrap(
-                    runSpacing: 6,
-                    children: [
-                      _buildRequirementText(
-                        S.of(context).passwordValidationMinLength,
-                        hasMinLength,
-                      ),
-                      _buildRequirementText(
-                        S.of(context).passwordValidationUpperCase,
-                        hasUpper,
-                      ),
-                      _buildRequirementText(
-                        S.of(context).passwordValidationLowerCase,
-                        hasLower,
-                      ),
-                      _buildRequirementText(
-                        S.of(context).passwordValidationNumber,
-                        hasNumber,
-                      ),
-                      _buildRequirementText(
-                          S.of(context).passwordValidationSpecialChar,
-                          hasSpecialChar),
-                    ],
+                  _buildRequirementText(
+                    S.of(context).passwordValidationMinLength,
+                    hasMinLength,
                   ),
+                  _buildRequirementText(
+                    S.of(context).passwordValidationUpperCase,
+                    hasUpper,
+                  ),
+                  _buildRequirementText(
+                    S.of(context).passwordValidationLowerCase,
+                    hasLower,
+                  ),
+                  _buildRequirementText(
+                    S.of(context).passwordValidationNumber,
+                    hasNumber,
+                  ),
+                  _buildRequirementText(
+                      S.of(context).passwordValidationSpecialChar,
+                      hasSpecialChar),
                 ],
               ),
 
@@ -287,7 +282,7 @@ class _ChangePasswordDialogWidgetState
           size: 12,
         ),
         const SizedBox(width: 6),
-        Expanded(
+        Flexible(
           child: Text(
             text,
             style: TextStyle(

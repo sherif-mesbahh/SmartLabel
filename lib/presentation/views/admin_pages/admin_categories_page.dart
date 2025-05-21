@@ -99,92 +99,184 @@ class AdminCategoriesPage extends StatelessWidget {
                   // Stats Section
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Wrap(
-                      alignment: WrapAlignment.spaceEvenly,
-                      spacing: 16,
-                      runSpacing: 16,
+                    child: Column(
                       children: [
-                        _buildStatCard(
-                          context,
-                          title: S.of(context).banners,
-                          count: AppCubit.get(context)
-                                  .bannersModel
-                                  ?.data
-                                  ?.length ??
-                              0,
-                          color: Colors.blue,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: _buildStatCard(
+                                context,
+                                title: S.of(context).banners,
+                                count: AppCubit.get(context)
+                                        .bannersModel
+                                        ?.data
+                                        ?.length ??
+                                    0,
+                                color: Colors.blue,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: _buildStatCard(
+                                context,
+                                title: S.of(context).activeBanners,
+                                count: AppCubit.get(context)
+                                        .activeBannersModel
+                                        ?.data
+                                        ?.length ??
+                                    0,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ],
                         ),
-                        _buildStatCard(
-                          context,
-                          title: S.of(context).activeBanners,
-                          count: AppCubit.get(context)
-                                  .activeBannersModel
-                                  ?.data
-                                  ?.length ??
-                              0,
-                          color: Colors.green,
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: _buildStatCard(
+                                context,
+                                title: S.of(context).categories,
+                                count: AppCubit.get(context)
+                                        .categoryModel
+                                        ?.data
+                                        ?.length ??
+                                    0,
+                                color: Colors.orange,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: _buildStatCard(
+                                context,
+                                title: S.of(context).products,
+                                count: AppCubit.get(context)
+                                        .productModel
+                                        ?.data
+                                        ?.length ??
+                                    0,
+                                color: Colors.purple,
+                              ),
+                            ),
+                          ],
                         ),
-                        _buildStatCard(
-                          context,
-                          title: S.of(context).categories,
-                          count: AppCubit.get(context)
-                                  .categoryModel
-                                  ?.data
-                                  ?.length ??
-                              0,
-                          color: Colors.orange,
-                        ),
-                        _buildStatCard(
-                          context,
-                          title: S.of(context).products,
-                          count: AppCubit.get(context)
-                                  .productModel
-                                  ?.data
-                                  ?.length ??
-                              0,
-                          color: Colors.purple,
-                        ),
-                        _buildStatCard(
-                          context,
-                          title: S.of(context).users,
-                          count: AppCubit.get(context)
-                                  .allUsersModel
-                                  ?.data
-                                  ?.length ??
-                              0,
-                          color: Colors.red,
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: _buildStatCard(
+                                context,
+                                title: S.of(context).users,
+                                count: AppCubit.get(context)
+                                        .allUsersModel
+                                        ?.data
+                                        ?.length ??
+                                    0,
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  pushNavigator(
+                                    context,
+                                    AdminEditUsersPage(),
+                                    slideRightToLeft,
+                                  );
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor: WidgetStateProperty.all(
+                                      primaryColor.withOpacity(0.25)),
+                                  foregroundColor:
+                                      WidgetStateProperty.all(primaryColor),
+                                  padding: WidgetStateProperty.all(
+                                      const EdgeInsets.symmetric(vertical: 16)),
+                                  minimumSize: WidgetStateProperty.all(
+                                      const Size.fromHeight(48)),
+                                  shape: WidgetStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      side: BorderSide(
+                                          color: primaryColor.withOpacity(0.4)),
+                                    ),
+                                  ),
+                                  overlayColor:
+                                      WidgetStateProperty.resolveWith<Color?>(
+                                    (Set<WidgetState> states) {
+                                      if (states
+                                          .contains(WidgetState.pressed)) {
+                                        return primaryColor.withOpacity(0.2);
+                                      }
+                                      if (states
+                                          .contains(WidgetState.hovered)) {
+                                        return primaryColor.withOpacity(0.15);
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  textStyle: WidgetStateProperty.all(
+                                    TextStyles.productTitle(context).copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                child: Text(S.of(context).editUsersButton),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
 
                   // Banners
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        S.of(context).allBanners,
-                        style: TextStyles.headline2(context),
-                      ),
-                      Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          pushNavigator(
-                            context,
-                            AdminEditUsersPage(),
-                            slideRightToLeft,
-                          );
-                        },
-                        child: Text(
-                          S.of(context).editUsersButton,
-                          style: TextStyles.buttonText(context).copyWith(
-                            color: primaryColor,
-                            fontSize: 16,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          S.of(context).allBanners,
+                          style: TextStyles.headline2(context).copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ],
+                        const Spacer(),
+                        TextButton.icon(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AddBannersDialogWidget(),
+                            );
+                          },
+                          icon: Icon(Icons.add, color: primaryColor),
+                          label: Text(
+                            S.of(context).addBannerButton,
+                            style: TextStyles.productTitle(context).copyWith(
+                              color: primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          style: TextButton.styleFrom(
+                            backgroundColor: primaryColor.withOpacity(0.15),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(
+                                  color: primaryColor.withOpacity(0.4)),
+                            ),
+                            foregroundColor: primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+
                   SizedBox(
                     height: 10,
                   ),
@@ -201,29 +293,15 @@ class AdminCategoriesPage extends StatelessWidget {
                             cubit: AppCubit.get(context),
                           ),
                         ),
-                  //Add Banner Button
                   SizedBox(
                     height: 10,
                   ),
+                  // Categories
                   Row(
                     children: [
                       Text(
                         S.of(context).allCategories,
                         style: TextStyles.headline2(context),
-                      ),
-                      Spacer(),
-                      TextButton(
-                        child: Text(
-                          S.of(context).addBannerButton,
-                          style: TextStyles.productTitle(context)
-                              .copyWith(color: primaryColor),
-                        ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AddBannersDialogWidget(),
-                          );
-                        },
                       ),
                     ],
                   ),
@@ -272,7 +350,7 @@ class AdminCategoriesPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2.2,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withOpacity(0.2),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: color.withOpacity(0.4)),
       ),

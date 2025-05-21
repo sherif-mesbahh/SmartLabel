@@ -68,18 +68,45 @@ class CategoriesProductsPage extends StatelessWidget {
                     }),
               );
             }
-
             if (products == null) {
               return Center(
-                  child: Text(S.of(context).failedToLoadCategoryProducts,
-                      style: TextStyle(color: Colors.red)));
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'assets/images/failed_icon.png',
+                      width: 120,
+                      height: 120,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      S.of(context).failedToLoadCategoryProducts,
+                      style: const TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
             }
-
             if (products.isEmpty) {
               return Center(
-                  child: Text(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'assets/images/failed_icon.png',
+                      width: 120,
+                      height: 120,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
                       S.of(context).noCategoryProductsFoundInThisCategory,
-                      style: TextStyle(color: Colors.red)));
+                      style: const TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
             }
 
             return SingleChildScrollView(
@@ -93,12 +120,12 @@ class CategoriesProductsPage extends StatelessWidget {
                     GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
-                        childAspectRatio: 1,
+                        childAspectRatio: screenWidth(context) /
+                            (screenHeight(context) * 0.45),
                       ),
                       itemCount: products.length,
                       itemBuilder: (context, index) {

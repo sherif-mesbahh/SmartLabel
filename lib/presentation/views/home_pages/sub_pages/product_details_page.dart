@@ -92,6 +92,16 @@ class ProductDetailsPage extends StatelessWidget {
           builder: (context, state) {
             return IconButton(
               onPressed: () {
+                print("isSearchProduct: $isSearchProduct");
+                print("searchOrder: $searchOrder, searchSort: $searchSort");
+
+                if (isSearchProduct) {
+                  AppCubit.get(context).getProductSearch(
+                    name: '',
+                    orderType: searchOrder,
+                    sortType: searchSort,
+                  );
+                }
                 if (AppCubit.get(context).navBarCurrentIndex == 0) {
                   AppCubit.get(context).getProducts();
                   AppCubit.get(context).getCategoryProducts(id: categoryId);
@@ -107,13 +117,6 @@ class ProductDetailsPage extends StatelessWidget {
                 }
                 if (AppCubit.get(context).navBarCurrentIndex == 3) {
                   popNavigator(context);
-                }
-                if (isSearchProduct) {
-                  AppCubit.get(context).getProductSearch(
-                    name: '',
-                    orderType: searchOrder,
-                    sortType: searchSort,
-                  );
                 }
               },
               icon: Icon(

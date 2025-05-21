@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -155,12 +156,20 @@ class NotificationItem extends StatelessWidget {
               leading: image != null
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        "http://smartlabel1.runasp.net/Uploads/$image",
+                      child: CachedNetworkImage(
+                        imageUrl: Uri.encodeFull(
+                            'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(image ?? '')}'),
                         width: 48,
                         height: 48,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(
+                        placeholder: (context, url) => const Center(
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
                           Icons.broken_image,
                           color: Colors.grey,
                         ),

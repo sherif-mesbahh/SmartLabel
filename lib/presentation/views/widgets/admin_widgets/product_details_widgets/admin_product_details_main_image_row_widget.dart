@@ -39,15 +39,15 @@ class ProductDetailsMainImageWidget extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (_) => FullScreenImagePage(
-                              imageUrl:
-                                  "http://smartlabel1.runasp.net/Uploads/${cubit.productDetailsModel!.data!.mainImage}",
+                              imageUrl: Uri.encodeFull(
+                                  'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(cubit.productDetailsModel!.data!.mainImage ?? '')}'),
                             ),
                           ),
                         );
                       },
                       child: CachedNetworkImage(
-                        imageUrl:
-                            "http://smartlabel1.runasp.net/Uploads/${cubit.productDetailsModel!.data!.mainImage}",
+                        imageUrl: Uri.encodeFull(
+                            'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(cubit.productDetailsModel!.data!.mainImage ?? '')}'),
                         height: 80,
                         width: 80,
                         fit: BoxFit.cover,
@@ -85,11 +85,38 @@ class ProductDetailsMainImageWidget extends StatelessWidget {
               builder: (context) => AddMainProductImageDialogWidget(),
             );
           },
-          child: Text(
-            S.of(context).editProductEditMainImageButton,
-            style:
-                TextStyles.productTitle(context).copyWith(color: primaryColor),
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(
+              primaryColor.withOpacity(0.25),
+            ),
+            foregroundColor: WidgetStateProperty.all(primaryColor),
+            padding: WidgetStateProperty.all(
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            ),
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(color: primaryColor.withOpacity(0.4)),
+              ),
+            ),
+            overlayColor: WidgetStateProperty.resolveWith<Color?>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.pressed)) {
+                  return primaryColor.withOpacity(0.2);
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return primaryColor.withOpacity(0.15);
+                }
+                return null;
+              },
+            ),
+            textStyle: WidgetStateProperty.all(
+              TextStyles.productTitle(context).copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
+          child: Text(S.of(context).editProductEditMainImageButton),
         ),
       ],
     );

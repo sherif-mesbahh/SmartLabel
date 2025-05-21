@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_label_software_engineering/core/components/components.dart';
-import 'package:smart_label_software_engineering/core/themes/themes.dart';
+import 'package:smart_label_software_engineering/core/utils/constants.dart';
 import 'package:smart_label_software_engineering/core/utils/text_styles.dart';
 import 'package:smart_label_software_engineering/models/category_model/category_datum.dart';
 import 'package:smart_label_software_engineering/presentation/cubits/app_cubit.dart';
@@ -30,25 +30,35 @@ class HomeCategoriesListViewItem extends StatelessWidget {
         });
       },
       child: SizedBox(
-        width: 50,
+        width: screenWidth(context) * .2,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 40,
-              width: 40,
+              height: screenHeight(context) * .08,
+              width: screenWidth(context) * .2,
               decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(
-                    'http://smartlabel1.runasp.net/Uploads/${model.imageUrl}',
-                  ),
-                  alignment: Alignment.topCenter,
-                ),
               ),
+              child: model.imageUrl != null && model.imageUrl!.isNotEmpty
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                        imageUrl: Uri.encodeFull(
+                            'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(model.imageUrl ?? '')}'),
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : const Icon(Icons.person, color: Colors.white),
             ),
             Text(
               model.name ?? 'No Name',

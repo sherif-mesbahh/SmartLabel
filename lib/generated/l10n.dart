@@ -540,9 +540,9 @@ class S {
     );
   }
 
-  /// `Favourites`
+  /// `WishList`
   String get navBarFav {
-    return Intl.message('Favourites', name: 'navBarFav', desc: '', args: []);
+    return Intl.message('WishList', name: 'navBarFav', desc: '', args: []);
   }
 
   /// `Profile`
@@ -1170,10 +1170,10 @@ class S {
     );
   }
 
-  /// `No category products found in this category.`
+  /// `No Products added yet in this category`
   String get noCategoryProductsFoundInThisCategory {
     return Intl.message(
-      'No category products found in this category.',
+      'No Products added yet in this category',
       name: 'noCategoryProductsFoundInThisCategory',
       desc: '',
       args: [],
@@ -2930,6 +2930,31 @@ class S {
   /// `Users`
   String get users {
     return Intl.message('Users', name: 'users', desc: '', args: []);
+  }
+
+  /// `Discount`
+  String get discount {
+    return Intl.message('Discount', name: 'discount', desc: '', args: []);
+  }
+
+  /// `Coming Soon`
+  String get comingSoon {
+    return Intl.message('Coming Soon', name: 'comingSoon', desc: '', args: []);
+  }
+
+  /// `Go to Admin Panel`
+  String get goToAdminPanel {
+    return Intl.message(
+      'Go to Admin Panel',
+      name: 'goToAdminPanel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Off`
+  String get off {
+    return Intl.message('Off', name: 'off', desc: '', args: []);
   }
 }
 

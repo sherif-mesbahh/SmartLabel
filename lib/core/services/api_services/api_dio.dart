@@ -31,67 +31,67 @@ class ApiService {
         onError: (error, handler) async {
           print('[DIO] Error occurred: ${error.response?.statusCode}');
 
-          if (error.response?.statusCode == 401) {
+          if (error.response?.statusCode == 401 ||
+              error.response?.statusCode == 403) {
+           // TokenRefresher.start();
             print('[DIO] Attempting to refresh token...');
             final refreshToken = await SecureTokenStorage.getRefreshToken();
+            final oldAccessToken = await SecureTokenStorage.getAccessToken();
+            print(
+                '[DIO] Stored tokens → Access: $oldAccessToken, Refresh: $refreshToken');
 
-            if (refreshToken != null) {
-              try {
-                // Use a clean Dio instance to refresh the token
-                final tokenDio = Dio();
-                final newTokenResponse = await tokenDio.post(
-                  ApiEndpoints.refreshToken,
-                  data: {'refreshToken': refreshToken},
-                  options:
-                      Options(headers: {'Content-Type': 'application/json'}),
-                );
-
-                final newAccessToken =
-                    newTokenResponse.data['data']['accessToken'];
-                final newRefreshToken =
-                    newTokenResponse.data['data']['refreshToken'];
-                print(
-                    '[DIO] Token refreshed. New access token: $newAccessToken');
-
-                await SecureTokenStorage.saveTokens(
-                    newAccessToken, newRefreshToken);
-
-                // Retry the original request
-                final opts = error.requestOptions;
-                opts.headers['Authorization'] = 'Bearer $newAccessToken';
-
-                print('[DIO] Retrying original request with new token...');
-                final clonedResponse = await _dio.request(
-                  opts.path,
-                  options: Options(
-                    method: opts.method,
-                    headers: opts.headers,
-                  ),
-                  data: opts.data,
-                  queryParameters: opts.queryParameters,
-                );
-
-                return handler.resolve(clonedResponse);
-              } catch (e) {
-                print('[DIO] Token refresh failed: $e');
-
-                if (e is DioException) {
-                  final statusCode = e.response?.statusCode;
-
-                  if (statusCode == 401 || statusCode == 403) {
-                    // Refresh token is invalid or expired
-                    await SecureTokenStorage.clearTokens();
-                    print('[DIO] Refresh token invalid. Tokens cleared.');
-                  } else {
-                    // Server error or network issue — don't clear tokens
-                    print('[DIO] Non-auth error. Keeping existing tokens.');
-                  }
-                }
-
-                return handler.reject(error);
-              }
-            } else {
+            if (refreshToken == null) {
               print('[DIO] No refresh token found.');
+              return handler.next(error);
+            }
+            try {
+              final tokenDio = Dio(); // clean instance to avoid interceptors
+              final response = await tokenDio.post(
+                ApiEndpoints.refreshToken,
+                data: {'refreshToken': refreshToken},
+                options: Options(headers: {'Content-Type': 'application/json'}),
+              );
+
+              final newAccessToken = response.data['data']['accessToken'];
+              final newRefreshToken = response.data['data']['refreshToken'];
+              print('[DIO] Token refresh successful.');
+
+              await SecureTokenStorage.saveTokens(
+                  newAccessToken, newRefreshToken);
+
+              // Retry the original request
+              final requestOptions = error.requestOptions;
+              requestOptions.headers['Authorization'] =
+                  'Bearer $newAccessToken';
+
+              print('[DIO] Retrying request: ${requestOptions.uri}');
+              final retryResponse = await _dio.request(
+                requestOptions.path,
+                options: Options(
+                  method: requestOptions.method,
+                  headers: requestOptions.headers,
+                ),
+                data: requestOptions.data,
+                queryParameters: requestOptions.queryParameters,
+              );
+
+              return handler.resolve(retryResponse);
+            } catch (e) {
+              print('[DIO] Token refresh failed: $e');
+
+              if (e is DioException) {
+                final statusCode = e.response?.statusCode;
+                if (statusCode == 401 || statusCode == 403) {
+                  print('[DIO] Refresh token expired or invalid.');
+                  await SecureTokenStorage.clearTokens();
+                } else {
+                  print('[DIO] Other token refresh error.');
+                }
+              }
+
+              return handler.reject(error); // Pass original error forward
+            } finally {
+              print('[DIO] Token refresh completed.');
             }
           }
 

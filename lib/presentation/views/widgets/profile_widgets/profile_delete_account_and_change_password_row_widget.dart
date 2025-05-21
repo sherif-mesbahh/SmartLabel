@@ -17,6 +17,14 @@ class ChangePasswordAndDeleleAccountWidget extends StatelessWidget {
       children: [
         // Change Password
         TextButton(
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            backgroundColor: primaryColor.withOpacity(0.4),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            foregroundColor: primaryColor,
+          ),
           onPressed: () {
             showDialog(
               context: context,
@@ -26,13 +34,22 @@ class ChangePasswordAndDeleleAccountWidget extends StatelessWidget {
           child: Text(
             S.of(context).profilePageChangePasswordButton,
             style: TextStyles.buttonText(context).copyWith(
-              color: primaryColor,
               fontSize: 14,
+              color: primaryColor,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
         // Delete Account
         TextButton(
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            backgroundColor: Colors.red.withOpacity(0.4),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            foregroundColor: Colors.red,
+          ),
           onPressed: () {
             showDialog(
               context: context,
@@ -42,8 +59,9 @@ class ChangePasswordAndDeleleAccountWidget extends StatelessWidget {
           child: Text(
             S.of(context).profilePageDeleteAccountButton,
             style: TextStyles.buttonText(context).copyWith(
-              color: Colors.red,
               fontSize: 14,
+              color: Colors.red,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

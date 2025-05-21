@@ -17,8 +17,8 @@ class ListViewSearchProductWidget extends StatelessWidget {
     required this.cubit,
     required this.index,
     this.isPrloduct = true,
-    this.searchOrder = 'id',
-    this.searchSort = 'asc',
+    required this.searchOrder,
+    required this.searchSort,
   });
 
   final AppCubit cubit;
@@ -34,154 +34,163 @@ class ListViewSearchProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        AppCubit.get(context)
-            .getProductDetails(id: product?.id ?? 0)
-            .then((onValue) {
+        AppCubit.get(context).getProductDetails(id: product?.id ?? 0).then((_) {
           pushNavigator(
-              context,
-              ProductDetailsPage(
-                isSearchProduct: true,
-                searchOrder: searchOrder,
-                searchSort: searchSort,
-              ),
-              slideRightToLeft);
+            context,
+            ProductDetailsPage(
+              isSearchProduct: true,
+              searchOrder: searchOrder,
+              searchSort: searchSort,
+            ),
+            slideRightToLeft,
+          );
         });
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              alignment: Alignment.topLeft,
-              children: [
-                Container(
-                  height: screenHeight(context) * .15,
-                  width: screenWidth(context) * .3,
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl: product?.mainImage != null
-                          ? 'http://smartlabel1.runasp.net/Uploads/${product!.mainImage}'
-                          : 'https://via.placeholder.com/150',
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Center(
-                        child: Lottie.asset(
-                          'assets/lottie/loading_indicator.json',
-                          width: 100,
-                          height: 100,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    ),
-                  ),
-                ),
-                if (hasDiscount)
-                  Image(
-                    height: screenHeight(context) * .05,
-                    width: screenWidth(context) * .09,
-                    image: AssetImage('assets/images/discount_image.png'),
-                  ),
-              ],
-            ),
-            Expanded(
-              flex: 10,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product?.name ?? '',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                      style: TextStyles.productTitle(context)
-                          .copyWith(fontSize: 12),
-                    ),
-                    Text(
-                      '${product?.newPrice}\$',
-                      style: TextStyles.productPrice(context),
-                    ),
-                    if (hasDiscount) ...[
-                      const SizedBox(width: 10),
-                      Text(
-                        '${product?.oldPrice}\$',
-                        style: TextStyles.productOldPrice(context),
-                      ),
-                    ],
-                  ],
-                ),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6,
+                offset: Offset(0, 3),
               ),
-            ),
-            Spacer(),
-            BlocBuilder<AppCubit, AppStates>(
-              builder: (context, state) {
-                final bool favorite = product?.favorite ?? false;
-                return favorite
-                    ? InkWell(
-                        onTap: () {
-                          if (AppCubit.get(context).isLogin) {
-                            cubit.removeFromFav(model: product!);
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: S.of(context).youMustBeLoggedIn,
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0,
-                            );
-                          }
-                        },
-                        child: Lottie.asset(
-                          'assets/lottie/inFavAnimation.json',
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                          repeat: false,
-                          reverse: false,
-                          animate: true,
-                        ),
-                      )
-                    : InkWell(
-                        onTap: () {
-                          if (AppCubit.get(context).isLogin) {
-                            cubit.addToFav(model: product!);
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: S.of(context).youMustBeLoggedIn,
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0,
-                            );
-                          }
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 5),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                alignment: Alignment.topLeft,
+                children: [
+                  Container(
+                    height: screenHeight(context) * 0.16,
+                    width: screenWidth(context) * 0.3,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.grey[200],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: CachedNetworkImage(
+                        imageUrl: product?.mainImage != null
+                            ? Uri.encodeFull(
+                                'http://smartlabel1.runasp.net/Uploads/${Uri.encodeComponent(product!.mainImage ?? '')}')
+                            : 'https://via.placeholder.com/150',
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Center(
                           child: Lottie.asset(
-                            'assets/lottie/notFavAnimation.json',
-                            width: 40,
-                            height: 40,
-                            repeat: false,
-                            reverse: false,
-                            animate: true,
+                            'assets/lottie/loading_indicator.json',
+                            width: 80,
+                            height: 80,
                           ),
                         ),
-                      );
-              },
-            ),
-          ],
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                  if (hasDiscount)
+                    Positioned(
+                      top: 4,
+                      left: 4,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          "${product?.discount}% ${S.of(context).off}",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product?.name ?? '',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyles.productTitle(context).copyWith(
+                          fontSize: 13,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Text(
+                            '${product?.newPrice}\$',
+                            style: TextStyles.productPrice(context)
+                                .copyWith(fontSize: 14),
+                          ),
+                          if (hasDiscount) ...[
+                            const SizedBox(width: 8),
+                            Text(
+                              '${product?.oldPrice}\$',
+                              style:
+                                  TextStyles.productOldPrice(context).copyWith(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              BlocBuilder<AppCubit, AppStates>(
+                builder: (context, state) {
+                  final bool favorite = product?.favorite ?? false;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0, top: 8.0),
+                    child: InkWell(
+                      onTap: () {
+                        if (AppCubit.get(context).isLogin) {
+                          favorite
+                              ? cubit.removeFromFav(model: product!)
+                              : cubit.addToFav(model: product!);
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: S.of(context).youMustBeLoggedIn,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        }
+                      },
+                      child: Icon(
+                        favorite ? Icons.favorite : Icons.favorite_border,
+                        color: favorite ? Colors.red : Colors.grey,
+                        size: 28,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

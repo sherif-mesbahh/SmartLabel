@@ -25,7 +25,7 @@ class ProductDetailsAddImagesWidget extends StatelessWidget {
       children: [
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (cubit.productImagesToUpload.isNotEmpty)
                 SingleChildScrollView(
@@ -72,11 +72,6 @@ class ProductDetailsAddImagesWidget extends StatelessWidget {
                 ),
               const SizedBox(height: 12.0),
               TextButton(
-                child: Text(
-                  S.of(context).editProductAddImagesButton,
-                  style: TextStyles.productTitle(context)
-                      .copyWith(color: primaryColor),
-                ),
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -86,6 +81,38 @@ class ProductDetailsAddImagesWidget extends StatelessWidget {
                     ),
                   );
                 },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(
+                    primaryColor.withOpacity(0.25),
+                  ),
+                  foregroundColor: WidgetStateProperty.all(primaryColor),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  ),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(color: primaryColor.withOpacity(0.4)),
+                    ),
+                  ),
+                  overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.pressed)) {
+                        return primaryColor.withOpacity(0.2);
+                      }
+                      if (states.contains(WidgetState.hovered)) {
+                        return primaryColor.withOpacity(0.15);
+                      }
+                      return null;
+                    },
+                  ),
+                  textStyle: WidgetStateProperty.all(
+                    TextStyles.productTitle(context).copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                child: Text(S.of(context).editProductAddImagesButton),
               ),
             ],
           ),

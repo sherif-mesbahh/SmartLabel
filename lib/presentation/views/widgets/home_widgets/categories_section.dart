@@ -41,9 +41,40 @@ class CategoriesSecion extends StatelessWidget {
                       );
                       cubit.getCategories();
                     },
-                    child: Text(S.of(context).seeAllButton,
-                        style: TextStyles.buttonText(context)
-                            .copyWith(fontSize: 12, color: primaryColor)),
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(
+                          primaryColor.withOpacity(0.25)),
+                      foregroundColor: WidgetStateProperty.all(primaryColor),
+                      padding: WidgetStateProperty.all(
+                        const EdgeInsets.symmetric(
+                            vertical: 14, horizontal: 20),
+                      ),
+                      shape: WidgetStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side:
+                              BorderSide(color: primaryColor.withOpacity(0.4)),
+                        ),
+                      ),
+                      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.pressed)) {
+                            return primaryColor.withOpacity(0.2);
+                          }
+                          if (states.contains(WidgetState.hovered)) {
+                            return primaryColor.withOpacity(0.15);
+                          }
+                          return null;
+                        },
+                      ),
+                      textStyle: WidgetStateProperty.all(
+                        TextStyles.productTitle(context)
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    child: Text(
+                      S.of(context).seeAllButton,
+                    ),
                   ),
                 ],
               ),
@@ -81,9 +112,40 @@ class CategoriesSecion extends StatelessWidget {
                       );
                       cubit.getCategories();
                     },
-                    child: Text(S.of(context).seeAllButton,
-                        style: TextStyles.buttonText(context)
-                            .copyWith(fontSize: 12, color: primaryColor)),
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(
+                          primaryColor.withOpacity(0.25)),
+                      foregroundColor: WidgetStateProperty.all(primaryColor),
+                      padding: WidgetStateProperty.all(
+                        const EdgeInsets.symmetric(
+                            vertical: 14, horizontal: 20),
+                      ),
+                      shape: WidgetStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side:
+                              BorderSide(color: primaryColor.withOpacity(0.4)),
+                        ),
+                      ),
+                      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                        (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.pressed)) {
+                            return primaryColor.withOpacity(0.2);
+                          }
+                          if (states.contains(WidgetState.hovered)) {
+                            return primaryColor.withOpacity(0.15);
+                          }
+                          return null;
+                        },
+                      ),
+                      textStyle: WidgetStateProperty.all(
+                        TextStyles.productTitle(context)
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    child: Text(
+                      S.of(context).seeAllButton,
+                    ),
                   ),
                 ],
               ),
@@ -124,15 +186,44 @@ class CategoriesSecion extends StatelessWidget {
                     );
                     cubit.getCategories();
                   },
-                  child: Text(S.of(context).seeAllButton,
-                      style: TextStyles.buttonText(context)
-                          .copyWith(fontSize: 12, color: primaryColor)),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all(primaryColor.withOpacity(0.25)),
+                    foregroundColor: WidgetStateProperty.all(primaryColor),
+                    padding: WidgetStateProperty.all(
+                      const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                    ),
+                    shape: WidgetStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: BorderSide(color: primaryColor.withOpacity(0.4)),
+                      ),
+                    ),
+                    overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.pressed)) {
+                          return primaryColor.withOpacity(0.2);
+                        }
+                        if (states.contains(WidgetState.hovered)) {
+                          return primaryColor.withOpacity(0.15);
+                        }
+                        return null;
+                      },
+                    ),
+                    textStyle: WidgetStateProperty.all(
+                      TextStyles.productTitle(context)
+                          .copyWith(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  child: Text(
+                    S.of(context).seeAllButton,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: screenHeight(context) * .1,
+              height: screenHeight(context) * .112,
               width: double.infinity,
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),

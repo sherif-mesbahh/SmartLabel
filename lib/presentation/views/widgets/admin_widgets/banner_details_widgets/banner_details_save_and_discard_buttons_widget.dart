@@ -43,50 +43,30 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Save Changes
               state is UpdateBannerLoadingState
                   ? Lottie.asset(
                       'assets/lottie/loading_indicator.json',
                       width: 100,
                       height: 100,
                     )
-                  : InkWell(
-                      child: Text(
-                        S.of(context).editBannerSaveButton,
-                        style: TextStyles.productTitle(context)
-                            .copyWith(color: primaryColor),
-                      ),
-                      onTap: () {
+                  : TextButton(
+                      onPressed: () {
                         print(startDateController.text);
                         print(endDateController.text);
+
                         String fixedStart =
                             normalizeArabicDateToUtc(startDateController.text);
                         String fixedEnd =
                             normalizeArabicDateToUtc(endDateController.text);
+
                         final parsedStartDate =
                             DateTime.tryParse(fixedStart)?.toLocal();
-
                         final parsedEndDate =
                             DateTime.tryParse(fixedEnd)?.toLocal();
 
                         if (parsedStartDate == null) {
                           Fluttertoast.showToast(
                             msg: "Invalid start date format",
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                          );
-                          return;
-                        }
-
-                        final nowLocal = DateTime.now(); // local time
-                        print("Time now: $nowLocal");
-
-                        print("start Time: $fixedStart");
-                        print("end Time: $fixedEnd");
-                        if (parsedStartDate.isBefore(nowLocal)) {
-                          Fluttertoast.showToast(
-                            msg:
-                                S.of(context).bannerStartDateMustNotBeBeforeNow,
                             backgroundColor: Colors.red,
                             textColor: Colors.white,
                           );
@@ -103,37 +83,97 @@ class BannerDetailsSaveAndDiscardButtonsWidget extends StatelessWidget {
                           );
                           return;
                         }
+
                         if (formKey.currentState!.validate()) {
                           cubit
                               .updateBanner(
-                            id: widget.bannerId,
-                            title: titleController.text,
-                            description: descController.text,
-                            startDate: fixedStart,
-                            endDate: fixedEnd,
-                            mainImage: cubit.mainBannerImageToUpload,
-                            imageFiles: cubit.bannerDetailsImagesToUpload,
-                            imagesToDelete: cubit.bannerDetailsImagesToDelete,
-                          )
-                              .then((_) {
-                            cubit.getBannerDetails(id: widget.bannerId);
-                          });
+                                id: widget.bannerId,
+                                title: titleController.text,
+                                description: descController.text,
+                                startDate: fixedStart,
+                                endDate: fixedEnd,
+                                mainImage: cubit.mainBannerImageToUpload,
+                                imageFiles: cubit.bannerDetailsImagesToUpload,
+                                imagesToDelete:
+                                    cubit.bannerDetailsImagesToDelete,
+                              )
+                              .then((_) =>
+                                  cubit.getBannerDetails(id: widget.bannerId));
                         }
                       },
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(
+                            primaryColor.withOpacity(0.25)),
+                        foregroundColor: WidgetStateProperty.all(primaryColor),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 24),
+                        ),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: BorderSide(
+                                color: primaryColor.withOpacity(0.4)),
+                          ),
+                        ),
+                        overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                          (Set<WidgetState> states) {
+                            if (states.contains(WidgetState.pressed)) {
+                              return primaryColor.withOpacity(0.2);
+                            }
+                            if (states.contains(WidgetState.hovered)) {
+                              return primaryColor.withOpacity(0.15);
+                            }
+                            return null;
+                          },
+                        ),
+                        textStyle: WidgetStateProperty.all(
+                          TextStyles.productTitle(context).copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      child: Text(S.of(context).editBannerSaveButton),
                     ),
               // Discard
-              InkWell(
-                child: Text(
-                  S.of(context).editBannerDiscardButton,
-                  style: TextStyles.productTitle(context)
-                      .copyWith(color: primaryColor),
-                ),
-                onTap: () {
+              TextButton(
+                onPressed: () {
                   cubit.bannerDetailsImagesToUpload = [];
                   cubit.bannerDetailsImagesToDelete = [];
                   cubit.mainBannerImageToUpload = null;
                   popNavigator(context);
                 },
+                style: ButtonStyle(
+                  backgroundColor:
+                      WidgetStateProperty.all(Colors.red.withOpacity(0.25)),
+                  foregroundColor: WidgetStateProperty.all(Colors.red),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  ),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(color: Colors.red.withOpacity(0.4)),
+                    ),
+                  ),
+                  overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.pressed)) {
+                        return Colors.red.withOpacity(0.2);
+                      }
+                      if (states.contains(WidgetState.hovered)) {
+                        return Colors.red.withOpacity(0.15);
+                      }
+                      return null;
+                    },
+                  ),
+                  textStyle: WidgetStateProperty.all(
+                    TextStyles.productTitle(context).copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                child: Text(S.of(context).editBannerDiscardButton),
               ),
             ],
           );
