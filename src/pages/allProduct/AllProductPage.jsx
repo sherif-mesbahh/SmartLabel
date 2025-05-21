@@ -18,7 +18,7 @@ function AllProductPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 3;
+  const pageSize = 9;
   const navigate = useNavigate();
 
   const query = useQuery();

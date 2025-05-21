@@ -5,17 +5,17 @@
 /* @layer base {
   @media (width>768px) {
     html { */
-      /* zoom: 125%; */ /* *******عشان يوسف ميزعلش******* */
-    /* }
+/* zoom: 125%; */ /* *******عشان يوسف ميزعلش******* */
+/* }
   }
 } */
 
 @layer components {
-  body{
-    @apply overflow-x-hidden cursor-[url('assets/mouse.png'),auto]
+  body {
+    @apply overflow-x-hidden cursor-[url('assets/mouse.png'),auto];
   }
-  body::-webkit-scrollbar{
-    @apply w-4
+  body::-webkit-scrollbar {
+    @apply w-4;
   }
   ::-webkit-scrollbar {
     @apply w-3;
@@ -27,8 +27,7 @@
     @apply bg-gradient-to-b from-blue-600 to-indigo-800 rounded-full;
   }
   a:hover,
-  button:hover{
-    @apply cursor-[url('assets/pointer.png'),auto]
-
+  button:hover {
+    @apply cursor-[url('assets/pointer.png'),auto];
   }
 }

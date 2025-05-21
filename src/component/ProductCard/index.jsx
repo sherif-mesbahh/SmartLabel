@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useFavorites } from "../../hooks/useFavorites";
 
 const ProductCard = React.memo(({ item }) => {
-  const { toggleFavorite, favorites, updateFavoriteItem, isLoading } = useFavorites();
+  const { toggleFavorite, favorites, updateFavoriteItem, isLoading } =
+    useFavorites();
   const isFavorite = favorites.items.some((favItem) => favItem.id === item.id);
 
   // Update favorite item when the product data changes
@@ -21,6 +22,9 @@ const ProductCard = React.memo(({ item }) => {
           alt={item.name}
           className="w-full h-48 object-cover"
         />
+        <div className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
+          {item.discount ? `${item.discount}%` : "Regular"}
+        </div>
         <div className="absolute top-2 right-2 shadow-xl rounded-full">
           <button
             onClick={() => toggleFavorite(item)}
@@ -33,7 +37,7 @@ const ProductCard = React.memo(({ item }) => {
                 isFavorite
                   ? "fill-red-500 text-red-500"
                   : "text-gray-400 dark:text-gray-500"
-              } ${isLoading ? 'opacity-50' : ''}`}
+              } ${isLoading ? "opacity-50" : ""}`}
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth="2"
@@ -55,13 +59,11 @@ const ProductCard = React.memo(({ item }) => {
           {item.description}
         </p>
         <div className="flex justify-between items-center flex-col gap-2 ">
-          <div className="flex items-center space-x-2">
-            <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
-              ${item.newPrice}
-            </span>
-            {item.oldPrice && (
-              <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
-                ${item.oldPrice}
+          <div className="text-gray-700 dark:text-gray-300 text-base font-medium flex items-center gap-2">
+            <span className="  text-lg">${item.newPrice.toFixed(2)}</span>
+            {item.oldPrice && item.discount !== 0 && (
+              <span className="text-lg text-gray-500 dark:text-red-400 line-through">
+                ${item.oldPrice.toFixed(2)}
               </span>
             )}
           </div>

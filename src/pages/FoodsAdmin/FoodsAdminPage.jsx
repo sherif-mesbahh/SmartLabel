@@ -67,7 +67,7 @@ function FoodsAdminPage() {
                     />
                   </Link>
                   <div className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                    {food.discount ? `${food.discount}%` : "NEW"}
+                    {food.discount ? `${food.discount}%` : "Regular"}
                   </div>
                 </div>
 
@@ -75,10 +75,12 @@ function FoodsAdminPage() {
                   <h3 className="text-xl font-semibold text-black dark:text-white mb-1">
                     {food.name}
                   </h3>
-                  <div className="text-gray-700 dark:text-gray-300 text-base font-medium">
-                    ${food.newPrice.toFixed(2)}
-                    {food.oldPrice && (
-                      <span className="text-sm text-gray-400 ml-2 line-through">
+                  <div className="text-gray-700 dark:text-gray-300 text-base font-medium flex items-center gap-2">
+                    <span className="  text-lg">
+                      ${food.newPrice.toFixed(2)}
+                    </span>
+                    {food.oldPrice && food.discount !== 0 && (
+                      <span className="text-lg text-gray-500 dark:text-red-400 line-through">
                         ${food.oldPrice.toFixed(2)}
                       </span>
                     )}
