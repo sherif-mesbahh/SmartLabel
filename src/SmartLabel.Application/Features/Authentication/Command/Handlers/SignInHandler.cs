@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Authentication.Command.Models;
 using SmartLabel.Application.Features.Authentication.Command.Results;
@@ -8,7 +9,8 @@ using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities.Identity;
 
 namespace SmartLabel.Application.Features.Authentication.Command.Handlers;
-public class SignInHandler(UserManager<ApplicationUser> userManager, IAuthenticationRepository authRepository, IEmailService emailService) : ResponseHandler, IRequestHandler<SignInCommand, Response<GetTokensDto>>
+public class SignInHandler(UserManager<ApplicationUser> userManager, IAuthenticationRepository authRepository, IEmailService emailService, IMemoryCache memoryCache)
+	: ResponseHandler, IRequestHandler<SignInCommand, Response<GetTokensDto>>
 {
 	public async Task<Response<GetTokensDto>> Handle(SignInCommand request, CancellationToken cancellationToken)
 	{

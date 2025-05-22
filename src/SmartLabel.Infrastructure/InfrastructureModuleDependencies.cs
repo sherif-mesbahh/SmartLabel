@@ -58,7 +58,6 @@ public static class InfrastructureModuleDependencies
 		var emailSettings = new EmailSettings();
 		configuration.GetSection(nameof(EmailSettings)).Bind(emailSettings);
 		services.AddSingleton(emailSettings);
-
 		services.AddAuthentication(
 				x =>
 				{

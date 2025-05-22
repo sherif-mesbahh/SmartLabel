@@ -56,8 +56,9 @@ public class AddProductHandler(IMapper mapper, IProductRepository repository, IF
 	}
 	private void InvalidCache(string? userId, int productId, int categoryId)
 	{
-		memoryCache.Remove($"ProductsUserId-");
-		memoryCache.Remove($"ProductsUserId-{userId}");
+		//memoryCache.Remove($"Products");
+		memoryCache.Remove($"ProductsUser-{userId}");
+		memoryCache.Remove($"ProductsUser-All");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
 		memoryCache.Remove($"ProductId-{productId}UserId-");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
