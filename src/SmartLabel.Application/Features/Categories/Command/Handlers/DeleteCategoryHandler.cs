@@ -37,5 +37,9 @@ public class DeleteCategoryHandler(ICategoryRepository categoryRepository, IFile
 		memoryCache.Remove($"Categories");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-");
+		//memoryCache.Remove($"Products");
+		memoryCache.Remove($"Products-{userId}");
+		memoryCache.Remove($"Products-");
+		memoryCache.Remove($"ProductsFav-{userId}");
 	}
 }

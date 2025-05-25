@@ -15,12 +15,16 @@ public class GetAllProductsHandler(IProductRepository repository, IHttpContextAc
 	public async Task<Response<IEnumerable<GetAllProductsDto?>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
 	{
 		var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(nameof(UserClaimModel.UserId));
-		var cachedKey = $"ProductsUserId-{userId}";
+		var cachedKey = $"ProductsUser-All";
+		if (userId is not null)
+		{
+			cachedKey = $"ProductsUser-{userId}";
+		}
+
 		if (memoryCache.TryGetValue(cachedKey, out IEnumerable<GetAllProductsDto?>? cachedResult))
 		{
 			return Success(cachedResult!, "All Products are retrieved successfully");
 		}
-		//ToDo : when add product and delete from user favorite remove from cache
 		var cacheEntryOptions = new MemoryCacheEntryOptions()
 			.SetSlidingExpiration(TimeSpan.FromMinutes(5))
 			.SetAbsoluteExpiration(TimeSpan.FromHours(1))

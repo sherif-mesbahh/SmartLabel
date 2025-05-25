@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using SmartLabel.Application.Bases;
 using SmartLabel.Application.Features.Authorization.Command.Models;
 using SmartLabel.Application.Repositories;
+using SmartLabel.Application.Services;
 using SmartLabel.Domain.Entities.Identity;
 
 namespace SmartLabel.Application.Features.Authorization.Command.Handlers;
-public class UpdateUserToRoleHandler(UserManager<ApplicationUser> userManager, IAuthorizationRepository authorizationRepository)
+public class UpdateUserToRoleHandler(UserManager<ApplicationUser> userManager, IAuthorizationRepository authorizationRepository, INotifierService notifierService)
 	: ResponseHandler, IRequestHandler<UpdateUserToRoleCommand, Response<string>>
 {
 	public async Task<Response<string>> Handle(UpdateUserToRoleCommand request, CancellationToken cancellationToken)
@@ -25,16 +26,17 @@ public class UpdateUserToRoleHandler(UserManager<ApplicationUser> userManager, I
 		try
 		{
 			await authorizationRepository.UpdateUserToRoleAsync(existingUser, request.RoleName);
+			await notifierService.SendToGroup($"user-{existingUser.Id.ToString()}",
+				"User role updated. Re-login required to apply changes.");
+
 			return NoContent<string>($"User with email {request.Email} became {request.RoleName}");
 
 		}
 		catch (Exception ex)
 		{
-			var errors = new List<string> { $"ex.Message" };
-
+			var errors = new List<string> { $"{ex.Message}" };
 			return BadRequest<string>(
-				message: "update user to this role failed",
-				errors: errors);
+				message: "update user to this role failed", errors: errors);
 		}
 
 	}

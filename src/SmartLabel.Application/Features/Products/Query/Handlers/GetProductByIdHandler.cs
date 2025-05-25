@@ -21,7 +21,6 @@ public class GetProductByIdHandler(IProductRepository repository, IHttpContextAc
 			return Success(cachedResult!, "product retrieved successfully");
 		}
 		var product = await repository.GetProductByIdUserAsync(request.Id, userId);
-		//when update or delete favorite remove from cache
 		if (product is null)
 			throw new KeyNotFoundException("Product with ID " + request.Id + " not found");
 		var cacheEntryOptions = new MemoryCacheEntryOptions()

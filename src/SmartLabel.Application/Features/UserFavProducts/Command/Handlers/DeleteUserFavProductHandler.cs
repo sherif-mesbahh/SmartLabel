@@ -36,7 +36,8 @@ public class DeleteUserFavProductHandler(IUserFavProductRepository userFavProduc
 	}
 	private void InvalidCached(string userId, int productId, int catId)
 	{
-		memoryCache.Remove($"ProductsUserId-{userId}");
+		memoryCache.Remove($"ProductsUser-{userId}");
+		memoryCache.Remove($"ProductsUser-All");
 		memoryCache.Remove($"ProductId-{productId}UserId-{userId}");
 		memoryCache.Remove($"ProductsFav-{userId}");
 		memoryCache.Remove($"CategoryId-{catId}UserId-{userId}");

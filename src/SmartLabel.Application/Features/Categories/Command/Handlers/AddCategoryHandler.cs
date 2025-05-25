@@ -41,5 +41,8 @@ public class AddCategoryHandler(IMapper mapper, ICategoryRepository categoryRepo
 		memoryCache.Remove($"Categories");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-{userId}");
 		memoryCache.Remove($"CategoryId-{categoryId}UserId-");
+		memoryCache.Remove($"ProductsFav-{userId}");
+		memoryCache.Remove($"ProductsUser-{userId}");
+		memoryCache.Remove($"ProductsUser-All");
 	}
 }
