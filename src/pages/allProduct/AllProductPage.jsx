@@ -108,7 +108,7 @@ function AllProductPage() {
                 whileHover={{ scale: 1.02 }}
                 className=""
               >
-                <Link to={`/food/${food.id}`} className="block">
+                <Link to={`/product/${food.id}`} className="block">
                   <ProductCard item={food} />
                 </Link>
               </motion.div>
